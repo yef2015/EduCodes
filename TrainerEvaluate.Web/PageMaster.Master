@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PageMaster.master.cs" Inherits="TrainerEvaluate.Web.PageMaster" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中小学干部培训评估系统</title>   
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="themes/color.css"/>
+  <%--  <link rel="stylesheet" type="text/css" href="themes/demo.css"/>--%>
+    <link rel="stylesheet" type="text/css" href="Scripts/uploadify.css"/>
+    <script type="text/javascript" src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="Scripts/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.uploadify.js"></script>
+    <script type="text/javascript" src="Scripts/swfobject.js"></script>    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    
+    <style type="text/css">
+    #fm {
+        margin: 0;
+        padding: 10px 30px;
+    }
+
+    .ftitle {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .fitem {
+        margin-bottom: 5px;
+    }
+
+        .fitem label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .fitem input {
+            width: 160px;
+        }
+</style>
+    
+    
+   <script type="text/javascript"> 
+
+     function formatterdate(val, row) {
+            if (val != "" && val != undefined) {
+                var date = StringToDate(val);
+                return date;
+            } else {
+                return "";
+            }
+        }
+
+
+        //解决ie8 时间格式问题
+        StringToDate = function(DateStr) {
+            //if (typeof DateStr == "undefined") return new Date();
+            //if (typeof DateStr == "date") return DateStr;
+            //var converted = Date.parse(DateStr);
+            //var myDate = new Date(converted);
+            //if (isNaN(myDate)) {
+            //    DateStr = DateStr.replace(/:/g, "-");//支持 2013:10:17
+            //    DateStr = DateStr.replace("T", "-"); //支持 2013 10 17
+            //    DateStr = DateStr.replace(".", "-"); //支持 2013.10.17
+            //    var arys = DateStr.split("-");   //支持2013-10-17
+            //    switch (arys.length) {
+            //        case 7://2013-10-17-13-56-33-22 格式
+            //            myDate = new Date(arys[0], --arys[1], arys[2], arys[3], arys[4], arys[5], arys[6]);
+            //            break;
+
+            //        case 6: //2013-10-17-13-56-33 格式
+            //            myDate = new Date(arys[0], --arys[1], arys[2], arys[3], arys[4], arys[5]);
+            //            break;
+
+            //        default://2013-10-17 格式
+            //            myDate = new Date(arys[0], --arys[1], arys[2]);
+            //            break;
+            //    }
+            //}
+            //return myDate;
+
+            if (DateStr != null&&DateStr !="") {
+                DateStr = DateStr.substring(0, 10);
+            }
+            return DateStr;
+        };
+    </script>
+</head>
+<body style="margin: 0px;color: #000000">
+    <table  style="width: 100%;border: 0px;border-spacing:0;">
+        <tr>
+            <td width="20%" background="images/back3.gif" height="1200">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+            <td width="80%" height="1200" valign="top">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

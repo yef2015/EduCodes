@@ -1,0 +1,273 @@
+ConnectionString 属性尚未初始化。|System.InvalidOperationException: ConnectionString 属性尚未初始化。
+   在 System.Data.SqlClient.SqlConnection.PermissionDemand()
+   在 System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 135
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63：2015-09-06 20:52:51
+ConnectionString 属性尚未初始化。|System.InvalidOperationException: ConnectionString 属性尚未初始化。
+   在 System.Data.SqlClient.SqlConnection.PermissionDemand()
+   在 System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 135
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63：2015-09-06 20:52:52
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-09-11 09:38:12
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-09-11 09:53:43
+Incorrect syntax near 'IsQuestionCreate'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'IsQuestionCreate'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:63b51db3-bba1-4256-adee-7d0b7bac46fa
+Error Number:102,State:1,Class:15：2015-09-11 14:52:22
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-13 22:34:26
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-13 23:24:44
+Cannot open database "TrainerEvaluateNew" requested by the login. The login failed.
+Login failed for user 'sa'.|System.Data.SqlClient.SqlException (0x80131904): Cannot open database "TrainerEvaluateNew" requested by the login. The login failed.
+Login failed for user 'sa'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:280dc9fa-23cf-4931-a6c6-c242040abd9a
+Error Number:4060,State:1,Class:11：2015-08-13 23:25:12
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-21 21:14:06
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-21 21:14:09
+Incorrect syntax near 'Title'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Title'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:c89fe6b5-b1c9-4cef-bad1-c8fe638286de
+Error Number:102,State:1,Class:15：2015-08-21 22:05:56
+Incorrect syntax near 'Title'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Title'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:5c81af79-2635-44b5-a318-3a036952c187
+Error Number:102,State:1,Class:15：2015-08-21 22:10:01
+Incorrect syntax near 'Title'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Title'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:5c81af79-2635-44b5-a318-3a036952c187
+Error Number:102,State:1,Class:15：2015-08-21 22:12:23
+Incorrect syntax near '初级'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '初级'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:f54090a3-d25a-4060-b9d3-6394f0b1f2d1
+Error Number:102,State:1,Class:15：2015-08-22 02:00:14
+Incorrect syntax near '初级'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '初级'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:f54090a3-d25a-4060-b9d3-6394f0b1f2d1
+Error Number:102,State:1,Class:15：2015-08-22 02:00:27
+Incorrect syntax near '中级'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '中级'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:f54090a3-d25a-4060-b9d3-6394f0b1f2d1
+Error Number:102,State:1,Class:15：2015-08-22 02:00:40
+Incorrect syntax near 'Title'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Title'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:7a5e4f24-d0d8-4396-8586-64b5d0ce37fa
+Error Number:102,State:1,Class:15：2015-08-22 03:55:29
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d49d8b71-beea-493d-b072-9889574cbd8b
+Error Number:102,State:1,Class:15：2015-08-22 04:35:06
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d49d8b71-beea-493d-b072-9889574cbd8b
+Error Number:102,State:1,Class:15：2015-08-22 04:36:56
+Incorrect syntax near '中级'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '中级'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ee25dcd8-8321-448f-831c-1bb8f426eaef
+Error Number:102,State:1,Class:15：2015-08-22 22:02:54
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:6b6b776d-ca4f-44a8-aaa3-68ec3a3984fe
+Error Number:102,State:1,Class:15：2015-08-22 22:27:41
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:12543f04-865d-4c71-86aa-9b94b58e17e3
+Error Number:102,State:1,Class:15：2015-08-22 22:34:47
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:e657e934-bd98-4925-afaf-3ba1912c35db
+Error Number:102,State:1,Class:15：2015-08-23 08:10:57
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:a904cef1-f007-4431-a486-0937450b1eff
+Error Number:102,State:1,Class:15：2015-08-23 08:14:05
+Incorrect syntax near 'Status'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'Status'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:a904cef1-f007-4431-a486-0937450b1eff
+Error Number:102,State:1,Class:15：2015-08-23 08:17:40
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-24 13:22:35
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-24 13:23:25
+Incorrect syntax near '='.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:57d85ac5-40f8-4179-b49e-04b54ea7ec7e
+Error Number:102,State:1,Class:15：2015-08-25 04:18:48
+Incorrect syntax near 'CreatTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreatTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:51ac80f7-c9f6-4f67-80a2-4803d5e72519
+Error Number:102,State:1,Class:15：2015-08-25 18:09:16
+Incorrect syntax near 'CreatTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreatTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:7a1194af-9325-4d07-806f-70b68c77346f
+Error Number:102,State:1,Class:15：2015-08-25 18:14:02
+Incorrect syntax near 'CreatTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreatTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:7a1194af-9325-4d07-806f-70b68c77346f
+Error Number:102,State:1,Class:15：2015-08-25 18:14:32
+Incorrect syntax near 'CreatTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreatTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:2902fcd1-5de8-4b24-8cbc-3d50b957587c
+Error Number:102,State:1,Class:15：2015-08-25 18:18:21
+Incorrect syntax near 'CreatTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreatTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:2902fcd1-5de8-4b24-8cbc-3d50b957587c
+Error Number:102,State:1,Class:15：2015-08-25 18:24:54
+Incorrect syntax near 'CreateTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreateTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:05a77ce6-168a-4693-8782-e994d24b903b
+Error Number:102,State:1,Class:15：2015-08-25 19:25:57
+Incorrect syntax near 'CreateTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreateTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ddd6ae43-bb42-4482-a758-024918b2a2cc
+Error Number:102,State:1,Class:15：2015-08-25 19:28:53
+Incorrect syntax near 'CreateTime'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'CreateTime'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ddd6ae43-bb42-4482-a758-024918b2a2cc
+Error Number:102,State:1,Class:15：2015-08-25 19:29:42
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-31 08:53:51
+在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 系统找不到指定的文件。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:2,State:0,Class:20：2015-08-31 08:58:29
+There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.|System.Data.SqlClient.SqlException (0x80131904): There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:7fd4099b-1d9c-48f5-999d-b929807c6573
+Error Number:110,State:1,Class:15：2015-08-31 09:13:30
+There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.|System.Data.SqlClient.SqlException (0x80131904): There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:7fd4099b-1d9c-48f5-999d-b929807c6573
+Error Number:110,State:1,Class:15：2015-08-31 09:15:05
+There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.|System.Data.SqlClient.SqlException (0x80131904): There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:e178d153-a378-4493-8963-673664777bda
+Error Number:110,State:1,Class:15：2015-08-31 09:18:48
+There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.|System.Data.SqlClient.SqlException (0x80131904): There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:03b56a9b-a0db-48ae-be64-1e76d3527ebd
+Error Number:110,State:1,Class:15：2015-08-31 09:36:12
+There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.|System.Data.SqlClient.SqlException (0x80131904): There are fewer columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:03b56a9b-a0db-48ae-be64-1e76d3527ebd
+Error Number:110,State:1,Class:15：2015-08-31 09:38:38
+Incorrect syntax near 'edc5e4'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'edc5e4'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:91b770b6-b142-483a-8d56-bdd8ddbcf6bc
+Error Number:102,State:1,Class:15：2015-08-31 11:33:22
+Incorrect syntax near 'edc5e4'.|System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near 'edc5e4'.
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:91b770b6-b142-483a-8d56-bdd8ddbcf6bc
+Error Number:102,State:1,Class:15：2015-08-31 11:34:02
+无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:5f4aa5e2-bbee-4fe4-ae8c-5f8504e24c89：2015-12-18 21:21:31
+无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:3fed8551-c107-4795-b50a-2e6de922069c：2015-12-18 21:21:55
+无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:5f142408-4c9b-426e-b8f8-2fa1b020c93a：2015-12-18 21:22:27
+无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2015\codes\gits\EducationNew\TrainerEvaluate.Web\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:269b8769-fbbb-45cb-87ff-d95fa0b0fe54：2015-12-18 21:23:45
+无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TrainerEvaluateNew"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:c4801fa0-3b5f-472e-9025-d65b8709d049：2015-12-18 21:26:59
+'LastModifyTime' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'LastModifyTime' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:e2ddce1d-99ca-4d7c-aff7-ebd99a267b37：2015-12-21 14:39:38
+'Dstatus' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'Dstatus' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:53ca0a87-7350-4292-bfee-f44548e23c52：2015-12-21 22:52:06
