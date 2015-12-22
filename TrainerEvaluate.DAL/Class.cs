@@ -9,7 +9,7 @@ using TrainerEvaluate.Utility.DB;
 namespace TrainerEvaluate.DAL
 {
 	/// <summary>
-	/// 数据访问类:Class
+	/// 数据访问类:Class   
 	/// </summary>
 	public partial class Class
 	{
