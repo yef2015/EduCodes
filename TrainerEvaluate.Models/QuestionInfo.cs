@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TrainerEvaluate.Models
 {
-    public class QuestionInfo
+    public class QuestionInfo   
     {
 
         /// <summary>
