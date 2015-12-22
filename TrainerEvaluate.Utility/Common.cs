@@ -5,7 +5,7 @@ namespace TrainerEvaluate.Utility
 {
 
 
-    public enum EnumDeleteState   
+    public enum EnumDeleteState      
     {
         [Description("删除")] 
         Deleted = 1,
