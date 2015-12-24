@@ -468,11 +468,18 @@ namespace TrainerEvaluate.Web
             var msg = "";
             try
             {
-                result = sdBll.Delete(new Guid(id));
-
-                if (!result)
+                if (SPSchool.IsExistSchoolByShdistId(id))
                 {
-                    msg = "保存失败！";
+                    msg = "该学区下存在学校，不允许删除！";
+                }
+                else
+                {
+                    result = sdBll.Delete(new Guid(id));
+
+                    if (!result)
+                    {
+                        msg = "删除失败！";
+                    }
                 }
             }
             catch (Exception ex)

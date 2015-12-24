@@ -32,17 +32,17 @@ namespace TrainerEvaluate.DAL
 		}
 
 
-		/// <summary>
-		/// 增加一条数据
-		/// </summary>
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
         public bool Add(Models.Student model)
-		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into Student(");
-            strSql.Append("StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description)");
-			strSql.Append(" values (");
-            strSql.Append("@StudentId,@IdentityNo,@StuName,@Gender,@School,@JobTitle,@TelNo,@CreateTime,@LastModifyTime, @Picture, @Birthday, @Nation, @FirstRecord, @FirstSchool,@LastRecord,@LastSchool, @PoliticsStatus, @Rank, @RankTime, @Post, @PostTime,@Mobile, @TeachNo, @Status, @Description)");
-			SqlParameter[] parameters = {
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into Student(");
+            strSql.Append("StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId)");
+            strSql.Append(" values (");
+            strSql.Append("@StudentId,@IdentityNo,@StuName,@Gender,@School,@JobTitle,@TelNo,@CreateTime,@LastModifyTime,@Picture,@Birthday,@Nation,@FirstRecord,@FirstSchool,@LastRecord,@LastSchool,@PoliticsStatus,@Rank,@RankTime,@Post,@PostTime,@Mobile,@TeachNo,@Status,@Description,@PostOptName,@PostOptId)");
+            SqlParameter[] parameters = {
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
 					new SqlParameter("@StuName", SqlDbType.NVarChar,50),
@@ -52,31 +52,33 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TelNo", SqlDbType.VarChar,50),
 					new SqlParameter("@CreateTime", SqlDbType.DateTime),
 					new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-                    new SqlParameter("@Picture", SqlDbType.VarChar, 50),
-                    new SqlParameter("@Birthday", SqlDbType.DateTime),
-                    new SqlParameter("@Nation", SqlDbType.Int, 4),
-                    new SqlParameter("@FirstRecord", SqlDbType.VarChar, 50),
-                    new SqlParameter("@FirstSchool", SqlDbType.VarChar, 50),
-                    new SqlParameter("@LastRecord", SqlDbType.VarChar, 50),
-                    new SqlParameter("@LastSchool", SqlDbType.VarChar, 50),
-                    new SqlParameter("@PoliticsStatus", SqlDbType.Int, 4),
-                    new SqlParameter("@Rank", SqlDbType.VarChar, 50),
-                    new SqlParameter("@RankTime", SqlDbType.DateTime),
-                    new SqlParameter("@Post", SqlDbType.VarChar,50),
-                    new SqlParameter("@PostTime", SqlDbType.DateTime),
-                    new SqlParameter("@Mobile", SqlDbType.VarChar,11),
-                    new SqlParameter("@TeachNo", SqlDbType.VarChar, 50),
-                    new SqlParameter("@Status", SqlDbType.Int, 4),
-                    new SqlParameter("@Description", SqlDbType.Text)};
-			parameters[0].Value = model.StudentId;
-			parameters[1].Value = model.IdentityNo;
-			parameters[2].Value = model.StuName;
-			parameters[3].Value = model.Gender;
-			parameters[4].Value = model.School;
+					new SqlParameter("@Picture", SqlDbType.VarChar,50),
+					new SqlParameter("@Birthday", SqlDbType.DateTime),
+					new SqlParameter("@Nation", SqlDbType.Int,4),
+					new SqlParameter("@FirstRecord", SqlDbType.VarChar,50),
+					new SqlParameter("@FirstSchool", SqlDbType.VarChar,50),
+					new SqlParameter("@LastRecord", SqlDbType.VarChar,50),
+					new SqlParameter("@LastSchool", SqlDbType.VarChar,50),
+					new SqlParameter("@PoliticsStatus", SqlDbType.Int,4),
+					new SqlParameter("@Rank", SqlDbType.VarChar,50),
+					new SqlParameter("@RankTime", SqlDbType.DateTime),
+					new SqlParameter("@Post", SqlDbType.VarChar,50),
+					new SqlParameter("@PostTime", SqlDbType.DateTime),
+					new SqlParameter("@Mobile", SqlDbType.VarChar,11),
+					new SqlParameter("@TeachNo", SqlDbType.VarChar,50),
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@PostOptName", SqlDbType.NVarChar,50),
+					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50)};
+            parameters[0].Value = Guid.NewGuid();
+            parameters[1].Value = model.IdentityNo;
+            parameters[2].Value = model.StuName;
+            parameters[3].Value = model.Gender;
+            parameters[4].Value = model.School;
             parameters[5].Value = model.JobTitle;
-			parameters[6].Value = model.TelNo;
-			parameters[7].Value = model.CreateTime;
-			parameters[8].Value = model.LastModifyTime;
+            parameters[6].Value = model.TelNo;
+            parameters[7].Value = model.CreateTime;
+            parameters[8].Value = model.LastModifyTime;
             //parameters[9].Value = model.Picture;
             parameters[9].Value = "";
             parameters[10].Value = model.Birthday;
@@ -94,22 +96,24 @@ namespace TrainerEvaluate.DAL
             parameters[22].Value = model.TeachNo;
             parameters[23].Value = 1;
             parameters[24].Value = model.Description;
+            parameters[25].Value = model.PostOptName;
+            parameters[26].Value = model.PostOptId;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		/// <summary>
-		/// 更新一条数据
-		/// </summary>
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
         public bool Update(Models.Student model)
-		{
+        {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update Student set ");
             strSql.Append("IdentityNo=@IdentityNo,");
@@ -135,7 +139,9 @@ namespace TrainerEvaluate.DAL
             strSql.Append("Mobile=@Mobile,");
             strSql.Append("TeachNo=@TeachNo,");
             strSql.Append("Status=@Status,");
-            strSql.Append("Description=@Description");
+            strSql.Append("Description=@Description,");
+            strSql.Append("PostOptName=@PostOptName,");
+            strSql.Append("PostOptId=@PostOptId");
             strSql.Append(" where StudentId=@StudentId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
@@ -162,6 +168,8 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TeachNo", SqlDbType.VarChar,50),
 					new SqlParameter("@Status", SqlDbType.Int,4),
 					new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@PostOptName", SqlDbType.NVarChar,50),
+					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50),
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16)};
             parameters[0].Value = model.IdentityNo;
             parameters[1].Value = model.StuName;
@@ -187,7 +195,9 @@ namespace TrainerEvaluate.DAL
             parameters[21].Value = model.TeachNo;
             parameters[22].Value = model.Status;
             parameters[23].Value = model.Description;
-            parameters[24].Value = model.StudentId;
+            parameters[24].Value = model.PostOptName;
+            parameters[25].Value = model.PostOptId;
+            parameters[26].Value = model.StudentId;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -198,7 +208,7 @@ namespace TrainerEvaluate.DAL
             {
                 return false;
             }
-		}
+        }
 
 		/// <summary>
 		/// 删除一条数据
@@ -248,24 +258,24 @@ namespace TrainerEvaluate.DAL
 		/// </summary>
         public Models.Student GetModel(Guid StudentId)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select top 1 StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description from Student ");
-			strSql.Append(" where StudentId=@StudentId and Status = 1");
-			SqlParameter[] parameters = {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId from Student ");
+            strSql.Append(" where StudentId=@StudentId ");
+            SqlParameter[] parameters = {
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16)			};
-			parameters[0].Value = StudentId;
+            parameters[0].Value = StudentId;
 
             Models.Student model = new Models.Student();
-			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
-			{
-				return DataRowToModel(ds.Tables[0].Rows[0]);
-			}
-			else
-			{
-				return null;
-			}
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
 		}
 
 
@@ -297,7 +307,7 @@ namespace TrainerEvaluate.DAL
 				{
 					model.School=row["School"].ToString();
 				}
-                if (row["JobTitle"] != null)
+                if (row["JobTitle"] != null && row["Gender"].ToString() != "")
 				{
                     model.JobTitle =int.Parse( row["JobTitle"].ToString());
 				}
@@ -382,6 +392,14 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Description = row["Description"].ToString();
                 }
+                if (row["PostOptName"] != null)
+                {
+                    model.PostOptName = row["PostOptName"].ToString();
+                }
+                if (row["PostOptId"] != null)
+                {
+                    model.PostOptId = row["PostOptId"].ToString();
+                }
 			}
 			return model;
 		}
@@ -393,7 +411,7 @@ namespace TrainerEvaluate.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			//strSql.Append("select StudentId,IdentityNo,StuName,Gender,School,Title,TelNo,CreateTime,LastModifyTime ");
-            strSql.Append("select StudentId,IdentityNo,StuName,Gender,case Gender when 1 then '男' else '女' end as GenderName,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description ");
+            strSql.Append("select StudentId,IdentityNo,StuName,Gender,case Gender when 1 then '男' else '女' end as GenderName,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId  ");
 			strSql.Append(" FROM Student ");
 			if(strWhere.Trim()!="")
 			{
@@ -414,7 +432,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description ");
+            strSql.Append(" StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId  ");
 			strSql.Append(" FROM Student ");
 			if(strWhere.Trim()!="")
 			{

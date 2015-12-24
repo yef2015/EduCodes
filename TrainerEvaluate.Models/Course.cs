@@ -22,6 +22,9 @@ namespace TrainerEvaluate.Models
         private int? _type;
         private int _status;
         private string _description;
+        private string _typename;
+        private string _typesmallid;
+        private string _typesmallname;
 		/// <summary>
 		/// 课程编号
 		/// </summary>
@@ -101,6 +104,30 @@ namespace TrainerEvaluate.Models
         {
             set { _description = value; }
             get { return _description; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TypeName
+        {
+            set { _typename = value; }
+            get { return _typename; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TypeSmallId
+        {
+            set { _typesmallid = value; }
+            get { return _typesmallid; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TypeSmallName
+        {
+            set { _typesmallname = value; }
+            get { return _typesmallname; }
         }
 		#endregion Model
 

@@ -6,6 +6,7 @@ using System.Text;
 using NPOI.HSSF.Record.Chart;
 using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
+using System.Data.SqlClient;
 
 namespace TrainerEvaluate.BLL
 {
@@ -163,6 +164,46 @@ namespace TrainerEvaluate.BLL
             }
             strSql.Append(" order by SchoolName asc, CreatedDate desc ");
             return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        /// <summary>
+        /// 根据学区，判断该学区下是否存在学校
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public static bool IsExistSchoolByShdistId(string shdId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from School");
+            strSql.Append(" where SchDisId=@SchDisId ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@SchDisId", SqlDbType.NVarChar,50)};
+            parameters[0].Value = shdId;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
+        /// <summary>
+        /// 获取学校信息，为填充下拉框
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetDataSourceOnSchool()
+        {
+            var dt = new DataTable();
+            try
+            {
+                var sql = " select  SchoolId AS Id,  SchoolName AS Name from School  where Status=1 ";
+                var result = DbHelperSQL.Query(sql);
+                if (result != null && result.Tables.Count > 0)
+                {
+                    dt = result.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return dt;
         }
 
 		#endregion  ExtensionMethod

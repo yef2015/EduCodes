@@ -27,13 +27,17 @@ namespace TrainerEvaluate.Web
             switch (dataType)
             {
                 case "sdn":
-                    // 学校类型
+                    // 所属学区
                     dt = BLL.SPSchoolDistrict.GetDataSourceOnSchDistrict();
+                    break;
+                case "shl":
+                    // 所属学校
+                    dt = BLL.SPSchool.GetDataSourceOnSchool();
                     break;
                 default:
                     break;
             }
-            
+
             if (dt != null && dt.Rows.Count > 0)
             {
                 var str = JsonConvert.SerializeObject(dt);

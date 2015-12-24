@@ -803,7 +803,14 @@ namespace TrainerEvaluate.Web
             stuModel.Mobile = context.Request["Mobile"];
             stuModel.TeachNo = context.Request["TeachNo"];
             stuModel.Description = context.Request["Description"];
-       
+            if (!string.IsNullOrEmpty(context.Request["PostOptName"]))
+            {
+                stuModel.PostOptName = context.Request["PostOptName"];
+            }
+            if (!string.IsNullOrEmpty(context.Request["PostOptId"]))
+            {
+                stuModel.PostOptId = context.Request["PostOptId"];
+            } 
         }
 
 

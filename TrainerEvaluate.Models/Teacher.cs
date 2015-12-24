@@ -25,6 +25,9 @@ namespace TrainerEvaluate.Models
         private string _mobile;
         private int _status;
         private string _description;
+        private string _researchid;
+        private string _researchbigname;
+        private string _researchbigid;
 		/// <summary>
 		/// 教师编号
 		/// </summary>
@@ -119,6 +122,30 @@ namespace TrainerEvaluate.Models
         {
             set { _description = value; }
             get { return _description; }
+        }
+        /// <summary>
+        /// 研究方向小类id
+        /// </summary>
+        public string ResearchId
+        {
+            set { _researchid = value; }
+            get { return _researchid; }
+        }
+        /// <summary>
+        /// 研究方向大类名称
+        /// </summary>
+        public string ResearchBigName
+        {
+            set { _researchbigname = value; }
+            get { return _researchbigname; }
+        }
+        /// <summary>
+        /// 研究方向大类id
+        /// </summary>
+        public string ResearchBigId
+        {
+            set { _researchbigid = value; }
+            get { return _researchbigid; }
         }
 		#endregion Model
 

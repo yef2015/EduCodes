@@ -36,7 +36,8 @@ namespace TrainerEvaluate.Models
         private string _teachNo;
         private int _status;
         private string _description;
-
+        private string _postoptname;
+        private string _postoptid;
             
 		/// <summary>
 		/// 编号
@@ -196,6 +197,22 @@ namespace TrainerEvaluate.Models
         {
             set { _description = value; }
             get { return _description; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PostOptName
+        {
+            set { _postoptname = value; }
+            get { return _postoptname; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PostOptId
+        {
+            set { _postoptid = value; }
+            get { return _postoptid; }
         }
 		#endregion Model
 

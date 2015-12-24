@@ -186,7 +186,7 @@ namespace TrainerEvaluate.BLL
         public DataSet GetDataForExport(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select CourseName,TeacherName,TeachPlace,TeachTime,case  Type  when 1 then '通识' when 2 then '专业' when 3 then '修养' else ''  end as Type,Description ");
+            strSql.Append(" select CourseName,TeacherName,TeachPlace,TeachTime,TypeName+'  '+TypeSmallName ,Description ");
             strSql.Append(" FROM Course ");
             if (strWhere.Trim() != "")
             {

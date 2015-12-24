@@ -442,7 +442,7 @@ namespace TrainerEvaluate.BLL
 	    public DataSet GetDataForExport(string strWhere)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select TeacherName,case Gender when 1 then '男' else '女' end as GenderName,IdentityNo,Dept,Title,Post,Research,Mobile,Description ");
+            strSql.Append(" select TeacherName,case Gender when 1 then '男' else '女' end as GenderName,IdentityNo,Dept,Title,Post,ResearchBigName+'  '+Research ,Mobile,Description ");
             strSql.Append(" FROM Teacher ");
             if (strWhere.Trim() != "")
             {

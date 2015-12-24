@@ -72,61 +72,61 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
         </div>
 
-        <div id="dlg" class="easyui-dialog" style="width: 700px; height: 470px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 520px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons">
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
                 <div class="fitem">
                     <label>班级名称:</label>
-                    <input name="Name" id="Name" class="easyui-textbox" required="true">
+                    <input name="Name" id="Name" class="easyui-textbox" style="width:280px;" required="true">
                 </div>
                 <div class="fitem">
                     <label>培训对象</label>
-                    <input name="Object" id="Object" class="easyui-textbox">
+                    <input name="Object" id="Object" class="easyui-textbox" style="width:280px;">
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
-                    <input name="Description" id="Description" class="easyui-textbox">
+                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px;width:280px;">
                 </div>
                 <div class="fitem">
                     <label>开始日期:</label>
-                    <input name="StartDate" id="StartDate" class="easyui-datebox"  />
+                    <input name="StartDate" id="StartDate" class="easyui-datebox" style="width:280px;"  />
                 </div>
                 <div class="fitem">
                     <label>结束日期:</label>
-                    <input name="FinishDate" id="FinishDate" class="easyui-datebox" />
+                    <input name="FinishDate" id="FinishDate" class="easyui-datebox" style="width:280px;" />
                 </div>
                 <div class="fitem">
                     <label>学员人数:</label>
-                    <input name="Students" id="Students" class="easyui-textbox" disabled="true">
+                    <input name="Students" id="Students" class="easyui-textbox" style="width:280px;" disabled="true">
                 </div>
                 <div class="fitem">
                     <label>学时:</label>
-                    <input name="Point" id="Point" class="easyui-textbox">
+                    <input name="Point" id="Point" class="easyui-textbox" style="width:280px;">
                 </div>
                 <div class="fitem">
                     <label>学时类型:</label> 
-                <select class="easyui-combobox" name="PointType" id="PointType" style="width: 127px;"    data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                <select class="easyui-combobox" name="PointType" id="PointType" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
 
                 </div>
                 <div class="fitem">
                     <label>班主任:</label>
-                    <input name="Teacher" id="Teacher" class="easyui-textbox" disabled="true">
+                    <input name="Teacher" id="Teacher" class="easyui-textbox" style="width:280px;" disabled="true">
                 </div>
                 <div class="fitem">
                     <label>培训范围:</label>  
-                  <select class="easyui-combobox" name="Area" id="Area" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                  <select class="easyui-combobox" name="Area" id="Area" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>
                 <div class="fitem">
                     <label>培训级别:</label>  
-                <select class="easyui-combobox" name="Level" id="Level" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                <select class="easyui-combobox" name="Level" id="Level" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>
                 <div class="fitem">
                     <label>培训类型:</label> 
-                     <select class="easyui-combobox" name="Type" id="Type" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                     <select class="easyui-combobox" name="Type" id="Type" style="width:280px;"   data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>
             </form>

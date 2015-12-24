@@ -68,36 +68,37 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="setTeacher()">授课教师设置</a>
         </div>
 
-        <div id="dlg" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons">
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
                 <div class="fitem">
                     <label>课程名称:</label>
-                    <input name="CourseName" id="CourseName" class="easyui-textbox" required="true" />
+                    <input name="CourseName" id="CourseName" class="easyui-textbox" style="width:280px;"  required="true" />
                 </div>
                 <div class="fitem">
                     <label>授课教师</label>
-                    <input class="easyui-combobox" style="height: 50px"
+                    <input class="easyui-combobox" style="height: 50px;width:280px;"
                         name="CourseInfo" id="CourseInfo"
                         data-options="multiple:true,multiline:true,panelHeight:'auto',url:'TeacherInfo.ashx?t=c',method:'get',valueField:'TeacherId',textField:'TeacherName'" />
                 </div>
                 <div class="fitem">
                     <label>授课地点:</label>
-                    <input name="TeachPlace" id="TeachPlace" class="easyui-textbox" />
+                    <input name="TeachPlace" id="TeachPlace" style="width:280px;"  class="easyui-textbox" />
                 </div>
                 <div class="fitem">
                     <label>授课时间:</label>
-                    <input name="TeachTime" id="TeachTime" class="easyui-datebox" />
+                    <input name="TeachTime" id="TeachTime" style="width:280px;"  class="easyui-datebox" />
                 </div>
                 <div class="fitem">
                     <label>课程类型:</label>
-                    <select class="easyui-combobox" name="Type" id="Type" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=t',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="Type" id="Type" style="width: 138px;" data-options="url:'ComboboxGetData.ashx?t=t',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                     </select>
+                    <input name="TypeSmallName" id="TypeSmallName" style="width:138px;"  class="easyui-textbox" />
                 </div>
                 <div class="fitem">
                     <label>描述:</label>
-                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 100px">
+                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px;width:280px;">
                 </div>
             </form>
         </div>
@@ -284,6 +285,7 @@
                 $('#TeachPlace').textbox("setText", row.TeachPlace);
                 $('#TeachTime').textbox("setText", row.TeachTime);
                 $('#Type').combobox("setValue", row.Type);
+                $('#TypeSmallName').textbox("setText", row.TypeSmallName);                
                 $('#Description').textbox("setText", row.Description);
 
                 url = 'Course.ashx' + '?t=e&id=' + row.CourseId;
@@ -294,8 +296,15 @@
 
         function saveUser() { 
             var data = {
-                CourseName: $('#CourseName').textbox("getText"), TeacherName: $('#CourseInfo').combobox("getText"), TeacherId: escape($('#CourseInfo').combobox("getValues")), TeachPlace: $('#TeachPlace').textbox("getText"),
-                TeachTime: $('#TeachTime').textbox("getText"), Type: $('#Type').combobox("getValue"), Description: $('#Description').textbox("getText")
+                CourseName: $('#CourseName').textbox("getText"),
+                TeacherName: $('#CourseInfo').combobox("getText"),
+                TeacherId: escape($('#CourseInfo').combobox("getValues")),
+                TeachPlace: $('#TeachPlace').textbox("getText"),
+                TeachTime: $('#TeachTime').textbox("getText"),
+                Type: $('#Type').combobox("getValue"),
+                TypeName: $('#Type').combobox("getText"),
+                TypeSmallName: $('#TypeSmallName').textbox("getText"),
+                Description: $('#Description').textbox("getText")
             }; 
             if (data.CourseName == "") {
                 alert("请填写课程名称！");

@@ -606,6 +606,7 @@ namespace TrainerEvaluate.Web
             teaModel.Dept = context.Request["Dept"];
             teaModel.TeacherName = context.Request["TeacherName"];
             teaModel.Post = context.Request["Post"];
+            teaModel.ResearchBigName = context.Request["ResearchBigName"];
             teaModel.Research = context.Request["Research"];
             teaModel.Mobile = context.Request["Mobile"];
             teaModel.Description = context.Request["Description"];

@@ -469,7 +469,9 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["Type"]))
             {
                 courModel.Type = Convert.ToInt32(context.Request["Type"]);
-            }  
+            }
+            courModel.TypeName = context.Request["TypeName"];
+            courModel.TypeSmallName = context.Request["TypeSmallName"];
         }
 
 

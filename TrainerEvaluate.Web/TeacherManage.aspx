@@ -84,47 +84,48 @@
 
 
 
-    <div id="dlg" class="easyui-dialog" style="width: 400px; height: 500px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 500px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons">
         <div class="ftitle">详细信息</div>
         <form id="fm" method="post">
             <div class="fitem">
                 <label>姓名:</label>
-                <input name="TeacherName" id="TeacherName" class="easyui-textbox" required="true">
+                <input name="TeacherName" id="TeacherName" class="easyui-textbox" style="width:280px;" required="true">
             </div>
             <div class="fitem">
                 <label>性别</label> 
-                 <select class="easyui-combobox" name="Gender" id="Gender" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                 <select class="easyui-combobox" name="Gender" id="Gender" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
             <div class="fitem">
                 <label>身份证号:</label>
-                <input name="IdentityNo" id="IdentityNo" class="easyui-textbox">
+                <input name="IdentityNo" id="IdentityNo" style="width:280px;" class="easyui-textbox">
             </div>
             <div class="fitem">
                 <label>所在单位:</label>
-                <input name="Dept" id="Dept" class="easyui-textbox">
+                <input name="Dept" id="Dept" style="width:280px;" class="easyui-textbox">
             </div>
             <div class="fitem">
                 <label>职称:</label> 
-                  <select class="easyui-combobox" name="Title" id="Title" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                  <select class="easyui-combobox" name="Title" id="Title" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                </select>
             </div>
             <div class="fitem">
                 <label>职务:</label>
-                <input name="Post" id="Post" class="easyui-textbox">
+                <input name="Post" id="Post" class="easyui-textbox" style="width:280px;">
             </div>
             <div class="fitem">
-                <label>研究方向:</label>
-                <input name="Research" id="Research" class="easyui-textbox">
+                <label>研究方向:</label>                
+                <input name="ResearchBigName" id="ResearchBigName" class="easyui-textbox" style="width:138px;">
+                <input name="Research" id="Research" class="easyui-textbox" style="width:138px;">
             </div>
             <div class="fitem">
                 <label>手机号:</label>
-                <input name="Mobile" id="Mobile" class="easyui-textbox">
+                <input name="Mobile" id="Mobile" class="easyui-textbox" style="width:280px;">
             </div>
             <div class="fitem">
                 <label>描述:</label>
-                <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 100px">
+                <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 80px;width:280px;">
             </div>
         </form>
     </div>
@@ -263,6 +264,7 @@
             $('#Gender').combobox("setValue", "");
             $('#Post').textbox("setText", "");
             $('#Research').textbox("setText", "");
+            $('#ResearchBigName').textbox("setText", "");            
             $('#Mobile').textbox("setText", "");
             $('#Description').textbox("setText", "");
              
@@ -282,6 +284,7 @@
                 $('#Gender').combobox("setValue", row.Gender);
                 $('#Post').textbox("setText", row.Post);
                 $('#Research').textbox("setText", row.Research);
+                $('#ResearchBigName').textbox("setText", row.ResearchBigName);
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
                 url = 'TeacherInfo.ashx' + '?t=e&id=' + row.TeacherId;
@@ -300,7 +303,7 @@
                 $('#aPost').text(row.Post);
                 $('#aIdentityNo').text(row.IdentityNo);
                 $('#aMobile').text(row.Mobile);
-                $('#aResearch').text(row.Research);
+                $('#aResearch').text(row.ResearchBigName + "  " + row.Research);
                 $('#aTitle').text(row.JobTitleName);
                 $('#aDescription').text(row.Description);
             } else {
@@ -310,10 +313,16 @@
 
         function saveUser() {
             var data = {
-                TeacherName: $('#TeacherName').textbox("getText"), Gender: $('#Gender').combobox("getValue"), IdentityNo: $('#IdentityNo').textbox("getText"),
-                Dept: $('#Dept').textbox("getText"), Title: $('#Title').combobox("getValue"),
-                Post: $('#Post').textbox("getText"), Research: $('#Research').textbox("getText"),
-                Mobile: $('#Mobile').textbox("getText"), Description: $('#Description').textbox("getText")
+                TeacherName: $('#TeacherName').textbox("getText"),
+                Gender: $('#Gender').combobox("getValue"),
+                IdentityNo: $('#IdentityNo').textbox("getText"),
+                Dept: $('#Dept').textbox("getText"),
+                Title: $('#Title').combobox("getValue"),
+                Post: $('#Post').textbox("getText"),
+                Research: $('#Research').textbox("getText"),
+                ResearchBigName: $('#ResearchBigName').textbox("getText"),
+                Mobile: $('#Mobile').textbox("getText"),
+                Description: $('#Description').textbox("getText")
             };
             $.post(url, data, function (result) {
                 if (result == "") {

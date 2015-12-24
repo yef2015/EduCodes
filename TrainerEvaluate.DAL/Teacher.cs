@@ -40,9 +40,9 @@ namespace TrainerEvaluate.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Teacher(");
-            strSql.Append("TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description)");
+            strSql.Append("TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description,ResearchId,ResearchBigName,ResearchBigId)");
 			strSql.Append(" values (");
-            strSql.Append("@TeacherId,@IdentityNo,@TeacherName,@Gender,@Title,@Dept,@CreateTime,@LastModifyTime, @Picture, @Post, @Research, @Mobile, @Status, @Description)");
+            strSql.Append("@TeacherId,@IdentityNo,@TeacherName,@Gender,@Title,@Dept,@CreateTime,@LastModifyTime, @Picture, @Post, @Research, @Mobile, @Status, @Description,@ResearchId,@ResearchBigName,@ResearchBigId)");
 			SqlParameter[] parameters = {
 					new SqlParameter("@TeacherId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
@@ -57,7 +57,10 @@ namespace TrainerEvaluate.DAL
                     new SqlParameter("@Research", SqlDbType.VarChar),
                     new SqlParameter("@Mobile", SqlDbType.VarChar),
                     new SqlParameter("@Status", SqlDbType.Int),
-                    new SqlParameter("@Description", SqlDbType.Text)};
+                    new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@ResearchId", SqlDbType.NVarChar,50),
+					new SqlParameter("@ResearchBigName", SqlDbType.NVarChar,50),
+					new SqlParameter("@ResearchBigId", SqlDbType.NVarChar,50)};
 			parameters[0].Value = Guid.NewGuid();
 			parameters[1].Value = model.IdentityNo;
 			parameters[2].Value = model.TeacherName;
@@ -72,6 +75,9 @@ namespace TrainerEvaluate.DAL
             parameters[11].Value = model.Mobile;
             parameters[12].Value = model.Status;
             parameters[13].Value = model.Description;
+            parameters[14].Value = model.ResearchId;
+            parameters[15].Value = model.ResearchBigName;
+            parameters[16].Value = model.ResearchBigId;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -102,8 +108,11 @@ namespace TrainerEvaluate.DAL
             strSql.Append("Research=@Research,");
             strSql.Append("Mobile=@Mobile,");
             strSql.Append("Status=@Status,");
-            strSql.Append("Description=@Description ");
-			strSql.Append(" where TeacherId=@TeacherId ");
+            strSql.Append("Description=@Description,");
+            strSql.Append("ResearchId=@ResearchId,");
+            strSql.Append("ResearchBigName=@ResearchBigName,");
+            strSql.Append("ResearchBigId=@ResearchBigId");
+            strSql.Append(" where TeacherId=@TeacherId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
 					new SqlParameter("@TeacherName", SqlDbType.NVarChar,50),
@@ -118,6 +127,9 @@ namespace TrainerEvaluate.DAL
                     new SqlParameter("@Mobile", SqlDbType.VarChar),
                     new SqlParameter("@Status", SqlDbType.Int),
                     new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@ResearchId", SqlDbType.NVarChar,50),
+					new SqlParameter("@ResearchBigName", SqlDbType.NVarChar,50),
+					new SqlParameter("@ResearchBigId", SqlDbType.NVarChar,50),
 					new SqlParameter("@TeacherId", SqlDbType.UniqueIdentifier,16)};
 
 			parameters[0].Value = model.IdentityNo;
@@ -133,8 +145,11 @@ namespace TrainerEvaluate.DAL
             parameters[10].Value = model.Mobile;
             parameters[11].Value = model.Status;
             parameters[12].Value = model.Description;
-			parameters[13].Value = model.TeacherId;
-           
+            parameters[13].Value = model.ResearchId;
+            parameters[14].Value = model.ResearchBigName;
+            parameters[15].Value = model.ResearchBigId;
+            parameters[16].Value = model.TeacherId;
+
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
 			{
@@ -198,7 +213,7 @@ namespace TrainerEvaluate.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description from Teacher ");
+            strSql.Append("select  top 1 TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description,ResearchId,ResearchBigName,ResearchBigId from Teacher ");
 			strSql.Append(" where TeacherId=@TeacherId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@TeacherId", SqlDbType.UniqueIdentifier,16)			};
@@ -281,7 +296,18 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Description = row["Description"].ToString();
                 }
-
+                if (row["ResearchId"] != null && row["ResearchId"].ToString() != "")
+                {
+                    model.ResearchId = row["ResearchId"].ToString();
+                }
+                if (row["ResearchBigName"] != null && row["ResearchBigName"].ToString() != "")
+                {
+                    model.ResearchBigName = row["ResearchBigName"].ToString();
+                }
+                if (row["ResearchBigId"] != null && row["ResearchBigId"].ToString() != "")
+                {
+                    model.ResearchBigId = row["ResearchBigId"].ToString();
+                }
                 /*
                  , Picture, Post, Research, Mobile, Status, Description*/
             }
@@ -294,7 +320,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select TeacherId,IdentityNo,TeacherName,Gender,case Gender when 1 then '男' else '女' end as GenderName,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description ");
+            strSql.Append("select TeacherId,IdentityNo,TeacherName,Gender,case Gender when 1 then '男' else '女' end as GenderName,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description,ResearchId,ResearchBigName,ResearchBigId ");
 			strSql.Append(" FROM Teacher ");
 			if(strWhere.Trim()!="")
 			{
@@ -315,7 +341,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description ");
+            strSql.Append(" TeacherId,IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Picture, Post, Research, Mobile, Status, Description,ResearchId,ResearchBigName,ResearchBigId ");
 			strSql.Append(" FROM Teacher ");
 			if(strWhere.Trim()!="")
 			{

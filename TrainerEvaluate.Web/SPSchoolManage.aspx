@@ -90,8 +90,7 @@
                 <input name="SchoolName" id="SchoolName" class="easyui-textbox" style="width:260px;" required="true">
             </div>
             <div class="fitem">
-                <label>所属学区:</label>
-                <%--<input name="SchDisName" id="SchDisName" class="easyui-textbox" style="width:260px;">--%>
+                <label>所属学区:</label>                
                 <select class="easyui-combobox" name="SchDisName" id="SchDisName" style="width: 260px;"    data-options="url:'ComboxGetDropData.ashx?t=sdn',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
@@ -443,7 +442,7 @@
                 }
             });
         }
-        
+
         function exportData() {
             var url = "SPSchoolInfo.ashx?t=ex"
                 + "&name=" + encodeURIComponent($("#SchoolName1").textbox('getText'))
@@ -453,7 +452,7 @@
                 + "&sht=" + $("#SchoolTypeName1").combobox("getValue");
             window.location = url;
         }
-        
+
         function clearCondition() {
             $('#StuName11').textbox('clear');
             $('#School11').textbox('clear');

@@ -38,12 +38,12 @@ namespace TrainerEvaluate.DAL
 		/// </summary>
 		public bool Add(Models.Course model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into Course(");
-			strSql.Append("CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description)");
-			strSql.Append(" values (");
-            strSql.Append("@CourseId,@CourseName,@TeacherId,@TeacherName,@TeachTime,@TeachPlace,@CreatTime,@LastModifyTime, @Type, @Status, @Description)");
-			SqlParameter[] parameters = {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into Course(");
+            strSql.Append("CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime,Type,Status,Description,TypeName,TypeSmallId,TypeSmallName)");
+            strSql.Append(" values (");
+            strSql.Append("@CourseId,@CourseName,@TeacherId,@TeacherName,@TeachTime,@TeachPlace,@CreatTime,@LastModifyTime,@Type,@Status,@Description,@TypeName,@TypeSmallId,@TypeSmallName)");
+            SqlParameter[] parameters = {
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CourseName", SqlDbType.NVarChar,50),
 					new SqlParameter("@TeacherId", SqlDbType.VarChar,-1),
@@ -52,50 +52,59 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TeachPlace", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatTime", SqlDbType.DateTime),
 					new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-                    new SqlParameter("@Type", SqlDbType.Int),
-                    new SqlParameter("@Status", SqlDbType.Int),
-                    new SqlParameter("@Description", SqlDbType.Text)};
-			parameters[0].Value = model.CourseId;
-			parameters[1].Value = model.CourseName;
-			parameters[2].Value = model.TeacherId;
-			parameters[3].Value = model.TeacherName;
-			parameters[4].Value = model.TeachTime;
-			parameters[5].Value = model.TeachPlace;
-			parameters[6].Value = model.CreatTime;
-			parameters[7].Value = model.LastModifyTime;
+					new SqlParameter("@Type", SqlDbType.Int,4),
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@TypeName", SqlDbType.NVarChar,50),
+					new SqlParameter("@TypeSmallId", SqlDbType.NVarChar,50),
+					new SqlParameter("@TypeSmallName", SqlDbType.NVarChar,50)};
+            parameters[0].Value = Guid.NewGuid();
+            parameters[1].Value = model.CourseName;
+            parameters[2].Value = model.TeacherId;
+            parameters[3].Value = model.TeacherName;
+            parameters[4].Value = model.TeachTime;
+            parameters[5].Value = model.TeachPlace;
+            parameters[6].Value = model.CreatTime;
+            parameters[7].Value = model.LastModifyTime;
             parameters[8].Value = model.Type;
             parameters[9].Value = model.Status;
             parameters[10].Value = model.Description;
+            parameters[11].Value = model.TypeName;
+            parameters[12].Value = model.TypeSmallId;
+            parameters[13].Value = model.TypeSmallName;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
 		public bool Update(Models.Course model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update Course set ");
-			strSql.Append("CourseName=@CourseName,");
-			strSql.Append("TeacherId=@TeacherId,");
-			strSql.Append("TeacherName=@TeacherName,");
-			strSql.Append("TeachTime=@TeachTime,");
-			strSql.Append("TeachPlace=@TeachPlace,");
-			strSql.Append("CreatTime=@CreatTime,");
-			strSql.Append("LastModifyTime=@LastModifyTime,");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update Course set ");
+            strSql.Append("CourseName=@CourseName,");
+            strSql.Append("TeacherId=@TeacherId,");
+            strSql.Append("TeacherName=@TeacherName,");
+            strSql.Append("TeachTime=@TeachTime,");
+            strSql.Append("TeachPlace=@TeachPlace,");
+            strSql.Append("CreatTime=@CreatTime,");
+            strSql.Append("LastModifyTime=@LastModifyTime,");
             strSql.Append("Type=@Type,");
             strSql.Append("Status=@Status,");
-            strSql.Append("Description=@Description ");
-			strSql.Append(" where CourseId=@CourseId ");
-			SqlParameter[] parameters = {
+            strSql.Append("Description=@Description,");
+            strSql.Append("TypeName=@TypeName,");
+            strSql.Append("TypeSmallId=@TypeSmallId,");
+            strSql.Append("TypeSmallName=@TypeSmallName");
+            strSql.Append(" where CourseId=@CourseId ");
+            SqlParameter[] parameters = {
 					new SqlParameter("@CourseName", SqlDbType.NVarChar,50),
 					new SqlParameter("@TeacherId", SqlDbType.VarChar,-1),
 					new SqlParameter("@TeacherName", SqlDbType.NVarChar,-1),
@@ -103,31 +112,37 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TeachPlace", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatTime", SqlDbType.DateTime),
 					new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-                    new SqlParameter("@Type", SqlDbType.Int),
-                    new SqlParameter("@Status", SqlDbType.Int),
-                    new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@Type", SqlDbType.Int,4),
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Description", SqlDbType.Text),
+					new SqlParameter("@TypeName", SqlDbType.NVarChar,50),
+					new SqlParameter("@TypeSmallId", SqlDbType.NVarChar,50),
+					new SqlParameter("@TypeSmallName", SqlDbType.NVarChar,50),
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16)};
-			parameters[0].Value = model.CourseName;
-			parameters[1].Value = model.TeacherId;
-			parameters[2].Value = model.TeacherName;
-			parameters[3].Value = model.TeachTime;
-			parameters[4].Value = model.TeachPlace;
-			parameters[5].Value = model.CreatTime;
-			parameters[6].Value = model.LastModifyTime;
+            parameters[0].Value = model.CourseName;
+            parameters[1].Value = model.TeacherId;
+            parameters[2].Value = model.TeacherName;
+            parameters[3].Value = model.TeachTime;
+            parameters[4].Value = model.TeachPlace;
+            parameters[5].Value = model.CreatTime;
+            parameters[6].Value = model.LastModifyTime;
             parameters[7].Value = model.Type;
             parameters[8].Value = model.Status;
             parameters[9].Value = model.Description;
-			parameters[10].Value = model.CourseId;
+            parameters[10].Value = model.TypeName;
+            parameters[11].Value = model.TypeSmallId;
+            parameters[12].Value = model.TypeSmallName;
+            parameters[13].Value = model.CourseId;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		/// <summary>
@@ -182,7 +197,7 @@ namespace TrainerEvaluate.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description from Course ");
+            strSql.Append("select  top 1 CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description,TypeName,TypeSmallId,TypeSmallName  from Course ");
 			strSql.Append(" where CourseId=@CourseId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16)			};
@@ -254,6 +269,18 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Description = row["Description"].ToString();
                 }
+                if (row["TypeName"] != null && row["TypeName"].ToString() != "")
+                {
+                    model.TypeName = row["TypeName"].ToString();
+                }
+                if (row["TypeSmallId"] != null && row["TypeSmallId"].ToString() != "")
+                {
+                    model.TypeSmallId = row["TypeSmallId"].ToString();
+                }
+                if (row["TypeSmallName"] != null && row["TypeSmallName"].ToString() != "")
+                {
+                    model.TypeSmallName = row["TypeSmallName"].ToString();
+                }
 			}
 			return model;
 		}
@@ -264,7 +291,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description");
+            strSql.Append("select CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description,TypeName,TypeSmallId,TypeSmallName ");
 			strSql.Append(" FROM Course ");
 			if(strWhere.Trim()!="")
 			{
@@ -285,7 +312,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description ");
+            strSql.Append(" CourseId,CourseName,TeacherId,TeacherName,TeachTime,TeachPlace,CreatTime,LastModifyTime, Type, Status, Description,TypeName,TypeSmallId,TypeSmallName ");
 			strSql.Append(" FROM Course ");
 			if(strWhere.Trim()!="")
 			{

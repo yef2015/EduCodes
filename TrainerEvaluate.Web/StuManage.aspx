@@ -85,7 +85,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-reload" plain="true" onclick="ArcInfo()">学员档案</a>
         </div>
     </div>
-    <div id="dlg" class="easyui-dialog" style="width: 700px; height: 500px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 700px; height: 530px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons2">
         <div class="ftitle">详细信息</div>
         <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
@@ -100,8 +100,8 @@
                     <div align="center">性别： </div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <select class="easyui-combobox" name="Gender" id="Gender" style="width: 160px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
-                      </select>
+                    <select class="easyui-combobox" name="Gender" id="Gender" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -115,7 +115,8 @@
                     <div align="center">所在学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <input name="School" id="School" class="easyui-textbox" />
+                    <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -123,7 +124,7 @@
                     <div align="center">职称：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                      </select>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
@@ -144,7 +145,7 @@
                     <div align="center">民族： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <select class="easyui-combobox" name="Nation" id="Nation" style="width: 160px;"  data-options="url:'ComboboxGetData.ashx?t=n',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="Nation" id="Nation" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=n',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                      </select>
                 </td>
             </tr>
@@ -181,7 +182,7 @@
                     <div align="center">政治面貌：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <select class="easyui-combobox" name="PoliticsStaus" id="PoliticsStaus" style="width: 160px;"  data-options="url:'ComboboxGetData.ashx?t=p',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="PoliticsStaus" id="PoliticsStaus" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=p',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                    </select>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
@@ -204,7 +205,9 @@
                     <div align="center">现任职务： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"> 
-                    <input name="Post" id="Post" class="easyui-textbox" />
+                    <input name="Post" id="Post" style="width:75px;" class="easyui-textbox" />
+                    <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;"  data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -222,19 +225,22 @@
                 </td>
             </tr>
             <tr>
-                <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">描述：</div>
-                </td>
-                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-
-                    <input name="Description" id="Description" class="easyui-textbox" />
-                </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">继教号： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-
                     <input name="TeachNo" id="TeachNo" class="easyui-textbox" required="true" />
+                </td>
+                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25"></td>
+                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"></td>
+            </tr>
+            <tr>
+                <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">描述：</div>
+                </td>
+                <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a" colspan="3">
+                    <input name="Description" id="Description" class="easyui-textbox" 
+                        data-options="multiline:true" style="height: 65px;width:500px;" />
                 </td>
             </tr>
         </table>
@@ -449,7 +455,7 @@
         var url = 'StudentsInfo.ashx';
         function newUser() {
             $('#dlg').dialog('open').dialog('setTitle', '新增学员信息');
-            $('#School').textbox("setText", "");
+            $('#School').combobox("setText", "");
             $('#JobTitle').combobox("setValue", "");
             $('#IdentityNo').textbox("setText", "");
             $('#TelNo').textbox("setText", "");
@@ -464,7 +470,8 @@
             $('#PoliticsStaus').combobox("setValue", "");
             $('#Rank').textbox("setText", "");
             $('#RankTime').textbox("setText", "");
-            $('#Post').textbox("setText", "");
+            $('#Post').textbox("setText", ""); 
+            $('#PostOptName').combobox("setText", "");
             $('#PostTime').textbox("setText", "");
             $('#Mobile').textbox("setText", "");
             $('#Description').textbox("setText", "");
@@ -475,22 +482,41 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg').dialog('open').dialog('setTitle', '编辑学员信息');
-                $('#School').textbox("setText", row.School);
-                $('#JobTitle').combobox("setValue", row.JobTitle);
+                $('#School').combobox("setText", row.School);
+                if (row.JobTitle != 0) {
+                    // 职称
+                    $('#JobTitle').combobox("setValue", row.JobTitle);
+                }
+                else {
+                    $('#JobTitle').combobox("setValue", "");
+                }
                 $('#IdentityNo').textbox("setText", row.IdentityNo);
                 $('#TelNo').textbox("setText", row.TelNo);
                 $('#StuName').textbox("setText", row.StuName);
                 $('#Gender').combobox("setValue", row.Gender);
                 $('#Birthday').datebox("setValue", row.Birthday);
-                $('#Nation').combobox("setValue", row.Nation);
+                if (row.Nation != 0) {
+                    // 民族
+                    $('#Nation').combobox("setValue", row.Nation);
+                }
+                else {
+                    $('#Nation').combobox("setValue", "");
+                }
                 $('#FirstRecord').textbox("setText", row.FirstRecord);
                 $('#FirstSchool').textbox("setText", row.FirstSchool);
                 $('#LastRecord').textbox("setText", row.LastRecord);
                 $('#LastSchool').textbox("setText", row.LastSchool);
-                $('#PoliticsStaus').combobox("setValue", row.PoliticsStatus);
+                if (row.PoliticsStatus != 0) {
+                    // 政治面貌
+                    $('#PoliticsStaus').combobox("setValue", row.PoliticsStatus);
+                }
+                else {
+                    $('#PoliticsStaus').combobox("setValue", "");
+                }
                 $('#Rank').textbox("setText", row.Rank);
                 $('#RankTime').datebox("setValue", row.RankTime);
-                $('#Post').textbox("setText", row.Post);
+                $('#Post').textbox("setText", row.Post); 
+                $('#PostOptName').combobox("setValue", row.PostOptId);
                 $('#PostTime').datebox("setValue", row.PostTime);
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
@@ -506,23 +532,44 @@
             if (row) {
                 $('#dlg1').dialog('open').dialog('setTitle', '学员档案');
                 $('#aStuName').text(row.StuName);
-                $('#aGender').text(row.GenderName);
+                if (row.GenderName != null) {
+                    $('#aGender').text(row.GenderName);
+                }
                 $('#aLastSchool').text(row.LastSchool);
-                $('#aJobTitle').text(row.JobTitleName);
+                if (row.JobTitleName != null) {
+                    $('#aJobTitle').text(row.JobTitleName);
+                }
                 $('#aIdentityNo').text(row.IdentityNo);
                 $('#aTelNo').text(row.TelNo);
                 $('#aCredit').text(row.Credit);
-                $('#aBirthday').text(StringToDate(row.Birthday));
-                $('#aNation').text(row.NationName);
+                if (row.Birthday != null) {
+                    $('#aBirthday').text(StringToDate(row.Birthday));
+                }
+                if (row.NationName != null) {
+                    $('#aNation').text(row.NationName);
+                }
                 $('#aFirstRecord').text(row.FirstRecord);
                 $('#aFirstSchool').text(row.FirstSchool);
                 $('#aLastRecord').text(row.LastRecord);
                 $('#aLastSchool').text(row.LastSchool);
-                $('#aPoliticsStaus').text(row.PoliticsStatusName);
+                if (row.PoliticsStatusName != null) {
+                    $('#aPoliticsStaus').text(row.PoliticsStatusName);
+                }
                 $('#aRank').text(row.Rank);
-                $('#aRankTime').text(StringToDate(row.RankTime));
-                $('#aPost').text(row.Post);
-                $('#aPostTime').text(StringToDate(row.PostTime));
+                if (row.RankTime != null) {
+                    $('#aRankTime').text(StringToDate(row.RankTime));
+                }
+                if (row.Post != null) {
+                    if (row.PostOptName != null) {
+                        $('#aPost').text(row.Post + "  " + row.PostOptName);
+                    }
+                    else {
+                        $('#aPost').text(row.Post);
+                    }
+                }
+                if (row.PostTime != null) {
+                    $('#aPostTime').text(StringToDate(row.PostTime));
+                }
                 $('#aMobile').text(row.Mobile);
                 $('#aDescription').text(row.Description);
                 $('#aTeachNo').text(row.TeachNo);
@@ -538,7 +585,7 @@
                 StuName: $('#StuName').textbox("getText"),
                 Gender: $('#Gender').combobox("getValue"),
                 IdentityNo: $('#IdentityNo').textbox("getText"),
-                School: $('#School').textbox("getText"),
+                School: $('#School').combobox("getText"),
                 JobTitle: $('#JobTitle').combobox("getValue"),
                 TelNo: $('#TelNo').textbox("getText"),
                 Birthday: $('#Birthday').textbox("getText"),
@@ -554,7 +601,9 @@
                 PostTime: $('#PostTime').textbox("getText"),
                 Mobile: $('#Mobile').textbox("getText"),
                 Description: $('#Description').textbox("getText"),
-                TeachNo: $('#TeachNo').textbox("getText")
+                TeachNo: $('#TeachNo').textbox("getText"),
+                PostOptName: $('#PostOptName ').combobox("getText"),
+                PostOptId: $('#PostOptName ').combobox("getValue")
             };
             if (data.StuName == "") {
                 $.messager.alert('提示', "请填写姓名", 'warning');
@@ -572,7 +621,7 @@
                 $.messager.alert('提示', "请填写继教号", 'warning');
                 return;
             }
-            $.post(url, data, function(result) {
+            $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');
                     $('#dg').datagrid('reload');
@@ -666,7 +715,7 @@
         });
 
 
-        function ifConfirmCover(filename) { 
+        function ifConfirmCover(filename) {
             var url = "UploadTmpData.ashx?t=cstu";
             var data = { "fname": filename };
             $.post(url, data, function (result) {

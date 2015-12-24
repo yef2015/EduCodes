@@ -173,9 +173,11 @@
                 $.messager.confirm('确认', '确定删除吗?', function (r) {
                     if (r) {
                         $.post(url, { id: row.SchDisId }, function (result) {
+
                             if (result == "" || result == null) {
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
+                                alert(result);
                                 $.messager.show({    // show error message
                                     title: 'Error',
                                     msg: result
@@ -271,7 +273,7 @@
             + "&desp=" + $("#Description1").textbox('getText');
             window.location = url;
         }
-        
+
         function clearCondition() {
             $('#SchDisName1').textbox('clear');
             $('#Description1').textbox('clear');

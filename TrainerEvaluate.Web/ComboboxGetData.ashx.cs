@@ -58,6 +58,9 @@ namespace TrainerEvaluate.Web
                 case "st":
                     dataType = "学校类型";
                     break;  
+                case "ptn":
+                    dataType = "学员职务";
+                    break;
                 default:
                     break; 
             }
