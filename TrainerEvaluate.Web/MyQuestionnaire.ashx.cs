@@ -36,7 +36,7 @@ namespace TrainerEvaluate.Web
             {
                 var uid = HttpContext.Current.Request["uid"];
                 var questionbll = new BLL.Questionnaire();
-                var ds = questionbll.GetStudentQuestionnaire(uid);
+                var ds = questionbll.GetStudentQuestionnaireNew(uid);
 
                 //  [{"SUBITEM_VALUE":"1","SUBITEM_NAME":"男"},{"SUBITEM_VALUE":"2","SUBITEM_NAME":"女"}]  
 

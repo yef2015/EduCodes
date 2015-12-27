@@ -1005,7 +1005,97 @@ namespace TrainerEvaluate.BLL
                 return null;
             }
         }
-         
+
+        /// <summary>
+        /// 提取当前处理人的需要参加调查
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
+        public DataSet GetCourseQuestionnarieInfoNew(Guid currentUserId)
+        {
+            try
+            {
+                // 获取学生所在的班级id列表
+                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", currentUserId.ToString());
+                DataSet ds = DbHelperSQL.Query(strSQL);
+                StringBuilder strClass = new StringBuilder();
+                string strClassId= string.Empty;
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        strClass.Append("'" + row["ID"] + "',");
+                    }
+
+                    if (strClass.Length > 0)
+                    {
+                        strClassId = strClass.ToString().Substring(0, strClass.ToString().Length - 1);
+                    }
+                }
+
+                // 通过班级列表，获取学生学习的课程，参加的评估课程
+                DataSet dsRe = new DataSet();
+                if (!string.IsNullOrEmpty(strClassId))
+                {
+                    var sqlRe = string.Format("select c.* from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0})", strClassId);
+                    dsRe= DbHelperSQL.Query(sqlRe);
+                }
+
+                return dsRe;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 提取当前处理人的需要参加调查
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
+        public DataSet GetStudentQuestionnaireNew(string studentId)
+        {    
+            try
+            {
+                // 获取学生所在的班级id列表
+                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", studentId);
+                DataSet ds = DbHelperSQL.Query(strSQL);
+                StringBuilder strClass = new StringBuilder();
+                string strClassId= string.Empty;
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        strClass.Append("'" + row["ID"] + "',");
+                    }
+
+                    if (strClass.Length > 0)
+                    {
+                        strClassId = strClass.ToString().Substring(0, strClass.ToString().Length - 1);
+                    }
+                }
+
+                // 通过班级列表，获取学生学习的课程，参加的评估课程
+                DataSet dsRe = new DataSet();
+                if (!string.IsNullOrEmpty(strClassId))
+                {
+                    var sqlRe = string.Format("select c.* from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0})", strClassId);
+                    dsRe= DbHelperSQL.Query(sqlRe);
+                }
+
+                return dsRe;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
 	    #endregion  ExtensionMethod
 	}
 }

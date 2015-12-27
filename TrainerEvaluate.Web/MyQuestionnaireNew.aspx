@@ -55,6 +55,7 @@
                 </td>
             </tr>
         </table>
+        
         <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="queHas" runat="server" style="margin-left: 10px;">
             <tr>
                 <td width="16%" bgcolor="F8DCC2" class="gray10a" height="25">
@@ -87,6 +88,9 @@
             <tr>
                 <td width="16%" colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">&nbsp; </td>
             </tr>
+        </table>
+        <asp:Literal ID="LiteralContent" runat="server"></asp:Literal>
+        <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="queHas2" runat="server" style="margin-left: 10px;">
             <tr bgcolor="#FFFFFF">
                 <td width="16%" colspan="4" class="white10" height="26" bgcolor="4A5C69">
                     <img src="images/bank.gif" width="10" height="10">一、您对本次培训课程的总体评价是：</td>
