@@ -161,7 +161,19 @@ namespace TrainerEvaluate.BLL
 	        }
 	    }
 
-
+        public Models.SysUser GetSysUserByIdentityNo(string identityNo, string pwd)
+        {
+            var userList = GetModelList(string.Format(" (UserAccount = '{0}' or IdentityNo = '{1}') and UserPassWord = '{2}'", identityNo, identityNo, pwd));
+            if (userList != null && userList.Count == 1)
+            {
+                return userList[0];
+            }
+            else
+            {
+                LogHelper.WriteLogofExceptioin(new Exception("用户信息重复或为找到"));
+                return null;
+            }
+        }
 
 	    public bool GetAccountExsist(string userAccount,Guid useGuid)
 	    {

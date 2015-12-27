@@ -276,8 +276,28 @@ namespace TrainerEvaluate.BLL
 
 
 
-	    public DataSet GetRoleUserListByPage(string roleId, string orderby, int startIndex, int endIndex)
+	    public DataSet GetRoleUserListByPage(string roleId,string roleName, string orderby, int startIndex, int endIndex)
 	    {
+            int userRole = 1;
+            switch (roleName)
+            { 
+                case "超级管理员":
+                    userRole = 3;
+                    break;
+                case "班主任":
+                    userRole = 3;
+                    break;
+                case "学员":
+                    userRole = 1;
+                    break;
+                case "教师":
+                    userRole = 2;
+                    break;
+                default:
+                    userRole = 1;
+                    break;
+            }
+
 	        StringBuilder strSql = new StringBuilder();
 	        strSql.Append("SELECT * FROM ( ");
 	        strSql.Append(" SELECT ROW_NUMBER() OVER (");
@@ -293,8 +313,8 @@ namespace TrainerEvaluate.BLL
 	        strSql.Append(
                 " ( select  a.*, case ISNULL(b.ID,'00000000-0000-0000-0000-000000000000') when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck     ");
 	        strSql.Append(
-                string.Format("   from SysUser a left join  SysRoleUser  b on a.UserId=b.UserId  and b.RoleId='{0}'   where UserRole!=1  )  ",
-	                roleId));
+                string.Format("   from SysUser a left join  SysRoleUser  b on a.UserId=b.UserId  and b.RoleId='{0}'   where UserRole ={1}  )  ",
+	                roleId,userRole));
 	        strSql.Append("  T ");
 	        strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE   TT.Row between {0} and {1}", startIndex, endIndex);
@@ -410,7 +430,7 @@ namespace TrainerEvaluate.BLL
 	        var sql =
 	            string.Format(
 	                "  select b.Name, d.FuncCode,d.FuncName from  SysRoleUser  a, Roles b, SysRoleFunc c,SysFunc d " +
-	                " where a.RoleId=b.ID  and c.RoleId=b.ID and c.FuncId=d.ID and a.UserId='{0}' ", userid);
+                    " where a.RoleId=b.ID  and c.RoleId=b.ID and c.FuncId=d.ID and a.UserId='{0}' order by d.FuncSort ASC", userid);
 
 
 	        var ds = DbHelperSQL.Query(sql);

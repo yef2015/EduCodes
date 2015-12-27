@@ -67,6 +67,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editClass()">编辑</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="DeleteClass()">删除</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="setStu()">学员设置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="uploadTmpStuData()">导入学员</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="setTeacher()">班主任设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="setCourse()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
@@ -211,7 +212,12 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg3').dialog('close'); " style="width: 90px">取消</a>
         </div> 
     </div>
-    
+
+    <div id="dlgUpload" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <div class="ftitle">上传excel数据文件</div>
+        <input type="file" id="upData" name="upData" />
+        <div id="fileQueue"></div>
+    </div>
     
     <script type="text/javascript">
         
@@ -581,82 +587,84 @@
     }
 
 
+    var vClassId = "";
+    function uploadTmpStuData() {
+        vClassId = "";
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            vClassId = row.ID;
+            $('#dlgUpload').dialog({
+                title: '批量设置学员',
+                height: '300px',
+                closed: false,
+                cache: false,
+                modal: true
+            });
+            $('#dlgUpload').dialog('open');
+        } else {            
+            $.messager.alert('提示', '请选择要设置的行!', 'warning');
+        }
+    }
 
-   
-
-  
-
-    //function uploadTmpData() {
-    //    $('#dlgUpload').dialog({
-    //        title: '批量导入',
-    //        height: '300px',
-    //        closed: false,
-    //        cache: false,
-    //        modal: true
-    //    });
-    //    $('#dlgUpload').dialog('open');
-    //}
-
-
-
-    //$(function () {
-    //    $('#upData').uploadify({
-    //        'swf': 'Scripts/uploadify.swf',
-    //        'uploader': 'UploadTmpData.ashx?t=cor',
-    //        'cancelImg': 'Scripts/cancel.png',
-    //        'removeCompleted': true,
-    //        'hideButton': false,
-    //        'auto': true,
-    //        'queueID': 'fileQueue',
-    //        'fileTypeExts': '*.xls;*.xlsx',
-    //        'fileTypeDesc': 'xls Files (.xls)',
-    //        'onSelect': function (e) {
-    //            if (e.type != '.xlsx' && e.type != '.xls') {
-    //                alert("请上传excel文件!");
-    //            }
-    //        },
-    //        'onUploadSuccess': function (file, data, response) {
-    //            if (data != "" && data != "1") {
-    //                var result = data.split('|');
-    //                if (result.length > 0) {
-    //                    if (confirm(result[0])) {
-    //                        ifConfirmCover(result[1]);
-    //                    } else {
-    //                        $('#dlgUpload').dialog('close');
-    //                        $('#dg').datagrid('reload');
-    //                    }
-    //                } else {
-    //                    alert(data);
-    //                }
-    //            }
-    //        },
-    //        'onUploadError': function (file, errorCode, errorMsg, errorString) {
-    //            $('#permissions_hint').show();
-    //        },
-    //        'onQueueComplete': function (queueData) {
-    //            if (queueData.uploadsSuccessful > 0) {
-    //                //window.location.reload(true);
-    //                $('#dlgUpload').dialog('close');
-    //                $('#dg').datagrid('reload');
-    //            }
-    //        }
-    //    });
-    //});
+    $(function () {
+        $('#upData').uploadify({
+            'swf': 'Scripts/uploadify.swf',
+            'uploader': 'UploadTmpData.ashx?t=stet&ClassId=' + vClassId,
+            'cancelImg': 'Scripts/cancel.png',
+            'removeCompleted': true,
+            'hideButton': false,
+            'auto': true,
+            'queueID': 'fileQueue',
+            'fileTypeExts': '*.xls;*.xlsx',
+            'fileTypeDesc': 'xls Files (.xls)',
+            'onSelect': function (e) {
+                if (e.type != '.xlsx' && e.type != '.xls') {
+                    alert("请上传excel文件!");
+                }
+            },
+            'onUploadSuccess': function (file, data, response) {
+                if (data != "" && data != "1") {
+                    var result = data.split('|');
+                    if (result.length > 0) {
+                        if (confirm(result[0])) {
+                            ifConfirmCover(result[1]);
+                        } else {
+                            $('#dlgUpload').dialog('close');
+                            $('#dg').datagrid('reload');
+                        }
+                    } else {
+                        alert(data);
+                    }
+                }
+            },
+            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                $('#permissions_hint').show();
+            },
+            'onQueueComplete': function (queueData) {
+                if (queueData.uploadsSuccessful > 0) {
+                    //window.location.reload(true);
+                    $('#dlgUpload').dialog('close');
+                    $('#dg').datagrid('reload');
+                }
+            }
+        });
+    });
 
 
-    //function ifConfirmCover(filename) {
-    //    var url = "UploadTmpData.ashx?t=ccor";
-    //    var data = { "fname": filename };
-    //    $.post(url, data, function (result) {
-    //        if (result == "") {
-    //            $('#dlg').dialog('close');
-    //            $('#dg').datagrid('reload');
-    //        }
-    //        else {
-    //            $.messager.alert('提示', result, 'warning');
-    //        }
-    //    });
-    //}
+    function ifConfirmCover(filename) {
+        alert(vClassId);
+        var url = "UploadTmpData.ashx?t=cstet&ClassId=" + vClassId;
+        var data = { "fname": filename };
+        $.post(url, data, function (result) {
+            if (result == "") {
+                $('#dlg').dialog('close');
+                $('#dg').datagrid('reload');
+            }
+            else {
+                $.messager.alert('提示', result, 'warning');
+            }
+        });
+    }
 
     function formatterdate(val, row) {
         if (val != "" && val != undefined) {

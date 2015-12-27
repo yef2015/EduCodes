@@ -20,13 +20,13 @@
                 <div align="center">角色名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="rname" class="easyui-textbox" id="rname">
+                <input name="rname" class="easyui-textbox" id="rname" style="width: 160px;" />
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">描述： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="rdesc" class="easyui-textbox" id="rdesc">
+                <input name="rdesc" class="easyui-textbox" id="rdesc" style="width: 160px;" />
             </td>
         </tr>
         <tr>
@@ -34,13 +34,13 @@
                 <div align="center">创建日期（起）：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="rtime" class="easyui-datebox" id="rtime">
+                <input name="rtime" class="easyui-datebox" id="rtime" style="width: 160px;" />
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                   <div align="center">创建日期（止）：</div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="endTime" class="easyui-datebox" id="endTime">
+                <input name="endTime" class="easyui-datebox" id="endTime" style="width: 160px;" />
             </td>
         </tr> 
         <tr>
@@ -93,17 +93,17 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">设置用户</a>
         </div>
     </div>
-    <div id="dlg" class="easyui-dialog" style="width: 400px; height: 380px; padding: 10px 20px" data-options="top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 500px; height: 300px; padding: 10px 20px" data-options="top:10"
         closed="true" buttons="#dlg-buttons" modal="true">
         <div class="ftitle">详细信息</div>
         <form id="fm1" method="post" novalidate>
             <div class="fitem">
                 <label>角色名称:</label>
-                <input name="Name" id="Name" class="easyui-textbox" required="true">
+                <input name="Name" id="Name" class="easyui-textbox" required="true" style="width:280px;" />
             </div>
             <div class="fitem">
                 <label>状态:</label>
-                <select class="easyui-combobox" name="Rstatus" id="Rstatus" style="width: 160px;" panelheight="auto">
+                <select class="easyui-combobox" name="Rstatus" id="Rstatus" style="width: 280px;" panelheight="auto">
                     <option value="1">有效</option>
                     <option value="2">无效</option>
                 </select>
@@ -111,7 +111,8 @@
             </div>
             <div class="fitem">
                 <label>描述:</label>
-                <input name="Description" id="Description" class="easyui-textbox" required="true">
+                <input name="Description" id="Description"  class="easyui-textbox" 
+                    data-options="multiline:true" style="height: 75px;width:280px;" />
             </div>  
         </form>
     </div>
@@ -135,6 +136,7 @@
                     </thead>
                 </table>
                 <input type="hidden" id="hRoleID" />
+                <input type="hidden" id="hRoleName" />
                 <input type="hidden" id="hIsAllFunc" />
                 <input type="hidden" id="hFuncIds" />
                 <input type="hidden" id="hUnFuncIds" /> 
@@ -200,10 +202,16 @@
 
         function edit() {
             var row = $('#dg').datagrid('getSelected');
-            if (row) {
+            if (row) {                
+                var roleName = row.Name;
+                if (roleName == '超级管理员' || roleName == '班主任' || roleName == '学员' || roleName == '教师')
+                {
+                    alert("角色名称为：" + roleName + "不允许修改，请核实。");
+                    return;
+                }
+
                 $('#dlg').dialog('open').dialog('setTitle', '修改角色信息');
                 $('#fm1').form('load', row);
-
 
                 url = "Roles.ashx?t=edit&id=" + row.ID;
             } else {
@@ -353,7 +361,8 @@
             if (row) {
                 $('#dlg2').dialog('open').dialog('setTitle', '角色用户设置');
                 $("#hRoleID").val(row.ID);
-                $('#dg2').datagrid('reload', { t: 'gu', rId: $("#hRoleID").val() });
+                $("#hRoleName").val(row.Name);
+                $('#dg2').datagrid('reload', { t: 'gu', rId: $("#hRoleID").val() ,rName:$("#hRoleName").val()});
             } else {
                 $.messager.alert('提示', '请选择要设置的行!', 'warning');
             }

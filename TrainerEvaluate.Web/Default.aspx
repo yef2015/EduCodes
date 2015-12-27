@@ -59,6 +59,9 @@
             case "schoolManage":
                 url = "SPSchoolManage.aspx";
                 break;
+            case "classTreeManage":
+                url = "ClassTreeManage.aspx";
+                break;
             default:
                 break;
             }
@@ -112,7 +115,8 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="studentManage" onclick="toMenu('studentManage')"  runat="server" >学员管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="teacherManage" onclick="toMenu('teacherManage')"  runat="server" >教师管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="courseManage" onclick="toMenu('courseManage')"  runat="server" >课程管理</div>
-                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="classManage" onclick="toMenu('classManage')"  runat="server" >班级管理</div>
+<%--                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="classManage" onclick="toMenu('classManage')"  runat="server" >班级管理</div>--%>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="classTreeManage" onclick="toMenu('classTreeManage')"  runat="server" >班级管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="qustionManage" onclick="toMenu('qustionManage')" runat="server" >培训评估</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="analysis" onclick="toMenu('analysis')" runat="server" >统计分析</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="manage" onclick="toMenu('manage')" runat="server" >系统管理</div>

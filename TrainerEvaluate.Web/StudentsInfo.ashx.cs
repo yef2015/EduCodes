@@ -693,6 +693,7 @@ namespace TrainerEvaluate.Web
                 stuModel.LastModifyTime = DateTime.Now;
                 var stuBll = new BLL.Student(); 
 
+                // 添加内容到sysuser表中
                 var sysUserMo = new Models.SysUser();
                 var sysuserbll = new BLL.SysUser();
                 sysUserMo.UserRole = (int) EnumUserRole.Student;
@@ -700,8 +701,11 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserId = stuModel.StudentId;
                 sysUserMo.UserPassWord = stuBll.GetPwd();
                 sysUserMo.UserAccount = stuBll.GetStuAccount();
-
+                sysUserMo.IdentityNo = stuModel.IdentityNo;
+                
                 sysuserbll.Add(sysUserMo);
+
+                // 添加内容到Student表中
                 result = stuBll.Add(stuModel);
 
                 if (!result)
@@ -736,7 +740,16 @@ namespace TrainerEvaluate.Web
             var msg = "";
             try
             { 
-                SetModelValue(stuModel,context);  
+                SetModelValue(stuModel,context);
+
+                var sysuserbll = new BLL.SysUser();
+                var sysUserMo = sysuserbll.GetModel(new Guid(id));
+                sysUserMo.UserName = stuModel.StuName;
+                sysUserMo.UserId = stuModel.StudentId;
+                sysUserMo.IdentityNo = stuModel.IdentityNo;
+
+                sysuserbll.Update(sysUserMo);
+
                 result = stuBll.Update(stuModel);
                 if (!result)
                 {

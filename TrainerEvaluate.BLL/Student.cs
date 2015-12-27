@@ -334,7 +334,25 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-
+        /// <summary>
+        /// 通过身份证号，获取studentid号
+        /// </summary>
+        /// <param name="identityNo"></param>
+        /// <returns></returns>
+        public static string GetStudentIdByIdentityNo(string identityNo)
+        {
+            var studentId = "";
+            try
+            {
+                var sql = string.Format(" select StudentId from Student  where Status=1 and IdentityNo='{0}' ", identityNo);
+                studentId = DbHelperSQL.GetSingle(sql).ToString();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return string.IsNullOrEmpty(studentId) ? "null" : studentId;
+        }
 
 	    #endregion  ExtensionMethod
 	}

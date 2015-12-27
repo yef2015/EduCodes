@@ -7,16 +7,15 @@ using System.Web;
 using Newtonsoft.Json;
 using TrainerEvaluate.BLL;
 using TrainerEvaluate.Utility;
+using System.Web.SessionState;
 
 namespace TrainerEvaluate.Web
 {
     /// <summary>
     /// ClassInfo 的摘要说明
     /// </summary>
-    public class ClassInfo : IHttpHandler
+    public class ClassInfo : IHttpHandler, IRequiresSessionState //就是这样显示的实现一下，不用实现什么方法
     {
-
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -78,16 +77,18 @@ namespace TrainerEvaluate.Web
 
                 context.Response.Write(str.ToString());
             }
-
             // var str = JsonConvert.SerializeObject(new { total = ds.Tables[0].Rows.Count, rows = ds.Tables[0] }); 
 
         }
 
-
-
-
         private string GetData(HttpContext context)
         {
+            var classYear = System.DateTime.Now.Year.ToString();
+            if(context.Session["ClassYear"] != null)
+            {
+                classYear = context.Session["ClassYear"].ToString();
+            }
+
             var ds = new DataSet();
             var classBll = new BLL.Class();
 
@@ -96,19 +97,16 @@ namespace TrainerEvaluate.Web
 
             var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "Name" : context.Request["sort"];
             var order = string.IsNullOrEmpty(context.Request["order"]) ? "desc" : context.Request["order"];
-
-
+            
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = classBll.GetRecordCount("Status!=0");
-            ds = classBll.GetListByPage("Status!=0", sort, startIndex, endIndex, order);
-
+            var num = classBll.GetRecordCount("Status!=0 and YearLevel = '" + classYear + "' ");
+            ds = classBll.GetListByPage("Status!=0  and YearLevel = '" + classYear + "' ", sort, startIndex, endIndex, order);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }
-
 
         private void Query(HttpContext context)
         {
@@ -169,12 +167,9 @@ namespace TrainerEvaluate.Web
             var num = classBll.GetRecordCount(strWhere);
             ds = classBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
 
-
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
-
-
 
         private void ExportCourseInfo(HttpContext context)
         {
@@ -192,7 +187,6 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("培训范围");
             fieldsNames.Add("培训级别");
             fieldsNames.Add("培训类型");
-
 
             var ds = QueryDataResultForExp(context);
             var filename = DateTime.Now.ToString("yyyy-MM-dd") + "-班级信息.xls";
@@ -254,8 +248,6 @@ namespace TrainerEvaluate.Web
             return ds;
         }
 
-
-
         private void AddData(HttpContext context)
         {
             var classModel = new Models.Class();
@@ -263,8 +255,7 @@ namespace TrainerEvaluate.Web
 
             var classBll = new BLL.Class();
             if (classBll.GetId() == 1)
-            {
-               
+            {               
                 classModel.ID = 2015000 + classBll.GetId();
             }
             else
@@ -290,22 +281,15 @@ namespace TrainerEvaluate.Web
                 LogHelper.WriteLogofExceptioin(ex);
                 result = false;
                 msg = ex.Message;
-
             }
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
 
-
-
-
-
-
         private void EditData(string id, HttpContext context)
         {
             var classBll = new BLL.Class();
             var classModel = classBll.GetModel(int.Parse(id));
-            //courModel. = DateTime.Now;
             var result = false;
             var msg = "";
             try
@@ -322,15 +306,11 @@ namespace TrainerEvaluate.Web
                 LogHelper.WriteLogofExceptioin(ex);
                 result = false;
                 msg = ex.Message;
-
             }
 
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
-
-
-
 
         private void SetModelValue(Models.Class classModel, HttpContext context)
         {
@@ -366,8 +346,11 @@ namespace TrainerEvaluate.Web
             {
                 classModel.Area = int.Parse(context.Request["Area"]);
             }
+            if (context.Session["ClassYear"] != null)
+            {
+                classModel.YearLevel = context.Session["ClassYear"].ToString();
+            }
         }
-
 
 
         private void DelData(string id, HttpContext context)
@@ -394,9 +377,5 @@ namespace TrainerEvaluate.Web
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
-
-
-
-
     }
 }

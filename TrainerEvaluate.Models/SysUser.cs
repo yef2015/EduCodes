@@ -17,7 +17,9 @@ namespace TrainerEvaluate.Models
         private string _userpassword;
         private DateTime? _createtime;
         private string _useraccount;
+        private int _status = 1;
         private string _Dept;
+        private string _identityno;
         /// <summary>
         /// 用户Id，同学员表、教师表中的id，用于关联
         /// </summary>
@@ -66,8 +68,15 @@ namespace TrainerEvaluate.Models
             set { _useraccount = value; }
             get { return _useraccount; }
         }
-        
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Status
+        {
+            set { _status = value; }
+            get { return _status; }
+        }
         
         /// <summary>
         /// 用户部门
@@ -76,6 +85,15 @@ namespace TrainerEvaluate.Models
         {
             set { _Dept = value; }
             get { return _Dept; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string IdentityNo
+        {
+            set { _identityno = value; }
+            get { return _identityno; }
         }
         #endregion Model
 

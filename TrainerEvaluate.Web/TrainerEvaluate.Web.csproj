@@ -110,6 +110,8 @@
     <Content Include="Analysis.aspx" />
     <Content Include="AnaysisContent.aspx" />
     <Content Include="ClassManage.aspx" />
+    <Content Include="ClassManageList.aspx" />
+    <Content Include="ClassTreeManage.aspx" />
     <Content Include="CourseManage.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Dictionaries.aspx" />
@@ -467,6 +469,20 @@
     </Compile>
     <Compile Include="ClassManage.aspx.designer.cs">
       <DependentUpon>ClassManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClassManageList.aspx.cs">
+      <DependentUpon>ClassManageList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClassManageList.aspx.designer.cs">
+      <DependentUpon>ClassManageList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClassTreeManage.aspx.cs">
+      <DependentUpon>ClassTreeManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClassTreeManage.aspx.designer.cs">
+      <DependentUpon>ClassTreeManage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComboboxGetData.ashx.cs">
       <DependentUpon>ComboboxGetData.ashx</DependentUpon>

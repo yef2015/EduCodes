@@ -55,8 +55,11 @@ namespace TrainerEvaluate.Web
             courseManage.Visible = false;
             qustionManage.Visible = false;
             personalInfo.Visible = true;
-            classManage.Visible = false;
+            //classManage.Visible = false;
             stuQue.Visible = false;
+            schooldistrict.Visible = false;
+            schoolManage.Visible = false;
+            classTreeManage.Visible = false;
 
             if (Profile.CurrentUser.UserRole==1)
             {  
@@ -83,10 +86,10 @@ namespace TrainerEvaluate.Web
                         {
                             analysis.Visible = true; 
                         }
-                        if (row["FuncCode"].ToString() == "classManage")
-                        {
-                            classManage.Visible = true;
-                        }
+                        //if (row["FuncCode"].ToString() == "classManage")
+                        //{
+                        //    classManage.Visible = true;
+                        //}
                         if (row["FuncCode"].ToString() == "studentManage")
                         {
                             studentManage.Visible = true;
@@ -98,6 +101,18 @@ namespace TrainerEvaluate.Web
                         if (row["FuncCode"].ToString() == "qustionManage")
                         {
                             qustionManage.Visible = true;
+                        }
+                        if (row["FuncCode"].ToString() == "schooldistrict")
+                        {
+                            schooldistrict.Visible = true;
+                        }
+                        if (row["FuncCode"].ToString() == "schoolManage")
+                        {
+                            schoolManage.Visible = true;
+                        }
+                        if (row["FuncCode"].ToString() == "classTreeManage")
+                        {
+                            classTreeManage.Visible = true;
                         } 
                     }
 
@@ -121,11 +136,11 @@ namespace TrainerEvaluate.Web
                                 analysis.Style["color"] = "#000000";
                                 analysis.Style["font-weight"] = "bold";
                                 break;
-                            case "classManage":
-                                ifrcont.Attributes["src"] = "ClassManage.aspx";
-                                classManage.Style["color"] = "#000000";
-                                classManage.Style["font-weight"] = "bold";
-                                break;
+                            //case "classManage":
+                            //    ifrcont.Attributes["src"] = "ClassManage.aspx";
+                            //    classManage.Style["color"] = "#000000";
+                            //    classManage.Style["font-weight"] = "bold";
+                            //    break;
                             case "studentManage":
                                 ifrcont.Attributes["src"] = "StuManage.aspx";
                                 studentManage.Style["color"] = "#000000";
@@ -138,6 +153,21 @@ namespace TrainerEvaluate.Web
                                 break;
                             case "qustionManage":
                                 ifrcont.Attributes["src"] = "QuestionnaireManage.aspx";
+                                qustionManage.Style["color"] = "#000000";
+                                qustionManage.Style["font-weight"] = "bold";
+                                break;
+                            case "schooldistrict":
+                                ifrcont.Attributes["src"] = "SPSchoolDistrict.aspx";
+                                qustionManage.Style["color"] = "#000000";
+                                qustionManage.Style["font-weight"] = "bold";
+                                break;
+                            case "schoolManage":
+                                ifrcont.Attributes["src"] = "SPSchoolManage.aspx";
+                                qustionManage.Style["color"] = "#000000";
+                                qustionManage.Style["font-weight"] = "bold";
+                                break;
+                            case "classTreeManage":
+                                ifrcont.Attributes["src"] = "ClassTreeManage.aspx";
                                 qustionManage.Style["color"] = "#000000";
                                 qustionManage.Style["font-weight"] = "bold";
                                 break;
@@ -184,7 +214,10 @@ namespace TrainerEvaluate.Web
                         qustionManage.Visible = false;
                         personalInfo.Visible = false;
                         logoutSys.Visible = false;
-                        classManage.Visible = false;
+                        //classManage.Visible = false;
+                        schooldistrict.Visible = false;
+                        schoolManage.Visible = false;
+                        classTreeManage.Visible = false;
                         stuQue.Visible = true;
                         break;
                     case EnumUserRole.Teacher:

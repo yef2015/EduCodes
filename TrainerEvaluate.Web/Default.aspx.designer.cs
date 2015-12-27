@@ -67,13 +67,13 @@ namespace TrainerEvaluate.Web {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl courseManage;
         
         /// <summary>
-        /// classManage 控件。
+        /// classTreeManage 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl classManage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl classTreeManage;
         
         /// <summary>
         /// qustionManage 控件。

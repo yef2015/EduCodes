@@ -183,10 +183,23 @@ namespace TrainerEvaluate.Web
             var msg = "";
             try
             {
-                SetModelValue(sysUserModel, context);
-                if (sysUserBll.GetAccountExsist(sysUserModel.UserAccount, sysUserModel.UserId))
+                SetModelEditValue(sysUserModel, context);
+                var userAccountOld = context.Request["UserAccountOld"];
+
+                if (userAccountOld != sysUserModel.UserAccount)
                 {
-                    msg = "该账号已存在，请修改！";
+                    if (sysUserBll.GetAccountExsist(sysUserModel.UserAccount, sysUserModel.UserId))
+                    {
+                        msg = "该账号已存在，请修改！";
+                    }
+                    else
+                    {
+                        result = sysUserBll.Update(sysUserModel);
+                        if (!result)
+                        {
+                            msg = "保存失败！";
+                        }
+                    }
                 }
                 else
                 {
@@ -196,7 +209,6 @@ namespace TrainerEvaluate.Web
                         msg = "保存失败！";
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -217,7 +229,18 @@ namespace TrainerEvaluate.Web
         {
             sysUserModel.UserName = context.Request["UserName"];
             sysUserModel.UserAccount = context.Request["UserAccount"];
-            sysUserModel.UserRole = 0;
+            sysUserModel.UserRole = (int)EnumUserRole.Admin;
+            sysUserModel.IdentityNo = context.Request["IdentityNo"];
+            sysUserModel.Dept = context.Request["Dept"];
+            //courModel.TeacherId = new Guid(context.Request["TeacherId"]);
+            sysUserModel.UserPassWord = context.Request["UserPassWord"];
+        }
+
+        private void SetModelEditValue(Models.SysUser sysUserModel, HttpContext context)
+        {
+            sysUserModel.UserName = context.Request["UserName"];
+            sysUserModel.UserAccount = context.Request["UserAccount"];
+            sysUserModel.IdentityNo = context.Request["IdentityNo"];
             sysUserModel.Dept = context.Request["Dept"];
             //courModel.TeacherId = new Guid(context.Request["TeacherId"]);
             sysUserModel.UserPassWord = context.Request["UserPassWord"];

@@ -271,3 +271,62 @@ ClientConnectionId:e2ddce1d-99ca-4d7c-aff7-ebd99a267b37：2015-12-21 14:39:38
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 d:\formwork\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:53ca0a87-7350-4292-bfee-f44548e23c52：2015-12-21 22:52:06
+关键字 'null' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 关键字 'null' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:b36982bb-9da9-4ace-a6b5-5b0103816881：2015-12-24 22:15:21
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:22:35
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:25:22
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:26:59
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:28:07
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:29:08
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:29:48
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 582
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 132：2015-12-25 22:31:24
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 583
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 133：2015-12-25 22:51:56
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 584
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 134：2015-12-25 22:56:04
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 585
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 135：2015-12-25 23:21:52
+列“名称”不属于表 。System.ArgumentException: 列“名称”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 TrainerEvaluate.Web.UploadTmpData.ClassStudentImport(DataTable dt, String classId, String& msg, String filename) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 594
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 144：2015-12-25 23:37:26
+关键字 'null' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 关键字 'null' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:b98eafde-a0a9-4460-a759-5cb1390a433f：2015-12-26 16:46:01
+关键字 'null' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 关键字 'null' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:da68df9f-b601-4910-a1da-d04bcaff291b：2015-12-26 16:47:36

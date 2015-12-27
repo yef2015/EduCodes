@@ -26,7 +26,7 @@ namespace TrainerEvaluate.Models
         private int? _level;
         private int? _type;
         private DateTime _createdTime;
-
+        private string _yearlevel;
             
 		/// <summary>
 		/// 编号
@@ -150,7 +150,14 @@ namespace TrainerEvaluate.Models
             set { _createdTime = value; }
             get { return _createdTime; }
         }
-       
+        /// <summary>
+        /// 
+        /// </summary>
+        public string YearLevel
+        {
+            set { _yearlevel = value; }
+            get { return _yearlevel; }
+        }
 		#endregion Model
 
 	}

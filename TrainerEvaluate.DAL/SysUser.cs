@@ -53,76 +53,128 @@ namespace TrainerEvaluate.DAL
 		/// </summary>
 		public bool Add(TrainerEvaluate.Models.SysUser model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into SysUser(");
-            strSql.Append("UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept)");
-			strSql.Append(" values (");
-            strSql.Append("@UserId,@UserRole,@UserName,@UserPassWord,@CreateTime,@UserAccount,@Dept)");
-			SqlParameter[] parameters = {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into SysUser(");
+            strSql.Append("UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Status,Dept,IdentityNo)");
+            strSql.Append(" values (");
+            strSql.Append("@UserId,@UserRole,@UserName,@UserPassWord,@CreateTime,@UserAccount,@Status,@Dept,@IdentityNo)");
+            SqlParameter[] parameters = {
 					new SqlParameter("@UserId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@UserRole", SqlDbType.Int,4),
 					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
 					new SqlParameter("@UserPassWord", SqlDbType.VarChar,50),
 					new SqlParameter("@CreateTime", SqlDbType.DateTime),
 					new SqlParameter("@UserAccount", SqlDbType.VarChar,50),
-					new SqlParameter("@Dept", SqlDbType.VarChar,50)};
-			parameters[0].Value = model.UserId;
-			parameters[1].Value = model.UserRole;
-			parameters[2].Value = model.UserName;
-			parameters[3].Value = model.UserPassWord;
-			parameters[4].Value = System.DateTime.Now;
-			parameters[5].Value = model.UserAccount;
-			parameters[6].Value = model.Dept;
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Dept", SqlDbType.NVarChar,50),
+					new SqlParameter("@IdentityNo", SqlDbType.NVarChar,50)};
+            parameters[0].Value = Guid.NewGuid();
+            parameters[1].Value = model.UserRole;
+            parameters[2].Value = model.UserName;
+            parameters[3].Value = model.UserPassWord;
+            parameters[4].Value = model.CreateTime;
+            parameters[5].Value = model.UserAccount;
+            parameters[6].Value = model.Status;
+            parameters[7].Value = model.Dept;
+            parameters[8].Value = model.IdentityNo;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public bool AddComeStudent(TrainerEvaluate.Models.SysUser model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into SysUser(");
+            strSql.Append("UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Status,Dept,IdentityNo)");
+            strSql.Append(" values (");
+            strSql.Append("@UserId,@UserRole,@UserName,@UserPassWord,@CreateTime,@UserAccount,@Status,@Dept,@IdentityNo)");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.UniqueIdentifier,16),
+					new SqlParameter("@UserRole", SqlDbType.Int,4),
+					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
+					new SqlParameter("@UserPassWord", SqlDbType.VarChar,50),
+					new SqlParameter("@CreateTime", SqlDbType.DateTime),
+					new SqlParameter("@UserAccount", SqlDbType.VarChar,50),
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Dept", SqlDbType.NVarChar,50),
+					new SqlParameter("@IdentityNo", SqlDbType.NVarChar,50)};
+            parameters[0].Value = model.UserId;
+            parameters[1].Value = model.UserRole;
+            parameters[2].Value = model.UserName;
+            parameters[3].Value = model.UserPassWord;
+            parameters[4].Value = model.CreateTime;
+            parameters[5].Value = model.UserAccount;
+            parameters[6].Value = model.Status;
+            parameters[7].Value = model.Dept;
+            parameters[8].Value = model.IdentityNo;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
 		public bool Update(TrainerEvaluate.Models.SysUser model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update SysUser set ");
-			strSql.Append("UserRole=@UserRole,");
-			strSql.Append("UserName=@UserName,");
-			strSql.Append("UserPassWord=@UserPassWord,");
-			strSql.Append("CreateTime=@CreateTime,");
-			strSql.Append("UserAccount=@UserAccount,");
-            strSql.Append("Dept=@Dept");
-			strSql.Append(" where UserId=@UserId ");
-			SqlParameter[] parameters = {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update SysUser set ");
+            strSql.Append("UserRole=@UserRole,");
+            strSql.Append("UserName=@UserName,");
+            strSql.Append("UserPassWord=@UserPassWord,");
+            strSql.Append("CreateTime=@CreateTime,");
+            strSql.Append("UserAccount=@UserAccount,");
+            strSql.Append("Status=@Status,");
+            strSql.Append("Dept=@Dept,");
+            strSql.Append("IdentityNo=@IdentityNo");
+            strSql.Append(" where UserId=@UserId ");
+            SqlParameter[] parameters = {
 					new SqlParameter("@UserRole", SqlDbType.Int,4),
 					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
 					new SqlParameter("@UserPassWord", SqlDbType.VarChar,50),
 					new SqlParameter("@CreateTime", SqlDbType.DateTime),
 					new SqlParameter("@UserAccount", SqlDbType.VarChar,50),
-					new SqlParameter("@UserId", SqlDbType.UniqueIdentifier,16),
-					new SqlParameter("@Dept", SqlDbType.VarChar,50)};
-			parameters[0].Value = model.UserRole;
-			parameters[1].Value = model.UserName;
-			parameters[2].Value = model.UserPassWord;
-			parameters[3].Value = model.CreateTime;
-			parameters[4].Value = model.UserAccount;
-			parameters[5].Value = model.UserId;
-			parameters[6].Value = model.Dept;
+					new SqlParameter("@Status", SqlDbType.Int,4),
+					new SqlParameter("@Dept", SqlDbType.NVarChar,50),
+					new SqlParameter("@IdentityNo", SqlDbType.NVarChar,50),
+					new SqlParameter("@UserId", SqlDbType.UniqueIdentifier,16)};
+            parameters[0].Value = model.UserRole;
+            parameters[1].Value = model.UserName;
+            parameters[2].Value = model.UserPassWord;
+            parameters[3].Value = model.CreateTime;
+            parameters[4].Value = model.UserAccount;
+            parameters[5].Value = model.Status;
+            parameters[6].Value = model.Dept;
+            parameters[7].Value = model.IdentityNo;
+            parameters[8].Value = model.UserId;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		/// <summary>
@@ -175,7 +227,7 @@ namespace TrainerEvaluate.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept from SysUser ");
+            strSql.Append("select  top 1 UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo from SysUser ");
 			strSql.Append(" where UserId=@UserId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@UserId", SqlDbType.UniqueIdentifier,16)			};
@@ -230,6 +282,10 @@ namespace TrainerEvaluate.DAL
 				{
                     model.Dept = row["Dept"].ToString();
 				}
+                if (row["IdentityNo"] != null && row["IdentityNo"].ToString() != "")
+                {
+                    model.IdentityNo = row["IdentityNo"].ToString();
+                }
 			}
 			return model;
 		}
@@ -240,7 +296,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept ");
+            strSql.Append("select UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo ");
 			strSql.Append(" FROM SysUser ");
 			if(strWhere.Trim()!="")
 			{
@@ -260,7 +316,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept ");
+            strSql.Append(" UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo ");
 			strSql.Append(" FROM SysUser ");
 			if(strWhere.Trim()!="")
 			{
@@ -297,7 +353,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetListByPage(string strWhere, string sort, int startIndex, int endIndex,string order)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("SELECT  UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept  FROM ( ");
+            strSql.Append("SELECT  UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo  FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(sort.Trim()))
 			{

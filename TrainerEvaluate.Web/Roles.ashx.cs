@@ -78,7 +78,7 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
             var num = rolesBll.GetRecordCount(" Rstatus !=0 ");
-            ds = rolesBll.GetListByPage(" Rstatus !=0  ", sort, startIndex, endIndex, order);
+            ds = rolesBll.GetListByPage(" Rstatus = 1  ", sort, startIndex, endIndex, order);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }
@@ -172,8 +172,6 @@ namespace TrainerEvaluate.Web
                 {
                     var roleModel = roleBll.GetModel(new Guid(id));
 
-                    //roleModel.LastModifyId = Profile.CurrentUser.UserId;
-                    //roleModel.LastModifyName = Profile.CurrentUser.UserName;
                     roleModel.LastModifyTime = System.DateTime.Now;
                     roleModel.Rstatus = 2;
                     result = roleBll.Update(roleModel);
@@ -189,7 +187,6 @@ namespace TrainerEvaluate.Web
                     msg = ex.Message;
                 }
                 context.Response.Write(msg);
-
             }
         }
 
@@ -219,13 +216,14 @@ namespace TrainerEvaluate.Web
         { 
             var ds = new DataSet();
             var roleId = context.Request["rId"];
+            var roleName = context.Request["rName"];
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
             var roleBll = new BLL.Roles();
-            ds = roleBll.GetRoleUserListByPage(roleId, "ck", startIndex, endIndex);
+            ds = roleBll.GetRoleUserListByPage(roleId,roleName, "ck", startIndex, endIndex);
             var num = 0;
             if (ds != null && ds.Tables.Count > 0)
             {

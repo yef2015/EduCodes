@@ -542,6 +542,22 @@ namespace TrainerEvaluate.Web
                 //sysUserMo.UserAccount = teaModel.IdentityNo;
 
                 //sysuserbll.Add(sysUserMo);
+
+
+
+                // 添加内容到sysuser表中
+                var sysUserMo = new Models.SysUser();
+                var sysuserbll = new BLL.SysUser();
+                sysUserMo.UserRole = (int)EnumUserRole.Teacher;
+                sysUserMo.UserName = teaModel.TeacherName;
+                sysUserMo.UserId = teaModel.TeacherId;
+                sysUserMo.UserPassWord = teaBll.GetPwd();
+                sysUserMo.UserAccount = teaBll.GetTeacherAccount();
+                sysUserMo.IdentityNo = teaModel.IdentityNo;
+
+                sysuserbll.Add(sysUserMo);
+
+                // 添加内容到Teacher表中
                 result = teaBll.Add(teaModel);
 
                 if (!result)
@@ -574,6 +590,16 @@ namespace TrainerEvaluate.Web
             try
             {
                 SetModelValue(teaModel, context);
+
+                var sysuserbll = new BLL.SysUser();
+                var sysUserMo = sysuserbll.GetModel(new Guid(id));
+                sysUserMo.UserName = teaModel.TeacherName;
+                sysUserMo.UserId = teaModel.TeacherId;
+                sysUserMo.IdentityNo = teaModel.IdentityNo;
+
+                sysuserbll.Update(sysUserMo);
+
+
                 result = teaBll.Update(teaModel);
                 if (!result)
                 {

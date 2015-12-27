@@ -35,6 +35,7 @@
                 <tr>
                     <th field="UserId" width="0" hidden="true">编号</th>
                     <th field="UserName" width="250" sortable="true">姓名</th>
+                    <th field="IdentityNo" width="250" sortable="true">身份证号</th>
                     <th field="Dept" width="100" sortable="true">单位</th>
                     <th field="UserAccount" width="200" sortable="true">登陆帐号</th>
                     <th field="UserPassWord" width="0" hidden="true">密码</th>
@@ -47,25 +48,30 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
         </div>
 
-        <div id="dlg" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 360px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons">
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
                 <div class="fitem">
                     <label>姓名:</label>
-                    <input name="UserName" id="UserName" class="easyui-textbox" required="true">
+                    <input name="UserName" id="UserName" class="easyui-textbox" required="true" style="width:280px;"/>
                 </div>
-                <div class="fitem">
+                <div class="fitem" >
+                    <label>身份证号</label>  
+                     <input name="IdentityNo" id="IdentityNo" class="easyui-textbox" required="true" style="width:280px;"/>
+                </div>
+                <div class="fitem" >
                     <label>单位</label>  
-                     <input name="Dept" id="Dept" class="easyui-textbox" required="true">
+                     <input name="Dept" id="Dept" class="easyui-textbox" required="true" style="width:280px;"/>
                 </div>
                 <div class="fitem">
                     <label>登录账号:</label>
-                    <input name="UserAccount" id="UserAccount" class="easyui-textbox">
+                    <input name="UserAccount" id="UserAccount" class="easyui-textbox" style="width:280px;"/>
+                     <input type="hidden" id="UserAccountOld" />
                 </div>
                 <div class="fitem">
                     <label>密码:</label>
-                    <input name="Pwd" id="Pwd" class="easyui-textbox">
+                    <input name="Pwd" id="Pwd" class="easyui-textbox" style="width:280px;"/>
                 </div>
             </form>
         </div>
@@ -95,8 +101,10 @@
 
                 $('#UserName').textbox("setText", row.UserName);
                 $('#UserAccount').textbox("setText", row.UserAccount);
+                $('#IdentityNo').textbox("setText", row.IdentityNo);
                 $('#Pwd').textbox("setText", row.UserPassWord);
                 $('#Dept').textbox("setText", row.Dept);
+                $("#UserAccountOld").val(row.UserAccount);
 
                 url = 'SysUser.ashx' + '?t=e&id=' + row.UserId;
             } else {
@@ -106,7 +114,14 @@
 
 
         function saveUser() {
-            var data = { UserName: $('#UserName').textbox("getText"), Dept: $('#Dept').textbox("getText"), UserAccount: $('#UserAccount').textbox("getText"), UserPassWord: $('#Pwd').textbox("getText") };
+            var data = {
+                UserName: $('#UserName').textbox("getText"),
+                Dept: $('#Dept').textbox("getText"),
+                UserAccount: $('#UserAccount').textbox("getText"),
+                UserAccountOld:$("#UserAccountOld").val(), 
+                IdentityNo: $('#IdentityNo').textbox("getText"),
+                UserPassWord: $('#Pwd').textbox("getText")
+            };
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');

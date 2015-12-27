@@ -453,6 +453,36 @@ namespace TrainerEvaluate.BLL
 	    }
 
 
+        public string GetTeacherAccount()
+        {
+            try
+            {
+                var sql = string.Format(" select COUNT(*) num from  SysUser where UserRole={0} and YEAR(CreateTime)=YEAR(GETDATE())", (int)EnumUserRole.Teacher);
+                var result = DbHelperSQL.Query(sql);
+                var num = 0;
+                if (result != null && result.Tables.Count > 0)
+                {
+                    num = Convert.ToInt32(result.Tables[0].Rows[0]["num"]) + 1;
+                }
+
+                var userAccount = "HB" + DateTime.Now.Year + num.ToString().PadLeft(3, '0');
+
+
+                return userAccount;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return "";
+            }
+        }
+
+        public string GetPwd()
+        {
+            var pwd = new Random();
+            return pwd.Next(999999).ToString();
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

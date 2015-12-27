@@ -113,10 +113,9 @@ namespace TrainerEvaluate.Web
                 if ((!string.IsNullOrEmpty(userAccount)) && (!string.IsNullOrEmpty(pwd)))
                 {
                     var sysUserBll = new BLL.SysUser();
-                    var sysUser = sysUserBll.GetSysUserByAccount(userAccount, pwd);
+                    var sysUser = sysUserBll.GetSysUserByIdentityNo(userAccount, pwd);
                     if (sysUser != null)
                     {
-
                         HttpContext.Current.Session.Add(SESSION_NAME, sysUser);
                         //   HttpContext.Current.Session[SESSION_NAME] = sysUser;
                         return true;
