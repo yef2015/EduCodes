@@ -89,8 +89,8 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="add()">新增</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="edit()">编辑</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroy()">删除</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editAuth()">设置权限</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">设置用户</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok" plain="true" onclick="editAuth()">设置权限</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="editUser()">设置用户</a>
         </div>
     </div>
     <div id="dlg" class="easyui-dialog" style="width: 500px; height: 300px; padding: 10px 20px" data-options="top:10"
