@@ -296,10 +296,12 @@
     <Content Include="themes\icons\application_form_edit.png" />
     <Content Include="themes\icons\back.png" />
     <Content Include="themes\icons\blank.gif" />
+    <Content Include="themes\icons\book_open_mark.png" />
     <Content Include="themes\icons\cancel.png" />
     <Content Include="themes\icons\chart_bar.png" />
     <Content Include="themes\icons\chk_checked.gif" />
     <Content Include="themes\icons\clear.png" />
+    <Content Include="themes\icons\collapse-all.gif" />
     <Content Include="themes\icons\computer_add.png" />
     <Content Include="themes\icons\cut.png" />
     <Content Include="themes\icons\download.png" />
