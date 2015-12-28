@@ -370,3 +370,6 @@ Incorrect syntax near 'TypeName'.|System.Data.SqlClient.SqlException (0x80131904
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:9da9946f-e9c2-4f91-a129-707bb7a5b7fc：2015-12-27 18:58:11
+Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0System.IO.IOException: Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0
+   在 TrainerEvaluate.BLL.ExportXls.ExcelToDataTable(String sheetName, Boolean isFirstRowColumn, String fileName) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.BLL\ExportXls.cs:行号 1184
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 109：2015-12-29 02:49:23

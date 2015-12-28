@@ -105,10 +105,9 @@
                     <input name="Point" id="Point" class="easyui-textbox" style="width:280px;">
                 </div>
                 <div class="fitem">
-                    <label>学时类型:</label> 
-                <select class="easyui-combobox" name="PointType" id="PointType" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                </select>
-
+                    <label>学时类型:</label>
+                    <select class="easyui-combobox" name="PointType" id="PointType" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select> 
                 </div>
                 <div class="fitem">
                     <label>班主任:</label>
@@ -249,7 +248,7 @@
                 $('#FinishDate').datebox("setValue", row.FinishDate);
                 $('#Students').textbox("setText", row.Students);
                 $('#Point').textbox("setText", row.Point);
-                $('#PointType').textbox("setText", row.PointType);
+                $('#PointType').combobox("setValue", row.PointType);
                 $('#Teacher').textbox("setText", row.Teacher);
                 $('#Area').combobox("setValue", row.Area);
                 $('#Level').combobox("setValue", row.Level);

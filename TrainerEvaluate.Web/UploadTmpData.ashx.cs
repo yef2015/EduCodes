@@ -503,7 +503,7 @@ namespace TrainerEvaluate.Web
                                 BLL.Student.GetStudentIdByIdentityNo(row["身份证号"].ToString().Trim()),
                                 classid));
                         }
-
+                        sqllist.Add(string.Format("update Class set Students={0}  where ID={1} ",dt.Rows.Count,classid));
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
                         System.IO.File.Delete(basePath + filename);
                         return result != 0;
@@ -533,7 +533,7 @@ namespace TrainerEvaluate.Web
             msg = "";
             if (dt != null && dt.Rows.Count > 0)
             {
-                msg = "为了取得班级编号" + "|" + filename;
+               // msg = "为了取得班级编号" + "|" + filename;
                 HttpContext.Current.Session.Add("cclstudatat", dt);
                 return false;
             }

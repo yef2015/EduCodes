@@ -255,8 +255,9 @@ namespace TrainerEvaluate.BLL
                 {
                     var lstSql = new List<string>();
                     lstSql.Add(string.Format(" delete from  ClassStudents  where ClassId={0} ", classId));
-                    var sql1 = string.Format("  insert into ClassStudents select NEWID(),{0},  StudentId,getdate() from Student ", classId);
+                    var sql1 = string.Format("  insert into ClassStudents select NEWID(),  StudentId,{0} from Student  where Status=1 ", classId);
                     lstSql.Add(sql1);
+                    lstSql.Add(string.Format(" UPDATE Class set Students=(select count(*) from Student  where Status=1 ) where ID={1} ", 0, classId));
                     DbHelperSQL.ExecuteSqlTran(lstSql);
                 }
                 return true;
@@ -276,8 +277,9 @@ namespace TrainerEvaluate.BLL
             try
             {
                 var strs = new List<string>();
-                var sql = string.Format(" delete from  ClassStudents  where ClassId={0}  ", classId);
+                var sql = string.Format(" delete from  ClassStudents  where ClassId={0}  ", classId);  
                 strs.Add(sql);
+                strs.Add(string.Format(" UPDATE Class set Students={0} where ID={1} ", 0, classId));
                 DbHelperSQL.ExecuteSqlTran(strs);
                 return true;
             }
@@ -315,13 +317,15 @@ namespace TrainerEvaluate.BLL
                                         );
                                 lstSql.Add(sql1);
                             }
-                        }  
+                        }
+                        lstSql.Add(string.Format(" UPDATE Class set Students={0} where ID={1} ", stuIds.Length,classId));
                         DbHelperSQL.ExecuteSqlTran(lstSql);
                     }
                     else
                     {
                         var lstSql = new List<string>();
-                        lstSql.Add(string.Format(" delete from  ClassStudents  where ClassId='{0}' ", classId));  
+                        lstSql.Add(string.Format(" delete from  ClassStudents  where ClassId='{0}' ", classId));
+                        lstSql.Add(string.Format(" UPDATE Class set Students={0} where ID={1} ", 0, classId));
                         DbHelperSQL.ExecuteSqlTran(lstSql);
                     }
                 }

@@ -140,7 +140,7 @@ namespace TrainerEvaluate.BLL
 		/// </summary>
 		public DataSet GetAllList()
 		{
-			return GetList("");
+            return GetList(" Status = 1 ");
 		}
 
 		/// <summary>
@@ -186,7 +186,7 @@ namespace TrainerEvaluate.BLL
             }
             strSql.Append(")AS Row, T.*  from   ");
             strSql.Append(" ( select a.TeacherId,a.TeacherName, a.Dept, case ISNULL(b.RId,'00000000-0000-0000-0000-000000000000')  when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck from Teacher a    ");
-            strSql.Append(string.Format("  left join  CourseTeacher b on a.TeacherId=b.TeacherId and b.CourseId='{0}'  )  ", courseId));
+            strSql.Append(string.Format("  left join  CourseTeacher b on a.TeacherId=b.TeacherId  and b.CourseId='{0}'  where a.Status=1  )  ", courseId));
             strSql.Append("  T "); 
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);

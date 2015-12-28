@@ -732,24 +732,26 @@ namespace TrainerEvaluate.Web
 
 
         private void EditData(string id, HttpContext context)
-        { 
-            var stuBll = new BLL.Student();
-            var stuModel = stuBll.GetModel(new Guid(id));
-            stuModel.LastModifyTime = DateTime.Now;
+        {
             var result = false;
             var msg = "";
             try
-            { 
-                SetModelValue(stuModel,context);
+            {
+                var stuBll = new BLL.Student();
+                var stuModel = stuBll.GetModel(new Guid(id));
+                stuModel.LastModifyTime = DateTime.Now;
+
+                SetModelValue(stuModel, context);
 
                 var sysuserbll = new BLL.SysUser();
                 var sysUserMo = sysuserbll.GetModel(new Guid(id));
-                sysUserMo.UserName = stuModel.StuName;
-                sysUserMo.UserId = stuModel.StudentId;
-                sysUserMo.IdentityNo = stuModel.IdentityNo;
-
-                sysuserbll.Update(sysUserMo);
-
+                if (sysUserMo != null)
+                {
+                    sysUserMo.UserName = stuModel.StuName;
+                    sysUserMo.UserId = stuModel.StudentId;
+                    sysUserMo.IdentityNo = stuModel.IdentityNo;
+                    sysuserbll.Update(sysUserMo);
+                }
                 result = stuBll.Update(stuModel);
                 if (!result)
                 {
@@ -764,7 +766,7 @@ namespace TrainerEvaluate.Web
 
             }
 
-          //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
 

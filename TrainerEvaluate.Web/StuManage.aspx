@@ -756,7 +756,7 @@
 
         function exportData() {
             var url = "StudentsInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#StuName11").textbox('getText')) + "&sch=" + $("#School11").textbox('getText')
-                + "&title=" + $("#Title11").textbox('getText') + "&telno=" + $("#TelNo11").textbox('getText') + "&gender=" + $('#Gender11').combobox("getValue")
+                + "&title=" + $("#Title11").combobox("getValue") + "&telno=" + $("#TelNo11").textbox('getText') + "&gender=" + $('#Gender11').combobox("getValue")
             + "&idno=" + $("#IdentityNo11").textbox('getText');
             window.location = url;
         }

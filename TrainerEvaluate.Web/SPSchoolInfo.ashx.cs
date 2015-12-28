@@ -324,11 +324,11 @@ namespace TrainerEvaluate.Web
             {
                 if (!string.IsNullOrEmpty(strWhere))
                 {
-                    strWhere += string.Format(" and  SchDisName = '" + schdisname + "' ");
+                    strWhere += string.Format(" and  SchDisName like '%" + schdisname + "%' ");
                 }
                 else
                 {
-                    strWhere = string.Format(" Dept SchDisName = '" + schdisname + "' ");
+                    strWhere = string.Format(" SchDisName like '%" + schdisname + "%' ");
                 }
             }
 
@@ -359,11 +359,11 @@ namespace TrainerEvaluate.Web
             {
                 if (!string.IsNullOrEmpty(strWhere))
                 {
-                    strWhere += string.Format(" and  SchoolTypeName = '" + schooltype + "' ");
+                    strWhere += string.Format(" and  SchoolTypeCode = '" + schooltype + "' ");
                 }
                 else
                 {
-                    strWhere = string.Format(" SchoolTypeName = '" + schooltype + "' ");
+                    strWhere = string.Format(" SchoolTypeCode = '" + schooltype + "' ");
                 }
             }
 
