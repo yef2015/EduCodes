@@ -11,8 +11,9 @@ namespace TrainerEvaluate.Models
         public QuestionnaireSurvey()
         { }
         #region Model
-        private Guid _id;
+        private Guid _questid;
         private string _showname;
+        private string _parentid;
         private string _showtype;
         private string _showorder;
         private string _showcode;
@@ -29,16 +30,25 @@ namespace TrainerEvaluate.Models
         private string _opttext4;
         private string _opttype4;
         private string _optvalue4;
-        private string _treenode;
+        private string _opttext5;
+        private string _opttype5;
+        private string _optvalue5;
+        private string _opttext6;
+        private string _opttype6;
+        private string _optvalue6;
+        private string _opttext7;
+        private string _opttype7;
+        private string _optvalue7;
         private DateTime? _createtime;
+        private DateTime? _lastmodifytime;
         private bool _isdelete;
         /// <summary>
         /// 
         /// </summary>
-        public Guid Id
+        public Guid QuestId
         {
-            set { _id = value; }
-            get { return _id; }
+            set { _questid = value; }
+            get { return _questid; }
         }
         /// <summary>
         /// 
@@ -47,6 +57,14 @@ namespace TrainerEvaluate.Models
         {
             set { _showname = value; }
             get { return _showname; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ParentId
+        {
+            set { _parentid = value; }
+            get { return _parentid; }
         }
         /// <summary>
         /// 
@@ -179,10 +197,74 @@ namespace TrainerEvaluate.Models
         /// <summary>
         /// 
         /// </summary>
-        public string TreeNode
+        public string OptText5
         {
-            set { _treenode = value; }
-            get { return _treenode; }
+            set { _opttext5 = value; }
+            get { return _opttext5; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptType5
+        {
+            set { _opttype5 = value; }
+            get { return _opttype5; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptValue5
+        {
+            set { _optvalue5 = value; }
+            get { return _optvalue5; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptText6
+        {
+            set { _opttext6 = value; }
+            get { return _opttext6; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptType6
+        {
+            set { _opttype6 = value; }
+            get { return _opttype6; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptValue6
+        {
+            set { _optvalue6 = value; }
+            get { return _optvalue6; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptText7
+        {
+            set { _opttext7 = value; }
+            get { return _opttext7; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptType7
+        {
+            set { _opttype7 = value; }
+            get { return _opttype7; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OptValue7
+        {
+            set { _optvalue7 = value; }
+            get { return _optvalue7; }
         }
         /// <summary>
         /// 
@@ -191,6 +273,14 @@ namespace TrainerEvaluate.Models
         {
             set { _createtime = value; }
             get { return _createtime; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? LastModifyTime
+        {
+            set { _lastmodifytime = value; }
+            get { return _lastmodifytime; }
         }
         /// <summary>
         /// 

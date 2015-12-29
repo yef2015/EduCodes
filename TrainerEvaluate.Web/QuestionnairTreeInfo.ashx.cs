@@ -20,6 +20,8 @@ namespace TrainerEvaluate.Web
             context.Response.ContentType = "text/plain";
 
             var opType = context.Request["t"];
+            var id = context.Request["id"];
+
             switch (opType)
             {
                 case "treelist":
@@ -27,11 +29,17 @@ namespace TrainerEvaluate.Web
                     context.Response.Write(str);
                     //Add(context);
                     break;
-                case "edit":
-                    //Edit(id, context);
+                case "nq":
+                    // 新增问题
+                    AddQustion(id,context);
                     break;
-                case "del":
-                    //Del(id, context);
+                case "eq":
+                    // 编辑问题
+                    EditQuestion(id, context);
+                    break;
+                case "dq":
+                    // 删除问题
+                    DelQuestion(id, context);
                     break;
                 case "q":
                     //Query(context);
@@ -43,32 +51,121 @@ namespace TrainerEvaluate.Web
 
         private string GetData(HttpContext context)
         {
-            //Expression<Func<SysFunc, bool>> where = PredicateExtensionses.True<SysFunc>();
-            //where = where.And(m => m.IsValid == true);
-            //var obj = unitOfWork.SysFuncBLL.GetPageList(where, m => m.OrderBy(u => u.ShowOrder), "");
-
-            //var str = JsonConvert.SerializeObject(new { total = obj.TotalCount, rows = obj.LstData });
-
-            //str = str.Replace("ParentId", "_parentId");
-
-            //return str;
-
-
             var ds = new DataSet();
             var qustBll = new BLL.QuestionnaireSurvey();
             ds = qustBll.GetQuestionnaireSurveryList();
             var num = ds.Tables[0].Rows.Count;
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
-            str = str.Replace("TreeNode", "_parentId");
+            str = str.Replace("ParentId", "_parentId");
 
-
-            str = "{\"total\":7,\"rows\":"+
-"[{\"Id\":\"f36d787f-b552-4fe7-845a-2e273084d057\",\"Name\":\"一、您对本次培训课程的总体评价是：\",\"ShowCode\":\"radAll\",\"_parentId\":null},"+
-"{\"Id\":\"2e56be46-9de7-4c0a-9c0a-e2b93f5e89ee\",\"Name\":\"二、课程内容\",\"ShowCode\":null,\"_parentId\":null},"+
-"{\"Id\":\"280af0f5-ce9c-4382-b646-75fd9fb53b25\",\"Name\":\"1.课程主题清晰明确\",\"ShowCode\":\"radSubject\",\"_parentId\":\"2e56be46-9de7-4c0a-9c0a-e2b93f5e89ee\"}," +
-"{\"Id\":\"1b5bdcbe-2689-4d35-84d7-33e83560bed8\",\"Name\":\"5.课程内容有助于个人发展\",\"ShowCode\":\"radCourseDevelop\",\"_parentId\":\"2e56be46-9de7-4c0a-9c0a-e2b93f5e89ee\"}]}";
             return str;
+        }
+
+        /// <summary>
+        /// 新增问题
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="context"></param>
+        private void AddQustion(string pid, HttpContext context)
+        {
+            var result = false;
+            var msg = "";
+            try
+            {
+                LogHelper.WriteLogofExceptioin(new Exception("begin"));
+                var quesModel = new Models.QuestionnaireSurvey();
+                quesModel.QuestId = Guid.NewGuid();
+                SetModelValue(quesModel, context);
+                quesModel.CreateTime = DateTime.Now;
+                quesModel.LastModifyTime = DateTime.Now;
+                quesModel.ParentId = pid;
+                var quesBll = new BLL.QuestionnaireSurvey();
+
+                result = quesBll.Add(quesModel);
+
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            }
+            context.Response.Write(msg);
+        }
+
+        /// <summary>
+        /// 编辑问题
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="context"></param>
+        private void EditQuestion(string id, HttpContext context)
+        { 
+            var quesBll = new BLL.QuestionnaireSurvey();
+            var quesModel = quesBll.GetModel(new Guid(id));
+            quesModel.LastModifyTime = DateTime.Now;
+            var result = false;
+            var msg = "";
+            try
+            {
+                SetModelValue(quesModel, context);
+
+                result = quesBll.Update(quesModel);
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            }
+
+            context.Response.Write(msg);
+        }
+
+        private void SetModelValue(Models.QuestionnaireSurvey quesModel, HttpContext context)
+        {
+            quesModel.ShowName = context.Request["ShowName"];
+            quesModel.ShowOrder = context.Request["ShowOrder"];
+        }
+
+        /// <summary>
+        /// 删除问题
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="context"></param>
+        private void DelQuestion(string id,HttpContext context)
+        {
+            var quesBll = new BLL.QuestionnaireSurvey(); 
+            var result = false;
+            var msg = "";
+            try
+            {　   
+                result= quesBll.Delete(new Guid(id)); 
+               
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            } 
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            context.Response.Write(msg); 
         }
 
         public bool IsReusable
