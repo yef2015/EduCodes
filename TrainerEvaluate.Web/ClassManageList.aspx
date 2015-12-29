@@ -316,7 +316,11 @@
             window.location = url;
         }
 
+        var courseids = "";
+        var uncourseids = "";
         function setCourse() {
+             courseids = "";
+             uncourseids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg3').dialog('open').dialog('setTitle', '课程设置');
@@ -327,8 +331,7 @@
             }
         }
 
-        var courseids = "";
-        var uncourseids = "";
+      
         $('#dg3').datagrid({
             onSelectAll: function () {
                 $("#hCourseIsAll").val("1");
@@ -399,7 +402,12 @@
             });
         }
 
+        var stuids = "";
+        var unstuids = "";
+
         function setStu() {
+              stuids = "";
+              unstuids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg1').dialog('open').dialog('setTitle', '学员设置');
@@ -411,8 +419,7 @@
 
         }
 
-        var stuids = "";
-        var unstuids = "";
+   
         $('#dg1').datagrid({
             onSelectAll: function () {
                 $("#hIsAllStu").val("1");
@@ -481,7 +488,12 @@
             });
         }
 
-        function setTeacher() {
+        var teacherids = "";
+        var unteacherids = "";
+
+        function setTeacher() { 
+              teacherids = "";
+              unteacherids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg2').dialog('open').dialog('setTitle', '班主任设置');
@@ -492,8 +504,7 @@
             }
         }
 
-        var teacherids = "";
-        var unteacherids = "";
+       
         $('#dg2').datagrid({
             onSelectAll: function () {
                 $("#hIsAllTeacher").val("1");
