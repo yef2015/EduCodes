@@ -173,7 +173,7 @@ namespace TrainerEvaluate.BLL
         {
             try
             {
-                var sql = string.Format(" select * from dbo.QuestionnaireSurvey order by ShowOrder asc ");
+                var sql = string.Format(" select top 7 Id,ShowName AS Name,ShowCode,TreeNode from QuestionnaireSurvey order by ShowOrder asc ");
 
                 return DbHelperSQL.Query(sql);
             }
