@@ -141,6 +141,8 @@
     <Content Include="MyQuestionnaireNew.aspx" />
     <Content Include="PersonalInfo.aspx" />
     <Content Include="QuestionnaireManage.aspx" />
+    <Content Include="QuestionnairManageShow.aspx" />
+    <Content Include="QuestionnairTreeContent.aspx" />
     <Content Include="Roles.aspx" />
     <Content Include="Scripts\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\editor_api.js" />
@@ -437,6 +439,7 @@
     <Content Include="UploadTemplate\学区信息.xls" />
     <Content Include="SPSchoolInfo.ashx" />
     <Content Include="UploadTemplate\学校信息.xls" />
+    <Content Include="QuestionnairTreeInfo.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -603,6 +606,23 @@
     </Compile>
     <Compile Include="QuestionnaireManage.aspx.designer.cs">
       <DependentUpon>QuestionnaireManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnairManageShow.aspx.cs">
+      <DependentUpon>QuestionnairManageShow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuestionnairManageShow.aspx.designer.cs">
+      <DependentUpon>QuestionnairManageShow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnairTreeContent.aspx.cs">
+      <DependentUpon>QuestionnairTreeContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuestionnairTreeContent.aspx.designer.cs">
+      <DependentUpon>QuestionnairTreeContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnairTreeInfo.ashx.cs">
+      <DependentUpon>QuestionnairTreeInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="Roles.ashx.cs">
       <DependentUpon>Roles.ashx</DependentUpon>
