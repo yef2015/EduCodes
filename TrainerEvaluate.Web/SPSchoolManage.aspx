@@ -454,11 +454,11 @@
         }
 
         function clearCondition() {
-            $('#SchoolName1').textbox('clear');
-            $('#SchDisName1').textbox('clear');
-            $('#RunNatureName1').combobox("setValue", "");
-            $('#SchoolTypeName1').combobox("setValue", "");
-            $('#LegalName1').textbox("setText", "");
+            $('#StuName11').textbox('clear');
+            $('#School11').textbox('clear');
+            $('#Gender11').combobox("setValue", "");
+            $('#Title11').textbox("setText", "");
+            $('#IdentityNo11').textbox("setText", "");
         }
 
 

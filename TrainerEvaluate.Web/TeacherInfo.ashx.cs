@@ -366,11 +366,11 @@ namespace TrainerEvaluate.Web
             {
                 if (!string.IsNullOrEmpty(strWhere))
                 {
-                    strWhere += string.Format(" and  Title =" + title + " ");
+                    strWhere += string.Format(" and  Title like '%" + title + "%' ");
                 }
                 else
                 {
-                    strWhere = string.Format(" Title =" + title + " ");
+                    strWhere = string.Format(" Title like '%" + title + "%' ");
                 }
             }
             if (!string.IsNullOrEmpty(idno))
@@ -593,13 +593,13 @@ namespace TrainerEvaluate.Web
 
                 var sysuserbll = new BLL.SysUser();
                 var sysUserMo = sysuserbll.GetModel(new Guid(id));
-                if (sysUserMo != null)
-                {
-                    sysUserMo.UserName = teaModel.TeacherName;
-                    sysUserMo.UserId = teaModel.TeacherId;
-                    sysUserMo.IdentityNo = teaModel.IdentityNo;
-                    sysuserbll.Update(sysUserMo); 
-                }  
+                sysUserMo.UserName = teaModel.TeacherName;
+                sysUserMo.UserId = teaModel.TeacherId;
+                sysUserMo.IdentityNo = teaModel.IdentityNo;
+
+                sysuserbll.Update(sysUserMo);
+
+
                 result = teaBll.Update(teaModel);
                 if (!result)
                 {

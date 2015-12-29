@@ -263,7 +263,7 @@ namespace TrainerEvaluate.DAL
             strSql.Append("select  top 1 StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId from Student ");
             strSql.Append(" where StudentId=@StudentId ");
             SqlParameter[] parameters = {
-					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier)			};
+					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16)			};
             parameters[0].Value = StudentId;
 
             Models.Student model = new Models.Student();
@@ -307,7 +307,7 @@ namespace TrainerEvaluate.DAL
 				{
 					model.School=row["School"].ToString();
 				}
-                if (row["JobTitle"] != null && row["JobTitle"].ToString() != "")
+                if (row["JobTitle"] != null && row["Gender"].ToString() != "")
 				{
                     model.JobTitle =int.Parse( row["JobTitle"].ToString());
 				}

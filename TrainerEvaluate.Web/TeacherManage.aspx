@@ -456,9 +456,9 @@
 
             $('#StuName11').textbox('clear');
             $('#School11').textbox('clear');
-            $('#Gender11').textbox('clear');
-            $('#Title11').textbox('clear');
-            $('#IdentityNo11').textbox('clear');
+            $('#Gender11').combobox("setValue", "");
+            $('#Title11').textbox("setText", "");
+            $('#IdentityNo11').textbox("setText", "");
 
         }
 
@@ -470,7 +470,7 @@
                 name: $("#StuName11").textbox('getText'),
                 sch: $("#School11").textbox('getText'),
                 gender: $("#Gender11").combobox("getValue"),
-                title: $("#Title11").combobox('getValue'),
+                title: $("#Title11").textbox('getText'),
                 idno: $("#IdentityNo11").textbox('getText')
             });
         }

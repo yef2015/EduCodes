@@ -370,6 +370,15 @@ Incorrect syntax near 'TypeName'.|System.Data.SqlClient.SqlException (0x80131904
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:9da9946f-e9c2-4f91-a129-707bb7a5b7fc：2015-12-27 18:58:11
-Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0System.IO.IOException: Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0
-   在 TrainerEvaluate.BLL.ExportXls.ExcelToDataTable(String sheetName, Boolean isFirstRowColumn, String fileName) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.BLL\ExportXls.cs:行号 1184
-   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 e:\mineown\mine\2016\Codes\TrainerEvaluate\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 109：2015-12-29 02:49:23
+无法打开登录所请求的数据库 "Tr1228"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "Tr1228"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:9056b5df-8606-455d-86c3-5cb83e37e4f3：2015-12-28 19:23:28
+无法打开登录所请求的数据库 "Tr1228"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "Tr1228"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:1893343b-4ca2-4ca0-9008-cdde4c6b4d6e：2015-12-28 19:23:35
