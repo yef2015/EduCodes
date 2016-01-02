@@ -32,7 +32,20 @@ namespace TrainerEvaluate.Utility
 
     }
 
+    /// <summary>
+    /// （1-学生2-教师3-管理员）
+    /// </summary>
+    public enum EnumQuestionType
+    {
+        [Description("不带答案")]
+        NoAnswer = 1,
 
+        [Description("答案是单选")]
+        AnswerRadio = 2,
+
+        [Description("答案是文本框")]
+        AnswerText = 3
+    }
 
     public enum EnumQuestionState
     {
@@ -42,11 +55,7 @@ namespace TrainerEvaluate.Utility
         [Description("已提交")]
         Submit = 1 
     }
-
-
-
-
-
+    
 
     public static  class Common
     {

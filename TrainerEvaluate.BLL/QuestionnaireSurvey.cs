@@ -174,7 +174,9 @@ namespace TrainerEvaluate.BLL
             try
             {
                 var sql = string.Format(@" select upper(QuestId) AS QuestId,
-                                              ShowName,ShowType,ShowOrder,ShowCode,ShowId,
+                                              ShowName,ShowName AS ShowNameA,ShowType,
+                                              ShowOrder,ShowCode,ShowId,
+                                              ShowName AS ShowNameText,ShowId AS ShowIdText,
                                               OptText1,OptType1,OptValue1,
                                               OptText2,OptType2,OptValue2,OptText3,OptType3,OptValue3,
                                               OptText4,OptType4,OptValue4,CreateTime,
