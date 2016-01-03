@@ -59,26 +59,22 @@ namespace TrainerEvaluate.Web
         private void GetDataForCombobox(HttpContext context)
         {
             var ds = new DataSet();
-            var couBll = new BLL.Class();
-            ds = couBll.GetAllList();
-
-            //  [{"SUBITEM_VALUE":"1","SUBITEM_NAME":"男"},{"SUBITEM_VALUE":"2","SUBITEM_NAME":"女"}]  
+            var classBll = new BLL.Class();
+            ds = classBll.GetAllList();
 
             if (ds != null && ds.Tables.Count > 0)
             {
                 var str = new StringBuilder("[");
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    str.Append("{\"CourseId\": \"" + row["CourseId"] + "\",");
-                    str.Append("\"CourseName\": \"" + row["CourseName"] + "\"},");
+                    str.Append("{\"ClassId\": \"" + row["ID"] + "\",");
+                    str.Append("\"ClassName\": \"" + row["Name"] + "\"},");
                 }
                 str.Remove(str.Length - 1, 1);
                 str.Append("]");
 
                 context.Response.Write(str.ToString());
             }
-            // var str = JsonConvert.SerializeObject(new { total = ds.Tables[0].Rows.Count, rows = ds.Tables[0] }); 
-
         }
 
         private string GetData(HttpContext context)

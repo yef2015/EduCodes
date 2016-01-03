@@ -47,8 +47,16 @@
             var url = "QuestionnaireHadler.ashx?t=exorg";
             window.location = url;
         }
-
-
+        // 导出教师满意度
+        function getTrainTeachReports() {
+            var url = "QuestionnaireHadler.ashx?t=extrainteach";
+            window.location = url;
+        }
+        // 导出培训课程满意度
+        function getTrainCourseReports() {
+            var url = "QuestionnaireHadler.ashx?t=extraincourse";
+            window.location = url;
+        }
 
         function exportSuggestion() {
             var url = "QuestionnaireHadler.ashx?t=exs&id=" + $("#hCourseid").val();

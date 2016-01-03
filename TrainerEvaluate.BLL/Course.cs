@@ -248,6 +248,19 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString()); 
         }
 
+        /// <summary>
+        /// 获得数据列表，通过班级Id
+        /// </summary>
+        public DataSet GetDataByClassId(string classId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select a.CourseId,a.CourseName from Course AS a  ");
+            strSql.Append(" left join ClassCourse AS b on a.CourseId = b.CourseID ");
+            strSql.Append(" where a.Status = 1 and b.ClassId = '"+classId+"'  ");
+            strSql.Append(" order by  a.TeachTime desc ");
+
+            return DbHelperSQL.Query(strSql.ToString()); 
+        }
 
 	    #endregion  ExtensionMethod
 	}

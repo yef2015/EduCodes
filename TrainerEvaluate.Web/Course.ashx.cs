@@ -38,6 +38,9 @@ namespace TrainerEvaluate.Web
                 case "c":
                     GetDataForCombobox(context);
                     break;
+                case "alc":
+                    GetDataForComByClassId(context);
+                    break;
                 case "ex":
                     ExportCourseInfo(context);
                     break;   
@@ -88,7 +91,27 @@ namespace TrainerEvaluate.Web
 
         }
 
+        private void GetDataForComByClassId(HttpContext context)
+        {
+            var classId = context.Request["classId"];
+            var ds = new DataSet();
+            var couBll = new BLL.Course();
+            ds = couBll.GetDataByClassId(classId);
 
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                var str = new StringBuilder("[");
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    str.Append("{\"CourseId\": \"" + row["CourseId"] + "\",");
+                    str.Append("\"CourseName\": \"" + row["CourseName"] + "\"},");
+                }
+                str.Remove(str.Length - 1, 1);
+                str.Append("]");
+
+                context.Response.Write(str.ToString());
+            }
+        }
 
 
         private string GetData(HttpContext context)

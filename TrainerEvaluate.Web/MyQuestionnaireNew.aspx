@@ -17,6 +17,109 @@
                 $(this).combobox("setValue", sel);
             }
         });
+
+        function checkRadio()
+        {
+            var val = $('input:radio[name="radAll"]:checked').val();
+            if (val == null) {
+                alert("您没有对‘您对本次培训课程的总体评价’进行评价。");
+                $('input:radio[name="radAll"]').focus();
+                return false;
+            }
+
+            var val1 = $('input:radio[name="radSubject"]:checked').val();
+            if (val1 == null) {
+                alert("您没有对‘课程主题清晰明确’进行评价。");
+                $('input:radio[name="radSubject"]').focus();
+                return false;
+            }
+
+            var val2 = $('input:radio[name="radContentRich"]:checked').val();
+            if (val2 == null) {
+                alert("您没有对‘课程内容丰富、能吸引人’进行评价。");
+                $('input:radio[name="radContentRich"]').focus();
+                return false;
+            }
+
+            var val3 = $('input:radio[name="radCoursePractical"]:checked').val();
+            if (val3 == null) {
+                alert("您没有对‘课程内容切合实际，能指导实践’进行评价。");
+                $('input:radio[name="radCoursePractical"]').focus();
+                return false;
+            }
+
+            var val4 = $('input:radio[name="radCourseKey"]:checked').val();
+            if (val4 == null) {
+                alert("您没有对‘课程内容重点突出，易于理解’进行评价。");
+                $('input:radio[name="radCourseKey"]').focus();
+                return false;
+            }
+
+            var val5 = $('input:radio[name="radCourseDevelop"]:checked').val();
+            if (val5 == null) {
+                alert("您没有对‘课程内容有助于个人发展’进行评价。");
+                $('input:radio[name="radCourseDevelop"]').focus();
+                return false;
+            }
+
+            var val6 = $('input:radio[name="radTeacherPrepare"]:checked').val();
+            if (val6 == null) {
+                alert("您没有对‘讲师准备比较充分’进行评价。");
+                $('input:radio[name="radTeacherPrepare"]').focus();
+                return false;
+            }
+
+            var val7 = $('input:radio[name="radTeacherLanguage"]:checked').val();
+            if (val7 == null) {
+                alert("您没有对‘语言表达清晰，态度端正’进行评价。");
+                $('input:radio[name="radTeacherLanguage"]').focus();
+                return false;
+            }
+
+            var val8 = $('input:radio[name="radTeacherBearing"]:checked').val();
+            if (val8 == null) {
+                alert("您没有对‘仪表仪容端庄大方，有亲和力’进行评价。");
+                $('input:radio[name="radTeacherBearing"]').focus();
+                return false;
+            }
+
+            var val9 = $('input:radio[name="radTeacherStyle"]:checked').val();
+            if (val9 == null) {
+                alert("您没有对‘培训方式多样，生动有趣’进行评价。");
+                $('input:radio[name="radTeacherStyle"]').focus();
+                return false;
+            }
+
+            var val10 = $('input:radio[name="radTeacherCommunication"]:checked').val();
+            if (val10 == null) {
+                alert("您没有对‘与学员沟通和互动有效’进行评价。");
+                $('input:radio[name="radTeacherCommunication"]').focus();
+                return false;
+            }
+
+            var val11 = $('input:radio[name="radOrgService"]:checked').val();
+            if (val11 == null) {
+                alert("您没有对‘培训服务周到细致’进行评价。");
+                $('input:radio[name="radOrgService"]').focus();
+                return false;
+            }
+
+            var val12 = $('input:radio[name="radOrgTime"]:checked').val();
+            if (val12 == null) {
+                alert("您没有对‘培训时间安排和控制合理’进行评价。");
+                $('input:radio[name="radOrgTime"]').focus();
+                return false;
+            }
+
+            var val13 = $('input:radio[name="radOrgArrange"]:checked').val();
+            if (val13 == null) {
+                alert("您没有对‘培训场所、设备安排到位’进行评价。");
+                $('input:radio[name="radOrgArrange"]').focus();
+                return false;
+            }
+
+            return true;
+        }
     </script>
 
     <style type="text/css">
@@ -89,270 +192,12 @@
                 <td width="16%" colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">&nbsp; </td>
             </tr>
         </table>
-        <asp:Literal ID="LiteralContent" runat="server"></asp:Literal>
-        <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="queHas2" runat="server" style="margin-left: 10px;">
-            <tr bgcolor="#FFFFFF">
-                <td width="16%" colspan="4" class="white10" height="26" bgcolor="4A5C69">
-                    <img src="images/bank.gif" width="10" height="10">一、您对本次培训课程的总体评价是：</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radAll" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="req1" ControlToValidate="radAll" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="4A5C69" class="white10" height="25">
-                    <img src="images/bank.gif" width="10" height="10">二、课程内容</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="25" height="10">1.课程主题清晰明确</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radSubject" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="radSubject" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="26">
-                    <img src="images/bank.gif" width="25" height="10">2.课程内容丰富、能吸引人</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="29">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radContentRich" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="radContentRich" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="25" height="10">3.课程内容切合实际，能指导实践</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="32">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radCoursePractical" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="radCoursePractical" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="27">
-                    <img src="images/bank.gif" width="25" height="10">4.课程内容重点突出，易于理解</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="30">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radCourseKey" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="radCourseKey" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="29">
-                    <img src="images/bank.gif" width="25" height="10">5.课程内容有助于个人发展</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="30">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radCourseDevelop" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="radCourseDevelop" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="4A5C69" class="white10" height="25">
-                    <img src="images/bank.gif" width="10" height="10">三、培训讲师</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="29">
-                    <img src="images/bank.gif" width="25" height="10">1.讲师准备比较充分</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radTeacherPrepare" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="radTeacherPrepare" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="25" height="10">2.语言表达清晰，态度端正</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radTeacherLanguage" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="radTeacherLanguage" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="25" height="10">3.仪表仪容端庄大方，有亲和力</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="31">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radTeacherBearing" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="radTeacherBearing" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="25" height="10">4.培训方式多样，生动有趣</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="30">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radTeacherStyle" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="radTeacherStyle" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="25" height="10">5.与学员沟通和互动有效</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radTeacherCommunication" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="radTeacherCommunication" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="4A5C69" class="white10" height="25">
-                    <img src="images/bank.gif" width="10" height="10">四、培训组织和管理</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="28">
-                    <img src="images/bank.gif" width="25" height="10">1.培训服务周到细致</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="30">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radOrgService" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator11" ControlToValidate="radOrgService" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="30">
-                    <img src="images/bank.gif" width="25" height="10">2.培训时间安排和控制合理</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="32">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radOrgTime" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator12" ControlToValidate="radOrgTime" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="25" height="10">3.培训场所、设备安排到位</td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="32">
-                    <img src="images/bank.gif" width="35" height="10">
-                    <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" ID="radOrgArrange" ForeColor="#000000">
-                        <asp:ListItem Value="4">满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="3">比较满意&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="2">一般&nbsp;&nbsp;</asp:ListItem>
-                        <asp:ListItem Value="1">不满意&nbsp;&nbsp;</asp:ListItem>
-                    </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator13" ControlToValidate="radOrgArrange" ErrorMessage="请选择" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="4A5C69" class="gray10a" height="25">
-                    <img src="images/bank.gif" width="10" height="10"><span class="white10">五、您对本课程还有哪些建议？</span></td>
-            </tr>
-            <tr>
-                <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="187">
-                    <img src="images/bank.gif" width="25" height="10">
-                    <textarea name="textfield" cols="100" rows="10" runat="server" id="txtSuggest"></textarea>
-                </td>
-            </tr>
+        <asp:Literal ID="LiteralContent" runat="server"></asp:Literal>        
+        <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="queHasBtn" runat="server" style="margin-left: 10px;">
             <tr>
                 <td colspan="4" bgcolor="#FFFFFF" class="gray10a" height="25">
                     <div align="center">
-                        <asp:ImageButton runat="server" Width="91" Height="27" OnClick="SubmitBtn_Click" ID="btnSubmit" />
+                        <asp:ImageButton runat="server" Width="91" Height="27" OnClientClick="return checkRadio();" OnClick="SubmitBtn_Click" ID="btnSubmit" />
                     </div>
                 </td>
             </tr>

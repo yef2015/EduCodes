@@ -33,13 +33,10 @@
             window.location = url;
         }
 
-
-
         function exportSuggestion() {
             var url = "QuestionnaireHadler.ashx?t=exs&id=" + $("#hCourseid").val();
             window.location = url;
         }
-
 
         //function exportSatisfy() {
         //    alert(1);
@@ -47,27 +44,50 @@
         //    alert(11);
         //}
 
+
+
+        $(function () {
+            var _classid = $('#ClassInfo').combobox({
+                url: 'ClassInfo.ashx?t=c',
+                editable: false,
+                valueField: 'ClassId',
+                textField: 'ClassName',
+                onSelect: function (record) {
+                    _courseid.combobox({
+                        disabled: false,
+                        url: 'Course.ashx?t=alc&&classId=' + record.ClassId,
+                        valueField: 'CourseId',
+                        textField: 'CourseName'
+                    }).combobox('clear');
+                }
+            });
+            var _courseid = $('#CourseInfo').combobox({
+                disabled: false,
+                valueField: 'CourseId',
+                textField: 'CourseName'
+            });
+        });
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="CourseNames" name="CourseNames" style="width:100%; height: 1271px; font-size: 14px; ">
-        <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">评估课程选择：</span>
+    <div id="CourseNames" name="CourseNames" style="height: 1271px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;">
+        
+        <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">评估班级选择：</span>
         <div>
-            <input class="easyui-combobox"
-                name="CourseInfo" id="CourseInfo"
-                data-options="
-                    url:'Course.ashx?t=c',
-                    method:'get',
-                    valueField:'CourseId',
-                    textField:'CourseName',
-                    panelHeight:'auto',
-                    width:'170'
-            ">
+            <input class="easyui-combobox" name="ClassInfo" id="ClassInfo" style="width:240px"
+                data-options="valueField:'ClassId', textField:'ClassName', panelHeight:'auto'" />  
+        </div>
+        <div style="margin-top: 10px;">
+            <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">评估课程选择：</span>
+            <div>
+                <input class="easyui-combobox" name="CourseInfo" id="CourseInfo" style="width:240px"  
+                    data-options="valueField:'CourseId', textField:'CourseName', panelHeight:'auto'" />                  
+            </div>
         </div>
         <div style="margin-top: 10px;">
             <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">课程满意度分布区间：</span><br />
-            <select id="satisfy" class="easyui-combobox" name="satisfy" style="width: 170px;">
+            <select id="satisfy" class="easyui-combobox" name="satisfy" style="width: 240px;">
                 <option>请选择满意度</option>
                 <option value="1">100%-95%</option>
                 <option value="2">95%-90%</option>
@@ -77,16 +97,34 @@
         </div>
         <div style="margin-top: 10px;">
             <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">统计报表：</span><br />
-            <select id="reports" class="easyui-combobox" name="satisfy" style="width: 170px;">
+            <select id="reports" class="easyui-combobox" name="satisfy" style="width: 240px;">
                 <option>请选择统计报表</option>
                 <option value="1">课程评估总体情况统计表</option>
                 <option value="2">课程内容各指标满意度分布表</option>
                 <option value="3">培训讲师各指标满意度分布表</option>
                 <option value="4">培训组织和管理满意度分布表</option>
+                <option value="5">培训教师满意度</option>
+                <option value="6">培训课程满意度</option>
             </select>
         </div>
 
         <script type="text/javascript">
+            $("#ClassInfo").combobox({
+                onLoadSuccess: function () {
+                    var val = $(this).combobox("getData");
+                    for (var item in val[0]) {
+                        if (item == "ClassId") {
+                            $(this).combobox("select", val[0][item]);
+                        }
+                    }
+                },
+                onSelect: function (param) {
+                    alert(param.ClassId);
+                    $("#headtable").css("display", "block");
+                    $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?classid=" + param.ClassId);
+                }
+            });
+
             $("#CourseInfo").combobox({
                 onLoadSuccess: function () {
                     var val = $(this).combobox("getData");
@@ -101,7 +139,7 @@
                     $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?cid=" + param.CourseId);
                     //  changeContent("AnaysisContent.aspx?cid=" + param.CourseId); 
                 }
-            });
+            });            
 
             $("#satisfy").combobox({
                 onLoadSuccess: function () {
@@ -109,7 +147,7 @@
                 },
                 onSelect: function (param) {
                     if (param.value != null && param.value != "请选择满意度") {
-                        $("#headtable").css("display", "none");
+                        $("#headtable").css("display", "none");                        
                         $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?sid=" + param.value);
                         //    changeContent("AnaysisContent.aspx?sid=" + param.value);
 
@@ -125,7 +163,10 @@
                 onSelect: function (param) {
                     if (param.value != null && param.value != "请选择统计报表") {
                         $("#headtable").css("display", "none");
-                        $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?t=r&sid=" + param.value);
+                        var classId = $('#ClassInfo').combobox("getValue");
+                        var courseId = $('#CourseInfo').combobox("getValue");
+                        $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?t=r&sid=" + param.value
+                            + "&classId=" + classId + "&courseId=" + courseId);
                         // changeContent("AnaysisContent.aspx?t=r&sid=" + param.value);
                     }
                 }

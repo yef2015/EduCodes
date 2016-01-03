@@ -33,7 +33,7 @@ namespace TrainerEvaluate.Utility
     }
 
     /// <summary>
-    /// （1-学生2-教师3-管理员）
+    /// （1-不带答案2-答案是单选3-答案是文本框）
     /// </summary>
     public enum EnumQuestionType
     {

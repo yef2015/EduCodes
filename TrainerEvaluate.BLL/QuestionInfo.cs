@@ -288,7 +288,7 @@ namespace TrainerEvaluate.BLL
                     var ls = new List<string>();
                     var sTime = string.IsNullOrEmpty(startTime) ? "null" : startTime;
                     var eTime = string.IsNullOrEmpty(endTime) ? "null" : endTime;  
-                    var sql1 = string.Format(" insert into  QuestionInfo (Id,Name,ClassCourseID,Status,CreatedTime,StartTime,EndTime) values('{0}','{1}','{2}',2,GETDATE(),{3},{4})", id,name, classCourseId, sTime,eTime); 
+                    var sql1 = string.Format(" insert into  QuestionInfo (Id,Name,ClassCourseID,Status,CreatedTime,StartTime,EndTime) values('{0}','{1}','{2}',2,GETDATE(),'{3}','{4}')", id,name, classCourseId, sTime,eTime); 
                     var sql2 = string.Format(" insert into CourseStudents   select NEWID(),a.CourseID ,b.StudentId,0,GETDATE() from ClassCourse a, ClassStudents b where a.ClassId=b.ClassId  and a.ID='{0}'",id);
 
                     ls.Add(sql1);

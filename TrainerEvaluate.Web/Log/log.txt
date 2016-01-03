@@ -382,3 +382,43 @@ ClientConnectionId:9056b5df-8606-455d-86c3-5cb83e37e4f3：2015-12-28 19:23:28
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:1893343b-4ca2-4ca0-9008-cdde4c6b4d6e：2015-12-28 19:23:35
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:27a91d39-dc0c-4efb-a3b3-b1c63efd1219：2016-01-03 14:56:20
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:27a91d39-dc0c-4efb-a3b3-b1c63efd1219：2016-01-03 14:57:02
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:76ed7e0d-354c-4d3e-b119-61679d8cf7f3：2016-01-03 15:05:42
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:76ed7e0d-354c-4d3e-b119-61679d8cf7f3：2016-01-03 15:05:42
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:76ed7e0d-354c-4d3e-b119-61679d8cf7f3：2016-01-03 15:05:46
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:76ed7e0d-354c-4d3e-b119-61679d8cf7f3：2016-01-03 15:05:47
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:c41b6f2a-f553-4db3-83df-2d91066b6e66：2016-01-03 15:06:13
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:03a908f3-47e6-46c0-8487-fc00c252d065：2016-01-03 15:06:29
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:03a908f3-47e6-46c0-8487-fc00c252d065：2016-01-03 15:06:31
+' 附近有语法错误。' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): ' 附近有语法错误。' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:03a908f3-47e6-46c0-8487-fc00c252d065：2016-01-03 15:06:46

@@ -13,6 +13,8 @@ namespace TrainerEvaluate.Models
 		#region Model
 		private Guid _questionnaireid;
 		private Guid _courseid;
+        private string _studentid;
+        private string _questairid;
 		private int _totalevaluation;
 		private int _coursesubject;
 		private int _courserich;
@@ -51,6 +53,22 @@ namespace TrainerEvaluate.Models
 			set{ _courseid=value;}
 			get{return _courseid;}
 		}
+        /// <summary>
+        /// 学生Id
+        /// </summary>
+        public string StudentId
+        {
+            set { _studentid = value; }
+            get { return _studentid; }
+        }
+        /// <summary>
+        /// 问卷id
+        /// </summary>
+        public string QuestairId
+        {
+            set { _questairid = value; }
+            get { return _questairid; }
+        }
 		/// <summary>
 		/// 总体评价
 		/// </summary>

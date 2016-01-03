@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TrainerEvaluate.Utility;
 
 namespace TrainerEvaluate.Web
 {
@@ -39,6 +40,7 @@ namespace TrainerEvaluate.Web
                     timeTip.InnerText = "评估时间为： " + ConfigurationManager.AppSettings["StartTime"] + " 到 " + ConfigurationManager.AppSettings["EndTime"];
                     quNo.Visible = false;
                     queHas.Visible = false;
+                    queHasBtn.Visible = false;
                     CourseNames.Visible = false;
                 }
             }
@@ -82,6 +84,7 @@ namespace TrainerEvaluate.Web
 
                 quNo.Visible = false;
                 queHas.Visible = true;
+                queHasBtn.Visible = true;
             }
             else
             {
@@ -97,11 +100,13 @@ namespace TrainerEvaluate.Web
 
                     quNo.Visible = false;
                     queHas.Visible = true;
+                    queHasBtn.Visible = true;
                 }
                 else
                 {
                     quNo.Visible = true;
                     queHas.Visible = false;
+                    queHasBtn.Visible = false;
                 }
             }
         }
@@ -114,52 +119,62 @@ namespace TrainerEvaluate.Web
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 strBuilder.Append("<table width='98%' border='0' cellspacing='1' cellpadding='3' align='center' bgcolor='C4D4E1' style='margin-left: 10px;'>");
-                foreach (DataRow row in ds.Tables[0].Rows)
+                DataTable dt = ds.Tables[0];
+                DataRow[] drRoot = dt.Select("ParentId is NULL");
+
+                if (drRoot.Length > 0)
                 {
-                    switch(row["ShowType"].ToString())
+                    DataRow[] drFirst = dt.Select("ParentId = '" + drRoot[0]["QuestId"].ToString() + "'");
+
+                    if (drFirst.Length > 0)
                     {
-                        case "1":
-                            // 针对 一、您对本次培训课程的总体评价是：
-                            strBuilder.Append("<tr bgcolor='#FFFFFF'><td width='16%' colspan='4' class='white10' height='26' bgcolor='4A5C69'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='10' height='10'>" + row["ShowName"] + "</td>");
-                            strBuilder.Append("</tr><tr><td colspan='4' bgcolor='F0F9FF' class='gray10a' height='25'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='35' height='10'>");
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "1' value='" + row["OptValue1"] + "' />" + row["OptText1"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "2' value='" + row["OptValue2"] + "' />" + row["OptText2"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "3' value='" + row["OptValue3"] + "' />" + row["OptText3"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "4' value='" + row["OptValue4"] + "' />" + row["OptText4"]);
-                            strBuilder.Append("</td></tr>");
-                            break;
-                        case "2":
-                            // 针对标题
+                        foreach (DataRow dr in drFirst)
+                        {
                             strBuilder.Append("<tr><td colspan='4' bgcolor='4A5C69' class='white10' height='25'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='10' height='10'>" + row["ShowName"] + "</td></tr>");
-                            break;
-                        case "3":
-                            // 针对radio
-                            strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='26'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>" + row["ShowName"] + "</td>");
-                            strBuilder.Append("</tr><tr><td colspan='4' bgcolor='F0F9FF' class='gray10a' height='29'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='35' height='10'>");
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "1' value='" + row["OptValue1"] + "' />" + row["OptText1"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "2' value='" + row["OptValue2"] + "' />" + row["OptText2"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "3' value='" + row["OptValue3"] + "' />" + row["OptText3"]);
-                            strBuilder.Append("<input type='radio' name='" + row["ShowId"] + "' id='" + row["ShowId"] + "4' value='" + row["OptValue4"] + "' />" + row["OptText4"]);
-                            strBuilder.Append("</td></tr>");
-                            break;
-                        case "4":
-                            // 针对 五、您对本课程还有哪些建议？
-                            strBuilder.Append("<tr><td colspan='4' bgcolor='4A5C69' class='white10' height='25'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='10' height='10'>" + row["ShowName"] + "</td></tr>");
-                            strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='187'>");
-                            strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>");
-                            strBuilder.Append("<input name='" + row["ShowId"] + "' id='" + row["ShowId"] + "' class='easyui-textbox' data-options='multiline:true' style='height: 160px;width:800px;'>");
-                            strBuilder.Append("</td></tr>");
-                            break;
-                        default:
-                            break;
+                            strBuilder.Append("<img src='images/bank.gif' width='10' height='10'>" + dr["ShowName"] + "</td></tr>");
+
+                            switch (dr["ShowType"].ToString())
+                            {
+                                case "NoAnswer":
+                                    DataRow[] drSecond = dt.Select("ParentId = '" + dr["QuestId"].ToString() + "'");
+                                    if (drSecond.Length > 0)
+                                    {
+                                        foreach (DataRow drChild in drSecond)
+                                        {
+                                            strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='26'>");
+                                            strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>" + drChild["ShowName"] + "</td>");
+                                            strBuilder.Append("</tr><tr><td colspan='4' bgcolor='F0F9FF' class='gray10a' height='29'>");
+                                            strBuilder.Append("<img src='images/bank.gif' width='35' height='10'>");
+                                            strBuilder.Append("<input type='radio' name='" + drChild["ShowId"] + "' id='" + drChild["ShowId"] + "1' value='" + drChild["OptValue1"] + "' />" + drChild["OptText1"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                            strBuilder.Append("<input type='radio' name='" + drChild["ShowId"] + "' id='" + drChild["ShowId"] + "2' value='" + drChild["OptValue2"] + "' />" + drChild["OptText2"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                            strBuilder.Append("<input type='radio' name='" + drChild["ShowId"] + "' id='" + drChild["ShowId"] + "3' value='" + drChild["OptValue3"] + "' />" + drChild["OptText3"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                            strBuilder.Append("<input type='radio' name='" + drChild["ShowId"] + "' id='" + drChild["ShowId"] + "4' value='" + drChild["OptValue4"] + "' />" + drChild["OptText4"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                            strBuilder.Append("</td></tr>");
+                                        }
+                                    }
+                                    break;
+                                case "AnswerRadio":
+                                    strBuilder.Append("<tr><td colspan='4' bgcolor='F0F9FF' class='gray10a' height='25'>");
+                                    strBuilder.Append("<img src='images/bank.gif' width='35' height='10'>");
+                                    strBuilder.Append("<input type='radio' name='" + dr["ShowId"] + "' id='" + dr["ShowId"] + "1' value='" + dr["OptValue1"] + "' />" + dr["OptText1"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                    strBuilder.Append("<input type='radio' name='" + dr["ShowId"] + "' id='" + dr["ShowId"] + "2' value='" + dr["OptValue2"] + "' />" + dr["OptText2"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                    strBuilder.Append("<input type='radio' name='" + dr["ShowId"] + "' id='" + dr["ShowId"] + "3' value='" + dr["OptValue3"] + "' />" + dr["OptText3"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                    strBuilder.Append("<input type='radio' name='" + dr["ShowId"] + "' id='" + dr["ShowId"] + "4' value='" + dr["OptValue4"] + "' />" + dr["OptText4"] + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                                    strBuilder.Append("</td></tr>");
+                                    break;
+                                case "AnswerText":
+                                    strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='187'>");
+                                    strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>");
+                                    strBuilder.Append("<input name='" + dr["ShowId"] + "' id='" + dr["ShowId"] + "' class='easyui-textbox' data-options='multiline:true' style='height: 160px;width:800px;'>");
+                                    strBuilder.Append("</td></tr>");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
                 }
+
                 strBuilder.Append("</table>");
                 LiteralContent.Text = strBuilder.ToString();
             }
@@ -191,68 +206,104 @@ namespace TrainerEvaluate.Web
         {
             try
             {
-                //var courseId = new Guid(hCouseId.Value);
+                var courseId = new Guid(hCouseId.Value);
+                var quesModel = new Models.Questionnaire();
+                Int32 total = 0;
+                int totalCourse = 0;
+                int totalTeacher = 0;
+                int totalOrg = 0;
+                quesModel.QuestionnaireId = Guid.NewGuid();
+                quesModel.AppraiserId = Profile.CurrentUser.UserId;
+                quesModel.AppraiserTime = DateTime.Now;
 
-                //var quesModel = new Models.Questionnaire();
-                //Int32 total = 0;
-                //int totalCourse = 0;
-                //int totalTeacher = 0;
-                //int totalOrg = 0;
-                //quesModel.QuestionnaireId = Guid.NewGuid();
-                //quesModel.AppraiserId = Profile.CurrentUser.UserId;
-                //quesModel.AppraiserTime = DateTime.Now;
-                //quesModel.CourseDevelop = Convert.ToInt32(radCourseDevelop.SelectedValue);
-                //total += (int)quesModel.CourseDevelop;
-                //totalCourse += (int)quesModel.CourseDevelop;
-                //quesModel.CourseId = courseId;
-                //quesModel.CourseKey = Convert.ToInt32(radCourseKey.SelectedValue);
-                //total += (int)quesModel.CourseKey;
-                //totalCourse += (int)quesModel.CourseKey;
-                //quesModel.CoursePractical = Convert.ToInt32(radCoursePractical.SelectedValue);
-                //total += (int)quesModel.CoursePractical;
-                //totalCourse += (int)quesModel.CoursePractical;
-                //quesModel.CourseRich = Convert.ToInt32(radContentRich.SelectedValue);
-                //total += (int)quesModel.CourseRich;
-                //totalCourse += (int)quesModel.CourseRich;
-                //quesModel.CourseSubject = Convert.ToInt32(radSubject.SelectedValue);
-                //total += (int)quesModel.CourseSubject;
-                //totalCourse += (int)quesModel.CourseSubject;
-                //quesModel.OrgArrange = Convert.ToInt32(radOrgArrange.SelectedValue);
-                //total += (int)quesModel.OrgArrange;
-                //totalOrg += (int)quesModel.OrgArrange;
-                //quesModel.OrgService = Convert.ToInt32(radOrgService.SelectedValue);
-                //total += (int)quesModel.OrgService;
-                //totalOrg += (int)quesModel.OrgService;
-                //quesModel.OrgTime = Convert.ToInt32(radOrgTime.SelectedValue);
-                //total += (int)quesModel.OrgTime;
-                //totalOrg += (int)quesModel.OrgTime;
-                //quesModel.TeacherBearing = Convert.ToInt32(radTeacherBearing.SelectedValue);
-                //total += (int)quesModel.TeacherBearing;
-                //totalTeacher += (int)quesModel.TeacherBearing;
-                //quesModel.TeacherCommunication = Convert.ToInt32(radTeacherCommunication.SelectedValue);
-                //total += (int)quesModel.TeacherCommunication;
-                //totalTeacher += (int)quesModel.TeacherCommunication;
-                //quesModel.TeacherLanguage = Convert.ToInt32(radTeacherLanguage.SelectedValue);
-                //total += (int)quesModel.TeacherLanguage;
-                //totalTeacher += (int)quesModel.TeacherLanguage;
-                //quesModel.TeacherPrepare = Convert.ToInt32(radTeacherPrepare.SelectedValue);
-                //total += (int)quesModel.TeacherPrepare;
-                //totalTeacher += (int)quesModel.TeacherPrepare;
-                //quesModel.TeacherStyle = Convert.ToInt32(radTeacherStyle.SelectedValue);
-                //total += (int)quesModel.TeacherStyle;
-                //totalTeacher += (int)quesModel.TeacherStyle;
-                //quesModel.TotalEvaluation = Convert.ToInt32(radAll.SelectedValue);
-                //quesModel.Suggest = txtSuggest.InnerText.Trim();
-                //quesModel.Total = total;
-                //quesModel.TotalOrg = totalOrg;
-                //quesModel.TotalCousre = totalCourse;
-                //quesModel.TotalTeacher = totalTeacher;
+                quesModel.StudentId = Profile.CurrentUser.UserId.ToString();
+                quesModel.QuestairId = this.hCouseId.Value.ToString();
+                quesModel.CourseId = courseId;
 
-                //var queBll = new BLL.Questionnaire();
-                //if (queBll.Add(quesModel))
-                //{
-                //    queBll.SubmitQuestionnaireState(Profile.CurrentUser.UserId, courseId);
-                //}
+                // 一、您对本次培训课程的总体评价是：
+                quesModel.TotalEvaluation = Convert.ToInt32(Request.Form["radAll"].ToString());
+
+                // 二、课程内容
+                // 1.课程主题清晰明确
+                quesModel.CourseSubject = Convert.ToInt32(Request.Form["radSubject"].ToString());
+                total += (int)quesModel.CourseSubject;
+                totalCourse += (int)quesModel.CourseSubject;
+
+                // 2.课程内容丰富、能吸引人
+                quesModel.CourseRich = Convert.ToInt32(Request.Form["radContentRich"].ToString());
+                total += (int)quesModel.CourseRich;
+                totalCourse += (int)quesModel.CourseRich;
+
+                // 3.课程内容切合实际，能指导实践
+                quesModel.CoursePractical = Convert.ToInt32(Request.Form["radCoursePractical"].ToString());
+                total += (int)quesModel.CoursePractical;
+                totalCourse += (int)quesModel.CoursePractical;
+
+                // 4.课程内容重点突出，易于理解
+                quesModel.CourseKey = Convert.ToInt32(Request.Form["radCourseKey"].ToString());
+                total += (int)quesModel.CourseKey;
+                totalCourse += (int)quesModel.CourseKey;
+
+                // 5.课程内容有助于个人发展
+                quesModel.CourseDevelop = Convert.ToInt32(Request.Form["radCourseDevelop"].ToString());
+                total += (int)quesModel.CourseDevelop;
+                totalCourse += (int)quesModel.CourseDevelop;
+
+                // 三、培训讲师
+                // 1.讲师准备比较充分
+                quesModel.TeacherPrepare = Convert.ToInt32(Request.Form["radTeacherPrepare"].ToString());
+                total += (int)quesModel.TeacherPrepare;
+                totalTeacher += (int)quesModel.TeacherPrepare;
+
+                // 2.语言表达清晰，态度端正
+                quesModel.TeacherLanguage = Convert.ToInt32(Request.Form["radTeacherLanguage"].ToString());
+                total += (int)quesModel.TeacherLanguage;
+                totalTeacher += (int)quesModel.TeacherLanguage;
+
+                // 3.仪表仪容端庄大方，有亲和力
+                quesModel.TeacherBearing = Convert.ToInt32(Request.Form["radTeacherBearing"].ToString());
+                total += (int)quesModel.TeacherBearing;
+                totalTeacher += (int)quesModel.TeacherBearing;
+
+                // 4.培训方式多样，生动有趣
+                quesModel.TeacherStyle = Convert.ToInt32(Request.Form["radTeacherStyle"].ToString());
+                total += (int)quesModel.TeacherStyle;
+                totalTeacher += (int)quesModel.TeacherStyle;
+
+                // 5.与学员沟通和互动有效
+                quesModel.TeacherCommunication = Convert.ToInt32(Request.Form["radTeacherCommunication"].ToString());
+                total += (int)quesModel.TeacherCommunication;
+                totalTeacher += (int)quesModel.TeacherCommunication;
+
+                // 四、培训组织和管理
+                // 1.培训服务周到细致
+                quesModel.OrgService = Convert.ToInt32(Request.Form["radOrgService"].ToString());
+                total += (int)quesModel.OrgService;
+                totalOrg += (int)quesModel.OrgService;
+
+                // 2.培训时间安排和控制合理
+                quesModel.OrgTime = Convert.ToInt32(Request.Form["radOrgTime"].ToString());
+                total += (int)quesModel.OrgTime;
+                totalOrg += (int)quesModel.OrgTime;
+
+                // 3.培训场所、设备安排到位
+                quesModel.OrgArrange = Convert.ToInt32(Request.Form["radOrgArrange"].ToString());
+                total += (int)quesModel.OrgArrange;
+                totalOrg += (int)quesModel.OrgArrange;
+
+                // 五、您对本课程还有哪些建议？
+                quesModel.Suggest = Request.Form["txtSuggest"].ToString();
+
+                quesModel.Total = total;
+                quesModel.TotalOrg = totalOrg;
+                quesModel.TotalCousre = totalCourse;
+                quesModel.TotalTeacher = totalTeacher;
+
+                var queBll = new BLL.Questionnaire();
+                if (queBll.Add(quesModel))
+                {
+                    queBll.SubmitQuestionnaireState(Profile.CurrentUser.UserId, courseId);
+                }
                 Response.Redirect("MyQuestionnaireNew.aspx");
             }
             catch (Exception ex)

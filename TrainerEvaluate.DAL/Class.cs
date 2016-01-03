@@ -307,12 +307,12 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			//strSql.Append("select StudentId,IdentityNo,StuName,Gender,School,Title,TelNo,CreateTime,LastModifyTime ");
             strSql.Append("select ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level, Type, CreatedTime,YearLevel ");
 			strSql.Append(" FROM Class ");
+            strSql.Append(" where Status = 1 ");
 			if(strWhere.Trim()!="")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" and "+strWhere);
 			}
             strSql.Append(" order by Name asc, CreatedTime desc ");
 			return DbHelperSQL.Query(strSql.ToString());

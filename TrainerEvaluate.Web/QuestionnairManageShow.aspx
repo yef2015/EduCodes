@@ -86,21 +86,21 @@
         </div>
     </div>
       
-     <div id="dlg" class="easyui-dialog" style="width: 400px; height: 380px; padding: 10px 20px" data-options="top:10"
+     <div id="dlg" class="easyui-dialog" style="width: 450px; height: 380px; padding: 10px 20px" data-options="top:10"
         closed="true" buttons="#dlg-buttons" modal="true">
         <div class="ftitle">详细信息</div>
         <form id="fm1" method="post">
             <div class="fitem">
                 <label>问卷名称:</label>
-                <input name="Parameter" id="Parameter" class="easyui-textbox" required="true" />
+                <input name="Parameter" id="Parameter" class="easyui-textbox" required="true" style="width:280px;" />
             </div> 
             <div class="fitem">
                 <label>调查开始时间:</label>
-                <input name="StartTime" id="StartTime" class="easyui-datebox"/>
+                <input name="StartTime" id="StartTime" class="easyui-datebox" style="width:280px;" />
             </div>
             <div class="fitem">
                 <label>调查结束时间:</label>
-                <input name="EndTime" id="EndTime" class="easyui-datebox"/>
+                <input name="EndTime" id="EndTime" class="easyui-datebox" style="width:280px;"/>
             </div>  
         </form>
     </div>
@@ -173,7 +173,12 @@
         function saveQueInfo() {
             $.messager.confirm('确认', '确定生成问卷吗?', function (r) {
                 if (r) {
-                    $.post(url, { id: quid, StartTime: $("#StartTime").datebox('getValue'), EndTime: $("#EndTime").datebox('getValue'), Name: $("#Parameter").textbox('getText') }, function (result) {
+                    $.post(url, {
+                        id: quid,
+                        StartTime: $("#StartTime").datebox('getValue'),
+                        EndTime: $("#EndTime").datebox('getValue'),
+                        Name: $("#Parameter").textbox('getText')
+                    }, function (result) {
                         if (result == "" || result == null) {
                             $('#dlg').dialog('close');
                             $('#dg').datagrid('reload'); // reload the user data

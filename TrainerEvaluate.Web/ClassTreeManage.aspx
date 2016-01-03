@@ -9,6 +9,10 @@
             padding-left:40px;
         }
 
+        .tree-title {
+            font-size:12px;
+        }
+
         a { color: #000000; } 
 
             a:link {
@@ -39,23 +43,37 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="msysmgr" name="sysmgr" style="height: 1271px; font-size: 14px; margin-left: 5px;width:263px;">
-        <div class="mymenu">
-            <h2 class="myl1">十二五</h2>
-            <div class="myslist">
-                <h3 class="myl2"><a href="#" onclick="changeyear(2014)">2014年</a></h3>
-                <h3 class="myl2"><a href="#" onclick="changeyear(2015)">2015年</a></h3>
-            </div>
-            <h2 class="myl1">十三五</h2>
-            <div class="myslist">
-                <h3 class="myl2"><a href="#" onclick="changeyear(2016)">2016年</a></h3>
-                <h3 class="myl2"><a href="#" onclick="changeyear(2017)">2017年</a></h3>
-                <h3 class="myl2"><a href="#" onclick="changeyear(2018)">2018年</a></h3>
-                <h3 class="myl2"><a href="#" onclick="changeyear(2019)">2019年</a></h3>
-                <h3 class="myl2"><a href="#" onclick="changeyear(2020)">2020年</a></h3>
-            </div>
-        </div>
+    <div id="msysmgr" name="sysmgr" style="height: 1271px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;">
+        <ul class="easyui-tree">
+            <li>
+                <span>班级管理</span>
+                <ul>
+                    <li>
+                        <span>十二五</span>
+                        <ul>
+                            <li>
+                                <span><a href="#" onclick="changeyear(2014)">2014年</a></span>
+                            </li>
+                            <li>
+                                <span><a href="#" onclick="changeyear(2015)">2015年</a></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>十三五</span>
+                        <ul>
+                            <li><a href="#" onclick="changeyear(2016)">2016年</a></li>
+                            <li><a href="#" onclick="changeyear(2017)">2017年</a></li>
+                            <li><a href="#" onclick="changeyear(2018)">2018年</a></li>
+                            <li><a href="#" onclick="changeyear(2019)">2019年</a></li>
+                            <li><a href="#" onclick="changeyear(2020)">2020年</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 <%--    <iframe id="ifrMgrContent" width="100%" height="1271" src="ClassManageList.aspx?key=2015" frameborder="0" scrolling="auto"> 

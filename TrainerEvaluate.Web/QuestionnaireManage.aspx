@@ -45,7 +45,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div id="questionmgr" name="questionmgr" style="width: 100%; height: 1271px; font-size: 14px; margin-left: 5px;padding-top:20px;">
+     <div id="questionmgr" name="questionmgr" style="height: 1271px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;">
         <ul id="questionmanage">
             <li value="2">问卷内容管理</li>
         </ul>
