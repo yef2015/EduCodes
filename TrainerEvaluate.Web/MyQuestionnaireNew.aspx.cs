@@ -15,15 +15,16 @@ namespace TrainerEvaluate.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var courseId = Request.QueryString["cid"];
+            var ccId = Request.QueryString["cid"];
             if (!IsPostBack)
             {
-                SetCourseValue(courseId);
+                var courseId = BLL.Questionnaire.GetCourseIdByccId(ccId);
+                SetCourseValue(courseId,ccId);
                 hUid.Value = Profile.CurrentUser.UserId.ToString();
             }  
         }
 
-        private void SetCourseValue(string courseId)
+        private void SetCourseValue(string courseId,string ccid)
         {
             if (ConfigurationManager.AppSettings["IsLimited"] != null &&
                 Convert.ToBoolean(ConfigurationManager.AppSettings["IsLimited"]))  //限制
@@ -32,7 +33,7 @@ namespace TrainerEvaluate.Web
                     0 &&
                     DateTime.Compare(DateTime.Now, Convert.ToDateTime(ConfigurationManager.AppSettings["EndTime"])) < 0)
                 {
-                    SetDisplay(courseId);
+                    SetDisplay(courseId,ccid);
                 }
                 else
                 {
@@ -46,11 +47,11 @@ namespace TrainerEvaluate.Web
             }
             else  //不限制
             {
-                SetDisplay(courseId);
+                SetDisplay(courseId,ccid);
             }
         }
 
-        private void SetDisplay(string courseId)
+        private void SetDisplay(string courseId,string ccid)
         {
             quTime.Visible = false;
             var queBll = new BLL.Questionnaire();
@@ -76,7 +77,9 @@ namespace TrainerEvaluate.Web
             {
                 var course = new BLL.Course();
                 var couModel = course.GetModel(new Guid(courseId));
-                hCouseId.Value = couModel.CourseId.ToString();
+
+                hCouseId.Value = ccid;
+
                 ipCourseName.InnerText = couModel.CourseName;
                 ipPlace.InnerText = couModel.TeachPlace;
                 ipTeacher.InnerText = couModel.TeacherName;
@@ -90,7 +93,7 @@ namespace TrainerEvaluate.Web
             {
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    hCouseId.Value = ds.Tables[0].Rows[0]["CourseId"].ToString();
+                    hCouseId.Value = ds.Tables[0].Rows[0]["ccId"].ToString();
 
                     ipCourseName.InnerText = ds.Tables[0].Rows[0]["CourseName"].ToString();
                     ipPlace.InnerText = ds.Tables[0].Rows[0]["TeachPlace"].ToString();
@@ -206,7 +209,9 @@ namespace TrainerEvaluate.Web
         {
             try
             {
-                var courseId = new Guid(hCouseId.Value);
+                var queBll = new BLL.Questionnaire();
+
+                var clacouId = hCouseId.Value;
                 var quesModel = new Models.Questionnaire();
                 Int32 total = 0;
                 int totalCourse = 0;
@@ -217,8 +222,6 @@ namespace TrainerEvaluate.Web
                 quesModel.AppraiserTime = DateTime.Now;
 
                 quesModel.StudentId = Profile.CurrentUser.UserId.ToString();
-                quesModel.QuestairId = this.hCouseId.Value.ToString();
-                quesModel.CourseId = courseId;
 
                 // 一、您对本次培训课程的总体评价是：
                 quesModel.TotalEvaluation = Convert.ToInt32(Request.Form["radAll"].ToString());
@@ -299,11 +302,29 @@ namespace TrainerEvaluate.Web
                 quesModel.TotalCousre = totalCourse;
                 quesModel.TotalTeacher = totalTeacher;
 
-                var queBll = new BLL.Questionnaire();
-                if (queBll.Add(quesModel))
+                // 保存学生对课程的评估信息
+                DataSet ds = queBll.GetQuestRelatByClassCourseId(clacouId);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    queBll.SubmitQuestionnaireState(Profile.CurrentUser.UserId, courseId);
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        if (dr["CourseID"] != null)
+                        {
+                            quesModel.CourseId = Guid.Parse(dr["CourseID"].ToString());
+                        }
+                        quesModel.ClassId = dr["ClassId"].ToString();
+                        quesModel.QuestairId = dr["Id"].ToString();
+                        quesModel.TeacherId = dr["TeacherId"].ToString();
+                        quesModel.TeacherName = dr["TeacherName"].ToString();
+
+                        queBll.Add(quesModel);
+                    }
                 }
+                
+                //if ()
+                //{
+                //    queBll.SubmitQuestionnaireState(Profile.CurrentUser.UserId, courseId);
+                //}
                 Response.Redirect("MyQuestionnaireNew.aspx");
             }
             catch (Exception ex)

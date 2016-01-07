@@ -119,7 +119,6 @@
                     }
                 },
                 onSelect: function (param) {
-                    alert(param.ClassId);
                     $("#headtable").css("display", "block");
                     $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?classid=" + param.ClassId);
                 }
@@ -136,7 +135,8 @@
                 },
                 onSelect: function (param) {
                     $("#headtable").css("display", "block");
-                    $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?cid=" + param.CourseId);
+                    var classId = $('#ClassInfo').combobox("getValue");
+                    $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?cid=" + param.CourseId + "&classid=" + classId);
                     //  changeContent("AnaysisContent.aspx?cid=" + param.CourseId); 
                 }
             });            
@@ -147,8 +147,9 @@
                 },
                 onSelect: function (param) {
                     if (param.value != null && param.value != "请选择满意度") {
-                        $("#headtable").css("display", "none");                        
-                        $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?sid=" + param.value);
+                        $("#headtable").css("display", "none");
+                        var classId = $('#ClassInfo').combobox("getValue");
+                        $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?sid=" + param.value + "&classid=" + classId);
                         //    changeContent("AnaysisContent.aspx?sid=" + param.value);
 
                     }

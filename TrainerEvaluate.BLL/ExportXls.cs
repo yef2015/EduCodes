@@ -338,11 +338,17 @@ namespace TrainerEvaluate.BLL
                 {
                     ICell cell0 = title.CreateCell(k);
                     cell0.CellStyle = cellstyleHead;
+                    cell0.SetCellValue("班级名称");
+                }
+                else if (k == 1)
+                {
+                    ICell cell0 = title.CreateCell(k);
+                    cell0.CellStyle = cellstyleHead;
                     cell0.SetCellValue("课程名称");
                 }
                 else
                 {
-                    ICell cell0 = title.CreateCell(k);  
+                    ICell cell0 = title.CreateCell(k);
                     cell0.CellStyle = cellstyleHead;
                     cell0.SetCellValue("课程内容各指标满意度");
                 }
@@ -633,14 +639,14 @@ namespace TrainerEvaluate.BLL
 
 
 
-        public     void ExportEvReportToxls(System.Web.HttpResponse Response, string filename, Guid courseId)
+        public void ExportEvReportToxls(System.Web.HttpResponse Response, string filename, Guid courseId, string classid)
         {
             Response.ContentType = "application/vnd.ms-excel";
             Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
             Response.Clear();
 
             InitializeWorkbook();
-            GenerateEvReportData(courseId);
+            GenerateEvReportData(courseId, classid);
             GetExcelStream().WriteTo(Response.OutputStream);
             Response.End();
 
@@ -648,7 +654,7 @@ namespace TrainerEvaluate.BLL
 
 
 
-        void GenerateEvReportData(Guid courseId)
+        void GenerateEvReportData(Guid courseId, string classid)
         {
             ISheet sheet1 = hssfworkbook.CreateSheet("评估报告单");
 
@@ -733,7 +739,7 @@ namespace TrainerEvaluate.BLL
             var coubll= new BLL.Course();
             var couModel = coubll.GetModel(courseId);
             var question = new BLL.Questionnaire();
-            var exportDs = question.GetReportTile(courseId);  
+            var exportDs = question.GetReportTile(courseId, classid);  
             if (exportDs != null && exportDs.Tables.Count > 0&&exportDs.Tables[0].Rows.Count>0)
             {
                 var datarow = exportDs.Tables[0].Rows[0];
@@ -856,7 +862,7 @@ namespace TrainerEvaluate.BLL
                     } 
                 }
 
-                var reportBody = question.GetReport(courseId);
+                var reportBody = question.GetReport(courseId, classid);
                 if (reportBody != null && reportBody.Tables.Count > 0)
                 {
                     var result = new Dictionary<int, double[]>();
@@ -959,11 +965,11 @@ namespace TrainerEvaluate.BLL
                
             }
 
-            GetSuggestion(courseId.ToString());
+            GetSuggestion(courseId.ToString(), classid);
         }
 
 
-       private void GetSuggestion(string coid)
+       private void GetSuggestion(string coid,string classid)
        { 
            ISheet sheet2 = hssfworkbook.CreateSheet("学员建议"); 
            ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
@@ -1020,7 +1026,7 @@ namespace TrainerEvaluate.BLL
            }
 
            var quesBll = new BLL.Questionnaire();
-           var ds = quesBll.GetSuggestion(coid);
+           var ds = quesBll.GetSuggestion(coid, classid);
            var exportDs = ds.Tables[0];
            int i = 2;
            if (exportDs != null && exportDs.Rows.Count > 0)

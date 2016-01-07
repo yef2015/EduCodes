@@ -201,9 +201,9 @@ namespace TrainerEvaluate.BLL
         /// </summary>
         /// <param name="coursId"></param>
         /// <returns></returns>
-	    public decimal[] GetSatisfyPercent(Guid coursId)
+	    public decimal[] GetSatisfyPercent(Guid coursId,string classId)
         {
-            return dal.GetSatisfyPercent(coursId);
+            return dal.GetSatisfyPercent(coursId,classId);
         }
 
 
@@ -245,7 +245,7 @@ namespace TrainerEvaluate.BLL
         /// 取满意度柱状图的课程
         /// </summary>
         /// <returns></returns>
-	    public DataTable GetSatisfybar(string level)
+        public DataTable GetSatisfybar(string level, string classId)
 	    {
             try
             { 
@@ -273,7 +273,7 @@ namespace TrainerEvaluate.BLL
                         break;
                 }
 
-                var sql = string.Format("exec GetSatisfybar {0},{1}", beginValue, endValue); 
+                var sql = string.Format("exec GetSatisfybar {0},{1},'{2}'", beginValue, endValue, classId); 
                 return DbHelperSQL.Query(sql).Tables[0]; 
             }
             catch (Exception ex)
@@ -556,6 +556,31 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet GetNofinishedStuListByPage(string courseId, string classId, string orderby, int startIndex, int endIndex)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append("order by T." + orderby + " desc ");
+            }
+            else
+            {
+                strSql.Append("order by T.QuestionnaireId desc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.StudentId,a.StuName,a.School,a.TelNo  from Student  as a ");
+            strSql.Append(" left join dbo.ClassStudents as b on a.StudentId = b.StudentId ");
+            strSql.Append(string.Format(" where b.ClassId = '{0}' and a.StudentId not in( ",classId));
+            strSql.Append(" select a.StudentId from Student a  ");
+            strSql.Append(" left join dbo.Questionnaire As b on a.StudentId = b.StudentId  ");
+            strSql.Append(string.Format(" where b.ClassId  = '{0}' and b.CourseId = '{1}' ) ) ",classId,courseId));
+            strSql.Append("  T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
 
 
@@ -610,7 +635,28 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-
+        public DataSet GetfinishedStuListByPage(string courseId,string classId, string orderby, int startIndex, int endIndex)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append("order by T." + orderby + " desc ");
+            }
+            else
+            {
+                strSql.Append("order by T.QuestionnaireId desc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.StudentId,a.StuName,a.School,a.TelNo  from Student a      ");
+            strSql.Append(" left join dbo.Questionnaire As b on a.StudentId = b.StudentId ");
+            strSql.Append(string.Format(" where b.ClassId  = '{0}' and b.CourseId = '{1}'   )  ", classId,courseId));
+            strSql.Append("  T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
 
 
@@ -739,6 +785,30 @@ namespace TrainerEvaluate.BLL
             }
         }
 
+        public DataSet GetSuggestion(string courseId, string classid)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(courseId)&&!string.IsNullOrEmpty(classid))
+                {
+                    var sql = string.Format(" select b.StuName,a.Suggest from Questionnaire a,Student b " +
+                                      " where a.StudentId = b.StudentId and a.Suggest<>''  " +
+                                      " and a.CourseId = '{0}' and a.ClassId = '{1}' order by AppraiserTime desc "
+                            , courseId, classid);
+
+                    return DbHelperSQL.Query(sql); 
+                }
+                else
+                {
+                    return new DataSet();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
 
 
         public DataSet GetSuggestionByPage(string courseId, string orderby, int startIndex, int endIndex)
@@ -890,13 +960,28 @@ namespace TrainerEvaluate.BLL
             }
 	    }
 
-
-        public DataSet GetReport(Guid courseId)
+        public DataSet GetReportTile(Guid courseId,string classId)
         {
             try
             {
                 var ds = new DataSet();
-                var sql = string.Format(" exec GetReport '{0}' ", courseId);
+                var sql = string.Format(" exec GetReportTitle '{0}','{1}' ", courseId, classId);
+                ds = DbHelperSQL.Query(sql);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
+        public DataSet GetReport(Guid courseId,string classId)
+        {
+            try
+            {
+                var ds = new DataSet();
+                var sql = string.Format(" exec GetReport '{0}','{1}' ", courseId,classId);
                 ds = DbHelperSQL.Query(sql);
                 return ds; 
             }
@@ -1086,7 +1171,7 @@ namespace TrainerEvaluate.BLL
                 DataSet dsRe = new DataSet();
                 if (!string.IsNullOrEmpty(strClassId))
                 {
-                    var sqlRe = string.Format("select c.* from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0})  {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE()", strClassId, strWhereCourse);
+                    var sqlRe = string.Format("select c.*,b.ID as ccID from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0})  {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE()", strClassId, strWhereCourse);
                     dsRe= DbHelperSQL.Query(sqlRe);
                 }
 
@@ -1160,7 +1245,7 @@ namespace TrainerEvaluate.BLL
                 DataSet dsRe = new DataSet();
                 if (!string.IsNullOrEmpty(strClassId))
                 {
-                    var sqlRe = string.Format("select c.* from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0}) {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE() ", strClassId, strWhereCourse);
+                    var sqlRe = string.Format("select c.CourseName,b.ID from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0}) {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE() ", strClassId, strWhereCourse);
                     dsRe= DbHelperSQL.Query(sqlRe);
                 }
 
@@ -1172,6 +1257,137 @@ namespace TrainerEvaluate.BLL
                 return null;
             }
         }
+
+        /// <summary>
+        /// 通过课程与班级关系表，获取保存学生评估问卷的信息
+        /// </summary>
+        /// <param name="clacourId"></param>
+        /// <returns></returns>
+         public DataSet GetQuestRelatByClassCourseId(string clacourId)
+        {    
+            try
+            {
+                StringBuilder strBuilder = new StringBuilder();
+                strBuilder.Append(" select b.ClassId,b.CourseID,d.TeacherId,e.TeacherName,c.Id ");
+                strBuilder.Append(" from Course as a ");
+                strBuilder.Append(" left join ClassCourse as b on b.CourseID = a.CourseId ");
+                strBuilder.Append(" left join QuestionInfo as c on b.ID = c.ClassCourseID ");
+                strBuilder.Append(" left join CourseTeacher as d on d.CourseId = a.CourseId ");
+                strBuilder.Append(" left join Teacher as e on e.TeacherId = d.TeacherId ");
+                strBuilder.Append(" where b.ID = '"+clacourId+"' ");
+
+                DataSet ds = DbHelperSQL.Query(strBuilder.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
+         /// <summary>
+         /// 通过课程与班级关系表，获取学生课程id
+         /// </summary>
+         /// <param name="clacourId"></param>
+         /// <returns></returns>
+         public static string GetCourseIdByccId(string ccId)
+         {
+             try
+             {
+                 string courseId = Guid.Empty.ToString();
+
+                 StringBuilder strBuilder = new StringBuilder();
+                 strBuilder.Append(" select * from ClassCourse ");
+                 strBuilder.Append(" where ID = '" + ccId + "' ");
+
+                 DataSet ds = DbHelperSQL.Query(strBuilder.ToString());
+                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                 {
+                     courseId = ds.Tables[0].Rows[0]["CourseID"].ToString();
+                 }
+                 return courseId;
+             }
+             catch (Exception ex)
+             {
+                 LogHelper.WriteLogofExceptioin(ex);
+                 return null;
+             }
+         }
+
+
+        /// <summary>
+        /// 获取已经参加评估的教师
+        /// </summary>
+        /// <returns></returns>
+         public DataTable GetTeacherEvaluate()
+         {
+             var sql = string.Format("exec GetTeacherEvaluate ");
+             var ds = DbHelperSQL.Query(sql);
+             if (ds != null && ds.Tables.Count > 0)
+             {
+                 return ds.Tables[0];
+             }
+             else
+             {
+                 return null;
+             }
+         }
+
+         /// <summary>
+         /// 根据教师id，获取教师的评估信息
+         /// </summary>
+         /// <returns></returns>
+         public DataTable GetTeacherSatifyById(string teacherId)
+         {
+             var sql = string.Format("exec GetTeacherSatifyById '{0}' ", teacherId);
+             var ds = DbHelperSQL.Query(sql);
+             if (ds != null && ds.Tables.Count > 0)
+             {
+                 return ds.Tables[0];
+             }
+             else
+             {
+                 return null;
+             }
+         }
+
+
+         /// <summary>
+         /// 获取已经参加评估的课程
+         /// </summary>
+         /// <returns></returns>
+         public DataTable GetCourseEvaluate()
+         {
+             var sql = string.Format("exec GetCourseEvaluate ");
+             var ds = DbHelperSQL.Query(sql);
+             if (ds != null && ds.Tables.Count > 0)
+             {
+                 return ds.Tables[0];
+             }
+             else
+             {
+                 return null;
+             }
+         }
+
+         /// <summary>
+         /// 根据课程id，获取课程的评估信息
+         /// </summary>
+         /// <returns></returns>
+         public DataTable GetCourseSatifyById(string courseId)
+         {
+             var sql = string.Format("exec GetCourseSatifyById '{0}' ", courseId);
+             var ds = DbHelperSQL.Query(sql);
+             if (ds != null && ds.Tables.Count > 0)
+             {
+                 return ds.Tables[0];
+             }
+             else
+             {
+                 return null;
+             }
+         }
 
 	    #endregion  ExtensionMethod
 	}

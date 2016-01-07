@@ -401,6 +401,30 @@ namespace TrainerEvaluate.DAL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
+        /// <summary>
+        /// 得到一个对象实体,通过身份证号
+        /// </summary>
+        public TrainerEvaluate.Models.SysUser GetModelByIdentityNo(string identityNo)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo from SysUser ");
+            strSql.Append(" where IdentityNo=@IdentityNo ");
+            SqlParameter[] parameters = { new SqlParameter("@IdentityNo", SqlDbType.NVarChar, 50) };
+            parameters[0].Value = identityNo;
+
+            TrainerEvaluate.Models.SysUser model = new TrainerEvaluate.Models.SysUser();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         #endregion  ExtensionMethod
          
 		 

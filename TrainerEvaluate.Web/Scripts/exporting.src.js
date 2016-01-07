@@ -43,7 +43,7 @@ var Chart = Highcharts.Chart,
 	// Add language
 	extend(defaultOptions.lang, {
 		//  printChart: 'Print chart',
-	    downloadPNG: '导出',
+	    downloadPNG: '导出'
 	//	downloadJPEG: 'Download JPEG image',
     //	downloadPDF: 'Download PDF document',
    //	downloadSVG: 'Download SVG vector image', 

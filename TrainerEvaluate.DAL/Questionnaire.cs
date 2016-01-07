@@ -40,18 +40,21 @@ namespace TrainerEvaluate.DAL
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public bool Add(TrainerEvaluate.Models.Questionnaire model)
+        public bool Add(Models.Questionnaire model)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Questionnaire(");
-            strSql.Append("QuestionnaireId,CourseId,StudentId,QuestairId,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg)");
+            strSql.Append("QuestionnaireId,CourseId,ClassId,StudentId,QuestairId,TeacherId,TeacherName,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg)");
             strSql.Append(" values (");
-            strSql.Append("@QuestionnaireId,@CourseId,@StudentId,@QuestairId,@TotalEvaluation,@CourseSubject,@CourseRich,@CoursePractical,@CourseKey,@CourseDevelop,@TeacherPrepare,@TeacherLanguage,@TeacherBearing,@TeacherStyle,@TeacherCommunication,@OrgService,@OrgTime,@OrgArrange,@AppraiserId,@AppraiserTime,@Suggest,@Total,@TotalCousre,@TotalTeacher,@TotalOrg)");
+            strSql.Append("@QuestionnaireId,@CourseId,@ClassId,@StudentId,@QuestairId,@TeacherId,@TeacherName,@TotalEvaluation,@CourseSubject,@CourseRich,@CoursePractical,@CourseKey,@CourseDevelop,@TeacherPrepare,@TeacherLanguage,@TeacherBearing,@TeacherStyle,@TeacherCommunication,@OrgService,@OrgTime,@OrgArrange,@AppraiserId,@AppraiserTime,@Suggest,@Total,@TotalCousre,@TotalTeacher,@TotalOrg)");
             SqlParameter[] parameters = {
 					new SqlParameter("@QuestionnaireId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16),
+					new SqlParameter("@ClassId", SqlDbType.NVarChar,50),
 					new SqlParameter("@StudentId", SqlDbType.NVarChar,50),
 					new SqlParameter("@QuestairId", SqlDbType.NVarChar,50),
+					new SqlParameter("@TeacherId", SqlDbType.NVarChar,-1),
+					new SqlParameter("@TeacherName", SqlDbType.NVarChar,-1),
 					new SqlParameter("@TotalEvaluation", SqlDbType.Int,4),
 					new SqlParameter("@CourseSubject", SqlDbType.Int,4),
 					new SqlParameter("@CourseRich", SqlDbType.Int,4),
@@ -75,29 +78,32 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TotalOrg", SqlDbType.Int,4)};
             parameters[0].Value = Guid.NewGuid();
             parameters[1].Value = model.CourseId;
-            parameters[2].Value = model.StudentId;
-            parameters[3].Value = model.QuestairId;
-            parameters[4].Value = model.TotalEvaluation;
-            parameters[5].Value = model.CourseSubject;
-            parameters[6].Value = model.CourseRich;
-            parameters[7].Value = model.CoursePractical;
-            parameters[8].Value = model.CourseKey;
-            parameters[9].Value = model.CourseDevelop;
-            parameters[10].Value = model.TeacherPrepare;
-            parameters[11].Value = model.TeacherLanguage;
-            parameters[12].Value = model.TeacherBearing;
-            parameters[13].Value = model.TeacherStyle;
-            parameters[14].Value = model.TeacherCommunication;
-            parameters[15].Value = model.OrgService;
-            parameters[16].Value = model.OrgTime;
-            parameters[17].Value = model.OrgArrange;
-            parameters[18].Value = model.AppraiserId;
-            parameters[19].Value = model.AppraiserTime;
-            parameters[20].Value = model.Suggest;
-            parameters[21].Value = model.Total;
-            parameters[22].Value = model.TotalCousre;
-            parameters[23].Value = model.TotalTeacher;
-            parameters[24].Value = model.TotalOrg;
+            parameters[2].Value = model.ClassId;
+            parameters[3].Value = model.StudentId;
+            parameters[4].Value = model.QuestairId;
+            parameters[5].Value = model.TeacherId;
+            parameters[6].Value = model.TeacherName;
+            parameters[7].Value = model.TotalEvaluation;
+            parameters[8].Value = model.CourseSubject;
+            parameters[9].Value = model.CourseRich;
+            parameters[10].Value = model.CoursePractical;
+            parameters[11].Value = model.CourseKey;
+            parameters[12].Value = model.CourseDevelop;
+            parameters[13].Value = model.TeacherPrepare;
+            parameters[14].Value = model.TeacherLanguage;
+            parameters[15].Value = model.TeacherBearing;
+            parameters[16].Value = model.TeacherStyle;
+            parameters[17].Value = model.TeacherCommunication;
+            parameters[18].Value = model.OrgService;
+            parameters[19].Value = model.OrgTime;
+            parameters[20].Value = model.OrgArrange;
+            parameters[21].Value = Guid.NewGuid();
+            parameters[22].Value = model.AppraiserTime;
+            parameters[23].Value = model.Suggest;
+            parameters[24].Value = model.Total;
+            parameters[25].Value = model.TotalCousre;
+            parameters[26].Value = model.TotalTeacher;
+            parameters[27].Value = model.TotalOrg;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -112,13 +118,16 @@ namespace TrainerEvaluate.DAL
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(TrainerEvaluate.Models.Questionnaire model)
+        public bool Update(Models.Questionnaire model)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update Questionnaire set ");
             strSql.Append("CourseId=@CourseId,");
+            strSql.Append("ClassId=@ClassId,");
             strSql.Append("StudentId=@StudentId,");
             strSql.Append("QuestairId=@QuestairId,");
+            strSql.Append("TeacherId=@TeacherId,");
+            strSql.Append("TeacherName=@TeacherName,");
             strSql.Append("TotalEvaluation=@TotalEvaluation,");
             strSql.Append("CourseSubject=@CourseSubject,");
             strSql.Append("CourseRich=@CourseRich,");
@@ -135,12 +144,19 @@ namespace TrainerEvaluate.DAL
             strSql.Append("OrgArrange=@OrgArrange,");
             strSql.Append("AppraiserId=@AppraiserId,");
             strSql.Append("AppraiserTime=@AppraiserTime,");
-            strSql.Append("Suggest=@Suggest");
+            strSql.Append("Suggest=@Suggest,");
+            strSql.Append("Total=@Total,");
+            strSql.Append("TotalCousre=@TotalCousre,");
+            strSql.Append("TotalTeacher=@TotalTeacher,");
+            strSql.Append("TotalOrg=@TotalOrg");
             strSql.Append(" where QuestionnaireId=@QuestionnaireId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16),
-                    new SqlParameter("@StudentId", SqlDbType.NVarChar,50),
+					new SqlParameter("@ClassId", SqlDbType.NVarChar,50),
+					new SqlParameter("@StudentId", SqlDbType.NVarChar,50),
 					new SqlParameter("@QuestairId", SqlDbType.NVarChar,50),
+					new SqlParameter("@TeacherId", SqlDbType.NVarChar,-1),
+					new SqlParameter("@TeacherName", SqlDbType.NVarChar,-1),
 					new SqlParameter("@TotalEvaluation", SqlDbType.Int,4),
 					new SqlParameter("@CourseSubject", SqlDbType.Int,4),
 					new SqlParameter("@CourseRich", SqlDbType.Int,4),
@@ -158,28 +174,39 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@AppraiserId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@AppraiserTime", SqlDbType.DateTime),
 					new SqlParameter("@Suggest", SqlDbType.NVarChar,-1),
+					new SqlParameter("@Total", SqlDbType.Int,4),
+					new SqlParameter("@TotalCousre", SqlDbType.Int,4),
+					new SqlParameter("@TotalTeacher", SqlDbType.Int,4),
+					new SqlParameter("@TotalOrg", SqlDbType.Int,4),
 					new SqlParameter("@QuestionnaireId", SqlDbType.UniqueIdentifier,16)};
             parameters[0].Value = model.CourseId;
-            parameters[1].Value = model.StudentId;
-            parameters[2].Value = model.QuestairId;
-            parameters[3].Value = model.TotalEvaluation;
-            parameters[4].Value = model.CourseSubject;
-            parameters[5].Value = model.CourseRich;
-            parameters[6].Value = model.CoursePractical;
-            parameters[7].Value = model.CourseKey;
-            parameters[8].Value = model.CourseDevelop;
-            parameters[9].Value = model.TeacherPrepare;
-            parameters[10].Value= model.TeacherLanguage;
-            parameters[11].Value= model.TeacherBearing;
-            parameters[12].Value = model.TeacherStyle;
-            parameters[13].Value = model.TeacherCommunication;
-            parameters[14].Value = model.OrgService;
-            parameters[15].Value = model.OrgTime;
-            parameters[16].Value = model.OrgArrange;
-            parameters[17].Value = model.AppraiserId;
-            parameters[18].Value = model.AppraiserTime;
-            parameters[19].Value = model.Suggest;
-            parameters[20].Value = model.QuestionnaireId;            
+            parameters[1].Value = model.ClassId;
+            parameters[2].Value = model.StudentId;
+            parameters[3].Value = model.QuestairId;
+            parameters[4].Value = model.TeacherId;
+            parameters[5].Value = model.TeacherName;
+            parameters[6].Value = model.TotalEvaluation;
+            parameters[7].Value = model.CourseSubject;
+            parameters[8].Value = model.CourseRich;
+            parameters[9].Value = model.CoursePractical;
+            parameters[10].Value = model.CourseKey;
+            parameters[11].Value = model.CourseDevelop;
+            parameters[12].Value = model.TeacherPrepare;
+            parameters[13].Value = model.TeacherLanguage;
+            parameters[14].Value = model.TeacherBearing;
+            parameters[15].Value = model.TeacherStyle;
+            parameters[16].Value = model.TeacherCommunication;
+            parameters[17].Value = model.OrgService;
+            parameters[18].Value = model.OrgTime;
+            parameters[19].Value = model.OrgArrange;
+            parameters[20].Value = model.AppraiserId;
+            parameters[21].Value = model.AppraiserTime;
+            parameters[22].Value = model.Suggest;
+            parameters[23].Value = model.Total;
+            parameters[24].Value = model.TotalCousre;
+            parameters[25].Value = model.TotalTeacher;
+            parameters[26].Value = model.TotalOrg;
+            parameters[27].Value = model.QuestionnaireId;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -238,17 +265,16 @@ namespace TrainerEvaluate.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public TrainerEvaluate.Models.Questionnaire GetModel(Guid QuestionnaireId)
+        public Models.Questionnaire GetModel(Guid QuestionnaireId)
         {
-
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 QuestionnaireId,CourseId,StudentId,QuestairId,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg from Questionnaire ");
+            strSql.Append("select  top 1 QuestionnaireId,CourseId,ClassId,StudentId,QuestairId,TeacherId,TeacherName,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg from Questionnaire ");
             strSql.Append(" where QuestionnaireId=@QuestionnaireId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@QuestionnaireId", SqlDbType.UniqueIdentifier,16)			};
             parameters[0].Value = QuestionnaireId;
 
-            TrainerEvaluate.Models.Questionnaire model = new TrainerEvaluate.Models.Questionnaire();
+            Models.Questionnaire model = new Models.Questionnaire();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -277,6 +303,10 @@ namespace TrainerEvaluate.DAL
                 {
                     model.CourseId = new Guid(row["CourseId"].ToString());
                 }
+                if (row["ClassId"] != null && row["ClassId"].ToString() != "")
+                {
+                    model.ClassId = row["ClassId"].ToString();
+                }
                 if (row["StudentId"] != null && row["StudentId"].ToString() != "")
                 {
                     model.StudentId = row["StudentId"].ToString();
@@ -284,6 +314,14 @@ namespace TrainerEvaluate.DAL
                 if (row["QuestairId"] != null && row["QuestairId"].ToString() != "")
                 {
                     model.QuestairId = row["QuestairId"].ToString();
+                }
+                if (row["TeacherId"] != null && row["TeacherId"].ToString() != "")
+                {
+                    model.TeacherId = row["TeacherId"].ToString();
+                }
+                if (row["TeacherName"] != null && row["TeacherName"].ToString() != "")
+                {
+                    model.TeacherName = row["TeacherName"].ToString();
                 }
                 if (row["TotalEvaluation"] != null && row["TotalEvaluation"].ToString() != "")
                 {
@@ -349,9 +387,25 @@ namespace TrainerEvaluate.DAL
                 {
                     model.AppraiserTime = DateTime.Parse(row["AppraiserTime"].ToString());
                 }
-                if (row["Suggest"] != null)
+                if (row["Suggest"] != null && row["Suggest"].ToString() != "")
                 {
                     model.Suggest = row["Suggest"].ToString();
+                }
+                if (row["Total"] != null && row["Total"].ToString() != "")
+                {
+                    model.Total = int.Parse(row["Total"].ToString());
+                }
+                if (row["TotalCousre"] != null && row["TotalCousre"].ToString() != "")
+                {
+                    model.TotalCousre = int.Parse(row["TotalCousre"].ToString());
+                }
+                if (row["TotalTeacher"] != null && row["TotalTeacher"].ToString() != "")
+                {
+                    model.TotalTeacher = int.Parse(row["TotalTeacher"].ToString());
+                }
+                if (row["TotalOrg"] != null && row["TotalOrg"].ToString() != "")
+                {
+                    model.TotalOrg = int.Parse(row["TotalOrg"].ToString());
                 }
             }
             return model;
@@ -363,7 +417,7 @@ namespace TrainerEvaluate.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select QuestionnaireId,CourseId,StudentId,QuestairId,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest ");
+            strSql.Append("select QuestionnaireId,CourseId,ClassId,StudentId,QuestairId,TeacherId,TeacherName,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg ");
             strSql.Append(" FROM Questionnaire ");
             if (strWhere.Trim() != "")
             {
@@ -383,7 +437,7 @@ namespace TrainerEvaluate.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" QuestionnaireId,CourseId,StudentId,QuestairId,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest ");
+            strSql.Append(" QuestionnaireId,CourseId,ClassId,StudentId,QuestairId,TeacherId,TeacherName,TotalEvaluation,CourseSubject,CourseRich,CoursePractical,CourseKey,CourseDevelop,TeacherPrepare,TeacherLanguage,TeacherBearing,TeacherStyle,TeacherCommunication,OrgService,OrgTime,OrgArrange,AppraiserId,AppraiserTime,Suggest,Total,TotalCousre,TotalTeacher,TotalOrg ");
             strSql.Append(" FROM Questionnaire ");
             if (strWhere.Trim() != "")
             {
@@ -520,12 +574,12 @@ namespace TrainerEvaluate.DAL
         /// </summary>
         /// <param name="coursId"></param>
         /// <returns></returns>
-        public decimal[] GetSatisfyPercent(Guid coursId)
+        public decimal[] GetSatisfyPercent(Guid coursId,string classId)
         {
             try
             {
                 var result = new decimal[8];
-                var sql1 = string.Format("exec GetPercent '{0}'", coursId);
+                var sql1 = string.Format("exec GetPercent '{0}','{1}' ", coursId, classId);
                 var ds = DbHelperSQL.Query(sql1);
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

@@ -32,6 +32,14 @@ namespace TrainerEvaluate.BLL
             return dal.Add(model);
         }
 
+         /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public bool AddComeStudent(TrainerEvaluate.Models.SysUser model)
+        {
+            return dal.AddComeStudent(model);
+        }
+
         /// <summary>
         /// 更新一条数据
         /// </summary>
@@ -180,8 +188,15 @@ namespace TrainerEvaluate.BLL
             return dal.ExistsAccount(userAccount, useGuid);
 	    }
 
-         
 
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public TrainerEvaluate.Models.SysUser GetModelByIdentityNo(string identityNo)
+        {
+
+            return dal.GetModelByIdentityNo(identityNo);
+        }
 
 
 	    #endregion  ExtensionMethod

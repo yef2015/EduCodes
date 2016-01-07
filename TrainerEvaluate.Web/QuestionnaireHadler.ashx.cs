@@ -20,6 +20,7 @@ namespace TrainerEvaluate.Web
             context.Response.ContentType = "text/plain";
             var opType = context.Request["t"];
             var id = context.Request["id"];
+            var classid = context.Request["classId"];
             switch (opType)
             {
                 case "n":
@@ -49,7 +50,7 @@ namespace TrainerEvaluate.Web
                     break;
                 case "r":
                     //  GetReportExcel(context, id);
-                    ExportEvReportToxls(context, id);
+                    ExportEvReportToxls(context, id, classid);
                     break;
                 case "stu":
                     //  GetStudentsForcheck(context, id);
@@ -119,7 +120,7 @@ namespace TrainerEvaluate.Web
 
 
 
-        private void ExportEvReportToxls(HttpContext context, string coursId)
+        private void ExportEvReportToxls(HttpContext context, string coursId, string classid)
         {
             var coid = new Guid(coursId);
             var couBll = new BLL.Course();
@@ -127,7 +128,7 @@ namespace TrainerEvaluate.Web
             var courseName = courseModel.CourseName;
             var exXls = new ExportXls();
             var filename = courseName + "-评估报告单.xls";
-            exXls.ExportEvReportToxls(context.Response, filename, coid);
+            exXls.ExportEvReportToxls(context.Response, filename, coid, classid);
         }
 
 
@@ -164,6 +165,7 @@ namespace TrainerEvaluate.Web
         {
             var exXls = new ExportXls();
             var fieldsNames = new List<string>();
+            fieldsNames.Add("班级名称");
             fieldsNames.Add("课程名称");
             fieldsNames.Add("课程主题清晰明确");
             fieldsNames.Add("课程内容丰富、能吸引人");
@@ -407,6 +409,7 @@ namespace TrainerEvaluate.Web
             ds = courBll.GetAllList();
 
             var courseId = context.Request["coId"];
+            var classId = context.Request["classId"];
             if (!string.IsNullOrEmpty(courseId))
             {
                 var page = Convert.ToInt32(context.Request["page"]);
@@ -415,7 +418,7 @@ namespace TrainerEvaluate.Web
                 var endIndex = startIndex + rows - 1;
 
                 var questionbll = new BLL.Questionnaire();
-                ds = questionbll.GetNofinishedStuListByPage(courseId, "School", startIndex, endIndex);
+                ds = questionbll.GetNofinishedStuListByPage(courseId,classId, "School", startIndex, endIndex);
                 var num = questionbll.GetNofinishedStuNum(courseId);
                 var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
                 context.Response.Write(str);
@@ -429,6 +432,7 @@ namespace TrainerEvaluate.Web
             ds = courBll.GetAllList();
 
             var courseId = context.Request["coId"];
+            var classId = context.Request["classId"];
             if (!string.IsNullOrEmpty(courseId))
             {
                 var page = Convert.ToInt32(context.Request["page"]);
@@ -437,7 +441,7 @@ namespace TrainerEvaluate.Web
                 var endIndex = startIndex + rows - 1;
 
                 var questionbll = new BLL.Questionnaire();
-                ds = questionbll.GetfinishedStuListByPage(courseId, "School", startIndex, endIndex);
+                ds = questionbll.GetfinishedStuListByPage(courseId,classId, "School", startIndex, endIndex);
                 var num = questionbll.GetfinishedStuNum(courseId);
                 var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
                 context.Response.Write(str);
@@ -476,10 +480,10 @@ namespace TrainerEvaluate.Web
 
 
 
-        private void GetReportDoc(HttpContext context, string coursId)
+        private void GetReportDoc(HttpContext context, string coursId, string classid)
         {
             var courseName = "";
-            var strWord = GetReportData(coursId, out courseName);
+            var strWord = GetReportData(coursId, out courseName, classid);
             context.Response.ContentEncoding = System.Text.Encoding.UTF7;
             context.Response.ClearContent();
             context.Response.ClearHeaders();
@@ -493,10 +497,10 @@ namespace TrainerEvaluate.Web
         }
 
 
-        private void GetReportExcel(HttpContext context, string coursId)
+        private void GetReportExcel(HttpContext context, string coursId, string classid)
         {
             var courseName = "";
-            var strWord = GetReportData(coursId, out courseName);
+            var strWord = GetReportData(coursId, out courseName, classid);
             context.Response.ContentEncoding = System.Text.Encoding.UTF7;
             context.Response.ClearContent();
             context.Response.ClearHeaders();
@@ -511,7 +515,7 @@ namespace TrainerEvaluate.Web
 
 
 
-        private string GetReportData(string coursId, out string courseName)
+        private string GetReportData(string coursId, out string courseName, string classid)
         {
             var coid = new Guid(coursId);
             var couBll = new BLL.Course();
@@ -519,7 +523,7 @@ namespace TrainerEvaluate.Web
             courseName = courseModel.CourseName;
             var report = new BLL.Questionnaire();
             var reportTitle = report.GetReportTile(coid);
-            var reportBody = report.GetReport(coid);
+            var reportBody = report.GetReport(coid, classid);
 
 
             var totalShould = 0;

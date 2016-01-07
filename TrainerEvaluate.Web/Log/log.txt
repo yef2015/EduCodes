@@ -422,3 +422,83 @@ ClientConnectionId:03a908f3-47e6-46c0-8487-fc00c252d065：2016-01-03 15:06:31
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:03a908f3-47e6-46c0-8487-fc00c252d065：2016-01-03 15:06:46
+'GetPercent' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetPercent' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:69c1d1ee-1030-47c0-b1cd-71b304f1cd5e：2016-01-05 23:38:48
+'GetPercent' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetPercent' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:69c1d1ee-1030-47c0-b1cd-71b304f1cd5e：2016-01-05 23:38:49
+'GetPercent' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetPercent' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:69c1d1ee-1030-47c0-b1cd-71b304f1cd5e：2016-01-05 23:39:00
+'GetPercent' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetPercent' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:69c1d1ee-1030-47c0-b1cd-71b304f1cd5e：2016-01-05 23:39:04
+'2015005' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '2015005' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:1440aeaf-9016-46fd-89e6-d7f9efb5d47a：2016-01-05 23:45:35
+'2015006' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '2015006' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:1440aeaf-9016-46fd-89e6-d7f9efb5d47a：2016-01-05 23:45:44
+'2015006' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '2015006' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:1440aeaf-9016-46fd-89e6-d7f9efb5d47a：2016-01-05 23:46:15
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ffdeae0b-bc05-4bf1-9f7e-712298c54d94：2016-01-06 16:28:36
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ffdeae0b-bc05-4bf1-9f7e-712298c54d94：2016-01-06 16:28:37
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ffdeae0b-bc05-4bf1-9f7e-712298c54d94：2016-01-06 16:28:39
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ffdeae0b-bc05-4bf1-9f7e-712298c54d94：2016-01-06 16:28:41
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d35a5669-87d8-470a-9278-8ca046801c2d：2016-01-06 21:14:46
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d35a5669-87d8-470a-9278-8ca046801c2d：2016-01-06 21:14:49
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d35a5669-87d8-470a-9278-8ca046801c2d：2016-01-06 21:14:52
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d35a5669-87d8-470a-9278-8ca046801c2d：2016-01-06 21:14:59
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d2f84ab3-668c-404d-b181-2bba33ba7787：2016-01-06 21:17:04
+'GetReport' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReport' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d2f84ab3-668c-404d-b181-2bba33ba7787：2016-01-06 21:17:48
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d86ffe1f-4f70-4831-b79a-190d6621a7de：2016-01-06 21:32:59
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d86ffe1f-4f70-4831-b79a-190d6621a7de：2016-01-06 21:34:30
+'GetReportTitle' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetReportTitle' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:d86ffe1f-4f70-4831-b79a-190d6621a7de：2016-01-06 21:35:43

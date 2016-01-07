@@ -11,13 +11,13 @@
                 <div align="center">姓名：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <input name="StuName11" class="easyui-textbox" id="StuName11" />
+                <input name="StuName11" class="easyui-textbox" id="StuName11" style="width:165px;" />
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">所在学校： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <input name="School11" class="easyui-textbox" id="School11" />
+                <input name="School11" class="easyui-textbox" id="School11" style="width:165px;" />
             </td>
         </tr>
         <tr>
@@ -32,7 +32,7 @@
                 <div align="center">联系电话： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" class="gray10a" height="26">
-                <input name="TelNo11" class="easyui-textbox" id="TelNo11" />
+                <input name="TelNo11" class="easyui-textbox" id="TelNo11" style="width:165px;" />
             </td>
         </tr>
         <tr>
@@ -40,14 +40,14 @@
                 <div align="center">性别：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <select class="easyui-combobox" name="Gender11" id="Gender11" style="width: 127px;"    data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                <select class="easyui-combobox" name="Gender11" id="Gender11" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">身份证号： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <input name="IdentityNo11" class="easyui-textbox" id="IdentityNo11" />
+                <input name="IdentityNo11" class="easyui-textbox" id="IdentityNo11" style="width:165px;" />
             </td>
         </tr>
         <tr>

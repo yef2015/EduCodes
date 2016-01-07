@@ -47,7 +47,7 @@ namespace TrainerEvaluate.Web
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         i++;
-                        str.Append("{\"CourseId\": \"" + row["CourseId"] + "\",");
+                        str.Append("{\"CourseId\": \"" + row["ID"] + "\",");
                         str.Append("\"CourseName\": \"" + i + ". " + row["CourseName"] + "\"},");
                     }
                     str.Remove(str.Length - 1, 1);

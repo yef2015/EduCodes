@@ -20,7 +20,7 @@
     <script type="text/javascript">
 
         function getReport() {
-            var url = "QuestionnaireHadler.ashx?t=r&id=" + $("#hCourseid").val();
+            var url = "QuestionnaireHadler.ashx?t=r&id=" + $("#hCourseid").val() + "&classId=" + +$("#hClassid").val();
             window.location = url;
         }
 
@@ -216,13 +216,14 @@
         </div>
     </form>
     <input type="hidden" id="hCourseid" runat="server" />
+    <input type="hidden" id="hClassid" runat="server" />
     <div id="dlg" class="easyui-dialog" style="width: 500px; height: 500px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons">
         <div class="easyui-tabs" style="width: 400px; height: 400px"> 
             <div  title="已完成学员" tyle="padding: 10px">
                 <div class="ftitle">学员信息：</div>
                 <table id="dg12" class="easyui-datagrid" toolbar="#toolbarf2"
-                    data-options="rownumbers:true,singleSelect:false,url:'QuestionnaireHadler.ashx?t=f2&coId='+$('#hCourseid').val(),method:'get',checkOnSelect:false, pagination:true">
+                    data-options="rownumbers:true,singleSelect:false,url:'QuestionnaireHadler.ashx?t=f2&coId='+$('#hCourseid').val()+'&classId='+$('#hClassid').val(),method:'get',checkOnSelect:false, pagination:true">
                     <thead>
                         <tr>
                             <th data-options="field:'StudentId'" hidden="true">StudentId</th>
@@ -236,7 +237,7 @@
             <div title="未完成学员" style="padding: 10px">
                 <div class="ftitle">学员信息：</div>
                 <table id="dg1" class="easyui-datagrid" toolbar="#toolbar"
-                    data-options="rownumbers:true,singleSelect:false,url:'QuestionnaireHadler.ashx?t=f&coId='+$('#hCourseid').val(),method:'get',checkOnSelect:false, pagination:true">
+                    data-options="rownumbers:true,singleSelect:false,url:'QuestionnaireHadler.ashx?t=f&coId='+$('#hCourseid').val()+'&classId='+$('#hClassid').val(),method:'get',checkOnSelect:false, pagination:true">
                     <thead>
                         <tr>
                             <th data-options="field:'StudentId'" hidden="true">StudentId</th>
@@ -458,7 +459,7 @@
                 }
                 $('#container1').highcharts({
                     chart: {
-                        type: 'bar',
+                        type: 'bar'
                     },
                     title: {
                         text: '课程满意度分布'
@@ -513,7 +514,7 @@
                                     }
                                 }
                             },
-                            showInLegend: false,
+                            showInLegend: false
                         }
                     },
                     //legend: {

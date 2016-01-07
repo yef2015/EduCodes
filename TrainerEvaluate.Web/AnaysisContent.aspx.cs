@@ -59,7 +59,8 @@ namespace TrainerEvaluate.Web
                     divReports.Visible = false;
                     analysisTable.Visible = false;
                     theYear.Visible = false;
-                    SetSatisfyBar(Request.QueryString["sid"]);
+                    var classId = Request.QueryString["classid"];
+                    SetSatisfyBar(Request.QueryString["sid"], classId);
                 }
                 else
                 {
@@ -83,10 +84,11 @@ namespace TrainerEvaluate.Web
             str.Append( "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\" " +
                         " style=\"border-collapse:collapse;font-size: 14px;text-align:center\" >");  
             str.Append("<tr height=\"40\">  ");
-            str.Append("<td colspan='10'> <span  style=\"font-size: 25px;font-weight: bold\">课程评估总体情况统计表</span><br/> </td>");
+            str.Append("<td colspan='11'> <span  style=\"font-size: 25px;font-weight: bold\">课程评估总体情况统计表</span><br/> </td>");
             str.Append("</tr>  ");
 
             str.Append("<tr  height=\"35\"  bgcolor=\"#F0F9FF\" >");
+            str.Append("<td><strong>班级名称</strong></td>");
             str.Append("<td><strong>课程名称</strong></td>");
             str.Append("<td><strong>授课教师</strong></td>");
             str.Append("<td><strong>总平均分（满分52分）</strong></td>");
@@ -122,6 +124,7 @@ namespace TrainerEvaluate.Web
                     i++;
                     var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
                     str.Append("<tr  height=\"35\"  bgcolor=\""+color+"\" > ");
+                    str.Append("<td>" + row["ClassName"] + " </td>");
                     str.Append("<td>" + row["CourseName"] + " </td>");
                     str.Append("<td>" + row["TeacherName"] + " </td>");
                     str.Append("<td>" + string.Format("{0:N2}",row["TotalAvgScore"]) + " </td>");
@@ -138,13 +141,13 @@ namespace TrainerEvaluate.Web
             i++;
             var color1 = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
             str.Append("<tr  height=\"35\" bgcolor=\""+color1+"\" > ");
-            str.Append("<td colspan='10'>");
+            str.Append("<td colspan='11'>");
             str.Append("总平均分=各项得分总和/实评人数；满意度=（很满意+满意）/实评人数； 课程（讲师或者组织）的满意度=每项满意度相加/项数 ");
             str.Append("</td>");
             str.Append("</tr>");
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
-            str.Append("<td colspan='10'>"); 
+            str.Append("<td colspan='11'>"); 
             str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTotalReports()\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>"); 
@@ -161,11 +164,13 @@ namespace TrainerEvaluate.Web
             str.Append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\" " +
                         " style=\"border-collapse:collapse;font-size: 14px;text-align:center\" >");
             str.Append("<tr height=\"40\">  ");
-            str.Append("<td colspan='6'> <span  style=\"font-size: 25px;font-weight: bold\">培训讲师各指标满意度分布表</span><br/> </td>");
+            str.Append("<td colspan='8'> <span  style=\"font-size: 25px;font-weight: bold\">培训讲师各指标满意度分布表</span><br/> </td>");
             str.Append("</tr>  ");
 
             str.Append("<tr  height=\"35\"  bgcolor=\"#F0F9FF\" >");
+            str.Append("<td  rowspan=\"2\" ><strong>班级名称</strong></td>");
             str.Append("<td  rowspan=\"2\" ><strong>课程名称</strong></td>");
+            str.Append("<td  rowspan=\"2\" ><strong>教师姓名</strong></td>");
           //  str.Append("<td  rowspan=\"2\" ><strong>培训教师</strong></td>");
            // str.Append("<td  rowspan=\"2\" ><strong>培训时间</strong></td>");
             str.Append("<td colspan=\"5\" ><strong>培训讲师各指标满意度</strong></td>");
@@ -203,7 +208,9 @@ namespace TrainerEvaluate.Web
                     i++;
                     var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
                     str.Append("<tr  height=\"35\"  bgcolor=\"" + color + "\" > ");
+                    str.Append("<td>" + row["ClassName"] + " </td>");
                     str.Append("<td>" + row["CourseName"] + " </td>");
+                    str.Append("<td>" + row["TeacherName"] + " </td>");
                 //    str.Append("<td>" + row["TeacherName"] + " </td>");
                 //    str.Append("<td>" + row["TeachTime"] + " </td>"); 
                     str.Append("<td>" + teacherPrepareP + " </td>");
@@ -240,10 +247,11 @@ namespace TrainerEvaluate.Web
             str.Append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\" " +
                         " style=\"border-collapse:collapse;font-size: 14px;text-align:center\" >");
             str.Append("<tr height=\"40\">  ");
-            str.Append("<td colspan='6'> <span  style=\"font-size: 25px;font-weight: bold\">课程内容各指标满意度分布表</span><br/> </td>");
+            str.Append("<td colspan='7'> <span  style=\"font-size: 25px;font-weight: bold\">课程内容各指标满意度分布表</span><br/> </td>");
             str.Append("</tr>  ");
 
             str.Append("<tr  height=\"35\"  bgcolor=\"#F0F9FF\" >");
+            str.Append("<td  rowspan=\"2\" ><strong>班级名称</strong></td>");
             str.Append("<td  rowspan=\"2\" ><strong>课程名称</strong></td>");
             //  str.Append("<td  rowspan=\"2\" ><strong>培训教师</strong></td>");
             // str.Append("<td  rowspan=\"2\" ><strong>培训时间</strong></td>");
@@ -282,6 +290,7 @@ namespace TrainerEvaluate.Web
                     i++;
                     var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
                     str.Append("<tr  height=\"35\"  bgcolor=\"" + color + "\" > ");
+                    str.Append("<td>" + row["ClassName"] + " </td>");
                     str.Append("<td>" + row["CourseName"] + " </td>");
                     //    str.Append("<td>" + row["TeacherName"] + " </td>");
                     //    str.Append("<td>" + row["TeachTime"] + " </td>"); 
@@ -302,7 +311,7 @@ namespace TrainerEvaluate.Web
             //str.Append("</tr>");
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
-            str.Append("<td colspan='10'>");
+            str.Append("<td colspan='7'>");
             str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getCourseReports()\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
@@ -319,10 +328,11 @@ namespace TrainerEvaluate.Web
             str.Append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\" " +
                         " style=\"border-collapse:collapse;font-size: 14px;text-align:center\" >");
             str.Append("<tr height=\"40\">  ");
-            str.Append("<td colspan='4'> <span  style=\"font-size: 25px;font-weight: bold\">培训组织和管理满意度分布表</span><br/> </td>");
+            str.Append("<td colspan='5'> <span  style=\"font-size: 25px;font-weight: bold\">培训组织和管理满意度分布表</span><br/> </td>");
             str.Append("</tr>  ");
 
             str.Append("<tr  height=\"35\"  bgcolor=\"#F0F9FF\" >");
+            str.Append("<td  rowspan=\"2\" ><strong>班级名称</strong></td>");
             str.Append("<td  rowspan=\"2\" ><strong>课程名称</strong></td>");
             //  str.Append("<td  rowspan=\"2\" ><strong>培训教师</strong></td>");
             // str.Append("<td  rowspan=\"2\" ><strong>培训时间</strong></td>");
@@ -353,6 +363,7 @@ namespace TrainerEvaluate.Web
                     i++;
                     var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
                     str.Append("<tr  height=\"35\"  bgcolor=\"" + color + "\" > ");
+                    str.Append("<td>" + row["ClassName"] + " </td>");
                     str.Append("<td>" + row["CourseName"] + " </td>");
                     //    str.Append("<td>" + row["TeacherName"] + " </td>");
                     //    str.Append("<td>" + row["TeachTime"] + " </td>"); 
@@ -381,7 +392,7 @@ namespace TrainerEvaluate.Web
         }
 
 
-        private void SetSatisfyBar(string sid)
+        private void SetSatisfyBar(string sid, string classId)
         {
             //hcate.Value = "课程1, 课程2, 课程3, 课程4, 课程5";
             //hdata.Value = "17, 31, 335, 203, 2";
@@ -391,7 +402,7 @@ namespace TrainerEvaluate.Web
             try
             {
                 var quesBll = new BLL.Questionnaire();
-                var dt = quesBll.GetSatisfybar(sid);
+                var dt = quesBll.GetSatisfybar(sid, classId);
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     var str1 = new StringBuilder();
@@ -432,20 +443,18 @@ namespace TrainerEvaluate.Web
             str.Append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\" " +
                         " style=\"border-collapse:collapse;font-size: 14px;text-align:center\" >");
             str.Append("<tr height=\"40\">  ");
-            str.Append("<td colspan='4'> <span  style=\"font-size: 25px;font-weight: bold\">培训课程满意度</span><br/> </td>");
+            str.Append("<td colspan='4'> <span  style=\"font-size: 25px;font-weight: bold\">培训教师满意度</span><br/> </td>");
             str.Append("</tr>  ");
 
             str.Append("<tr  height=\"30\"  bgcolor=\"#F0F9FF\" >");
-            str.Append("<td><strong>课程名称</strong></td>");
             str.Append("<td><strong>教师姓名</strong></td>");
+            str.Append("<td><strong>课程名称</strong></td>");
             str.Append("<td><strong>授课班级</strong></td>");
             str.Append("<td><strong>满意度</strong></td>");
             str.Append("</tr>");
 
-            var classId = Request.QueryString["classId"];    // 班级id
-            var courseId = Request.QueryString["courseId"];  // 课程id
             var report = new BLL.Questionnaire();
-            var dt = report.GetTrainCourseReports(classId, courseId);
+            var dt = report.GetTeacherEvaluate();
             var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -461,21 +470,49 @@ namespace TrainerEvaluate.Web
                     //   ? "100%"
                     //   : string.Format("{0:N2}%", Convert.ToDouble(row["OrgTimeP"]) * 100);
 
-                    string[] list = row["TeacherName"].ToString().Split(',');
-                    string teacher = string.Empty;
-                    if (list.Length > 0)
+                    var rowNum = Convert.ToInt32(row["CourseCount"].ToString());
+                    string teacherId = row["TeacherId"].ToString();
+                    if(rowNum>1)
                     {
-                        teacher = list[0];
-                    }
+                        DataTable dtInfo = new DataTable();
+                        dtInfo = report.GetTeacherSatifyById(teacherId);
 
-                    i++;
-                    var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
-                    str.Append("<tr  height=\"35\"  bgcolor=\"" + color + "\" > ");
-                    str.Append("<td>" + teacher + " </td>");
-                    str.Append("<td>" + row["CourseName"].ToString() + " </td>");
-                    str.Append("<td>" + row["ClassName"].ToString() + " </td>");
-                    str.Append("<td>100%</td>");
-                    str.Append("</tr>");
+                        str.Append("<tr  height=\"35\" > ");
+                        str.Append("<td rowspan='" + dtInfo.Rows.Count + "' >" + row["TeacherName"] + " </td>");
+                        bool isFirst = true;
+
+                        foreach (DataRow rowInfo in dtInfo.Rows)
+                        {
+                            if (!isFirst)
+                            {
+                                str.Append("<tr  height=\"35\"> ");
+                            }
+                            isFirst = false;
+
+                            str.Append("<td>" + rowInfo["CourseName"].ToString() + " </td>");
+                            str.Append("<td>" + rowInfo["ClassName"].ToString() + " </td>");
+
+                            var teacherSafy = Convert.ToDouble(rowInfo["TotalTeacher"]) >= 1.0
+                               ? "100%"
+                               : string.Format("{0:N2}%", Convert.ToDouble(rowInfo["TotalTeacher"]) * 100);
+                            str.Append("<td>" + teacherSafy + "</td>");
+                            str.Append("</tr>");
+                        }
+                    }
+                    else
+                    {
+                        str.Append("<tr  height=\"35\" > ");
+                        str.Append("<td>" + row["TeacherName"] + " </td>");
+                        str.Append("<td>" + row["CourseName"].ToString() + " </td>");
+                        str.Append("<td>" + row["ClassName"].ToString() + " </td>");
+
+                        var teacherSingSafy = Convert.ToDouble(row["TotalTeacher"]) >= 1.0
+                              ? "100%"
+                              : string.Format("{0:N2}%", Convert.ToDouble(row["TotalTeacher"]) * 100);
+                        str.Append("<td>" + teacherSingSafy + "</td>");
+
+                        str.Append("</tr>");
+                    }
                 }
             }
 
@@ -509,42 +546,76 @@ namespace TrainerEvaluate.Web
             str.Append("<td><strong>满意度</strong></td>");
             str.Append("</tr>");
 
+
+
+            str.Append("<tr  height=\"35\" > ");
+            str.Append("<td>实践</td>");
+            str.Append("<td>李四</td>");
+            str.Append("<td>2016年希望之星 </td>");
+            str.Append("<td>100%</td>");
+            str.Append("</tr>");
+
+
+
+
+
+
+
+
             var classId = Request.QueryString["classId"];    // 班级id
             var courseId = Request.QueryString["courseId"];  // 课程id
             var report = new BLL.Questionnaire();
-            var dt = report.GetTrainCourseReports(classId, courseId);
+            var dt = report.GetCourseEvaluate();
             var i = 0;
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    //var orgArrangeP = Convert.ToDouble(row["OrgArrangeP"]) >= 1.0
-                    //    ? "100%"
-                    //    : string.Format("{0:N2}%", Convert.ToDouble(row["OrgArrangeP"]) * 100);
-                    //var orgServiceP = Convert.ToDouble(row["OrgServiceP"]) >= 1.0
-                    //   ? "100%"
-                    //   : string.Format("{0:N2}%", Convert.ToDouble(row["OrgServiceP"]) * 100);
-                    //var orgTimeP = Convert.ToDouble(row["OrgTimeP"]) >= 1.0
-                    //   ? "100%"
-                    //   : string.Format("{0:N2}%", Convert.ToDouble(row["OrgTimeP"]) * 100);
+            //if (dt != null && dt.Rows.Count > 0)
+            //{
+            //    foreach (DataRow row in dt.Rows)
+            //    {
+            //        var rowNum = Convert.ToInt32(row["TeacherCount"].ToString());
+            //        string courseId1 = row["CourseId"].ToString();
+            //        if (rowNum > 1)
+            //        {
+            //            DataTable dtInfo = new DataTable();
+            //            dtInfo = report.GetCourseSatifyById(courseId1);
 
-                    string[] list = row["TeacherName"].ToString().Split(',');
-                    string teacher = string.Empty;
-                    if (list.Length > 0)
-                    {
-                        teacher = list[0];
-                    }
+            //            str.Append("<tr  height=\"35\" > ");
+            //            str.Append("<td rowspan='" + dtInfo.Rows.Count + "' >" + row["CourseName"] + " </td>");
+            //            bool isFirst = true;
 
-                    i++;
-                    var color = i % 2 == 1 ? "#FFFFFF" : "#F0F9FF";
-                    str.Append("<tr  height=\"35\"  bgcolor=\"" + color + "\" > ");
-                    str.Append("<td>" + teacher + " </td>");
-                    str.Append("<td>" + row["CourseName"].ToString() + " </td>");
-                    str.Append("<td>" + row["ClassName"].ToString() + " </td>");
-                    str.Append("<td>100%</td>");
-                    str.Append("</tr>");
-                }
-            }
+            //            foreach (DataRow rowInfo in dtInfo.Rows)
+            //            {
+            //                if (!isFirst)
+            //                {
+            //                    str.Append("<tr  height=\"35\"> ");
+            //                }
+            //                isFirst = false;
+
+            //                str.Append("<td>" + rowInfo["CourseName"].ToString() + " </td>");
+            //                str.Append("<td>" + rowInfo["ClassName"].ToString() + " </td>");
+
+            //                var courseSafy = Convert.ToDouble(rowInfo["TotalCourse"]) >= 1.0
+            //                   ? "100%"
+            //                   : string.Format("{0:N2}%", Convert.ToDouble(rowInfo["TotalCourse"]) * 100);
+            //                str.Append("<td>" + courseSafy + "</td>");
+            //                str.Append("</tr>");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            str.Append("<tr  height=\"35\" > ");
+            //            str.Append("<td>" + row["CourseName"] + " </td>");
+            //            str.Append("<td>" + row["TeacherName"].ToString() + " </td>");
+            //            str.Append("<td>" + row["ClassName"].ToString() + " </td>");
+
+            //            var courseSafy = Convert.ToDouble(row["TotalCourse"]) >= 1.0
+            //                  ? "100%"
+            //                  : string.Format("{0:N2}%", Convert.ToDouble(row["TotalCourse"]) * 100);
+            //            str.Append("<td>" + courseSafy + "</td>");
+
+            //            str.Append("</tr>");
+            //        }
+            //    }
+            //}
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
@@ -562,6 +633,7 @@ namespace TrainerEvaluate.Web
             try
             {
                 var courseId = Guid.Empty;
+                var classId = string.Empty;
                 var coursebll = new BLL.Course();
                 if (!string.IsNullOrEmpty(Request.QueryString["cid"]))
                 {
@@ -572,7 +644,18 @@ namespace TrainerEvaluate.Web
                 {
                     courseId = coursebll.GetTop1Guid();
                     hCourseid.Value = courseId.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(Request.QueryString["classid"]))
+                {
+                    classId = Request.QueryString["classid"].ToString();
+                    hClassid.Value = classId;
+                }
+                else //取个默认的
+                {
+
                 } 
+                
 
                 var courseModel = coursebll.GetModel(courseId);
                 courseName.InnerText = courseModel.CourseName;
@@ -581,8 +664,8 @@ namespace TrainerEvaluate.Web
                 trainTime.InnerText = courseModel.TeachTime;
                  
 
-                var question = new BLL.Questionnaire(); 
-                var dsResult = question.GetReportTile(courseId);
+                var question = new BLL.Questionnaire();
+                var dsResult = question.GetReportTile(courseId, classId);
                 if (dsResult != null && dsResult.Tables.Count > 0)
                 {
                     var row = dsResult.Tables[0].Rows[0];
@@ -608,7 +691,7 @@ namespace TrainerEvaluate.Web
                 //satisfaction.InnerText = string.Format("{0:N2}" + "%", (((float) totalAvg/52)*100));
                 //level.InnerText = question.GetLevel(((float)totalAvg / 52));
 
-                var statifyPercent = question.GetSatisfyPercent(courseId); 
+                var statifyPercent = question.GetSatisfyPercent(courseId, classId);
                 if (statifyPercent != null)
                 {
                     htp1.Value = string.Format("{0:N2}", ((statifyPercent[0])*100));
@@ -626,7 +709,7 @@ namespace TrainerEvaluate.Web
                 }
 
 
-                SetDetail(courseId); 
+                SetDetail(courseId,classId); 
 
                 #region old tendency
 
@@ -682,10 +765,14 @@ namespace TrainerEvaluate.Web
         }
 
         
-        private void SetDetail(Guid coid)
+        private void SetDetail(Guid coid,string classId)
         {
             var report = new BLL.Questionnaire();
-            var reportBody = report.GetReport(coid);
+            if (string.IsNullOrEmpty(classId))
+            {
+                classId = "2015006";
+            }
+            var reportBody = report.GetReport(coid, classId);
             var result = new Dictionary<int, double[]>();
             if (reportBody != null && reportBody.Tables.Count > 0)
             {

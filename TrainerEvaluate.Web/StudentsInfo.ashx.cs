@@ -703,7 +703,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserAccount = stuBll.GetStuAccount();
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
                 
-                sysuserbll.Add(sysUserMo);
+                sysuserbll.AddComeStudent(sysUserMo);
 
                 // 添加内容到Student表中
                 result = stuBll.Add(stuModel);
@@ -743,7 +743,7 @@ namespace TrainerEvaluate.Web
                 SetModelValue(stuModel,context);
 
                 var sysuserbll = new BLL.SysUser();
-                var sysUserMo = sysuserbll.GetModel(new Guid(id));
+                var sysUserMo = sysuserbll.GetModel(stuModel.StudentId);
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
                 sysUserMo.IdentityNo = stuModel.IdentityNo;

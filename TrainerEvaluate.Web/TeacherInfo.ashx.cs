@@ -20,7 +20,7 @@ namespace TrainerEvaluate.Web
         {
             context.Response.ContentType = "text/plain";
             var opType = context.Request["t"];
-            var id = context.Request["id"];
+            var id = context.Request["id"]; 
             switch (opType)
             {
                 case "n":
