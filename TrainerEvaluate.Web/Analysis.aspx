@@ -112,20 +112,21 @@
             $("#ClassInfo").combobox({
                 onLoadSuccess: function () {
                     var val = $(this).combobox("getData");
-                    for (var item in val[0]) {
+                    for (var item in val[1]) {
                         if (item == "ClassId") {
-                            $(this).combobox("select", val[0][item]);
+                            $(this).combobox("select", val[1][item]);
                         }
                     }
                 },
                 onSelect: function (param) {
                     $("#headtable").css("display", "block");
-                    $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?classid=" + param.ClassId);
+                    //$("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?classid=" + param.ClassId);
                 }
             });
 
             $("#CourseInfo").combobox({
                 onLoadSuccess: function () {
+                    var classId = $('#ClassInfo').combobox("getValue");
                     var val = $(this).combobox("getData");
                     for (var item in val[0]) {
                         if (item == "CourseId") {
@@ -136,6 +137,13 @@
                 onSelect: function (param) {
                     $("#headtable").css("display", "block");
                     var classId = $('#ClassInfo').combobox("getValue");
+                    if (classId == '0000')
+                    {
+                        // 班级为全部，对评估课程进行清空处理
+                        $('#CourseInfo').combobox('disable');
+                        $("#ifrAnalysisContent").attr("src", "");
+                        return;
+                    }
                     $("#ifrAnalysisContent").attr("src", "AnaysisContent.aspx?cid=" + param.CourseId + "&classid=" + classId);
                     //  changeContent("AnaysisContent.aspx?cid=" + param.CourseId); 
                 }
@@ -179,7 +187,7 @@
      
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-   <iframe id="ifrAnalysisContent" width="100%" height="1271" frameborder="0" scrolling="auto" src="AnaysisContent.aspx"> 
+   <iframe id="ifrAnalysisContent" width="100%" height="1271" frameborder="0" scrolling="auto"> 
     </iframe>   
 
 </asp:Content>

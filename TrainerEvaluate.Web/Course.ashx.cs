@@ -106,7 +106,16 @@ namespace TrainerEvaluate.Web
                     str.Append("{\"CourseId\": \"" + row["CourseId"] + "\",");
                     str.Append("\"CourseName\": \"" + row["CourseName"] + "\"},");
                 }
-                str.Remove(str.Length - 1, 1);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    str.Remove(str.Length - 1, 1);
+                }
+                else
+                {
+                    str.Append("{\"CourseId\": \""+Guid.Empty.ToString()+"\",");
+                    str.Append("\"CourseName\": \"未选择\"}");
+                }
+
                 str.Append("]");
 
                 context.Response.Write(str.ToString());

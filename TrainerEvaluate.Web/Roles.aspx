@@ -204,7 +204,7 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {                
                 var roleName = row.Name;
-                if (roleName == '超级管理员' || roleName == '班主任' || roleName == '学员' || roleName == '教师')
+                if (roleName == '超级管理员' || roleName == '项目负责人' || roleName == '学员' || roleName == '教师')
                 {
                     alert("角色名称为：" + roleName + "不允许修改，请核实。");
                     return;

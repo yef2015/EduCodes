@@ -64,7 +64,7 @@ namespace TrainerEvaluate.Web
                 }
                 else
                 {
-                    theYear.InnerText = DateTime.Now.Year + "年中青年干部教育管理培训班课程评估表";
+                    //theYear.InnerText = DateTime.Now.Year + "年中青年干部教育管理培训班课程评估表";
                     container1.Visible = false;
                     divReports.Visible = false;
                     analysisTable.Visible = true;
@@ -460,25 +460,16 @@ namespace TrainerEvaluate.Web
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    //var orgArrangeP = Convert.ToDouble(row["OrgArrangeP"]) >= 1.0
-                    //    ? "100%"
-                    //    : string.Format("{0:N2}%", Convert.ToDouble(row["OrgArrangeP"]) * 100);
-                    //var orgServiceP = Convert.ToDouble(row["OrgServiceP"]) >= 1.0
-                    //   ? "100%"
-                    //   : string.Format("{0:N2}%", Convert.ToDouble(row["OrgServiceP"]) * 100);
-                    //var orgTimeP = Convert.ToDouble(row["OrgTimeP"]) >= 1.0
-                    //   ? "100%"
-                    //   : string.Format("{0:N2}%", Convert.ToDouble(row["OrgTimeP"]) * 100);
-
-                    var rowNum = Convert.ToInt32(row["CourseCount"].ToString());
+                    var rowNum = 1;
                     string teacherId = row["TeacherId"].ToString();
+                    DataTable dtInfo = new DataTable();
+                    dtInfo = report.GetTeacherSatifyById(teacherId);
+                    rowNum = dtInfo.Rows.Count;
+
                     if(rowNum>1)
                     {
-                        DataTable dtInfo = new DataTable();
-                        dtInfo = report.GetTeacherSatifyById(teacherId);
-
                         str.Append("<tr  height=\"35\" > ");
-                        str.Append("<td rowspan='" + dtInfo.Rows.Count + "' >" + row["TeacherName"] + " </td>");
+                        str.Append("<td rowspan='" + rowNum + "' >" + row["TeacherName"] + " </td>");
                         bool isFirst = true;
 
                         foreach (DataRow rowInfo in dtInfo.Rows)
@@ -499,16 +490,16 @@ namespace TrainerEvaluate.Web
                             str.Append("</tr>");
                         }
                     }
-                    else
+                    else if(rowNum==1)
                     {
                         str.Append("<tr  height=\"35\" > ");
                         str.Append("<td>" + row["TeacherName"] + " </td>");
-                        str.Append("<td>" + row["CourseName"].ToString() + " </td>");
-                        str.Append("<td>" + row["ClassName"].ToString() + " </td>");
+                        str.Append("<td>" + dtInfo.Rows[0]["CourseName"].ToString() + " </td>");
+                        str.Append("<td>" + dtInfo.Rows[0]["ClassName"].ToString() + " </td>");
 
-                        var teacherSingSafy = Convert.ToDouble(row["TotalTeacher"]) >= 1.0
+                        var teacherSingSafy = Convert.ToDouble(dtInfo.Rows[0]["TotalTeacher"]) >= 1.0
                               ? "100%"
-                              : string.Format("{0:N2}%", Convert.ToDouble(row["TotalTeacher"]) * 100);
+                              : string.Format("{0:N2}%", Convert.ToDouble(dtInfo.Rows[0]["TotalTeacher"]) * 100);
                         str.Append("<td>" + teacherSingSafy + "</td>");
 
                         str.Append("</tr>");
@@ -547,75 +538,61 @@ namespace TrainerEvaluate.Web
             str.Append("</tr>");
 
 
-
-            str.Append("<tr  height=\"35\" > ");
-            str.Append("<td>实践</td>");
-            str.Append("<td>李四</td>");
-            str.Append("<td>2016年希望之星 </td>");
-            str.Append("<td>100%</td>");
-            str.Append("</tr>");
-
-
-
-
-
-
-
-
             var classId = Request.QueryString["classId"];    // 班级id
             var courseId = Request.QueryString["courseId"];  // 课程id
             var report = new BLL.Questionnaire();
             var dt = report.GetCourseEvaluate();
-            var i = 0;
-            //if (dt != null && dt.Rows.Count > 0)
-            //{
-            //    foreach (DataRow row in dt.Rows)
-            //    {
-            //        var rowNum = Convert.ToInt32(row["TeacherCount"].ToString());
-            //        string courseId1 = row["CourseId"].ToString();
-            //        if (rowNum > 1)
-            //        {
-            //            DataTable dtInfo = new DataTable();
-            //            dtInfo = report.GetCourseSatifyById(courseId1);
 
-            //            str.Append("<tr  height=\"35\" > ");
-            //            str.Append("<td rowspan='" + dtInfo.Rows.Count + "' >" + row["CourseName"] + " </td>");
-            //            bool isFirst = true;
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    var rowNum = 1;
+                    string tempCourseId = row["CourseId"].ToString();
+                    DataTable dtInfo = new DataTable();
+                    dtInfo = report.GetCourseSatifyById(tempCourseId);
+                    rowNum = dtInfo.Rows.Count;
 
-            //            foreach (DataRow rowInfo in dtInfo.Rows)
-            //            {
-            //                if (!isFirst)
-            //                {
-            //                    str.Append("<tr  height=\"35\"> ");
-            //                }
-            //                isFirst = false;
+                    if (rowNum > 1)
+                    {
+                        str.Append("<tr  height=\"35\" > ");
+                        str.Append("<td rowspan='" + rowNum + "' >" + row["CourseName"] + " </td>");
+                        bool isFirst = true;
 
-            //                str.Append("<td>" + rowInfo["CourseName"].ToString() + " </td>");
-            //                str.Append("<td>" + rowInfo["ClassName"].ToString() + " </td>");
+                        foreach (DataRow rowInfo in dtInfo.Rows)
+                        {
+                            if (!isFirst)
+                            {
+                                str.Append("<tr  height=\"35\"> ");
+                            }
+                            isFirst = false;
 
-            //                var courseSafy = Convert.ToDouble(rowInfo["TotalCourse"]) >= 1.0
-            //                   ? "100%"
-            //                   : string.Format("{0:N2}%", Convert.ToDouble(rowInfo["TotalCourse"]) * 100);
-            //                str.Append("<td>" + courseSafy + "</td>");
-            //                str.Append("</tr>");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            str.Append("<tr  height=\"35\" > ");
-            //            str.Append("<td>" + row["CourseName"] + " </td>");
-            //            str.Append("<td>" + row["TeacherName"].ToString() + " </td>");
-            //            str.Append("<td>" + row["ClassName"].ToString() + " </td>");
+                            str.Append("<td>" + rowInfo["TeacherName"].ToString() + " </td>");
+                            str.Append("<td>" + rowInfo["ClassName"].ToString() + " </td>");
 
-            //            var courseSafy = Convert.ToDouble(row["TotalCourse"]) >= 1.0
-            //                  ? "100%"
-            //                  : string.Format("{0:N2}%", Convert.ToDouble(row["TotalCourse"]) * 100);
-            //            str.Append("<td>" + courseSafy + "</td>");
+                            var courseSafy = Convert.ToDouble(rowInfo["TotalCourse"]) >= 1.0
+                               ? "100%"
+                               : string.Format("{0:N2}%", Convert.ToDouble(rowInfo["TotalCourse"]) * 100);
+                            str.Append("<td>" + courseSafy + "</td>");
+                            str.Append("</tr>");
+                        }
+                    }
+                    else if(rowNum==1)
+                    {
+                        str.Append("<tr  height=\"35\" > ");
+                        str.Append("<td>" + row["CourseName"] + " </td>");
+                        str.Append("<td>" + dtInfo.Rows[0]["TeacherName"].ToString() + " </td>");
+                        str.Append("<td>" + dtInfo.Rows[0]["ClassName"].ToString() + " </td>");
 
-            //            str.Append("</tr>");
-            //        }
-            //    }
-            //}
+                        var courseSafy = Convert.ToDouble(dtInfo.Rows[0]["TotalCourse"]) >= 1.0
+                              ? "100%"
+                              : string.Format("{0:N2}%", Convert.ToDouble(dtInfo.Rows[0]["TotalCourse"]) * 100);
+                        str.Append("<td>" + courseSafy + "</td>");
+
+                        str.Append("</tr>");
+                    }
+                }
+            }
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
@@ -645,7 +622,7 @@ namespace TrainerEvaluate.Web
                     courseId = coursebll.GetTop1Guid();
                     hCourseid.Value = courseId.ToString();
                 }
-
+                
                 if (!string.IsNullOrEmpty(Request.QueryString["classid"]))
                 {
                     classId = Request.QueryString["classid"].ToString();
@@ -654,8 +631,11 @@ namespace TrainerEvaluate.Web
                 else //取个默认的
                 {
 
-                } 
-                
+                }
+
+                // 根据课程id，查找所属班级，最后确定课程所属年份
+                var classbll = new BLL.Class();
+                theYear.InnerText = classbll.GetClassInfoByClassId(classId) + "年中青年干部教育管理培训班课程评估表";
 
                 var courseModel = coursebll.GetModel(courseId);
                 courseName.InnerText = courseModel.CourseName;

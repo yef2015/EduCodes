@@ -21,14 +21,14 @@
         </tr>
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">培训范围：</div>
+                <div align="center">培训形式：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a"> 
                <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">培训类型： </div>
+                <div align="center">培训层次： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                <select class="easyui-combobox" name="tType" id="tType" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
@@ -57,7 +57,7 @@
                     <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
                     <th field="Students" width="100" sortable="true">学员人数</th>
                     <th field="Point" width="100" sortable="true">学时</th>
-                    <th field="Teacher" width="100" sortable="true">班主任</th>
+                    <th field="Teacher" width="100" sortable="true">项目负责人</th>
                 </tr>
             </thead>
         </table>
@@ -67,12 +67,12 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="DeleteClass()">删除</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="setStu()">学员设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="uploadTmpStuData()">导入学员</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">班主任设置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">项目负责人设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourse()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
         </div>
 
-        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 520px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons">
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
@@ -81,12 +81,12 @@
                     <input name="Name" id="Name" class="easyui-textbox" style="width:280px;" required="true">
                 </div>
                 <div class="fitem">
-                    <label>培训对象</label>
-                    <input name="Object" id="Object" class="easyui-textbox" style="width:280px;">
+                    <label>培训对象:</label>
+                    <input name="Object" id="Object" class="easyui-textbox" style="width:280px;" />
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
-                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px;width:280px;">
+                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px;width:280px;" />
                 </div>
                 <div class="fitem">
                     <label>开始日期:</label>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="fitem">
                     <label>学员人数:</label>
-                    <input name="Students" id="Students" class="easyui-textbox" style="width:280px;" disabled="true">
+                    <input name="Students" id="Students" class="easyui-textbox" style="width:280px;" disabled="true" />
                 </div>
                 <div class="fitem">
                     <label>学时:</label>
@@ -111,21 +111,21 @@
 
                 </div>
                 <div class="fitem">
-                    <label>班主任:</label>
+                    <label>项目负责人:</label>
                     <input name="Teacher" id="Teacher" class="easyui-textbox" style="width:280px;" disabled="true">
                 </div>
                 <div class="fitem">
-                    <label>培训范围:</label>  
+                    <label>培训形式:</label>  
                   <select class="easyui-combobox" name="Area" id="Area" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>
-                <div class="fitem">
+<%--                <div class="fitem">
                     <label>培训级别:</label>  
                 <select class="easyui-combobox" name="Level" id="Level" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
-                </div>
+                </div>--%>
                 <div class="fitem">
-                    <label>培训类型:</label> 
+                    <label>培训层次:</label> 
                      <select class="easyui-combobox" name="Type" id="Type" style="width:280px;"   data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>
@@ -162,7 +162,7 @@
 
         <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
-            <div class="ftitle">请选择班主任</div>
+            <div class="ftitle">请选择项目负责人</div>
            
                 <table id="dg2" class="easyui-datagrid"
                     data-options="rownumbers:true,singleSelect:false,url:'TeacherInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
@@ -232,7 +232,7 @@
             $('#PointType').textbox("setText", "");
             $('#Teacher').textbox("setText", "");
             $('#Area').textbox("setText", "");
-            $('#Level').textbox("setText", "");
+            //$('#Level').textbox("setText", "");
             $('#Type').textbox("setText", "");
 
             url = 'ClassInfo.ashx' + '?t=n';
@@ -249,10 +249,10 @@
                 $('#FinishDate').datebox("setValue", row.FinishDate);
                 $('#Students').textbox("setText", row.Students);
                 $('#Point').textbox("setText", row.Point);
-                $('#PointType').textbox("setText", row.PointType);
+                $('#PointType').combobox("setValue", row.PointType);
                 $('#Teacher').textbox("setText", row.Teacher);
                 $('#Area').combobox("setValue", row.Area);
-                $('#Level').combobox("setValue", row.Level);
+                //$('#Level').combobox("setValue", row.Level);
                 $('#Type').combobox("setValue", row.Type);
 
                 url = 'ClassInfo.ashx' + '?t=e&id=' + row.ID;
@@ -268,7 +268,7 @@
                 FinishDate: $('#FinishDate').textbox("getText"), Students: $('#Students').textbox("getText"),
                 Point: $('#Point').textbox("getText"), PointType: $('#PointType').combobox("getValue"),
                 Teacher: $('#Teacher').textbox("getText"),
-                Level: $('#Level').combobox("getValue"),
+                //Level: $('#Level').combobox("getValue"),
                 Type: $('#Type').combobox("getValue"),
                 Area: $('#Area').combobox("getValue")
             };
@@ -497,7 +497,7 @@
               unteacherids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $('#dlg2').dialog('open').dialog('setTitle', '班主任设置');
+                $('#dlg2').dialog('open').dialog('setTitle', '项目负责人设置');
                 $("#hClassid").val(row.ID);
                 $('#dg2').datagrid('reload', { t: 'gt', cId: $("#hClassid").val() });
             } else {

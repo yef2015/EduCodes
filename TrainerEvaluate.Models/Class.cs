@@ -111,7 +111,7 @@ namespace TrainerEvaluate.Models
         }
 
         /// <summary>
-        /// 班主任
+        /// 项目负责人
         /// </summary>
         public string Teacher
         {
