@@ -284,7 +284,7 @@ namespace TrainerEvaluate.BLL
                 case "超级管理员":
                     userRole = 3;
                     break;
-                case "班主任":
+                case "项目负责人":
                     userRole = 3;
                     break;
                 case "学员":

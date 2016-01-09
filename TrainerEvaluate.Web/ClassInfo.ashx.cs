@@ -65,6 +65,10 @@ namespace TrainerEvaluate.Web
             if (ds != null && ds.Tables.Count > 0)
             {
                 var str = new StringBuilder("[");
+
+                str.Append("{\"ClassId\": \"0000\",");
+                str.Append("\"ClassName\": \"全部\"},");
+
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     str.Append("{\"ClassId\": \"" + row["ID"] + "\",");
@@ -179,7 +183,7 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("学员人数");
             fieldsNames.Add("学时");
             fieldsNames.Add("学时类型");
-            fieldsNames.Add("班主任");
+            fieldsNames.Add("项目负责人");
             fieldsNames.Add("培训范围");
             fieldsNames.Add("培训级别");
             fieldsNames.Add("培训类型");
@@ -330,10 +334,10 @@ namespace TrainerEvaluate.Web
             {
                 classModel.PointType = int.Parse(context.Request["PointType"]);
             }
-            if (!string.IsNullOrEmpty(context.Request["Level"]))
-            {
-                classModel.Level = Convert.ToInt32(context.Request["Level"]);
-            }
+            //if (!string.IsNullOrEmpty(context.Request["Level"]))
+            //{
+            //    classModel.Level = Convert.ToInt32(context.Request["Level"]);
+            //}
             if (!string.IsNullOrEmpty(context.Request["Type"]))
             {
                 classModel.Type = int.Parse(context.Request["Type"]);

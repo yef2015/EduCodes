@@ -266,6 +266,33 @@ namespace TrainerEvaluate.BLL
         }
 
 
+        /// <summary>
+        /// 根据班级id，查找所属班级，最后确定课程所属年份
+        /// </summary>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        public string GetClassInfoByClassId(string classId)
+        {
+            try
+            {
+                string classYear = System.DateTime.Now.Year.ToString();
+
+                var sql = string.Format("select a.Name,a.YearLevel from Class a where a.Status = 1 and a.ID = '{0}'", classId);
+                DataSet ds = DbHelperSQL.Query(sql);
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    var row = ds.Tables[0].Rows[0];
+                    classYear = row["YearLevel"].ToString();
+                }
+                return classYear;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return string.Empty;
+            }
+        }
+
 	    #endregion  ExtensionMethod
 	}
 }

@@ -58,7 +58,7 @@
                     <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
                     <th field="Students" width="100" sortable="true">学员人数</th>
                     <th field="Point" width="100" sortable="true">学时</th>
-                    <th field="Teacher" width="100" sortable="true">班主任</th>
+                    <th field="Teacher" width="100" sortable="true">项目负责人</th>
                 </tr>
             </thead>
         </table>
@@ -68,7 +68,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="DeleteClass()">删除</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="setStu()">学员设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="uploadTmpStuData()">导入学员</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="setTeacher()">班主任设置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="setTeacher()">项目负责人设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="setCourse()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
         </div>
@@ -112,7 +112,7 @@
 
                 </div>
                 <div class="fitem">
-                    <label>班主任:</label>
+                    <label>项目负责人:</label>
                     <input name="Teacher" id="Teacher" class="easyui-textbox" style="width:280px;" disabled="true">
                 </div>
                 <div class="fitem">
@@ -166,7 +166,7 @@
 
         <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
-            <div class="ftitle">请选择班主任</div>
+            <div class="ftitle">请选择项目负责人</div>
            
                 <table id="dg2" class="easyui-datagrid"
                     data-options="rownumbers:true,singleSelect:false,url:'TeacherInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
@@ -506,7 +506,7 @@
     function setTeacher() {
         var row = $('#dg').datagrid('getSelected');
         if (row) {
-            $('#dlg2').dialog('open').dialog('setTitle', '班主任设置');
+            $('#dlg2').dialog('open').dialog('setTitle', '项目负责人设置');
             $("#hClassid").val(row.ID);
             $('#dg2').datagrid('reload', { t: 'gt', cId: $("#hClassid").val() });
         } else {
