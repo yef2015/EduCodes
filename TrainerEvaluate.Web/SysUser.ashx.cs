@@ -76,7 +76,17 @@ namespace TrainerEvaluate.Web
                 {
                     strWhere = string.Format(" Dept like '%" + dept + "%' ");
                 }
-            } 
+            }
+
+            //系统管理里只显示【系统管理员】、【项目负责人】
+            if (!string.IsNullOrEmpty(strWhere))
+            {
+                strWhere += string.Format(" and  UserRole="+ (int)EnumUserRole.Admin);
+            }
+            else
+            {
+                strWhere += string.Format("   UserRole=" + (int)EnumUserRole.Admin);  
+            }
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
@@ -112,6 +122,16 @@ namespace TrainerEvaluate.Web
             } 
             //  ds = sysUserBll.GetList(strWhere);
 
+
+            //系统管理里只显示【系统管理员】、【项目负责人】
+            if (!string.IsNullOrEmpty(strWhere))
+            {
+                strWhere += string.Format(" and  UserRole=" + (int)EnumUserRole.Admin);
+            }
+            else
+            {
+                strWhere += string.Format("   UserRole=" + (int)EnumUserRole.Admin);
+            }
 
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
