@@ -196,7 +196,7 @@
         function add() {
             $('#dlg').dialog('open').dialog('setTitle', '新增角色信息');
             $('#fm').form('clear');
-            url = "Roles.ashx?t=add";
+            url = "Roles.ashx?t=add";  
         }
 
 
