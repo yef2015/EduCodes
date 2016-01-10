@@ -353,7 +353,7 @@
                     <div align="center">在职学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <span id="aLastSchoolo"></span>
+                    <span id="aLastSchool"></span>
                 </td>
             </tr>
             <tr>

@@ -202,11 +202,9 @@ namespace TrainerEvaluate.Web
 
             var roleBll = new BLL.Roles(); 
             ds = roleBll.GetRoleFuncListByPage(roleId, "ck", startIndex, endIndex);
-            var num = 0;
-            if (ds != null && ds.Tables.Count > 0)
-            {
-                num = ds.Tables[0].Rows.Count;
-            }  
+
+            var num = roleBll.GetFuncRecordCount(" IsValid = 1 ");
+
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
@@ -224,11 +222,8 @@ namespace TrainerEvaluate.Web
 
             var roleBll = new BLL.Roles();
             ds = roleBll.GetRoleUserListByPage(roleId,roleName, "ck", startIndex, endIndex);
-            var num = 0;
-            if (ds != null && ds.Tables.Count > 0)
-            {
-                num = ds.Tables[0].Rows.Count;
-            }  
+            var num = roleBll.GetUserRecordCount(" Status = 1 ");
+ 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }

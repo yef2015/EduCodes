@@ -483,6 +483,29 @@ namespace TrainerEvaluate.BLL
             return pwd.Next(999999).ToString();
         }
 
+        /// <summary>
+        /// 获取授课教师信息，为填充下拉框
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetDataSourceOnTeacher()
+        {
+            var dt = new DataTable();
+            try
+            {
+                var sql = " select TeacherId as ID,TeacherName as Name from Teacher where Status = 1 order by Name   ";
+                var result = DbHelperSQL.Query(sql);
+                if (result != null && result.Tables.Count > 0)
+                {
+                    dt = result.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return dt;
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

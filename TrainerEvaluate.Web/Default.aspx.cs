@@ -60,31 +60,43 @@ namespace TrainerEvaluate.Web
             schooldistrict.Visible = false;
             schoolManage.Visible = false;
             classTreeManage.Visible = false;
+            personArchive.Visible = false;  // 个人档案
+            trainExper.Visible = false;     // 培训经历
+            teacherArchive.Visible = false; // 教师的个人档案
+            professExper.Visible = false;   // 任教经历
 
             if (Profile.CurrentUser.UserRole==1)
             {  
                 stuQue.Visible = true;
                 ifrcont.Attributes["src"] = "MyQuestionnaireNew.aspx";
+                personArchive.Visible = true;
+                trainExper.Visible = true;
+            }
+            else if (Profile.CurrentUser.UserRole == 2)
+            {
+                ifrcont.Attributes["src"] = "MyTeacherArchive.aspx";
+                teacherArchive.Visible = true;
+                professExper.Visible = true;
             }
             else
             {
                 var roleBll = new BLL.Roles();
-                var dt = roleBll.GetCurrentUserRoleInfo(Profile.CurrentUser.UserId); 
+                var dt = roleBll.GetCurrentUserRoleInfo(Profile.CurrentUser.UserId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
                         if (row["FuncCode"].ToString() == "manage")
                         {
-                            manage.Visible = true; 
+                            manage.Visible = true;
                         }
                         if (row["FuncCode"].ToString() == "teacherManage")
                         {
-                            teacherManage.Visible = true; 
+                            teacherManage.Visible = true;
                         }
                         if (row["FuncCode"].ToString() == "analysis")
                         {
-                            analysis.Visible = true; 
+                            analysis.Visible = true;
                         }
                         //if (row["FuncCode"].ToString() == "classManage")
                         //{
@@ -113,7 +125,7 @@ namespace TrainerEvaluate.Web
                         if (row["FuncCode"].ToString() == "classTreeManage")
                         {
                             classTreeManage.Visible = true;
-                        } 
+                        }
                     }
 
                     if (dt.Rows.Count > 0)
@@ -183,8 +195,8 @@ namespace TrainerEvaluate.Web
                         ifrcont.Attributes["src"] = "PersonalInfo.aspx";
                         personalInfo.Style["color"] = "#000000";
                         personalInfo.Style["font-weight"] = "bold";
-                    }  
-                } 
+                    }
+                }
             } 
         }
    

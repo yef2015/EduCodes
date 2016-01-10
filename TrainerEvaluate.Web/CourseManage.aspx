@@ -14,13 +14,19 @@
                 <input name="corName" class="easyui-textbox" id="corName">
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                <div align="center">授课地点： </div>
+            </td>
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
+                <input name="TeachPlace11" class="easyui-textbox" id="TeachPlace11">
+            </td>
+            <%--<td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">授课教师： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
                 <input name="teacherName" class="easyui-textbox" id="teacherName">
-            </td>
+            </td>--%>
         </tr>
-        <tr>
+        <%--<tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">授课地点：</div>
             </td>
@@ -33,7 +39,7 @@
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <input name="TeachTime11" id="TeachTime11" class="easyui-datebox" />
             </td>
-        </tr>
+        </tr>--%>
         <tr bgcolor="#FFFFFF">
             <td colspan="4" class="gray10a" height="26" align="middle">
                 <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryUser()" style="width: 90px">查询</a>
@@ -49,11 +55,11 @@
             <thead>
                 <tr>
                     <th field="CourseId" width="0" hidden="true">编号</th>
-                    <th field="TeacherId" width="0" hidden="true">教师编号</th>
+                    <th field="TeacherId" width="0" hidden="false">教师编号</th>
                     <th field="CourseName" width="300" sortable="true">课程名称</th>
-                    <th field="TeacherName" width="100" sortable="true">授课教师</th>
+                    <th field="TeacherName" width="0" hidden="false">授课教师</th>
                     <th field="TeachPlace" width="100" sortable="true">授课地点</th>
-                    <th field="TeachTime" width="100" sortable="true">授课时间</th>
+                    <th field="TeachTime" width="0" hidden="false">授课时间</th>
                     <th field="Description" width="200" sortable="true">描述</th>
                 </tr>
             </thead>
@@ -65,7 +71,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">下载模板</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadTmpData()">批量导入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-redo" plain="true" onclick="exportData()">导出</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">授课教师设置</a>
+<%--            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">授课教师设置</a>--%>
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 500px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -76,20 +82,20 @@
                     <label>课程名称:</label>
                     <input name="CourseName" id="CourseName" class="easyui-textbox" style="width:280px;"  required="true" />
                 </div>
-                <div class="fitem">
+<%--                <div class="fitem">
                     <label>授课教师</label>
                     <input class="easyui-combobox" style="height: 50px;width:280px;"
                         name="CourseInfo" id="CourseInfo"
                         data-options="multiple:true,multiline:true,panelHeight:'auto',url:'TeacherInfo.ashx?t=c',method:'get',valueField:'TeacherId',textField:'TeacherName'" />
-                </div>
+                </div>--%>
                 <div class="fitem">
                     <label>授课地点:</label>
                     <input name="TeachPlace" id="TeachPlace" style="width:280px;"  class="easyui-textbox" />
                 </div>
-                <div class="fitem">
+<%--                <div class="fitem">
                     <label>授课时间:</label>
                     <input name="TeachTime" id="TeachTime" style="width:280px;"  class="easyui-datebox" />
-                </div>
+                </div>--%>
                 <div class="fitem">
                     <label>课程类型:</label>
                     <select class="easyui-combobox" name="Type" id="Type" style="width: 138px;" data-options="url:'ComboboxGetData.ashx?t=t',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
@@ -142,9 +148,9 @@
     <script type="text/javascript">
         function clearCondition() {
             $('#corName').textbox('clear');
-            $('#teacherName').textbox('clear');
+            //$('#teacherName').textbox('clear');
             $('#TeachPlace11').textbox('clear');;
-            $('#TeachTime11').textbox("setText", "");
+            //$('#TeachTime11').textbox("setText", "");
         }
 
 
@@ -152,17 +158,17 @@
             $('#dg').datagrid('load', {
                 t: "q",
                 name: $("#corName").textbox('getText'),
-                teaName: $("#teacherName").textbox('getText'),
-                teaplace: $("#TeachPlace11").textbox('getText'),
-                teaTime: $("#TeachTime11").textbox('getText')
+                //teaName: $("#teacherName").textbox('getText'),
+                teaplace: $("#TeachPlace11").textbox('getText')
+                //teaTime: $("#TeachTime11").textbox('getText')
             });
         }
 
 
 
         function exportData() {
-            var url = "Course.ashx?t=ex" + "&name=" + encodeURIComponent($("#corName").textbox('getText')) + "&teaName=" + $("#teacherName").textbox('getText')
-                + "&teaplace=" + $("#TeachPlace11").textbox('getText') + "&teaTime=" + $('#TeachTime11').combobox("getValue");
+            var url = "Course.ashx?t=ex" + "&name=" + encodeURIComponent($("#corName").textbox('getText')) + "&teaName=" 
+                + "&teaplace=" + $("#TeachPlace11").textbox('getText');
             window.location = url;
         }
 
@@ -281,9 +287,9 @@
             if (row) {
                 $('#dlg').dialog('open').dialog('setTitle', '编辑');
                 $('#CourseName').textbox("setText", row.CourseName);
-                $('#TeacherName').combobox("setText", row.TeacherName);
+                //$('#TeacherName').combobox("setText", row.TeacherName);
                 $('#TeachPlace').textbox("setText", row.TeachPlace);
-                $('#TeachTime').textbox("setText", row.TeachTime);
+                //$('#TeachTime').textbox("setText", row.TeachTime);
                 $('#Type').combobox("setValue", row.Type);
                 $('#TypeSmallName').textbox("setText", row.TypeSmallName);                
                 $('#Description').textbox("setText", row.Description);
@@ -297,10 +303,10 @@
         function saveUser() { 
             var data = {
                 CourseName: $('#CourseName').textbox("getText"),
-                TeacherName: $('#CourseInfo').combobox("getText"),
-                TeacherId: escape($('#CourseInfo').combobox("getValues")),
+                TeacherName:"", //$('#CourseInfo').combobox("getText"),
+                TeacherId:"", //escape($('#CourseInfo').combobox("getValues")),
                 TeachPlace: $('#TeachPlace').textbox("getText"),
-                TeachTime: $('#TeachTime').textbox("getText"),
+                TeachTime:"2016-01-10", //$('#TeachTime').textbox("getText"),
                 Type: $('#Type').combobox("getValue"),
                 TypeName: $('#Type').combobox("getText"),
                 TypeSmallName: $('#TypeSmallName').textbox("getText"),

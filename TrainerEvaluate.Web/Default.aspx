@@ -62,6 +62,18 @@
             case "classTreeManage":
                 url = "ClassTreeManage.aspx";
                 break;
+            case "personArchive":
+                url = "MyPersonArchive.aspx";
+                break;
+            case "trainExper":
+                url = "MyTrainExper.aspx";
+                break;
+            case "teacherArchive":
+                url = "MyTeacherArchive.aspx";
+                break;
+            case "professExper":
+                url = "MyProfessExper.aspx";
+                break;
             default:
                 break;
             }
@@ -121,6 +133,10 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="analysis" onclick="toMenu('analysis')" runat="server" >统计分析</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="manage" onclick="toMenu('manage')" runat="server" >系统管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQue" onclick="toMenu('stuQue')"  runat="server" >问卷调查</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="personArchive" onclick="toMenu('personArchive')"  runat="server" >个人档案</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="trainExper" onclick="toMenu('trainExper')"  runat="server" >培训经历</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="teacherArchive" onclick="toMenu('teacherArchive')"  runat="server" >个人档案</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="professExper" onclick="toMenu('professExper')"  runat="server" >任教经历</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="personalInfo" onclick="toMenu('personalInfo')" runat="server" >个人信息修改</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" onclick="logout()" id="logoutSys" runat="server" >系统退出</div> 
                   <%--  <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" onclick="logout()" id="logoutStu" runat="server" >系统退出</div>--%>

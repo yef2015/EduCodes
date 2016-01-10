@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseTeacher.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="Dictionaries.cs" />
