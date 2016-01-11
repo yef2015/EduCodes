@@ -78,10 +78,10 @@
             <thead>
                 <tr>
                     <th field="ID" width="0" hidden="true">编号</th>
-                    <th field="Name" width="150" sortable="true">角色名称</th>
-                    <th field="Rstatus" width="100" sortable="true" formatter="formatterRoleStatus">状态</th>
-                    <th field="Description" width="100" sortable="true">描述</th>
-                    <th field="CreateTime" width="150" sortable="true" formatter="formatterdate">创建时间</th>
+                    <th field="Name" width="20%" sortable="true">角色名称</th> 
+                    <th field="Description" width="40%" sortable="true">描述</th>
+                    <th field="Rstatus" width="15%" sortable="true" formatter="formatterRoleStatus">状态</th>
+                    <th field="CreateTime" width="20%" sortable="true" formatter="formatterdate">创建时间</th>
                 </tr>
             </thead>
         </table>
@@ -195,8 +195,8 @@
 
         function add() {
             $('#dlg').dialog('open').dialog('setTitle', '新增角色信息');
-            $('#fm').form('clear');
-            url = "Roles.ashx?t=add";  
+            $('#fm1').form('clear');
+            url = "Roles.ashx?t=add";
         }
 
 
@@ -204,9 +204,9 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {                
                 var roleName = row.Name;
-                if (roleName == '超级管理员' || roleName == '项目负责人' || roleName == '学员' || roleName == '授课教师')
+                if (roleName == '系统管理员' || roleName == '项目负责人' || roleName == '学员' || roleName == '教师' || roleName == '统计分析人员')
                 {
-                    alert("角色名称为：" + roleName + "不允许修改，请核实。");
+                    alert("角色名称为【" + roleName + "】系统内置角色，不允许修改！");
                     return;
                 }
 
@@ -223,6 +223,11 @@
         function destroy() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
+                var roleName = row.Name;
+                if (roleName == '系统管理员' || roleName == '项目负责人' || roleName == '学员' || roleName == '教师' || roleName == '统计分析人员') {
+                    alert("角色名称为【" + roleName + "】系统内置角色，不允许删除！");
+                    return;
+                }
                 if (confirm("确认要删除吗？")) {
                     url = "Roles.ashx?t=del";
                     $.post(url, { id: row.ID }, function (result) {
@@ -245,6 +250,14 @@
             var data = {
                 Name: $('#Name').textbox("getText"), Rstatus: $('#Rstatus').combobox("getValue"), Description: $('#Description').textbox("getText")
             };
+            if (data.Name == "") {
+                alert("请填写角色名称！");
+                return;
+            }
+            if (data.Name == "系统管理员" || data.Name == "项目负责人" || data.Name == "学员" || data.Name == "教师" || data.Name == '统计分析人员') {
+                alert("角色名称为【" + data.Name + "】,与系统内置角色重名，请修改！");
+                return;
+            }
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');

@@ -297,8 +297,8 @@ namespace TrainerEvaluate.BLL
 	    {
             int userRole = 1;
             switch (roleName)
-            { 
-                case "超级管理员":
+            {
+                case "系统管理员":
                     userRole = 3;
                     break;
                 case "项目负责人":
