@@ -266,6 +266,55 @@
         </div>
 
 
+        <div id="dlg6" class="easyui-dialog" style="width: 550px; height: 300px; padding: 10px 20px" data-options="modal:true,top:10"
+            closed="true" buttons="#dlg-buttons6">
+            <form id="fm1" method="post">
+                <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
+                    <tr>
+                        <td colspan="4" bgcolor="F0F9FF" class="gray10a" height="25">
+                            <div align="center"><span id="aExportClass"></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" bgcolor="FFFFFF" class="gray10a" height="25">
+                            <div align="center">班级现有人数：</div>
+                        </td>
+                        <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
+                            <span id="aCurPerson"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" bgcolor="FFFFFF" class="gray10a" height="25">
+                            <div align="center">要导入人数：</div>
+                        </td>
+                        <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
+                            <span id="aExportCount"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" bgcolor="FFFFFF" class="gray10a" height="25">
+                            <div align="center">与现有班级重复人数：</div>
+                        </td>
+                        <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
+                            <span id="aRepeatCount"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" bgcolor="FFFFFF" class="gray10a" height="25">
+                            <div align="center">系统不存在人数：</div>
+                        </td>
+                        <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
+                            <span id="aNotExistCount"></span>
+                        </td>
+                    </tr>
+                </table>            
+            </form>
+        </div>
+        <div id="dlg-buttons6">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveClassAndStudent()" style="width: 120px">确认导入</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg6').dialog('close'); " style="width: 120px">取消导入</a>
+        </div> 
+
 
 
     </div>
@@ -276,6 +325,7 @@
         <div id="fileQueue"></div>
     </div>
     <input type="hidden" id="setClassIdForStu" /> 
+    <input type="hidden" id="setClassNameStu" /> 
 
     <script type="text/javascript">
 
@@ -776,6 +826,9 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $("#setClassIdForStu").val(row.ID);
+                $("#setClassNameStu").val(row.Name);
+                $('#aExportClass').text(row.Name);
+
                 $('#dlgUpload').dialog({
                     title: '批量设置学员',
                     height: '300px',
@@ -783,13 +836,14 @@
                     cache: false,
                     modal: true
                 });
+                SetUploadTmpStuData(row.ID);
                 $('#dlgUpload').dialog('open');
             } else {
                 $.messager.alert('提示', '请选择要设置的行!', 'warning');
             }
         }
-        var classId = $("#setClassIdForStu").val();
-        $(function () {
+        
+        function SetUploadTmpStuData(classId){
             $('#upData').uploadify({
                 'swf': 'Scripts/uploadify.swf',
                 'uploader': 'UploadTmpData.ashx?t=stet&d=' + classId,
@@ -809,12 +863,22 @@
                     if (data != "" && data != "1") {
                         var result = data.split('|');
                         if (result.length > 0) {
-                            alert(result[0]);
-                            ifConfirmCover(result[1]);
+                            if (result[0] == "studentexport")
+                            {
+                                $('#aCurPerson').text(result[1]);
+                                $('#aExportCount').text(result[2]);
+                                $('#aRepeatCount').text(result[3]);
+                                $('#aNotExistCount').text(result[4]);
+                                $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
+                            }
+                            else
+                            {
+                                ifConfirmCover(result[1]);
+                            }
                         } else {
                             alert(data);
                         }
-                    }
+                    } 
                 },
                 'onUploadError': function (file, errorCode, errorMsg, errorString) {
                     $('#permissions_hint').show();
@@ -826,7 +890,22 @@
                     }
                 }
             });
-        });
+        }
+
+        function saveClassAndStudent()
+        {
+            var url = "UploadTmpData.ashx?t=cstet&d=" + $("#setClassIdForStu").val();
+            var data = { "fname": "" };
+            $.post(url, data, function (result) {
+                if (result == "") {
+                    $('#dlg6').dialog('close');
+                    $('#dg').datagrid('reload');
+                }
+                else {
+                    $.messager.alert('提示', result, 'warning');
+                }
+            });
+        }
 
 
         function ifConfirmCover(filename) {

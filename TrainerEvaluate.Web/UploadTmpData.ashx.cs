@@ -49,7 +49,7 @@ namespace TrainerEvaluate.Web
                 // 班级添加学员
                 var classId = context.Request["d"];
 
-                var res = ConfirmClassStuDatat(context.Request["fname"], classId, out result);
+                var res = ConfirmClassStuDatat(classId, out result);
             }
             else
             {
@@ -132,7 +132,8 @@ namespace TrainerEvaluate.Web
                     }
                     else if (dtype == "stet")
                     {
-                        result = ClassStudentImport(dt, out msg, filename);
+                        var classId = context.Request["d"];
+                        result = ClassStudentImport(dt, out msg, filename,classId);
                     }
                     File.Delete(basePath + filename);
 
@@ -482,30 +483,85 @@ namespace TrainerEvaluate.Web
 
         #region 向班级中添加学员
 
-        private bool ConfirmClassStuDatat(string filename, string classid, out string msg)
+        private bool ConfirmClassStuDatat(string classid, out string msg)
         {
             msg = "";
-            var basePath = HttpContext.Current.Server.MapPath("UploadTemplate/");
             if (HttpContext.Current.Session["cclstudatat"] != null)
             {
                 var dt = (DataTable)HttpContext.Current.Session["cclstudatat"];
+                var dtExist = (DataTable)HttpContext.Current.Session["cclstudatatDouble"];
+                var ccCount = (int)HttpContext.Current.Session["cclstudatatCount"];                
+
                 if (dt != null)
                 {
                     try
                     {
                         var sqllist = new List<string>();
 
+                        var stuBll = new BLL.Student();
+                        var startAcount = stuBll.GetStuAccount();
+                        var startNo = startAcount.Substring(startAcount.Length - 3, 3);
+                        var i = 0;
+                        i = i + Convert.ToInt32(startNo);
+                        var uid = Guid.Empty;
+                        bool isExist = false;
+                        var iCount = 0;
+
+
                         foreach (DataRow row in dt.Rows)
                         {
-                            sqllist.Add(string.Format(
-                                "delete ClassStudents where StudentId = '{0}' and ClassId = '{1}' ;insert into ClassStudents (RId,StudentId,ClassId) values" +
-                                "  (NEWID(),'{0}','{1}')",
-                                BLL.Student.GetStudentIdByIdentityNo(row["身份证号"].ToString().Trim()),
-                                classid));
+                            foreach (DataRow drCur in dtExist.Rows)
+                            {
+                                if (row["身份证号"].ToString() == drCur["IdentityNo"].ToString())
+                                {
+                                    isExist = true;
+                                    break;
+                                }
+                            }
+                            if (isExist)
+                            {
+                                // 添加关系
+                                sqllist.Add(string.Format(
+                                    "delete ClassStudents where StudentId = '{0}' and ClassId = '{1}' ;insert into ClassStudents (RId,StudentId,ClassId) values" +
+                                    "  (NEWID(),'{0}','{1}')",
+                                    BLL.Student.GetStudentIdByIdentityNo(row["身份证号"].ToString().Trim()),
+                                    classid));
+                            }
+                            else
+                            {
+                                // 添加学员，添加关系
+                                Random pwd = new Random(GetRandomSeed());
+                                i++;
+                                uid = Guid.NewGuid();
+
+                                sqllist.Add(string.Format(
+                                "insert into   Student (StudentId,StuName,Gender,IdentityNo,School,JobTitle,TelNo,Birthday,Nation,FirstRecord,FirstSchool," +
+                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description," +
+                                                       "CreateTime,LastModifyTime,Status) values" +
+                                                       "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
+                                                       "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
+                                                        uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
+                                                         row["身份证号"].ToString().Trim(), row["所在单位"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
+                                                         row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
+                                                         row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
+                                                         row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
+                                                         row["现任职务"].ToString().Trim(), row["任职时间"].ToString().Trim(), row["手机号"].ToString().Trim(),
+                                                         row["继教号"].ToString().Trim(), row["描述"].ToString().Trim()));
+
+                                sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
+                                                          " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), pwd.Next(999999).ToString(),
+                                                          "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'), uid,
+                                                          row["身份证号"].ToString().Trim(), (int)EnumUserRole.Student));
+
+                                sqllist.Add(string.Format(
+                                    "insert into ClassStudents (RId,StudentId,ClassId) values" +
+                                    "  (NEWID(),'{0}','{1}')",uid,classid));
+                            }
+                            isExist = false;
                         }
-                        sqllist.Add(string.Format("update Class set Students={0}  where ID={1} ", dt.Rows.Count, classid));
+
+                        sqllist.Add(string.Format("update Class set Students={0}  where ID={1} ", ccCount, classid));
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
-                        System.IO.File.Delete(basePath + filename);
                         return result != 0;
                     }
                     catch (Exception ex)
@@ -528,13 +584,71 @@ namespace TrainerEvaluate.Web
             }
         }
 
-        private bool ClassStudentImport(DataTable dt, out string msg, string filename)
+        private bool ClassStudentImport(DataTable dt, out string msg, string filename, string classId)
         {
             msg = "";
             if (dt != null && dt.Rows.Count > 0)
             {
-                // msg = "为了取得班级编号" + "|" + filename;
+                // 班级现有人数
+                string sqlStu = "select b.IdentityNo,b.StuName from ClassStudents  a left join Student b on b.StudentId = a.StudentId where a.ClassId = '"+classId+"'";
+                var dtCurStu = DbHelperSQL.Query(sqlStu);
+                var curCount = 0;
+                if (dtCurStu != null && dtCurStu.Tables.Count > 0 && dtCurStu.Tables[0].Rows.Count > 0)
+                {
+                    curCount = dtCurStu.Tables[0].Rows.Count;
+                }
+
+                // 要导入人数
+                var exportCount = dt.Rows.Count;
+                
+                // 重复的人数
+                var repeatCount = 0;
+                foreach (DataRow dr in dtCurStu.Tables[0].Rows)
+                {
+                    foreach (DataRow drExp in dt.Rows)
+                    {
+                        if (dr["IdentityNo"].ToString() == drExp["身份证号"].ToString().Trim())
+                        {
+                            repeatCount++;
+                            break;
+                        }
+                    }
+                }
+                if (repeatCount > exportCount)
+                {
+                    repeatCount = exportCount;
+                }
+
+                // 系统中不存在的人数
+                var notExistCount = 0;
+                var sb1 = new StringBuilder();
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (!string.IsNullOrEmpty(sb1.ToString()))
+                    {
+                        sb1.Append(string.Format(",'{0}'", row["身份证号"].ToString().Trim()));
+                    }
+                    else
+                    {
+                        sb1.Append(string.Format("'{0}'", row["身份证号"].ToString().Trim()));
+                    }
+                }
+
+                var sql = string.Format(" select distinct(IdentityNo) from Student where IdentityNo in ({0}) and Status = 1 ", sb1.ToString());
+                var dtExist = DbHelperSQL.Query(sql);
+
+                if (dtExist != null && dtExist.Tables.Count > 0 && dtExist.Tables[0].Rows.Count > 0) 
+                {
+                    notExistCount = exportCount - dtExist.Tables[0].Rows.Count;
+                }
+
+                var basePath = HttpContext.Current.Server.MapPath("UploadTemplate/");
+                System.IO.File.Delete(basePath + filename);
+
+                msg = "studentexport|" + curCount + "|" + exportCount + "|" + repeatCount + "|" + notExistCount + "|";
                 HttpContext.Current.Session.Add("cclstudatat", dt);
+                HttpContext.Current.Session.Add("cclstudatatDouble", dtCurStu.Tables[0]);
+                HttpContext.Current.Session.Add("cclstudatatCount", curCount + exportCount-repeatCount);
                 return false;
             }
             else
