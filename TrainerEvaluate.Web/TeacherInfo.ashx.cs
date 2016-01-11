@@ -53,6 +53,10 @@ namespace TrainerEvaluate.Web
                 case "gt":
                     GetTeacherInfoClass(context);
                     break;
+                case "pah":
+                    var strph = GetPersonArchive(context);
+                    context.Response.Write(strph);
+                    break; 
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -667,7 +671,22 @@ namespace TrainerEvaluate.Web
             context.Response.Write(msg);
         }
 
+        private string GetPersonArchive(HttpContext context)
+        {
+            var ds = new DataSet();
+            var teaBll = new BLL.Teacher();
 
+            var teaId = context.Request["uid"];
+
+            ds = teaBll.GetListByPage(" Status = 1   and TeacherId = '" + teaId + "' ", "TeacherName", 1, 5, "asc");
+            var str = string.Empty;
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                str = JsonConvert.SerializeObject(new { rows = ds.Tables[0] });
+            }
+            return str;
+        }
        
     }
 }

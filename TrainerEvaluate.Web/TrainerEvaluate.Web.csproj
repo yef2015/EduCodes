@@ -138,7 +138,11 @@
     <Content Include="images\temp2.gif" />
     <Content Include="Login.aspx" />
     <Content Include="Manage.aspx" />
+    <Content Include="MyPersonArchive.aspx" />
+    <Content Include="MyProfessExper.aspx" />
     <Content Include="MyQuestionnaireNew.aspx" />
+    <Content Include="MyTeacherArchive.aspx" />
+    <Content Include="MyTrainExper.aspx" />
     <Content Include="PersonalInfo.aspx" />
     <Content Include="QuestionnaireManage.aspx" />
     <Content Include="QuestionnairManageShow.aspx" />
@@ -562,6 +566,20 @@
     <Compile Include="Manage.aspx.designer.cs">
       <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MyPersonArchive.aspx.cs">
+      <DependentUpon>MyPersonArchive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyPersonArchive.aspx.designer.cs">
+      <DependentUpon>MyPersonArchive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyProfessExper.aspx.cs">
+      <DependentUpon>MyProfessExper.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyProfessExper.aspx.designer.cs">
+      <DependentUpon>MyProfessExper.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MyQuestionnaire.ashx.cs">
       <DependentUpon>MyQuestionnaire.ashx</DependentUpon>
     </Compile>
@@ -571,6 +589,20 @@
     </Compile>
     <Compile Include="MyQuestionnaireNew.aspx.designer.cs">
       <DependentUpon>MyQuestionnaireNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyTeacherArchive.aspx.cs">
+      <DependentUpon>MyTeacherArchive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyTeacherArchive.aspx.designer.cs">
+      <DependentUpon>MyTeacherArchive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyTrainExper.aspx.cs">
+      <DependentUpon>MyTrainExper.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyTrainExper.aspx.designer.cs">
+      <DependentUpon>MyTrainExper.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageContent.Master.cs">
       <DependentUpon>PageContent.Master</DependentUpon>

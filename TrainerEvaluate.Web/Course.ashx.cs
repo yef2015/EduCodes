@@ -50,6 +50,16 @@ namespace TrainerEvaluate.Web
                 case "gc":
                     GetClassCourse(context);
                     break;
+                case "ctc":
+                    SetClassCourseTeacher(context);
+                    break;
+                case "cctdel":
+                    DelClassCourseTeacher(context);
+                    break;
+                case "dcct":
+                    var strcct = GetCourseTeaData(context);
+                    context.Response.Write(strcct);
+                    break;                     
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -144,6 +154,37 @@ namespace TrainerEvaluate.Web
             return str;
         }
 
+        private string GetCourseTeaData(HttpContext context)
+        {
+            var ds = new DataSet();
+            var classId = context.Request["cId"];
+            var cctBll = new BLL.CourseTeacher();
+
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "CoursName" : context.Request["sort"];
+            var order = string.IsNullOrEmpty(context.Request["order"]) ? "desc" : context.Request["order"];
+             
+
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var num = 10;
+            if (!string.IsNullOrEmpty(classId))
+            {
+                num = cctBll.GetRecordCount(" ClassId = '" + classId + "' ");
+                ds = cctBll.GetListByPage("  ClassId = '" + classId + "' ", sort, startIndex, endIndex);
+            }
+            else
+            {
+                ds = cctBll.GetListByPage(" ", sort, startIndex, endIndex); 
+            }
+            
+
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
+        }
+        
 
         /// <summary>
         /// 获取班级课程
@@ -263,9 +304,101 @@ namespace TrainerEvaluate.Web
         }
 
 
-        
+        /// <summary>
+        /// 保存班级、课程、教师的关系；在班级管理中，选择课程、选择老师、设置开始时间、结束时间
+        /// </summary>
+        /// <param name="context"></param>
+        private void SetClassCourseTeacher(HttpContext context)
+        {
+            var cctModel = new Models.CourseTeacher();
+            SetClassCourseTeaValue(cctModel, context);
 
+            var cctBll = new BLL.CourseTeacher();
 
+            cctModel.CreateTime = DateTime.Now;
+            var result = false;
+            var msg = "";
+            try
+            {
+                result = cctBll.Add(cctModel);
+
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+            }
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            context.Response.Write(msg);
+        }
+
+        private void DelClassCourseTeacher(HttpContext context)
+        {
+            var msg = "";
+            var classId = context.Request["ClassId"];
+            var isAll = context.Request["IsAll"];
+            if (!string.IsNullOrEmpty(isAll)) //全选
+            {
+                if (isAll == "1")
+                {
+                    var cctBll = new BLL.CourseTeacher();
+                    var result = cctBll.DeleteByClassId(classId);
+                    if (!result)
+                    {
+                        msg = "保存失败！";
+                    }
+                }                
+            }
+            else
+            {
+                var cctds = context.Request["CctIds"];
+                if (!string.IsNullOrEmpty(cctds))
+                {
+                    var cct = cctds.Split('|');
+                    var ridList = string.Empty;
+                    foreach (var sid in cct)
+                    {
+                        ridList += "'"+sid+"',";
+                    }
+
+                    var cctBll = new BLL.CourseTeacher();
+                    var result = cctBll.DeleteList(ridList.Substring(0,ridList.Length-1));
+                    if (!result)
+                    {
+                        msg = "保存失败！";
+                    }
+                }                
+            }
+            context.Response.Write(msg);
+
+        }
+
+        private void SetClassCourseTeaValue(Models.CourseTeacher courModel, HttpContext context)
+        {
+            if (!string.IsNullOrEmpty(context.Request["CourseId"]))
+            {
+                courModel.CourseId = Guid.Parse(context.Request["CourseId"]);
+            } 
+            courModel.CoursName = context.Request["CoursName"];
+            courModel.ClassId = context.Request["ClassId"];
+            courModel.ClassName = context.Request["ClassName"];
+            courModel.TeacherId = context.Request["TeacherId"];
+            courModel.TeacherName = context.Request["TeacherName"];
+
+            if (!string.IsNullOrEmpty(context.Request["StartDate"]))
+            {
+                courModel.StartDate = DateTime.Parse(context.Request["StartDate"]);
+            }
+            if (!string.IsNullOrEmpty(context.Request["FinishDate"]))
+            {
+                courModel.FinishDate = DateTime.Parse(context.Request["FinishDate"]);
+            }            
+        }
 
         private void Query(HttpContext context)
         {

@@ -68,7 +68,8 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="setStu()">学员设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="uploadTmpStuData()">导入学员</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">项目负责人设置</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourse()">课程设置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourseNew()">课程设置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="showCourseNew()">查看课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
         </div>
 
@@ -207,6 +208,66 @@
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseCourse()" style="width: 90px">保存</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg3').dialog('close'); " style="width: 90px">取消</a>
         </div> 
+
+        <div id="dlg4" class="easyui-dialog" style="width: 450px; height: 350px; padding: 10px 20px" data-options="modal:true,top:10"
+            closed="true" buttons="#dlg-buttons4">
+            <div class="ftitle">设置课程信息</div>
+            <form id="fmCourse" method="post">
+                <div class="fitem">
+                    <label>选择课程:</label>
+                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                    </select>
+                </div>
+                <div class="fitem">
+                    <label>授课老师:</label> 
+                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                    </select>
+                </div>
+                <div class="fitem">
+                    <label>开始日期:</label>
+                    <input name="CusStartDate" id="CusStartDate" class="easyui-datebox" style="width:260px;"  />
+                </div>
+                <div class="fitem">
+                    <label>结束日期:</label>
+                    <input name="CusFinishDate" id="CusFinishDate" class="easyui-datebox" style="width:260px;" />
+                </div>
+                <input type="hidden" id="hClassName" /> 
+            </form>
+        </div>
+        <div id="dlg-buttons4">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseCourseNew()" style="width: 90px">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg4').dialog('close'); " style="width: 90px">取消</a>
+        </div> 
+
+         <div id="dlg5" class="easyui-dialog" style="width: 550px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+            closed="true" buttons="#dlg-buttons5">
+            <div class="ftitle">请选择要删除的课程</div>
+           
+                <table id="dg5" class="easyui-datagrid"
+                    data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
+                    <thead>
+                        <tr>
+                            <th data-options="field:'ck',checkbox:true"></th>
+                            <th data-options="field:'RId'" hidden="true">RId</th>
+                            <th  width="120" data-options="field:'CoursName'">课程名称</th>
+                            <th  width="120" data-options="field:'TeacherName'">教师姓名</th>
+                            <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
+                            <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
+                        </tr>
+                    </thead>
+                </table> 
+                <input type="hidden" id="hcctIsAll" />
+                <input type="hidden" id="hcctIds" /> 
+                <input type="hidden" id="hUncctIds" /> 
+        </div>
+        <div id="dlg-buttons5">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveDeleteCourse()" style="width: 90px">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg5').dialog('close');" style="width: 90px">取消</a>
+        </div>
+
+
+
+
     </div>
 
     <div id="dlgUpload" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
@@ -332,6 +393,38 @@
             }
         }
 
+
+        function setCourseNew() {
+
+            $('#CusCourse').textbox("setValue", "");
+            $('#CusTeacher').textbox("setValue", "");
+            $('#CusStartDate').textbox("setValue", "");
+            $('#CusFinishDate').datebox("setValue", "");
+
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlg4').dialog('open').dialog('setTitle', '课程设置');
+                $("#hClassid").val(row.ID);
+                $("#hClassName").val(row.Name);
+            } else {
+                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+            }
+        }
+
+        function showCourseNew() {
+            courseids = "";
+            uncourseids = "";
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlg5').dialog('open').dialog('setTitle', '查看课程设置');
+                $("#hClassid").val(row.ID);
+                $('#dg5').datagrid('reload', { t: 'dcct', cId: $("#hClassid").val() });
+            } else {
+                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+            }
+        }
+        
+
       
         $('#dg3').datagrid({
             onSelectAll: function () {
@@ -402,6 +495,110 @@
                 }
             });
         }
+
+        function saveChoseCourseNew() {
+            var url = "Course.ashx?t=ctc";
+            var data = {
+                CourseId: $('#CusCourse').combobox("getValue"),
+                CoursName: $('#CusCourse').combobox("getText"),
+                TeacherId: $('#CusTeacher').combobox("getValue"),
+                TeacherName: $('#CusTeacher').combobox("getText"),
+                ClassId: $("#hClassid").val(),
+                ClassName: $("#hClassName").val(),
+                StartDate: $('#CusStartDate').textbox("getText"),
+                FinishDate: $('#CusFinishDate').textbox("getText")
+            };
+            if (data.CoursName == "") {
+                alert("请选择课程！");
+                return;
+            }
+            if (data.TeacherName == "") {
+                alert("请选择老师！");
+                return;
+            }
+            $.post(url, data, function (result) {
+                if (result == "") {
+                    $('#dlg4').dialog('close');
+                    alert("设置成功。");
+                }
+                else {
+                    $.messager.alert('提示', result, 'warning');
+                }
+            });
+        }
+
+        function saveDeleteCourse() {
+            var data;
+            if ($("#hcctIsAll").val() == "1") {
+                data = { IsAll: 1, ClassId: $("#hClassid").val() };
+            } else {
+                data = { CctIds: $("#hcctIds").val(), ClassId: $("#hClassid").val()};
+            }
+            var url = "Course.ashx?t=cctdel";
+            $.post(url, data, function (result) {
+                if (result == "") {
+                    $('#dlg5').dialog('close');
+                    $('#dg5').datagrid('load');
+                    $('#dg').datagrid('reload');
+                    cctids = "";
+                    uncctids = "";
+                } else {
+                    $.messager.alert('提示', result, 'warning');
+                    $('#dlg5').dialog('close');
+                    $('#dg5').datagrid('load');
+                    $('#dg').datagrid('reload');
+                    cctids = "";
+                    uncctids = "";
+                }
+            });
+        }
+
+        var cctids = "";
+        var uncctids = "";
+
+        $('#dg5').datagrid({
+            onSelectAll: function () {
+                $("#hcctIsAll").val("1");
+            },
+            onUnselectAll: function () {
+                $("#hcctIsAll").val("0");
+                $("#hcctIds").val("");
+                cctids = "";
+            },
+            onSelect: function (index, row) {
+                if (cctids == "") {
+                    var rows = $('#dg5').datagrid('getSelections');
+                    for (var i = 0; i < rows.length; i++) {
+                        var row1 = rows[i];
+                        if (cctids != "") {
+                            cctids = cctids + "|" + row1.RId;
+                        } else {
+                            cctids = row1.RId;
+                        }
+                    }
+                }
+                cctids = cctids + "|" + row.RId;
+                $("#hcctIds").val(cctids);
+            },
+            onUnselect: function (index, row) {
+                if (uncctids != "") {
+                    uncctids = uncctids + "|" + row.RId;
+                } else {
+                    uncctids = row.RId;
+                }
+                $("#hUncctIds").val(uncctids);
+            },
+            onLoadSuccess: function (data) {
+                if (data) {
+                    $.each(data.rows, function (index, item) {
+                        if (item.ck == 1) {
+                            $('#dg5').datagrid('checkRow', index);
+                        }
+                    });
+                }
+            }
+        });
+
 
         var stuids = "";
         var unstuids = "";
@@ -519,7 +716,7 @@
                     var rows = $('#dg2').datagrid('getSelections');
                     for (var i = 0; i < rows.length; i++) {
                         var row1 = rows[i];
-                        if (stuids != "") {
+                        if (teacherids != "") {
                             teacherids = teacherids + "|" + row1.TeacherId;
                         } else {
                             teacherids = row1.TeacherId;

@@ -41,6 +41,14 @@ namespace TrainerEvaluate.Web
                 case "ex":
                     ExportCourseInfo(context);
                     break;
+                case "stcl":
+                    var stcla = GetClassInfoByStudentId(context);
+                    context.Response.Write(stcla);
+                    break;
+                case "stcp":
+                    var stclp = GetProfessExperByTeacherId(context);
+                    context.Response.Write(stclp);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -376,6 +384,45 @@ namespace TrainerEvaluate.Web
             }
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
+        }
+
+        private string GetClassInfoByStudentId(HttpContext context)
+        {
+            var ds = new DataSet();
+            var classBll = new BLL.Class();
+            var studentId = context.Request["studentId"];
+
+            ds = classBll.GetClassInfoByStudentId(studentId);
+            var num =10;
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                num = ds.Tables[0].Rows.Count;
+            }
+
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
+        }
+
+        /// <summary>
+        /// 获取教师的任教经历信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private string GetProfessExperByTeacherId(HttpContext context)
+        {
+            var ds = new DataSet();
+            var classBll = new BLL.Class();
+            var teacherId = context.Request["teacherId"];
+
+            ds = classBll.GetProfessExperByTeacherId(teacherId);
+            var num = 10;
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                num = ds.Tables[0].Rows.Count;
+            }
+
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
         }
     }
 }

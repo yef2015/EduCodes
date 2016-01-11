@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
 
 namespace TrainerEvaluate.BLL
@@ -260,6 +261,29 @@ namespace TrainerEvaluate.BLL
             strSql.Append(" order by  a.TeachTime desc ");
 
             return DbHelperSQL.Query(strSql.ToString()); 
+        }
+
+        /// <summary>
+        /// 获取课程信息，为填充下拉框
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetDataSourceOnCourse()
+        {
+            var dt = new DataTable();
+            try
+            {
+                var sql = " select CourseId as ID,CourseName as Name from Course where Status = 1 order by Name  ";
+                var result = DbHelperSQL.Query(sql);
+                if (result != null && result.Tables.Count > 0)
+                {
+                    dt = result.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return dt;
         }
 
 	    #endregion  ExtensionMethod

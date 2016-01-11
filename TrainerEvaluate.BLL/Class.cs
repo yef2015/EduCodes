@@ -293,6 +293,51 @@ namespace TrainerEvaluate.BLL
             }
         }
 
+        public DataSet GetClassInfoByStudentId(string studentId)
+        {
+            try
+            {
+                var sql = string.Format("select a.* from Class a left join ClassStudents b on a.ID = b.ClassId "
+                    + " where b.StudentId = '{0}' and a.Status = 1 order by a.StartDate desc ", studentId);
+                DataSet ds = DbHelperSQL.Query(sql);
+                
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+        
+
+
+
+        public DataSet GetProfessExperByTeacherId(string teacherId)
+        {
+            try
+            {
+                var sql = string.Format(" select b.RId as Id, a.CourseName,a.TeachPlace,a.TeachTime, c.Name as ClassName,c.Object,c.Description, "
+                    + " c.Students as StudentCount,c.Point,c.Teacher,c.StartDate,c.FinishDate "
+                    + " from Course a "
+                    + " left join CourseTeacher b on a.CourseId=b.CourseId "
+                    + " left join Class c on c.ID = b.ClassId "
+                    + " where b.TeacherId = '{0}' and a.Status = 1 and c.Status = 1 "
+                    + " order by a.TeachTime desc ", teacherId);
+
+                DataSet ds = DbHelperSQL.Query(sql);
+                
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+
+
 	    #endregion  ExtensionMethod
 	}
 }

@@ -34,6 +34,14 @@ namespace TrainerEvaluate.Web
                     // 所属学校
                     dt = BLL.SPSchool.GetDataSourceOnSchool();
                     break;
+                case "ccus":
+                    // 选择课程
+                    dt = BLL.Course.GetDataSourceOnCourse();
+                    break;
+                case "ctea":
+                    // 选择授课老师
+                    dt = BLL.Teacher.GetDataSourceOnTeacher();
+                    break;
                 default:
                     break;
             }

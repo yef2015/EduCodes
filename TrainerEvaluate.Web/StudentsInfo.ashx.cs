@@ -42,6 +42,10 @@ namespace TrainerEvaluate.Web
                     break;
                 case "sc":
                     SaveClassStuData(context); 
+                    break;
+                case "pah":
+                   var strph = GetPersonArchive(context);
+                    context.Response.Write(strph);
                     break; 
                 default:
                     var str = GetData(context);
@@ -727,10 +731,6 @@ namespace TrainerEvaluate.Web
 
 
 
-
-
-
-
         private void EditData(string id, HttpContext context)
         { 
             var stuBll = new BLL.Student();
@@ -938,6 +938,23 @@ namespace TrainerEvaluate.Web
         }
 
 
+
+        private string GetPersonArchive(HttpContext context)
+        {
+            var ds = new DataSet();
+            var stuBll = new BLL.Student();
+
+            var stuId = context.Request["uid"];
+
+            ds = stuBll.GetListByPage(" Status = 1   and StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
+            var str =string.Empty;
+
+            if(ds!=null&&ds.Tables[0].Rows.Count>0)
+            { 
+                str = JsonConvert.SerializeObject(new {rows = ds.Tables[0] });
+            }
+            return str;
+        }
 
 
 

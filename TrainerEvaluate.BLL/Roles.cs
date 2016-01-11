@@ -190,7 +190,24 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-
+        public int GetFuncRecordCount(string strWhere)
+		{
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) FROM SysFunc ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+		}
 
 
         public bool SaveAllFunc(string roleId)
@@ -321,6 +338,24 @@ namespace TrainerEvaluate.BLL
 	        return DbHelperSQL.Query(strSql.ToString());
 	    }
 
+        public int GetUserRecordCount(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) FROM SysUser ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
 
         public bool SaveAllUser(string roleId)
         {
