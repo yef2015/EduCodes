@@ -52,6 +52,10 @@ namespace TrainerEvaluate.Web
                     //  GetReportExcel(context, id);
                     ExportEvReportToxls(context, id, classid);
                     break;
+                case "rall":
+                    //  批量导出课程评估表
+                    ExportAllEvReportToxls(context, classid);
+                    break;
                 case "stu":
                     //  GetStudentsForcheck(context, id);
                     break;
@@ -1040,6 +1044,18 @@ namespace TrainerEvaluate.Web
         {
             var msg = "";
             context.Response.Write(msg);
+        }
+
+        private void ExportAllEvReportToxls(HttpContext context, string classid)
+        {
+            var ccid =int.Parse( classid);
+            var ccBll = new Class();
+            var ccModel = ccBll.GetModel(ccid);
+            var className = ccModel.Name;
+            var filename = className + "-评估报告单.xls";
+
+            var exXls = new ExportXls();
+            exXls.ExportAllEvReportToxls(context.Response, filename, classid);
         }
     }
 }

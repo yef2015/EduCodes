@@ -126,7 +126,7 @@ namespace TrainerEvaluate.Web
                     str.Append("<tr  height=\"35\"  bgcolor=\""+color+"\" > ");
                     str.Append("<td>" + row["ClassName"] + " </td>");
                     str.Append("<td>" + row["CourseName"] + " </td>");
-                    str.Append("<td>" + row["TeacherName"] + " </td>");
+                    str.Append("<td>" + row["MyTeacherName"] + " </td>");
                     str.Append("<td>" + string.Format("{0:N2}",row["TotalAvgScore"]) + " </td>");
                     str.Append("<td>" +  totalSatisfy + " </td>");
                     str.Append("<td>" + row["ToLevel"] + " </td>");
@@ -637,12 +637,16 @@ namespace TrainerEvaluate.Web
                 var classbll = new BLL.Class();
                 theYear.InnerText = classbll.GetClassInfoByClassId(classId) + "年中青年干部教育管理培训班课程评估表";
 
-                var courseModel = coursebll.GetModel(courseId);
-                courseName.InnerText = courseModel.CourseName;
-                coursePlace.InnerText = courseModel.TeachPlace;
-                teacherName.InnerText = courseModel.TeacherName;
-                trainTime.InnerText = courseModel.TeachTime;
-                 
+                DataSet dsCourse = coursebll.GetCourseInfoByCourseId(courseId.ToString());
+                if (dsCourse != null && dsCourse.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dro = dsCourse.Tables[0].Rows[0];
+                    courseName.InnerText = dro["CourseName"].ToString(); 
+                    coursePlace.InnerText = dro["TeachPlace"].ToString(); 
+                    teacherName.InnerText = dro["TeacherName"].ToString();
+                    trainTime.InnerText = "从" + Convert.ToDateTime(dro["StartDate"]).ToString("yyyy-MM-dd") + "到" +
+                        Convert.ToDateTime(dro["FinishDate"]).ToString("yyyy-MM-dd");
+                }
 
                 var question = new BLL.Questionnaire();
                 var dsResult = question.GetReportTile(courseId, classId);

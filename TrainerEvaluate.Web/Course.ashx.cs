@@ -59,7 +59,13 @@ namespace TrainerEvaluate.Web
                 case "dcct":
                     var strcct = GetCourseTeaData(context);
                     context.Response.Write(strcct);
-                    break;                     
+                    break;  
+                case "tips":
+                    // 批量导出提示信息
+                    var classId = context.Request["ClassId"];
+                    var exporttips = GetExportTipsByClassId(context);
+                    context.Response.Write(exporttips);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -677,7 +683,30 @@ namespace TrainerEvaluate.Web
             context.Response.Write(msg);
         }
 
-
-        
+        /// <summary>
+        /// 获取批量导出班级的提示信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private string GetExportTipsByClassId(HttpContext context)
+        {
+            string str = string.Empty;
+            try
+            {
+                var ds = new DataSet();
+                var classId = context.Request["ClassId"];
+                var clBll = new BLL.Class();
+                ds = clBll.GetDataByClassId(classId);
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    str = "export|" + ds.Tables[0].Rows[0]["Name"].ToString() + "|" + ds.Tables[0].Rows.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return str;
+        }
     }
 }

@@ -286,6 +286,15 @@ namespace TrainerEvaluate.BLL
             return dt;
         }
 
+        public DataSet GetCourseInfoByCourseId(string courseId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select a.CourseName,a.TeachPlace,b.TeacherName,b.StartDate,b.FinishDate  ");
+            strSql.Append(" from Course a,CourseTeacher b ");
+            strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '"+courseId+"' ");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
 	    #endregion  ExtensionMethod
 	}
 }

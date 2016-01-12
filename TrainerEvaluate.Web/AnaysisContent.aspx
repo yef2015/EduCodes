@@ -20,7 +20,32 @@
     <script type="text/javascript">
 
         function getReport() {
-            var url = "QuestionnaireHadler.ashx?t=r&id=" + $("#hCourseid").val() + "&classId=" + +$("#hClassid").val();
+            var url = "QuestionnaireHadler.ashx?t=r&id=" + $("#hCourseid").val() + "&classId=" + $("#hClassid").val();
+            window.location = url;
+        }
+
+        // 批量导出课程评估表
+        function getAllReport() {
+            var url = "Course.ashx?t=tips";
+            var data = { ClassId: $("#hClassid").val() };
+            $.post(url, data, function (result) {
+                if (result != "") {
+                    var tips = result.split('|');
+                    if (tips.length > 0) {
+                        if (tips[0] == "export") {
+                            $('#atipsClass').text(tips[1]);
+                            $('#atipsCourse').text(tips[2]);
+                            
+                            $('#dlg6').dialog('open').dialog('setTitle', '批量导出课程评估表');
+                        }
+                    }
+                }
+            });
+        }
+
+        function getAllReportInfo() {
+            $('#dlg6').dialog('close');
+            var url = "QuestionnaireHadler.ashx?t=rall&id=" + $("#hCourseid").val() + "&classId=" + $("#hClassid").val();
             window.location = url;
         }
 
@@ -183,11 +208,9 @@
             </tr>
             <tr>
                 <td align="center" colspan="7" bgcolor="#FFFFFF">
-                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getReport()" style="width: 180px">导出评估报告单及学员建议</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getReport()" style="width: 180px">导出评估报告单及学员建议</a>&nbsp;&nbsp;
+                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getAllReport()" style="width: 200px">批量导出评估报告单及学员建议</a>
                 </td>
-                <%--  <td align="left" colspan="2"  bgcolor="#FFFFFF"> 
-                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getSuggestion()" style="width: 120px">导出学员建议</a>
-                </td>--%>
             </tr>
         </table>
 
@@ -278,6 +301,25 @@
     <div id="toolbar1">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="exportSuggestion()">导出</a>
     </div>
+
+     <div id="dlg6" class="easyui-dialog" style="width: 450px; height: 200px; padding: 10px 20px" data-options="modal:true,top:200"
+            closed="true" buttons="#dlg-buttons6">
+            <form id="fm1" method="post">
+                <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
+                    <tr>
+                        <td bgcolor="FFFFFF" class="gray10a" height="25" >
+                            您是否导出
+                            <span id="atipsClass" style="font-size:14px;font-weight:bold;color:red;">班级</span>班共
+                            <span id="atipsCourse"  style="font-size:14px;font-weight:bold;color:red;">课程</span>门课的课程评估表
+                        </td>
+                    </tr>
+                </table>            
+            </form>
+        </div>
+        <div id="dlg-buttons6">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getAllReportInfo()" style="width: 120px">确认导出</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg6').dialog('close'); " style="width: 120px">取消导出</a>
+        </div> 
 
     <script type="text/javascript">
 
