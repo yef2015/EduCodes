@@ -70,7 +70,8 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">项目负责人设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourseNew()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="showCourseNew()">查看课程设置</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">导出</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">批量导出班级信息</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a>
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 500px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -426,6 +427,16 @@
             var url = "ClassInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#name").textbox('getText')) + "&description=" + encodeURIComponent($("#description").textbox('getText'))
                 + "&area=" + $("#tArea").combobox('getValue') + "&type=" + $("#tType").combobox('getValue');
             window.location = url;
+        }
+
+        function downloadDetailTmp() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                var url = "ClassInfo.ashx?t=exdi&classId=" + row.ID + "&className=" + row.Name;
+                window.location = url;
+            } else {
+                $.messager.alert('提示', '请选择要导出班级所在的行!', 'warning');
+            }
         }
 
         var courseids = "";

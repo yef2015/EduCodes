@@ -187,7 +187,8 @@ namespace TrainerEvaluate.BLL
         public DataSet GetDataForExport(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select CourseName,TeacherName,TeachPlace,TeachTime,TypeName+'  '+TypeSmallName ,Description ");
+            //strSql.Append(" select CourseName,TeacherName,TeachPlace,TeachTime,TypeName+'  '+TypeSmallName ,Description ");
+            strSql.Append(" select CourseName,TeachPlace,TypeName+'  '+TypeSmallName ,Description ");
             strSql.Append(" FROM Course ");
             if (strWhere.Trim() != "")
             {
@@ -195,6 +196,27 @@ namespace TrainerEvaluate.BLL
             }
             strSql.Append(" order by CourseName asc, TeachTime desc ");
             return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetDataForExportByClassId(string classId)
+        {
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append(" select a.CourseName,b.TeacherName,a.TeachPlace, ");
+                strSql.Append(" CONVERT(varchar(100), b.StartDate, 111) as StartDate, ");
+                strSql.Append(" CONVERT(varchar(100), b.FinishDate, 111) as FinishDate, ");
+                strSql.Append(" a.TypeName+'  '+a.TypeSmallName as TypeInfo ,a.Description ");
+                strSql.Append(" from Course a,CourseTeacher b ");
+                strSql.Append(" where a.CourseId = b.CourseId and b.ClassId = '" + classId + "' and a.Status = 1 ");
+                strSql.Append(" order by a.CourseName asc, b.StartDate desc ");
+                return DbHelperSQL.Query(strSql.ToString());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
         }
 
 

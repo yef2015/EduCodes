@@ -348,6 +348,60 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+                /// <summary>
+        /// 获得导出的班级信息，通过班级Id
+        /// </summary>
+        public DataSet GetExportByClassId(string classId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select a.Name as ClassName,a.Object,a.Description,a.StartDate,a.FinishDate,a.Students, ");
+            strSql.Append(" a.Point,b.Name as PointTypeName,c.Name as TypeName,d.Name as AreaName from Class a  ");
+            strSql.Append(" left join Dictionaries b on a.PointType = b.ID and a.ID = '" + classId + "' ");
+            strSql.Append(" left join Dictionaries c on a.Type = c.ID and a.ID = '" + classId + "' ");
+            strSql.Append(" left join Dictionaries d on a.Area = d.ID and a.ID = '" + classId + "'  ");
+            strSql.Append(" where a.Status = 1 and a.ID = '"+classId+"'  ");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        /// <summary>
+        /// 通过班级id，获取项目负责人
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public string GetProjectPersonClassId(string classId)
+        {
+            string str = string.Empty;
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append(" select a.UserId,a.UserName from SysUser a ");
+                strSql.Append(" left join ClassTeacher b on a.UserId = b.TeacherId ");
+                strSql.Append(" where b.ClassId = '" + classId + "' and a.Status = 1 ");
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        str += dr["UserName"].ToString() + ",";
+                    }
+                    if (str.Length > 0)
+                    {
+                        str = str.Substring(0, str.Length - 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return str;
+        }
+
+
+
+
+
+
 	    #endregion  ExtensionMethod
 	}
 }

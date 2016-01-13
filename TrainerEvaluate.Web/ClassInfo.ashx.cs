@@ -41,6 +41,10 @@ namespace TrainerEvaluate.Web
                 case "ex":
                     ExportCourseInfo(context);
                     break;
+                case "exdi":
+                    // 导出班级详细信息
+                    ExportClassDetailsInfo(context);
+                    break;
                 case "stcl":
                     var stcla = GetClassInfoByStudentId(context);
                     context.Response.Write(stcla);
@@ -203,6 +207,16 @@ namespace TrainerEvaluate.Web
             {
                 exXls.ExportToXls(context.Response, fieldsNames, ds.Tables[0], filename);
             }
+        }
+
+        private void ExportClassDetailsInfo(HttpContext context)
+        {
+            var classid = context.Request["classId"];
+            var className = context.Request["className"];
+            var exXls = new ExportXls();
+            var filename = DateTime.Now.ToString("yyyy-MM-dd") + "-" + className + "-班级信息.xls";
+
+            exXls.ExportClassDetailsToxls(context.Response, filename, classid);
         }
 
         private DataSet QueryDataResultForExp(HttpContext context)

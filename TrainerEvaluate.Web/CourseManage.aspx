@@ -168,7 +168,7 @@
 
         function exportData() {
             var url = "Course.ashx?t=ex" + "&name=" + encodeURIComponent($("#corName").textbox('getText')) + "&teaName=" 
-                + "&teaplace=" + $("#TeachPlace11").textbox('getText');
+                + "&teaTime=&teaplace=" + $("#TeachPlace11").textbox('getText');
             window.location = url;
         }
 

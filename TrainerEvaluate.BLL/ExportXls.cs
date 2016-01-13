@@ -1613,5 +1613,398 @@ namespace TrainerEvaluate.BLL
            }
        }
 
+       /// <summary>
+       /// 导出班级的详细信息
+       /// </summary>
+       public void ExportClassDetailsToxls(System.Web.HttpResponse Response, string filename, string classid)
+       {
+           Response.ContentType = "application/vnd.ms-excel";
+           Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
+           Response.Clear();
+
+           InitializeWorkbook();
+           GenerateEvClassDetails(classid);
+           GetExcelStream().WriteTo(Response.OutputStream);
+           Response.End();
+       }
+
+       void GenerateEvClassDetails(string classid)
+       {
+           #region 班级基本信息
+
+           ISheet sheet1 = hssfworkbook.CreateSheet("班级基本信息");
+
+           ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
+           cellstyleHead.VerticalAlignment = VerticalAlignment.Center;
+           //表头样式
+           cellstyleHead.BorderBottom = BorderStyle.Thin;
+           cellstyleHead.BorderLeft = BorderStyle.Thin;
+           cellstyleHead.BorderRight = BorderStyle.Thin;
+           cellstyleHead.BorderTop = BorderStyle.Thin;
+           cellstyleHead.WrapText = true;
+           cellstyleHead.Alignment = HorizontalAlignment.Center;
+           var font = hssfworkbook.CreateFont();
+           font.FontHeightInPoints = 15;
+           font.FontName = "宋体";
+           font.Boldweight = 700;
+           cellstyleHead.SetFont(font);
+
+           //表体样式
+           ICellStyle cellstyleContent = hssfworkbook.CreateCellStyle();
+           cellstyleContent.BorderBottom = BorderStyle.Thin;
+           cellstyleContent.BorderLeft = BorderStyle.Thin;
+           cellstyleContent.BorderRight = BorderStyle.Thin;
+           cellstyleContent.BorderTop = BorderStyle.Thin;
+           cellstyleContent.Alignment = HorizontalAlignment.Center;
+           var font1 = hssfworkbook.CreateFont();
+           font1.FontHeightInPoints = 14;
+           font1.FontName = "宋体";
+           font1.Boldweight = 10;
+           cellstyleContent.SetFont(font1);
+           cellstyleContent.WrapText = true;
+
+           ICellStyle cellstyleConTitle = hssfworkbook.CreateCellStyle();
+           cellstyleConTitle.BorderBottom = BorderStyle.Thin;
+           cellstyleConTitle.BorderLeft = BorderStyle.Thin;
+           cellstyleConTitle.BorderRight = BorderStyle.Thin;
+           cellstyleConTitle.BorderTop = BorderStyle.Thin;
+           cellstyleConTitle.Alignment = HorizontalAlignment.Center;
+           cellstyleConTitle.VerticalAlignment = VerticalAlignment.Center;
+           var font11 = hssfworkbook.CreateFont();
+           font11.FontHeightInPoints = 14;
+           font11.FontName = "宋体";
+           font11.Boldweight = 600;
+           cellstyleConTitle.SetFont(font11);
+           cellstyleConTitle.WrapText = true;
+
+           ICellStyle cellstyleConTitleLeft = hssfworkbook.CreateCellStyle();
+           cellstyleConTitleLeft.BorderBottom = BorderStyle.Thin;
+           cellstyleConTitleLeft.BorderLeft = BorderStyle.Thin;
+           cellstyleConTitleLeft.BorderRight = BorderStyle.Thin;
+           cellstyleConTitleLeft.BorderTop = BorderStyle.Thin;
+           cellstyleConTitleLeft.Alignment = HorizontalAlignment.Left;
+           cellstyleConTitleLeft.VerticalAlignment = VerticalAlignment.Center;
+           var fontTitleLeft = hssfworkbook.CreateFont();
+           fontTitleLeft.FontHeightInPoints = 14;
+           fontTitleLeft.FontName = "宋体";
+           fontTitleLeft.Boldweight = 10;
+           cellstyleConTitleLeft.SetFont(fontTitleLeft);
+           cellstyleConTitleLeft.WrapText = true;
+
+           var classbll = new BLL.Class();
+           var ds = classbll.GetExportByClassId(classid);
+           string className = string.Empty;
+           string Object = string.Empty;
+           string StartDate = string.Empty;
+           string FinishDate = string.Empty;
+           string AreaName = string.Empty;
+           string TypeName = string.Empty;
+           string PointTypeName = string.Empty;
+           string Students = string.Empty;
+           string Point = string.Empty;
+           string Content = string.Empty;
+           string ProjectPerson = string.Empty;
+           try
+           {
+               if (ds != null && ds.Tables[0].Rows.Count > 0)
+               {
+                   DataRow dr = ds.Tables[0].Rows[0];
+                   Object = dr["Object"].ToString();
+                   StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("yyyy-MM-dd");
+                   FinishDate = Convert.ToDateTime(dr["FinishDate"]).ToString("yyyy-MM-dd");
+                   AreaName = dr["AreaName"].ToString();
+                   TypeName = dr["TypeName"].ToString();
+                   PointTypeName = dr["PointTypeName"].ToString();
+                   Students = dr["Students"].ToString();
+                   Point = dr["Point"].ToString();
+                   Content = dr["Description"].ToString();
+               }
+               ProjectPerson = classbll.GetProjectPersonClassId(classid);
+           }
+           catch (Exception ex)
+           {
+               LogHelper.WriteLogofExceptioin(ex);
+           }
+
+           IRow title = sheet1.CreateRow(0);
+           title.Height = 600;
+
+           for (int f = 0; f < 4; f++)
+           {
+               ICell cell = title.CreateCell(f);
+               sheet1.SetColumnWidth(f, 13 * 256);
+               cell.SetCellValue(className + "班级基本信息");
+               cell.CellStyle = cellstyleHead;
+           }
+            SetCellRangeAddress(sheet1, 0, 0, 0, 3);
+            sheet1.SetColumnWidth(0, 20 * 256);
+            sheet1.SetColumnWidth(1, 40 * 256);
+            sheet1.SetColumnWidth(2, 20 * 256);
+            sheet1.SetColumnWidth(3, 40 * 256);
+
+            IRow row1 = sheet1.CreateRow(1);
+            ICell cell1 = row1.CreateCell(0);
+            cell1.CellStyle = cellstyleConTitle;
+            cell1.SetCellValue("培训对象");
+            ICell cell2 = row1.CreateCell(1);
+            cell2.CellStyle = cellstyleContent;
+            cell2.SetCellValue(Object);
+            ICell cell3 = row1.CreateCell(2);
+            cell3.CellStyle = cellstyleConTitle;
+            cell3.SetCellValue("项目负责人");
+            ICell cell4 = row1.CreateCell(3);
+            cell4.CellStyle = cellstyleContent;
+            cell4.SetCellValue(ProjectPerson);
+
+            IRow row2 = sheet1.CreateRow(2);
+            ICell cell21 = row2.CreateCell(0);
+            cell21.CellStyle = cellstyleConTitle;
+            cell21.SetCellValue("开始日期");
+            ICell cell22 = row2.CreateCell(1);
+            cell22.CellStyle = cellstyleContent;
+            cell22.SetCellValue(StartDate);
+            ICell cell23 = row2.CreateCell(2);
+            cell23.CellStyle = cellstyleConTitle;
+            cell23.SetCellValue("结束日期");
+            ICell cell24 = row2.CreateCell(3);
+            cell24.CellStyle = cellstyleContent;
+            cell24.SetCellValue(FinishDate);
+
+            IRow row3 = sheet1.CreateRow(3);
+            ICell cell31 = row3.CreateCell(0);
+            cell31.CellStyle = cellstyleConTitle;
+            cell31.SetCellValue("培训形式");
+            ICell cell32 = row3.CreateCell(1);
+            cell32.CellStyle = cellstyleContent;
+            cell32.SetCellValue(AreaName);
+            ICell cell33 = row3.CreateCell(2);
+            cell33.CellStyle = cellstyleConTitle;
+            cell33.SetCellValue("培训层次");
+            ICell cell34 = row3.CreateCell(3);
+            cell34.CellStyle = cellstyleContent;
+            cell34.SetCellValue(TypeName);
+
+            IRow row4 = sheet1.CreateRow(4);
+            ICell cell41 = row4.CreateCell(0);
+            cell41.CellStyle = cellstyleConTitle;
+            cell41.SetCellValue("学员人数");
+            ICell cell42 = row4.CreateCell(1);
+            cell42.CellStyle = cellstyleContent;
+            cell42.SetCellValue(Students);
+            ICell cell43 = row4.CreateCell(2);
+            cell43.CellStyle = cellstyleConTitle;
+            cell43.SetCellValue("学时");
+            ICell cell44 = row4.CreateCell(3);
+            cell44.CellStyle = cellstyleContent;
+            cell44.SetCellValue(Point);
+
+            IRow row5 = sheet1.CreateRow(5);
+            ICell cell51 = row5.CreateCell(0);
+            cell51.CellStyle = cellstyleConTitle;
+            cell51.SetCellValue("学时类型");
+            ICell cell52 = row5.CreateCell(1);
+            cell52.CellStyle = cellstyleContent;
+            cell52.SetCellValue(PointTypeName);
+            ICell cell53 = row5.CreateCell(2);
+            cell53.CellStyle = cellstyleConTitle;
+            cell53.SetCellValue("");
+            ICell cell54 = row5.CreateCell(3);
+            cell54.CellStyle = cellstyleContent;
+            cell54.SetCellValue("");
+
+            IRow row6 = sheet1.CreateRow(6);
+            row6.Height = 800;
+            ICell cell61 = row6.CreateCell(0);
+            cell61.CellStyle = cellstyleConTitle;
+            cell61.SetCellValue("培训内容");
+            ICell cell62 = row6.CreateCell(1);
+            cell62.CellStyle = cellstyleContent;
+            cell62.SetCellValue(Content);
+            ICell cell63 = row6.CreateCell(2);
+            cell63.CellStyle = cellstyleConTitle;
+            cell63.SetCellValue(Content);
+            ICell cell64 = row6.CreateCell(3);
+            cell64.CellStyle = cellstyleContent;
+            cell64.SetCellValue(Content);
+            SetCellRangeAddress(sheet1, 6, 6, 1, 3);
+
+           #endregion
+
+            // GetSuggestion(courseId.ToString(), classid);
+            GetClassDetailsForStudent(classid); // 班级学员信息
+
+            GetClassDetailsForCourse(classid);  // 班级课程信息
+       }
+
+       /// <summary>
+       /// 班级学员信息
+       /// </summary>
+       /// <param name="classid"></param>
+       private void GetClassDetailsForStudent(string classid)
+       {
+           var fieldsNames = new List<string>();
+           fieldsNames.Add("姓名");
+           fieldsNames.Add("性别");
+           fieldsNames.Add("身份证号");
+           fieldsNames.Add("所在单位");
+           fieldsNames.Add("职称");
+           fieldsNames.Add("联系电话");
+           fieldsNames.Add("出生日期");
+           fieldsNames.Add("民族");
+           fieldsNames.Add("全日制学历");
+           fieldsNames.Add("全日制学校");
+           fieldsNames.Add("在职学历");
+           fieldsNames.Add("在职学校");
+           fieldsNames.Add("政治面貌");
+           fieldsNames.Add("现任级别");
+           fieldsNames.Add("任现任级别时间");
+           fieldsNames.Add("现任职务");
+           fieldsNames.Add("任职时间");
+           fieldsNames.Add("手机号");
+           fieldsNames.Add("继教号");
+           fieldsNames.Add("描述");
+
+           var ds = new DataSet();
+           var stuBll = new BLL.Student();
+           ds = stuBll.GetDataForExportByClassId(classid);
+
+           DataTable exportDs = new DataTable();
+           if (ds != null && ds.Tables[0].Rows.Count > 0)
+           {
+               exportDs = ds.Tables[0];
+           }
+
+           ISheet sheet2 = hssfworkbook.CreateSheet("班级学员信息");
+           ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
+           cellstyleHead.VerticalAlignment = VerticalAlignment.Center;
+           //表头样式
+           cellstyleHead.BorderBottom = BorderStyle.Thin;
+           cellstyleHead.BorderLeft = BorderStyle.Thin;
+           cellstyleHead.BorderRight = BorderStyle.Thin;
+           cellstyleHead.BorderTop = BorderStyle.Thin;
+           var font = hssfworkbook.CreateFont();
+           font.FontHeightInPoints = 11;
+           font.FontName = "宋体";
+           font.Boldweight = 700;
+           cellstyleHead.SetFont(font);
+
+           //表体样式
+           ICellStyle cellstyleContent = hssfworkbook.CreateCellStyle();
+           cellstyleContent.BorderBottom = BorderStyle.Thin;
+           cellstyleContent.BorderLeft = BorderStyle.Thin;
+           cellstyleContent.BorderRight = BorderStyle.Thin;
+           cellstyleContent.BorderTop = BorderStyle.Thin;
+           var font1 = hssfworkbook.CreateFont();
+           font1.FontHeightInPoints = 11;
+           font1.FontName = "宋体";
+           font1.Boldweight = 10;
+           cellstyleContent.SetFont(font1);
+
+
+           IRow title = sheet2.CreateRow(0);
+           for (int f = 0; f < fieldsNames.Count; f++)
+           {
+               ICell cell = title.CreateCell(f);
+               cell.SetCellValue(fieldsNames[f]);
+
+               cell.CellStyle = cellstyleHead;
+
+           }
+           int i = 1;
+           if (exportDs != null && exportDs.Rows.Count > 0)
+           {
+               foreach (DataRow r in exportDs.Rows)
+               {
+                   IRow row = sheet2.CreateRow(i);
+                   for (var j = 0; j < exportDs.Columns.Count; j++)
+                   {
+                       ICell cell = row.CreateCell(j);
+                       cell.CellStyle = cellstyleContent;
+                       sheet2.SetColumnWidth(j, 5000);
+                       cell.SetCellValue(Convert.ToString(r[j]));
+                   }
+                   i++;
+               }
+           }
+       }
+
+       /// <summary>
+       /// 班级课程信息
+       /// </summary>
+       /// <param name="classid"></param>
+       private void GetClassDetailsForCourse(string classid)
+       {
+           var fieldsNames = new List<string>();
+           fieldsNames.Add("课程名称");
+           fieldsNames.Add("授课教师");
+           fieldsNames.Add("授课地点");
+           fieldsNames.Add("授课开始时间");
+           fieldsNames.Add("授课结束时间");
+           fieldsNames.Add("课程类型");
+           fieldsNames.Add("描述");
+
+           var ds = new DataSet();
+           var corBll = new BLL.Course();
+           ds = corBll.GetDataForExportByClassId(classid);
+
+           DataTable exportDs = new DataTable();
+           if (ds != null && ds.Tables[0].Rows.Count > 0)
+           {
+               exportDs = ds.Tables[0];
+           }
+
+           ISheet sheet3 = hssfworkbook.CreateSheet("班级课程信息");
+           ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
+           cellstyleHead.VerticalAlignment = VerticalAlignment.Center;
+           //表头样式
+           cellstyleHead.BorderBottom = BorderStyle.Thin;
+           cellstyleHead.BorderLeft = BorderStyle.Thin;
+           cellstyleHead.BorderRight = BorderStyle.Thin;
+           cellstyleHead.BorderTop = BorderStyle.Thin;
+           var font = hssfworkbook.CreateFont();
+           font.FontHeightInPoints = 11;
+           font.FontName = "宋体";
+           font.Boldweight = 700;
+           cellstyleHead.SetFont(font);
+
+           //表体样式
+           ICellStyle cellstyleContent = hssfworkbook.CreateCellStyle();
+           cellstyleContent.BorderBottom = BorderStyle.Thin;
+           cellstyleContent.BorderLeft = BorderStyle.Thin;
+           cellstyleContent.BorderRight = BorderStyle.Thin;
+           cellstyleContent.BorderTop = BorderStyle.Thin;
+           var font1 = hssfworkbook.CreateFont();
+           font1.FontHeightInPoints = 11;
+           font1.FontName = "宋体";
+           font1.Boldweight = 10;
+           cellstyleContent.SetFont(font1);
+
+
+           IRow title = sheet3.CreateRow(0);
+           for (int f = 0; f < fieldsNames.Count; f++)
+           {
+               ICell cell = title.CreateCell(f);
+               cell.SetCellValue(fieldsNames[f]);
+
+               cell.CellStyle = cellstyleHead;
+
+           }
+           int i = 1;
+           if (exportDs != null && exportDs.Rows.Count > 0)
+           {
+               foreach (DataRow r in exportDs.Rows)
+               {
+                   IRow row = sheet3.CreateRow(i);
+                   for (var j = 0; j < exportDs.Columns.Count; j++)
+                   {
+                       ICell cell = row.CreateCell(j);
+                       cell.CellStyle = cellstyleContent;
+                       sheet3.SetColumnWidth(j, 5000);
+                       cell.SetCellValue(Convert.ToString(r[j]));
+                   }
+                   i++;
+               }
+           }
+       } 
     }
 }

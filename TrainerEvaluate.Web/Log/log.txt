@@ -502,3 +502,36 @@ ClientConnectionId:d86ffe1f-4f70-4831-b79a-190d6621a7de：2016-01-06 21:34:30
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:d86ffe1f-4f70-4831-b79a-190d6621a7de：2016-01-06 21:35:43
+Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0System.IO.IOException: Invalid header signature; read 0x0000000000000000, expected 0xE11AB1A1E011CFD0
+   在 TrainerEvaluate.BLL.ExportXls.ExcelToDataTable(String sheetName, Boolean isFirstRowColumn, String fileName) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.BLL\ExportXls.cs:行号 1190
+   在 TrainerEvaluate.Web.UploadTmpData.Upload(HttpContext context, String dtype) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Web\UploadTmpData.ashx.cs:行号 109：2016-01-11 20:39:07
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:252fb868-5f60-4b3a-b9e4-dc9820e8a157：2016-01-12 21:52:58
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:252fb868-5f60-4b3a-b9e4-dc9820e8a157：2016-01-12 21:52:59
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:bf65acd4-e81d-4a67-8aeb-d96d7eabc30c：2016-01-12 21:53:06
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:cb0f1c60-73bd-4265-80da-261b556df8d1：2016-01-12 21:53:21
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:8a2fbcc3-6808-4e1c-ad44-f4c79ea49772：2016-01-13 20:46:55
