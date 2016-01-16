@@ -20,13 +20,13 @@
                 <div align="center">角色名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="rname" class="easyui-textbox" id="rname" style="width: 160px;" />
+                <input name="rname" class="easyui-textbox" id="rname"  style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">描述： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="rdesc" class="easyui-textbox" id="rdesc" style="width: 160px;" />
+                <input name="rdesc" class="easyui-textbox" id="rdesc"  style="width: 165px;"/>
             </td>
         </tr>
         <tr>
@@ -34,13 +34,13 @@
                 <div align="center">创建日期（起）：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="rtime" class="easyui-datebox" id="rtime" style="width: 160px;" />
+                <input name="rtime" class="easyui-datebox" id="rtime"  style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                   <div align="center">创建日期（止）：</div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="endTime" class="easyui-datebox" id="endTime" style="width: 160px;" />
+                <input name="endTime" class="easyui-datebox" id="endTime"  style="width: 165px;"/>
             </td>
         </tr> 
         <tr>
@@ -48,7 +48,7 @@
                  <div align="center">状态： </div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-               <select class="easyui-combobox" name="rstatus" id="rstatus" style="width: 160px;" panelheight="auto">
+               <select class="easyui-combobox" name="rstatus" id="rstatus" panelheight="auto" style="width: 165px;"/>
                     <option value="1">有效</option>
                     <option value="2">无效</option>
                 </select>

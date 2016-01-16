@@ -9,13 +9,13 @@
                 <div align="center">用户名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tName" class="easyui-textbox" id="tName" />
+                <input name="tName" class="easyui-textbox" id="tName" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">用户部门： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tDept" class="easyui-textbox" id="tDept" /> 
+                <input name="tDept" class="easyui-textbox" id="tDept" style="width: 165px;"/>
             </td>
         </tr>
         <tr bgcolor="#FFFFFF">

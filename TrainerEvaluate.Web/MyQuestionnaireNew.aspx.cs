@@ -75,15 +75,18 @@ namespace TrainerEvaluate.Web
             }
             if (!string.IsNullOrEmpty(courseId))  //点击后传过来的
             {
-                var course = new BLL.Course();
-                var couModel = course.GetModel(new Guid(courseId));
-
                 hCouseId.Value = ccid;
 
-                ipCourseName.InnerText = couModel.CourseName;
-                ipPlace.InnerText = couModel.TeachPlace;
-                ipTeacher.InnerText = couModel.TeacherName;
-                ipTime.InnerText = couModel.TeachTime;
+                DataTable dt = BLL.Course.GetCourseByCorIdStuId(courseId, Profile.CurrentUser.UserId.ToString());
+
+                if (dt.Rows.Count > 0)
+                {
+                    ipCourseName.InnerText = dt.Rows[0]["CourseName"].ToString();
+                    ipPlace.InnerText = dt.Rows[0]["TeachPlace"].ToString();
+                    ipTeacher.InnerText = dt.Rows[0]["TeacherName"].ToString();
+                    ipTime.InnerText = Convert.ToDateTime(dt.Rows[0]["StartDate"].ToString()).ToString("yyyy-MM-dd")+"到"+
+                                       Convert.ToDateTime(dt.Rows[0]["FinishDate"].ToString()).ToString("yyyy-MM-dd"); 
+                }
 
                 quNo.Visible = false;
                 queHas.Visible = true;
@@ -93,13 +96,14 @@ namespace TrainerEvaluate.Web
             {
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    hCouseId.Value = ds.Tables[0].Rows[0]["ccId"].ToString();
+                    DataRow dr = ds.Tables[0].Rows[0];
+                    hCouseId.Value = dr["ccId"].ToString();
 
-                    ipCourseName.InnerText = ds.Tables[0].Rows[0]["CourseName"].ToString();
-                    ipPlace.InnerText = ds.Tables[0].Rows[0]["TeachPlace"].ToString();
-                    ipTeacher.InnerText = ds.Tables[0].Rows[0]["TeacherName"].ToString();
-                    ipTime.InnerText = ds.Tables[0].Rows[0]["TeachTime"].ToString();
-
+                    ipCourseName.InnerText = dr["CourseName"].ToString();
+                    ipPlace.InnerText = dr["TeachPlace"].ToString();
+                    ipTeacher.InnerText = dr["TeacherName"].ToString();
+                    ipTime.InnerText = Convert.ToDateTime(dr["StartDate"].ToString()).ToString("yyyy-MM-dd") + "到" +
+                                       Convert.ToDateTime(dr["FinishDate"].ToString()).ToString("yyyy-MM-dd"); 
 
                     quNo.Visible = false;
                     queHas.Visible = true;
@@ -303,7 +307,24 @@ namespace TrainerEvaluate.Web
                 quesModel.TotalTeacher = totalTeacher;
 
                 // 保存学生对课程的评估信息
-                DataSet ds = queBll.GetQuestRelatByClassCourseId(clacouId);
+                //DataTable dt = BLL.Course.GetCourseByCorIdStuId(clacouId, Profile.CurrentUser.UserId.ToString());
+                //if (dt != null && dt.Rows.Count > 0)
+                //{
+                //    foreach (DataRow dr in dt.Rows)
+                //    {
+                //        if (dr["CourseId"] != null)
+                //        {
+                //            quesModel.CourseId = Guid.Parse(dr["CourseID"].ToString());
+                //        }
+                //        quesModel.ClassId = dr["ClassId"].ToString();
+                //        quesModel.QuestairId = Guid.Empty.ToString();
+                //        quesModel.TeacherId = dr["TeacherId"].ToString();
+                //        quesModel.TeacherName = dr["TeacherName"].ToString();
+
+                //        queBll.Add(quesModel);
+                //    }
+                //}
+                DataSet ds = queBll.GetQuestRelatByCCId(clacouId);
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow dr in ds.Tables[0].Rows)

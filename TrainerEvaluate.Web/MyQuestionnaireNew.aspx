@@ -132,7 +132,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="CourseNames" runat="server" style="width: 169px; height: 1271px; font-size: 14px; margin-left: 15px;">
+    <div id="CourseNames" runat="server" style="width: 100%; height: 900px; font-size: 14px; padding-left: 8px;padding-top:10px;">
         待评估课程：
         <input class="easyui-combobox"
             name="CourseInfo" id="CourseInfo" style="height: 20px;"
@@ -141,7 +141,7 @@
                     method:'get',
                     valueField:'CourseId',
                     textField:'CourseName' 
-            ">
+            " />
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

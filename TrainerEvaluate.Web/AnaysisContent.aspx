@@ -302,15 +302,15 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="exportSuggestion()">导出</a>
     </div>
 
-     <div id="dlg6" class="easyui-dialog" style="width: 450px; height: 200px; padding: 10px 20px" data-options="modal:true,top:200"
+     <div id="dlg6" class="easyui-dialog" style="width: 450px; height: 200px; padding: 10px 20px" data-options="modal:true,top:500"
             closed="true" buttons="#dlg-buttons6">
             <form id="fm1" method="post">
                 <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
                     <tr>
-                        <td bgcolor="FFFFFF" class="gray10a" height="25" >
+                        <td bgcolor="FFFFFF" class="gray10a" height="35" >
                             您是否导出
-                            <span id="atipsClass" style="font-size:14px;font-weight:bold;color:red;">班级</span>班共
-                            <span id="atipsCourse"  style="font-size:14px;font-weight:bold;color:red;">课程</span>门课的课程评估表
+                            <span id="atipsClass" style="font-size:16px;font-weight:bold;color:red;">班级</span>&nbsp;&nbsp;班共
+                            <span id="atipsCourse"  style="font-size:16px;font-weight:bold;color:red;">课程</span>&nbsp;&nbsp;门课的课程评估表
                         </td>
                     </tr>
                 </table>            

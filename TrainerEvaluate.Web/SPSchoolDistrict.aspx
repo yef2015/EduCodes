@@ -55,17 +55,17 @@
 
 
 
-    <div id="dlg" class="easyui-dialog" style="width: 400px; height: 340px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 550px; height: 320px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons">
         <div class="ftitle">详细信息</div>
         <form id="fm" method="post">
             <div class="fitem">
                 <label>名称:</label>
-                <input name="SchDisName" id="SchDisName" class="easyui-textbox" style="width:200px;" required="true">
+                <input name="SchDisName" id="SchDisName" class="easyui-textbox" style="width:300px;" required="true">
             </div>
             <div class="fitem">
                 <label>描述:</label>
-                <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 100px;width:200px;">
+                <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 100px;width:300px;">
             </div>
         </form>
     </div>

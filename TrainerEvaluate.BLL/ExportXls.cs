@@ -220,7 +220,7 @@ namespace TrainerEvaluate.BLL
             for (int f = 0; f < fieldsName.Count; f++)
             {
                 ICell cell = title.CreateCell(f);
-                sheet1.SetColumnWidth(f, 13 * 256);
+                sheet1.SetColumnWidth(f, 15 * 256);
                 cell.SetCellValue(fieldsName[f]); 
                 cell.CellStyle = cellstyleHead;
                 
@@ -231,7 +231,7 @@ namespace TrainerEvaluate.BLL
                 foreach (DataRow r in exportDs.Rows)
                 {
                     IRow row = sheet1.CreateRow(i);
-                    for (var j = 0; j < exportDs.Columns.Count; j++)
+                    for (var j = 0; j < exportDs.Columns.Count-1; j++)
                     {
                         ICell cell = row.CreateCell(j);
                         cell.CellStyle = cellstyleContent;
@@ -248,7 +248,12 @@ namespace TrainerEvaluate.BLL
                             : string.Format("{0:N2}%", Convert.ToDouble(r[j]) * 100);
                           
                             cell.SetCellValue( totalSatisfy);
-                        } 
+                        }
+                        else if (exportDs.Columns[j].ColumnName == "CourseStartTime" || exportDs.Columns[j].ColumnName == "CourseFinishTime")
+                        {
+                            cell.SetCellValue("从" + Convert.ToDateTime(r[j]).ToString("yyyy-MM-dd") + "到"
+                                + Convert.ToDateTime(r[j+1]).ToString("yyyy-MM-dd"));
+                        }
                         else
                         {
                             cell.SetCellValue(Convert.ToString(r[j]));
@@ -264,7 +269,7 @@ namespace TrainerEvaluate.BLL
 
                 IRow row1 = sheet1.CreateRow(i);
                 row1.Height = 600;
-                for (var j = 0; j < exportDs.Columns.Count; j++)
+                for (var j = 0; j < exportDs.Columns.Count-1; j++)
                 {
                     ICell cell1 = row1.CreateCell(j);
                     cell1.CellStyle = cellstyleContent;
@@ -278,7 +283,7 @@ namespace TrainerEvaluate.BLL
                         cell1.SetCellValue("");
                     } 
                 }  
-                SetCellRangeAddress(sheet1, i, i, 0, 9);
+                SetCellRangeAddress(sheet1, i, i, 0, 10);
             }
         }
 
@@ -366,8 +371,9 @@ namespace TrainerEvaluate.BLL
                 cell.CellStyle = cellstyleHead;
 
             }
-            SetCellRangeAddress(sheet1, 0, 0, 1, 5);
-            SetCellRangeAddress(sheet1, 0, 1, 0, 0); 
+            SetCellRangeAddress(sheet1, 0, 0, 2, 6);
+            SetCellRangeAddress(sheet1, 0, 1, 0, 0);
+            SetCellRangeAddress(sheet1, 0, 1, 1, 1);
             int i = 2;
             if (exportDs != null && exportDs.Rows.Count > 0)
             {
@@ -461,7 +467,19 @@ namespace TrainerEvaluate.BLL
                 {
                     ICell cell0 = title.CreateCell(k);
                     cell0.CellStyle = cellstyleHead;
+                    cell0.SetCellValue("班级名称");
+                }
+                else if (k == 1)
+                {
+                    ICell cell0 = title.CreateCell(k);
+                    cell0.CellStyle = cellstyleHead;
                     cell0.SetCellValue("课程名称");
+                }
+                else if (k == 2)
+                {
+                    ICell cell0 = title.CreateCell(k);
+                    cell0.CellStyle = cellstyleHead;
+                    cell0.SetCellValue("教师姓名");
                 }
                 else
                 {
@@ -483,8 +501,10 @@ namespace TrainerEvaluate.BLL
                 cell.CellStyle = cellstyleHead;
 
             }
-            SetCellRangeAddress(sheet1, 0, 0, 1, 5);
+            SetCellRangeAddress(sheet1, 0, 0, 3, 7);
             SetCellRangeAddress(sheet1, 0, 1, 0, 0);
+            SetCellRangeAddress(sheet1, 0, 1, 1, 1);
+            SetCellRangeAddress(sheet1, 0, 1, 2, 2);
             int i = 2;
             if (exportDs != null && exportDs.Rows.Count > 0)
             {
@@ -577,6 +597,12 @@ namespace TrainerEvaluate.BLL
                 {
                     ICell cell0 = title.CreateCell(k);
                     cell0.CellStyle = cellstyleHead;
+                    cell0.SetCellValue("班级名称");
+                }
+                else if (k == 1)
+                {
+                    ICell cell0 = title.CreateCell(k);
+                    cell0.CellStyle = cellstyleHead;
                     cell0.SetCellValue("课程名称");
                 }
                 else
@@ -599,8 +625,10 @@ namespace TrainerEvaluate.BLL
                 cell.CellStyle = cellstyleHead;
 
             }
-            SetCellRangeAddress(sheet1, 0, 0, 1, 3);
+            SetCellRangeAddress(sheet1, 0, 0, 2, 4);
             SetCellRangeAddress(sheet1, 0, 1, 0, 0);
+            SetCellRangeAddress(sheet1, 0, 1, 1, 1);
+
             int i = 2;
             if (exportDs != null && exportDs.Rows.Count > 0)
             {
@@ -719,13 +747,17 @@ namespace TrainerEvaluate.BLL
 
 
             IRow title = sheet1.CreateRow(0);
-            title.Height = 600; 
+            title.Height = 600;
+
+            // 根据课程id，查找所属班级，最后确定课程所属年份
+            var classbll = new BLL.Class();
+            string strTitleName = classbll.GetClassInfoByClassId(classid) + "年中青年干部教育管理培训班课程评估表";
 
             for (int f = 0; f < 6; f++)
             {
                 ICell cell = title.CreateCell(f);
                 sheet1.SetColumnWidth(f, 13 * 256);
-                cell.SetCellValue(DateTime.Now.Year+ "年中青年干部教育管理培训班课程评估表");
+                cell.SetCellValue(strTitleName);
                 cell.CellStyle = cellstyleHead; 
             }
             SetCellRangeAddress(sheet1, 0, 0, 0, 5);
@@ -1224,6 +1256,9 @@ namespace TrainerEvaluate.BLL
            strWhere = "CourseId in(select CourseID from ClassCourse where ClassId = '{0}') and Status = 1";
            var coubll = new BLL.Course();
            var couModelList = coubll.GetModelList(string.Format(strWhere,classid));
+           var classbll = new BLL.Class();
+           // 根据课程id，查找所属班级，最后确定课程所属年份               
+           string strTitleName = classbll.GetClassInfoByClassId(classid) + "年中青年干部教育管理培训班课程评估表";
 
            foreach (Models.Course model in couModelList)
            {
@@ -1305,7 +1340,7 @@ namespace TrainerEvaluate.BLL
                {
                    ICell cell = title.CreateCell(f);
                    sheet1.SetColumnWidth(f, 13 * 256);
-                   cell.SetCellValue(DateTime.Now.Year + "年中青年干部教育管理培训班课程评估表");
+                   cell.SetCellValue(strTitleName);
                    cell.CellStyle = cellstyleHead;
                }
                SetCellRangeAddress(sheet1, 0, 0, 0, 5);
@@ -2005,6 +2040,206 @@ namespace TrainerEvaluate.BLL
                    i++;
                }
            }
-       } 
+       }
+
+
+       /// <summary>
+       /// 培训教师满意度
+       /// </summary>
+       public void ExportTrainTeachToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename)
+       {
+           Response.ContentType = "application/vnd.ms-excel";
+           Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
+           Response.Clear();
+
+           InitializeWorkbook();
+           GenerateTrainTeachData(fieldsName, exportDs, filename);
+           GetExcelStream().WriteTo(Response.OutputStream);
+           Response.End();
+       }
+
+       void GenerateTrainTeachData(List<string> fieldsName, DataTable exportDs, string filename)
+       {
+           ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
+
+           ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
+           cellstyleHead.VerticalAlignment = VerticalAlignment.Center;
+           //表头样式
+           cellstyleHead.BorderBottom = BorderStyle.Thin;
+           cellstyleHead.BorderLeft = BorderStyle.Thin;
+           cellstyleHead.BorderRight = BorderStyle.Thin;
+           cellstyleHead.BorderTop = BorderStyle.Thin;
+           cellstyleHead.WrapText = true;
+           var font = hssfworkbook.CreateFont();
+           font.FontHeightInPoints = 11;
+           font.FontName = "宋体";
+           font.Boldweight = 700;
+           cellstyleHead.SetFont(font);
+
+           //表体样式
+           ICellStyle cellstyleContent = hssfworkbook.CreateCellStyle();
+           cellstyleContent.BorderBottom = BorderStyle.Thin;
+           cellstyleContent.BorderLeft = BorderStyle.Thin;
+           cellstyleContent.BorderRight = BorderStyle.Thin;
+           cellstyleContent.BorderTop = BorderStyle.Thin;
+           var font1 = hssfworkbook.CreateFont();
+           font1.FontHeightInPoints = 11;
+           font1.FontName = "宋体";
+           font1.Boldweight = 10;
+           cellstyleContent.SetFont(font1);
+           cellstyleContent.WrapText = true;
+
+           IRow title = sheet1.CreateRow(0);
+           title.Height = 600;
+           for (int f = 0; f < fieldsName.Count; f++)
+           {
+               ICell cell = title.CreateCell(f);
+               sheet1.SetColumnWidth(f, 18 * 256);
+               cell.SetCellValue(fieldsName[f]);
+               cell.CellStyle = cellstyleHead;
+           }
+
+           int rowStart = 1;
+           var report = new BLL.Questionnaire();
+           DataTable dtInfo = new DataTable();
+           if (exportDs != null && exportDs.Rows.Count > 0)
+           {
+               foreach (DataRow r in exportDs.Rows)
+               {
+                   var rowNum = 1;
+                   string teacherId = r["TeacherId"].ToString();
+                   dtInfo = report.GetTeacherSatifyById(teacherId);
+                   rowNum = dtInfo.Rows.Count;
+
+                   for (var j = 0; j < dtInfo.Rows.Count; j++)
+                   {
+                       IRow row = sheet1.CreateRow(rowStart+j);
+                       ICell cell1 = row.CreateCell(0);
+                       cell1.CellStyle = cellstyleContent;
+                       cell1.SetCellValue(r["TeacherName"].ToString());
+
+                       ICell cell2 = row.CreateCell(1);
+                       cell2.CellStyle = cellstyleContent;
+                       cell2.SetCellValue(dtInfo.Rows[j]["CourseName"].ToString());
+
+                       ICell cell3 = row.CreateCell(2);
+                       cell3.CellStyle = cellstyleContent;
+                       cell3.SetCellValue(dtInfo.Rows[j]["ClassName"].ToString());
+
+                       ICell cell4 = row.CreateCell(3);
+                       cell4.CellStyle = cellstyleContent;
+                       var totalSatisfy = Convert.ToDouble(dtInfo.Rows[j]["TotalTeacher"].ToString()) >= 1.0
+                        ? "100%"
+                       : string.Format("{0:N2}%", Convert.ToDouble(dtInfo.Rows[j]["TotalTeacher"].ToString()) * 100);
+
+                       cell4.SetCellValue(totalSatisfy);
+                   }
+
+                   SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
+                   rowStart = rowStart + rowNum;
+               }
+           }
+       }
+
+
+       /// <summary>
+       /// 培训课程满意度
+       /// </summary>
+       public void ExportTrainCourseToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename)
+       {
+           Response.ContentType = "application/vnd.ms-excel";
+           Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
+           Response.Clear();
+
+           InitializeWorkbook();
+           GenerateTrainCourseData(fieldsName, exportDs, filename);
+           GetExcelStream().WriteTo(Response.OutputStream);
+           Response.End();
+       }
+
+       void GenerateTrainCourseData(List<string> fieldsName, DataTable exportDs, string filename)
+       {
+           ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
+
+           ICellStyle cellstyleHead = hssfworkbook.CreateCellStyle();
+           cellstyleHead.VerticalAlignment = VerticalAlignment.Center;
+           //表头样式
+           cellstyleHead.BorderBottom = BorderStyle.Thin;
+           cellstyleHead.BorderLeft = BorderStyle.Thin;
+           cellstyleHead.BorderRight = BorderStyle.Thin;
+           cellstyleHead.BorderTop = BorderStyle.Thin;
+           cellstyleHead.WrapText = true;
+           var font = hssfworkbook.CreateFont();
+           font.FontHeightInPoints = 11;
+           font.FontName = "宋体";
+           font.Boldweight = 700;
+           cellstyleHead.SetFont(font);
+
+           //表体样式
+           ICellStyle cellstyleContent = hssfworkbook.CreateCellStyle();
+           cellstyleContent.BorderBottom = BorderStyle.Thin;
+           cellstyleContent.BorderLeft = BorderStyle.Thin;
+           cellstyleContent.BorderRight = BorderStyle.Thin;
+           cellstyleContent.BorderTop = BorderStyle.Thin;
+           var font1 = hssfworkbook.CreateFont();
+           font1.FontHeightInPoints = 11;
+           font1.FontName = "宋体";
+           font1.Boldweight = 10;
+           cellstyleContent.SetFont(font1);
+           cellstyleContent.WrapText = true;
+
+           IRow title = sheet1.CreateRow(0);
+           title.Height = 600;
+           for (int f = 0; f < fieldsName.Count; f++)
+           {
+               ICell cell = title.CreateCell(f);
+               sheet1.SetColumnWidth(f, 18 * 256);
+               cell.SetCellValue(fieldsName[f]);
+               cell.CellStyle = cellstyleHead;
+           }
+
+           int rowStart = 1;
+           var report = new BLL.Questionnaire();
+           DataTable dtInfo = new DataTable();
+           if (exportDs != null && exportDs.Rows.Count > 0)
+           {
+               foreach (DataRow r in exportDs.Rows)
+               {
+                   var rowNum = 1;
+                   string tempCourseId = r["CourseId"].ToString();
+                   dtInfo.Rows.Clear();
+                   dtInfo = report.GetCourseSatifyById(tempCourseId);
+                   rowNum = dtInfo.Rows.Count;
+
+                   for (var j = 0; j < dtInfo.Rows.Count; j++)
+                   {
+                       IRow row = sheet1.CreateRow(rowStart + j);
+                       ICell cell1 = row.CreateCell(0);
+                       cell1.CellStyle = cellstyleContent;
+                       cell1.SetCellValue(r["CourseName"].ToString());
+
+                       ICell cell2 = row.CreateCell(1);
+                       cell2.CellStyle = cellstyleContent;
+                       cell2.SetCellValue(dtInfo.Rows[j]["TeacherName"].ToString());
+
+                       ICell cell3 = row.CreateCell(2);
+                       cell3.CellStyle = cellstyleContent;
+                       cell3.SetCellValue(dtInfo.Rows[j]["ClassName"].ToString());
+
+                       ICell cell4 = row.CreateCell(3);
+                       cell4.CellStyle = cellstyleContent;
+                       var totalSatisfy = Convert.ToDouble(dtInfo.Rows[j]["TotalCourse"].ToString()) >= 1.0
+                        ? "100%"
+                       : string.Format("{0:N2}%", Convert.ToDouble(dtInfo.Rows[j]["TotalCourse"].ToString()) * 100);
+
+                       cell4.SetCellValue(totalSatisfy);
+                   }
+
+                   SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
+                   rowStart = rowStart + rowNum;            
+               }
+           }
+       }
+
     }
 }

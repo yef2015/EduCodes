@@ -84,6 +84,14 @@ namespace TrainerEvaluate.Web
                 case "exorg":
                     ExportOrgReport(context);
                     break;
+                case "extrainteach":
+                    // 导出培训教师满意度
+                    ExportTrainTeachReport(context);
+                    break;
+                case "extraincourse":
+                    // 导出培训课程满意度
+                    ExportTrainCourseReport(context);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -137,11 +145,11 @@ namespace TrainerEvaluate.Web
 
 
 
-
         private void ExportTotalReport(HttpContext context)
         {
             var exXls = new ExportXls();
             var fieldsNames = new List<string>();
+            fieldsNames.Add("班级名称");
             fieldsNames.Add("课程名称");
             fieldsNames.Add("授课教师");
             fieldsNames.Add("总平均分（满分52分）");
@@ -156,6 +164,8 @@ namespace TrainerEvaluate.Web
             var quesBll = new BLL.Questionnaire();
             var dt = quesBll.GetTotalReport();
             dt.Columns.Remove("CourseId");
+            dt.Columns.Remove("MyTeacherName");
+            dt.Columns.Remove("TeachTime");
             dt.AcceptChanges();
 
 
@@ -198,7 +208,9 @@ namespace TrainerEvaluate.Web
         {
             var exXls = new ExportXls();
             var fieldsNames = new List<string>();
+            fieldsNames.Add("班级名称");
             fieldsNames.Add("课程名称");
+            fieldsNames.Add("教师姓名");
             fieldsNames.Add("讲师准备比较充分");
             fieldsNames.Add("语言表达清晰，态度端正");
             fieldsNames.Add("仪表仪容端庄大方，有亲和力");
@@ -207,7 +219,6 @@ namespace TrainerEvaluate.Web
             var quesBll = new BLL.Questionnaire();
             var dt = quesBll.GetTeacherReport();
             dt.Columns.Remove("CourseId");
-            dt.Columns.Remove("TeacherName");
             dt.Columns.Remove("TeachTime");
             dt.Columns.Remove("TeacherBearing");
             dt.Columns.Remove("TeacherCommunication");
@@ -227,6 +238,7 @@ namespace TrainerEvaluate.Web
         {
             var exXls = new ExportXls();
             var fieldsNames = new List<string>();
+            fieldsNames.Add("班级名称");
             fieldsNames.Add("课程名称");
             fieldsNames.Add("培训服务周到细致");
             fieldsNames.Add("培训时间安排和控制合理");
@@ -297,10 +309,6 @@ namespace TrainerEvaluate.Web
 
 
 
-
-
-
-
         private void ExportStuInfo(HttpContext context, string id)
         {
 
@@ -324,11 +332,7 @@ namespace TrainerEvaluate.Web
 
 
         }
-
-
-
-
-
+        
 
         /// <summary>
         /// 导出意见
@@ -402,10 +406,6 @@ namespace TrainerEvaluate.Web
 
 
 
-
-
-
-
         private void GetNofinishedStudent(HttpContext context)
         {
             var ds = new DataSet();
@@ -451,7 +451,6 @@ namespace TrainerEvaluate.Web
                 context.Response.Write(str);
             }
         }
-
 
 
 
@@ -837,7 +836,6 @@ namespace TrainerEvaluate.Web
 
 
 
-
         private void Query(HttpContext context)
         {
             var courseName = context.Request["cname"];
@@ -1009,8 +1007,6 @@ namespace TrainerEvaluate.Web
 
 
 
-
-
         private void DelData(string id, HttpContext context)
         {
             var queBll = new BLL.Questionnaire();
@@ -1057,5 +1053,48 @@ namespace TrainerEvaluate.Web
             var exXls = new ExportXls();
             exXls.ExportAllEvReportToxls(context.Response, filename, classid);
         }
+
+
+        /// <summary>
+        /// 培训教师满意度
+        /// </summary>
+        /// <param name="context"></param>
+        private void ExportTrainTeachReport(HttpContext context)
+        {
+            var exXls = new ExportXls();
+            var fieldsNames = new List<string>();
+            fieldsNames.Add("教师姓名");
+            fieldsNames.Add("课程名称");
+            fieldsNames.Add("授课班级");
+            fieldsNames.Add("满意度");
+
+            var report = new BLL.Questionnaire();
+            var dt = report.GetTeacherEvaluate();
+
+            var filename = System.DateTime.Now.ToString("yyyy-MM-dd") + "培训教师满意度统计表.xls";
+            exXls.ExportTrainTeachToxls(context.Response, fieldsNames, dt, filename);
+        }
+
+
+        /// <summary>
+        /// 培训课程满意度
+        /// </summary>
+        /// <param name="context"></param>
+        private void ExportTrainCourseReport(HttpContext context)
+        {
+            var exXls = new ExportXls();
+            var fieldsNames = new List<string>();
+            fieldsNames.Add("课程名称");
+            fieldsNames.Add("教师姓名");
+            fieldsNames.Add("授课班级");
+            fieldsNames.Add("满意度");
+
+            var report = new BLL.Questionnaire();
+            var dt = report.GetCourseEvaluate();
+
+            var filename = System.DateTime.Now.ToString("yyyy-MM-dd") + "培训课程满意度统计表.xls";
+            exXls.ExportTrainCourseToxls(context.Response, fieldsNames, dt, filename);
+        }
+        
     }
 }

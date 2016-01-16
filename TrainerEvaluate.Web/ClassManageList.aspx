@@ -138,7 +138,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width: 90px">取消</a>
         </div>
 
-        <div id="dlg1" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg1" class="easyui-dialog" style="width: 400px; height: 470px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons1">
             <div class="ftitle">请选择学生</div> 
                 <table id="dg1" class="easyui-datagrid"
@@ -162,7 +162,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg1').dialog('close');$('#dg1').datagrid('load');" style="width: 90px">取消</a>
         </div>
 
-        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 470px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
             <div class="ftitle">请选择项目负责人</div>
            

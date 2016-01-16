@@ -10,13 +10,13 @@
                 <div align="center">名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="SchoolName1" class="easyui-textbox" id="SchoolName1">
+                <input name="SchoolName1" class="easyui-textbox" id="SchoolName1" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">所属学区： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="SchDisName1" class="easyui-textbox" id="SchDisName1">
+                <input name="SchDisName1" class="easyui-textbox" id="SchDisName1" style="width: 165px;"/>
             </td>
         </tr>
         <tr>
@@ -24,14 +24,14 @@
                 <div align="center">办学性质： </div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">  
-                 <select class="easyui-combobox" name="RunNatureName1" id="RunNatureName1" style="width: 160px;"    data-options="url:'ComboboxGetData.ashx?t=rc',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                 <select class="easyui-combobox" name="RunNatureName1" id="RunNatureName1"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=rc',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">法人名称： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="LegalName1" class="easyui-textbox" id="LegalName1">
+                <input name="LegalName1" class="easyui-textbox" id="LegalName1" style="width: 165px;"/>
             </td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
                 <div align="center">学校类型：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-              <select class="easyui-combobox" name="SchoolTypeName1" id="SchoolTypeName1" style="width: 160px;"  data-options="url:'ComboboxGetData.ashx?t=st',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+              <select class="easyui-combobox" name="SchoolTypeName1" id="SchoolTypeName1"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=st',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                </select>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25"></td>

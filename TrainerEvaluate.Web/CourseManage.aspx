@@ -11,13 +11,13 @@
                 <div align="center">课程名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="corName" class="easyui-textbox" id="corName">
+                <input name="corName" class="easyui-textbox" id="corName" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">授课地点： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="TeachPlace11" class="easyui-textbox" id="TeachPlace11">
+                <input name="TeachPlace11" class="easyui-textbox" id="TeachPlace11" style="width: 165px;"/>
             </td>
             <%--<td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">授课教师： </div>

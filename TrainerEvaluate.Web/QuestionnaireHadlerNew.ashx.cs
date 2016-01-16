@@ -95,7 +95,6 @@ namespace TrainerEvaluate.Web
            var status = context.Request["Status"];
            var courseName = context.Request["CourseName"];
            var teacher = context.Request["Teacher"];
-           var time = context.Request["Time"];
            var place = context.Request["Place"];
 
             var strWhere = "";
@@ -136,17 +135,6 @@ namespace TrainerEvaluate.Web
                     strWhere = string.Format(" TeacherName  like '%" + teacher + "%' ");
                 }
             }
-            if (!string.IsNullOrEmpty(time))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachTime  like '%" + time + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachTime  like '%" + time + "%' ");
-                }
-            }
             if (!string.IsNullOrEmpty(place))
             {
                 if (!string.IsNullOrEmpty(strWhere))
@@ -159,27 +147,17 @@ namespace TrainerEvaluate.Web
                 }
             }
 
-          
+
             ds = questioninfo.GetListByPageNew(strWhere, sort, startIndex, endIndex);
-            var num = 0;
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                  num = ds.Tables[0].Rows.Count;
-            } 
+            var num = questioninfo.GetRecordCountNew(strWhere);
+
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
 
- 
-
-
-
-
-
         //生成问卷
         private void CreateQue(HttpContext context)
-        {
-           
+        {           
             var classCourseId = context.Request["id"];
             var name = context.Request["Name"];
             var startTime = context.Request["StartTime"];

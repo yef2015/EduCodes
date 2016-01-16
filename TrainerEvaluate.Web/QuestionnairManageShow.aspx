@@ -10,7 +10,7 @@
                 <div align="center">班级名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tClassName" class="easyui-textbox" id="tClassName">
+                <input name="tClassName" class="easyui-textbox" id="tClassName" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">问卷状态： </div>
@@ -29,27 +29,26 @@
                 <div align="center">课程名称：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="tCourseName" class="easyui-textbox" id="tCourseName">
+                <input name="tCourseName" class="easyui-textbox" id="tCourseName" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">授课教师： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="tTeacher" class="easyui-textbox" id="tTeacher">
+                <input name="tTeacher" class="easyui-textbox" id="tTeacher" style="width: 165px;"/>
             </td>
         </tr>
         <tr>
             <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">授课时间：</div>
+                <div align="center">授课地点：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tTime" id="tTime" class="easyui-datebox" />
+                <input name="tPlace" class="easyui-textbox" id="tPlace" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">授课地点： </div>
+                <div align="center"> </div>
             </td>
-            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tPlace" class="easyui-textbox" id="tPlace">
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">                
             </td>
         </tr>
         <tr bgcolor="#FFFFFF">
@@ -67,14 +66,15 @@
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
-                    <th field="ID" width="0" sortable="true" hidden="true">班级课程编号</th>
+                    <th field="ID" width="0" sortable="true" hidden="true">班级课程老师编号</th>
                     <th field="CourseID" width="0" contenteditable="" hidden="true">课程编号</th>
                     <th field="TeacherID" width="0" hidden="true">教师编号</th>
                     <th field="ClassName" width="25%" sortable="true">班级名称</th>
-                    <th field="CourseName" width="25%" sortable="true">课程名称</th>
+                    <th field="CourseName" width="20%" sortable="true">课程名称</th>
                     <th field="TeacherName" width="10%" sortable="true">授课教师</th>
-                    <th field="TeachPlace" width="15%" sortable="true">授课地点</th>
-                    <th field="TeachTime" width="10%" sortable="true">授课时间</th>
+                    <th field="TeachPlace" width="14%" sortable="true">授课地点</th>
+                    <th field="TeachTime" width="10%" sortable="true">授课开始时间</th>
+                    <th field="TeachFinishDate" width="10%" sortable="true">授课结束时间</th>
                     <th field="QuestionInfoStatus" width="10%" sortable="true">问卷状态</th>
                 </tr>
             </thead>
@@ -121,7 +121,6 @@
                 Status: $("#tStatus").combobox('getValue'),
                 CourseName: $('#tCourseName').textbox("getText"),
                 Teacher: $("#tTeacher").textbox('getText'),
-                Time: $("#tTime").textbox('getText'),
                 Place: $("#tPlace").textbox('getText')
             });
         }
@@ -131,7 +130,6 @@
             $('#tStatus').textbox('clear');
             $('#tCourseName').textbox("setText", "");
             $('#tTeacher').textbox("setText", "");
-            $('#tTime').textbox("setText", "");
             $('#tPlace').textbox("setText", "");
         }
 

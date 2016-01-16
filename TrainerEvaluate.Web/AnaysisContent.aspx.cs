@@ -134,7 +134,8 @@ namespace TrainerEvaluate.Web
                     str.Append("<td>" + totalTeacher + " </td>");
                     str.Append("<td>" + totalOrg + " </td>");
                     str.Append("<td>" + row["TotalDone"] + " </td>");
-                    str.Append("<td>" + row["TeachTime"] + " </td>");  
+                    str.Append("<td>从" + Convert.ToDateTime(row["CourseStartTime"]).ToString("yyyy-MM-dd") + "到"
+                        + Convert.ToDateTime(row["CourseFinishTime"]).ToString("yyyy-MM-dd") + " </td>");  
                     str.Append("</tr>");
                 }
             }
@@ -455,7 +456,6 @@ namespace TrainerEvaluate.Web
 
             var report = new BLL.Questionnaire();
             var dt = report.GetTeacherEvaluate();
-            var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
@@ -509,7 +509,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainCourseReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainTeachReports()\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 

@@ -317,6 +317,31 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public static DataTable GetCourseByCorIdStuId(string corId,string stuId)
+        {
+            var dt = new DataTable();
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append(" select a.CourseId, a.CourseName,a.TeachPlace,b.ClassId,b.TeacherId,b.TeacherName,b.StartDate,b.FinishDate  ");
+                strSql.Append(" from Course a,CourseTeacher b ");
+                strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '" + corId + "' ");
+                strSql.Append(" and b.ClassId in (select ClassId from ClassStudents where StudentId = '" + stuId + "') ");
+
+                var result = DbHelperSQL.Query(strSql.ToString());
+                if (result != null && result.Tables.Count > 0)
+                {
+                    dt = result.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                dt = new DataTable();
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return dt;
+        }
+
 	    #endregion  ExtensionMethod
 	}
 }

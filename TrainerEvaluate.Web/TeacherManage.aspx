@@ -11,13 +11,13 @@
                 <div align="center">姓名：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="StuName11" class="easyui-textbox" id="StuName11">
+                <input name="StuName11" class="easyui-textbox" id="StuName11" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">所在单位： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="School11" class="easyui-textbox" id="School11">
+                <input name="School11" class="easyui-textbox" id="School11" style="width: 165px;"/>
             </td>
         </tr>
         <tr>
@@ -25,14 +25,14 @@
                 <div align="center">性别： </div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">  
-                 <select class="easyui-combobox" name="Gender11" id="Gender11" style="width: 160px;"    data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                 <select class="easyui-combobox" name="Gender11" id="Gender11"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">身份证号： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="IdentityNo11" class="easyui-textbox" id="IdentityNo11">
+                <input name="IdentityNo11" class="easyui-textbox" id="IdentityNo11" style="width: 165px;"/>
             </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
                 <div align="center">职称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-              <select class="easyui-combobox" name="Title11" id="Title11" style="width: 160px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+              <select class="easyui-combobox" name="Title11" id="Title11"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                </select>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25"></td>

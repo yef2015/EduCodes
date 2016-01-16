@@ -1119,17 +1119,8 @@ namespace TrainerEvaluate.BLL
         {
             try
             {
-                // 通过sysuser表与student表进行关联，查找表student的id
-                string strUser = string.Format("select b.StudentId from SysUser AS a left join Student AS b on a.IdentityNo = b.IdentityNo where a.UserId = '{0}' and a.Status = 1 and b.Status = 1", currentUserId.ToString());
-                string studentId = string.Empty;
-                DataSet dsUser = DbHelperSQL.Query(strUser);
-                if (dsUser != null && dsUser.Tables.Count > 0)
-                {
-                    studentId = dsUser.Tables[0].Rows[0][0].ToString();
-                }
-
                 // 获取学生所在的班级id列表
-                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", studentId);
+                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", currentUserId);
                 DataSet ds = DbHelperSQL.Query(strSQL);
                 StringBuilder strClass = new StringBuilder();
                 string strClassId= string.Empty;
@@ -1171,7 +1162,11 @@ namespace TrainerEvaluate.BLL
                 DataSet dsRe = new DataSet();
                 if (!string.IsNullOrEmpty(strClassId))
                 {
-                    var sqlRe = string.Format("select c.*,b.ID as ccID from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0})  {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE()", strClassId, strWhereCourse);
+                    var sqlRe = string.Format(" select c.CourseId,c.CourseName, c.TeachPlace,b.TeacherName,b.StartDate,b.FinishDate,b.RId as ccID  " +
+                        " from QuestionInfo AS a,CourseTeacher as b,Course AS c " +
+                        " where a.ClassCourseID = b.RId and b.CourseId = c.CourseId " +
+                        " and a.Status = 2 and b.ClassId in({0})  {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE() ",
+                        strClassId, strWhereCourse);
                     dsRe= DbHelperSQL.Query(sqlRe);
                 }
 
@@ -1194,17 +1189,8 @@ namespace TrainerEvaluate.BLL
         {    
             try
             {
-                // 通过sysuser表与student表进行关联，查找表student的id
-                string strUser = string.Format("select b.StudentId from SysUser AS a left join Student AS b on a.IdentityNo = b.IdentityNo where a.UserId = '{0}' and a.Status = 1 and b.Status = 1", studentId);
-                string studentIdNew = string.Empty;
-                DataSet dsUser = DbHelperSQL.Query(strUser);
-                if (dsUser != null && dsUser.Tables.Count > 0)
-                {
-                    studentIdNew = dsUser.Tables[0].Rows[0][0].ToString();
-                }
-
                 // 获取学生所在的班级id列表
-                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", studentIdNew);
+                var strSQL = string.Format("select b.ID,b.Name from dbo.ClassStudents AS a, dbo.Class AS b where a.ClassId = b.ID and a.StudentId = '{0}' and b.Status = 1", studentId);
                 DataSet ds = DbHelperSQL.Query(strSQL);
                 StringBuilder strClass = new StringBuilder();
                 string strClassId= string.Empty;
@@ -1237,7 +1223,7 @@ namespace TrainerEvaluate.BLL
                     if (strCourse.Length > 0)
                     {
                         strCourseId = strCourse.ToString().Substring(0, strCourse.ToString().Length - 1);
-                        strWhereCourse = string.Format("and c.CourseId not in({0})", strCourseId);
+                        strWhereCourse = string.Format("and b.CourseId not in({0})", strCourseId);
                     }
                 }
 
@@ -1245,7 +1231,7 @@ namespace TrainerEvaluate.BLL
                 DataSet dsRe = new DataSet();
                 if (!string.IsNullOrEmpty(strClassId))
                 {
-                    var sqlRe = string.Format("select c.CourseName,b.ID from QuestionInfo AS a,ClassCourse AS b,Course AS c where a.ClassCourseID = b.ID and b.CourseID = c.CourseId and a.Status = 2 and b.ClassId in({0}) {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE() ", strClassId, strWhereCourse);
+                    var sqlRe = string.Format("select b.CoursName AS CourseName,b.RId AS ID from QuestionInfo AS a,CourseTeacher AS b where a.ClassCourseID = b.RId and a.Status = 2 and b.ClassId in ({0}) {1} and a.StartTime < GETDATE() and a.EndTime > GETDATE() ", strClassId, strWhereCourse);
                     dsRe= DbHelperSQL.Query(sqlRe);
                 }
 
@@ -1263,18 +1249,15 @@ namespace TrainerEvaluate.BLL
         /// </summary>
         /// <param name="clacourId"></param>
         /// <returns></returns>
-         public DataSet GetQuestRelatByClassCourseId(string clacourId)
+        public DataSet GetQuestRelatByCCId(string clacourId)
         {    
             try
             {
                 StringBuilder strBuilder = new StringBuilder();
-                strBuilder.Append(" select b.ClassId,b.CourseID,d.TeacherId,e.TeacherName,c.Id ");
-                strBuilder.Append(" from Course as a ");
-                strBuilder.Append(" left join ClassCourse as b on b.CourseID = a.CourseId ");
-                strBuilder.Append(" left join QuestionInfo as c on b.ID = c.ClassCourseID ");
-                strBuilder.Append(" left join CourseTeacher as d on d.CourseId = a.CourseId ");
-                strBuilder.Append(" left join Teacher as e on e.TeacherId = d.TeacherId ");
-                strBuilder.Append(" where b.ID = '"+clacourId+"' ");
+                strBuilder.Append(" select a.ClassId,a.CourseId,a.TeacherId,a.TeacherName,b.Id ");
+                strBuilder.Append(" from CourseTeacher as a ");
+                strBuilder.Append(" left join QuestionInfo as b on b.ClassCourseID = a.RId  ");
+                strBuilder.Append(" where a.RId = '" + clacourId + "' ");
 
                 DataSet ds = DbHelperSQL.Query(strBuilder.ToString());
                 return ds;

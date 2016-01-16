@@ -186,9 +186,10 @@ namespace TrainerEvaluate.BLL
 
         public int GetRecordCountNew(string  strWhere)
         {
-            var sql = string.Format("select count(a.Name)" +
-                                 " from ClassCourse b  left join QuestionInfo a on b.ID=a.ClassCourseID " +
-                                 "  inner join Class c on c.ID=b.ClassId inner join Course d on d.CourseId=b.CourseID");
+            var sql = " select COUNT(b.RId) as num " +
+                      " from CourseTeacher b " +
+                      " left join QuestionInfo a on b.RId = a.ClassCourseID " +
+                      " inner join Course d on d.CourseId = b.CourseId ";
              
             StringBuilder strSql = new StringBuilder();
             strSql.Append(sql);
@@ -204,8 +205,7 @@ namespace TrainerEvaluate.BLL
             else
             {
                 return Convert.ToInt32(obj);
-            }
-            
+            }            
         }
 
 
@@ -229,13 +229,15 @@ namespace TrainerEvaluate.BLL
             //                      "from  QuestionInfo a,ClassCourse b,Class c,Course d,Teacher e" +
             //                      " where  a.ClassCourseID=b.ID and b.ClassId=c.ID and d.CourseId=b.CourseID)"); 
 
-            var sql1 = string.Format("(select  b.ID, a.Name,a.StartTime,a.EndTime,b.ClassId,b.CourseID,b.TeacherID,c.Name  ClassName,d.CourseName,d.TeacherName, d.TeachPlace,d.TeachTime,case  ISNULL(a.Status,1) when 1 then '未生成'  when 2 then '已生成' when 3 then '已取消' end   QuestionInfoStatus,ISNULL(a.Status,1) Status " +
-                                  " from ClassCourse b  left join QuestionInfo a on b.ID=a.ClassCourseID " +
-                                  "  inner join Class c on c.ID=b.ClassId inner join Course d on d.CourseId=b.CourseID)");
-
-            strSql.Append( sql1 + "  T ");  
+            strSql.Append(" ( select b.RId as ID,a.Name,a.StartTime,a.EndTime,b.ClassId,b.CourseId,b.TeacherId, ");
+            strSql.Append(" b.ClassName,b.CoursName as CourseName,b.TeacherName , ");
+            strSql.Append(" d.TeachPlace,convert(varchar, b.StartDate, 102) as TeachTime ,convert(varchar, b.FinishDate, 102) as TeachFinishDate,   ");
+            strSql.Append(" case  ISNULL(a.Status,1) when 1 then '未生成'  when 2 then '已生成' when 3 then '已取消' end   QuestionInfoStatus, ");
+            strSql.Append(" ISNULL(a.Status,1) Status  ");
+            strSql.Append(" from CourseTeacher b ");
+            strSql.Append(" left join QuestionInfo a on b.RId = a.ClassCourseID ");
+            strSql.Append(" inner join Course d on d.CourseId = b.CourseId )   T ");
             strSql.Append(" ) TT");
-
 
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
