@@ -160,7 +160,7 @@ namespace TrainerEvaluate.BLL
 	    public DataSet GetDataForExport(string strWhere)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select a.Name,Object, Description, StartDate, FinishDate, Students, Point, b.Name as PointTypeName, Teacher, c.Name as  AreaName,d.Name as   LevelName,  e.Name as TypeName ");
+            strSql.Append("select a.Name,Object, Description, convert(varchar, a.StartDate, 102) as StartDate, convert(varchar, a.FinishDate, 102) as FinishDate, Students, Point, b.Name as PointTypeName, Teacher, c.Name as  AreaName,d.Name as   LevelName,  e.Name as TypeName ");
             strSql.Append(" FROM Class a left join Dictionaries b on a.PointType=b.ID left join Dictionaries c on a.Area=c.ID  left join Dictionaries d on a.Level=d.ID  left join Dictionaries e on a.Type=e.ID ");
             if (strWhere.Trim() != "")
             {

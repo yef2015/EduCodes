@@ -370,11 +370,11 @@ namespace TrainerEvaluate.Web
             {
                 if (!string.IsNullOrEmpty(strWhere))
                 {
-                    strWhere += string.Format(" and  Title like '%" + title + "%' ");
+                    strWhere += string.Format(" and  Title = '" + title + "' ");
                 }
                 else
                 {
-                    strWhere = string.Format(" Title like '%" + title + "%' ");
+                    strWhere = string.Format(" Title = '" + title + "' ");
                 }
             }
             if (!string.IsNullOrEmpty(idno))

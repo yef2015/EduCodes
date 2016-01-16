@@ -63,11 +63,11 @@
             <thead>
                 <tr>
                     <th field="TeacherId" width="0" hidden="true">编号</th>
-                    <th field="TeacherName" width="200" sortable="true">姓名</th>
-                    <th field="GenderName" width="100" sortable="true">性别</th>
-                    <th field="IdentityNo" width="100" sortable="true">身份证号</th>
-                    <th field="Dept" width="300" sortable="true">所在单位</th>
-                    <th field="JobTitleName" width="100" sortable="true">职称</th>
+                    <th field="TeacherName" width="18%" sortable="true">姓名</th>
+                    <th field="GenderName" width="10%" sortable="true">性别</th>
+                    <th field="IdentityNo" width="30%" sortable="true">身份证号</th>
+                    <th field="Dept" width="25%" sortable="true">所在单位</th>
+                    <th field="JobTitleName" width="15%" sortable="true">职称</th>
                 </tr>
             </thead>
         </table>
@@ -470,7 +470,7 @@
                 name: $("#StuName11").textbox('getText'),
                 sch: $("#School11").textbox('getText'),
                 gender: $("#Gender11").combobox("getValue"),
-                title: $("#Title11").textbox('getText'),
+                title:$("#Title11").combobox("getValue"), 
                 idno: $("#IdentityNo11").textbox('getText')
             });
         }

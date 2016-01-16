@@ -113,8 +113,8 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = classBll.GetRecordCount("Status!=0 and YearLevel = '" + classYear + "' ");
-            ds = classBll.GetListByPage("Status!=0  and YearLevel = '" + classYear + "' ", sort, startIndex, endIndex, order);
+            var num = classBll.GetRecordCount(" Status=1 and YearLevel = '" + classYear + "' ");
+            ds = classBll.GetListByPage(" Status=1  and YearLevel = '" + classYear + "' ", sort, startIndex, endIndex, order);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
@@ -126,45 +126,33 @@ namespace TrainerEvaluate.Web
             var description = context.Request["Description"];
             var area = context.Request["Area"];
             var type = context.Request["Type"];
+            var classYear = System.DateTime.Now.Year.ToString();
+            if (context.Session["ClassYear"] != null)
+            {
+                classYear = context.Session["ClassYear"].ToString();
+            }
             var ds = new DataSet();
             var classBll = new BLL.Class();
-            var strWhere = "";
+            var strWhere = " Status = 1 ";
+            if (!string.IsNullOrEmpty(classYear))
+            {
+                strWhere += string.Format(" and  YearLevel = '" + classYear + "' ");
+            }
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere = string.Format(" Name like '%" + name.Trim() + "%' ");
+                strWhere += string.Format(" and Name like '%" + name.Trim() + "%' ");
             }
             if (!string.IsNullOrEmpty(description))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Description  like '%" + description.Trim() + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + description.Trim() + "%' ");
-                }
+                strWhere += string.Format(" and  Description  like '%" + description.Trim() + "%' ");
             }
             if (!string.IsNullOrEmpty(area))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Area =" + area.Trim() + " ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Area =" + area.Trim() + " ");
-                }
+                strWhere += string.Format(" and  Area =" + area.Trim() + " ");
             }
             if (!string.IsNullOrEmpty(type))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Type =" + type.Trim() + " ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Type =" + type.Trim() + " ");
-                }
+                strWhere += string.Format(" and  Type =" + type.Trim() + " ");
             }
 
             var page = Convert.ToInt32(context.Request["page"]);
@@ -225,45 +213,35 @@ namespace TrainerEvaluate.Web
             var description = context.Request["Description"].Trim();
             var area = context.Request["Area"].Trim();
             var type = context.Request["Type"].Trim();
+
+            var classYear = System.DateTime.Now.Year.ToString();
+            if (context.Session["ClassYear"] != null)
+            {
+                classYear = context.Session["ClassYear"].ToString();
+            }
+
             var ds = new DataSet();
             var classBll = new BLL.Class();
-            var strWhere = "";
+            var strWhere =  "a.Status = 1  ";
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere = string.Format(" Name like '%" + name + "%' ");
+                strWhere += string.Format(" and a.Name like '%" + name + "%' ");
+            }
+            if (!string.IsNullOrEmpty(classYear))
+            {
+                strWhere += string.Format(" and  a.YearLevel = '" + classYear + "' ");
             }
             if (!string.IsNullOrEmpty(description))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Description  like '%" + description + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + description + "%' ");
-                }
+                strWhere += string.Format(" and  a.Description  like '%" + description + "%' ");
             }
             if (!string.IsNullOrEmpty(area))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Area =" + area + " ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Area =" + area + " ");
-                }
+                strWhere += string.Format(" and  a.Area =" + area + " ");
             }
             if (!string.IsNullOrEmpty(type))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Type= " + type + "  ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Type="  + type + " ");
-                }
+                strWhere += string.Format(" and  a.Type= " + type + "  ");
             }
 
             ds = classBll.GetDataForExport(strWhere);
