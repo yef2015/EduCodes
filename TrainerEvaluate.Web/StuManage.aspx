@@ -19,13 +19,13 @@
             <td width="34%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <input name="School11" class="easyui-textbox" id="School11" style="width:165px;" />
             </td>
-        </tr>
+        </tr>   
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="26">
                 <div align="center">职称：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" class="gray10a" height="26"> 
-              <select class="easyui-combobox" name="Title11" id="Title11" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+              <select class="easyui-combobox" name="Title11" id="Title11" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="26">
@@ -66,12 +66,12 @@
             <thead>
                 <tr>
                     <th field="StudentId" width="0" hidden="true">编号</th>
-                    <th field="StuName" width="150" sortable="true">姓名</th>
-                    <th field="GenderName" width="100" sortable="true">性别</th>
-                    <th field="IdentityNo" width="150" sortable="true">身份证号</th>
-                    <th field="School" width="200" sortable="true">所在学校</th>
-                    <th field="JobTitleName" width="100" sortable="true">职称</th>
-                    <th field="TelNo" width="100" sortable="true">联系电话</th>
+                    <th field="StuName" width="15%" sortable="true">姓名</th>
+                    <th field="GenderName" width="10%" sortable="true">性别</th>
+                    <th field="IdentityNo" width="22%" sortable="true">身份证号</th>
+                    <th field="School" width="20%" sortable="true">所在学校</th>
+                    <th field="JobTitleName" width="15%" sortable="true">职称</th>
+                    <th field="TelNo" width="15%" sortable="true">联系电话</th>
                 </tr>
             </thead>
         </table>
@@ -124,7 +124,7 @@
                     <div align="center">职称：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                      </select>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">

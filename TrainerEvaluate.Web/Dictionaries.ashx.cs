@@ -58,8 +58,8 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = dictBll.GetRecordCount(" Dstatus !=0 ");
-            ds = dictBll.GetListByPage(" Dstatus !=0 ",sort, startIndex, endIndex, order);
+            var num = dictBll.GetRecordCount(" Dstatus =1 ");
+            ds = dictBll.GetListByPage(" Dstatus = 1 ",sort, startIndex, endIndex, order);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }
@@ -191,21 +191,14 @@ namespace TrainerEvaluate.Web
 
             var ds = new DataSet();
             var dictBll = new BLL.Dictionaries();
-            var strWhere = "";
+            var strWhere = " Dstatus =1 ";
             if (!string.IsNullOrEmpty(dname))
             {
-                strWhere = string.Format(" Name like '%" + dname + "%' ");
+                strWhere += string.Format(" and Name like '%" + dname + "%' ");
             }
             if (!string.IsNullOrEmpty(dtype))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  DType like '%" + dtype + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" DType  like '%" + dtype + "%' ");
-                }
+                strWhere += string.Format(" and  DType like '%" + dtype + "%' ");
             }
 
             var page = Convert.ToInt32(context.Request["page"]);

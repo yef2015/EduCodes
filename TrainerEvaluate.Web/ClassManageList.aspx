@@ -240,7 +240,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg4').dialog('close'); " style="width: 90px">取消</a>
         </div> 
 
-         <div id="dlg5" class="easyui-dialog" style="width: 550px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+         <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons5">
             <div class="ftitle">请选择要删除的课程</div>
            
@@ -250,10 +250,10 @@
                         <tr>
                             <th data-options="field:'ck',checkbox:true"></th>
                             <th data-options="field:'RId'" hidden="true">RId</th>
-                            <th  width="120" data-options="field:'CoursName'">课程名称</th>
-                            <th  width="120" data-options="field:'TeacherName'">教师姓名</th>
-                            <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
-                            <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
+                            <th  width="35%" data-options="field:'CoursName'">课程名称</th>
+                            <th  width="20%" data-options="field:'TeacherName'">教师姓名</th>
+                            <th field="StartDate" width="18%" sortable="true" formatter="formatterdate">开始日期</th>
+                            <th field="FinishDate" width="18%" sortable="true" formatter="formatterdate">结束日期</th>
                         </tr>
                     </thead>
                 </table> 

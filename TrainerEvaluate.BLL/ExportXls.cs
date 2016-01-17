@@ -874,7 +874,7 @@ namespace TrainerEvaluate.BLL
                 cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
                 SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
-                var resultTotalReport = question.GetTotalReport();
+                var resultTotalReport = question.GetTotalReport(classid);
                 if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
                 {
                     var cr = resultTotalReport.Select(string.Format(" CourseId='{0}'", courseId));
@@ -1441,7 +1441,7 @@ namespace TrainerEvaluate.BLL
                    cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
                    SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
-                   var resultTotalReport = question.GetTotalReport();
+                   var resultTotalReport = question.GetTotalReport(classid);
                    if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
                    {
                        var cr = resultTotalReport.Select(string.Format(" CourseId='{0}'", model.CourseId));
@@ -2046,19 +2046,19 @@ namespace TrainerEvaluate.BLL
        /// <summary>
        /// 培训教师满意度
        /// </summary>
-       public void ExportTrainTeachToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename)
+       public void ExportTrainTeachToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename,string classid)
        {
            Response.ContentType = "application/vnd.ms-excel";
            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
            Response.Clear();
 
            InitializeWorkbook();
-           GenerateTrainTeachData(fieldsName, exportDs, filename);
+           GenerateTrainTeachData(fieldsName, exportDs, filename,classid);
            GetExcelStream().WriteTo(Response.OutputStream);
            Response.End();
        }
 
-       void GenerateTrainTeachData(List<string> fieldsName, DataTable exportDs, string filename)
+       void GenerateTrainTeachData(List<string> fieldsName, DataTable exportDs, string filename,string classId)
        {
            ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
 
@@ -2108,7 +2108,7 @@ namespace TrainerEvaluate.BLL
                {
                    var rowNum = 1;
                    string teacherId = r["TeacherId"].ToString();
-                   dtInfo = report.GetTeacherSatifyById(teacherId);
+                   dtInfo = report.GetTeacherSatifyById(teacherId,classId);
                    rowNum = dtInfo.Rows.Count;
 
                    for (var j = 0; j < dtInfo.Rows.Count; j++)
@@ -2134,9 +2134,11 @@ namespace TrainerEvaluate.BLL
 
                        cell4.SetCellValue(totalSatisfy);
                    }
-
-                   SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
-                   rowStart = rowStart + rowNum;
+                   if (dtInfo.Rows.Count > 0)
+                   {
+                       SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
+                       rowStart = rowStart + rowNum;
+                   }
                }
            }
        }
@@ -2145,19 +2147,19 @@ namespace TrainerEvaluate.BLL
        /// <summary>
        /// 培训课程满意度
        /// </summary>
-       public void ExportTrainCourseToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename)
+       public void ExportTrainCourseToxls(System.Web.HttpResponse Response, List<string> fieldsName, DataTable exportDs, string filename,string classId)
        {
            Response.ContentType = "application/vnd.ms-excel";
            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
            Response.Clear();
 
            InitializeWorkbook();
-           GenerateTrainCourseData(fieldsName, exportDs, filename);
+           GenerateTrainCourseData(fieldsName, exportDs, filename, classId);
            GetExcelStream().WriteTo(Response.OutputStream);
            Response.End();
        }
 
-       void GenerateTrainCourseData(List<string> fieldsName, DataTable exportDs, string filename)
+       void GenerateTrainCourseData(List<string> fieldsName, DataTable exportDs, string filename, string classId)
        {
            ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
 
@@ -2208,7 +2210,7 @@ namespace TrainerEvaluate.BLL
                    var rowNum = 1;
                    string tempCourseId = r["CourseId"].ToString();
                    dtInfo.Rows.Clear();
-                   dtInfo = report.GetCourseSatifyById(tempCourseId);
+                   dtInfo = report.GetCourseSatifyById(tempCourseId,classId);
                    rowNum = dtInfo.Rows.Count;
 
                    for (var j = 0; j < dtInfo.Rows.Count; j++)
@@ -2234,9 +2236,11 @@ namespace TrainerEvaluate.BLL
 
                        cell4.SetCellValue(totalSatisfy);
                    }
-
-                   SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
-                   rowStart = rowStart + rowNum;            
+                   if (dtInfo.Rows.Count > 0)
+                   {
+                       SetCellRangeAddress(sheet1, rowStart, rowStart + rowNum - 1, 0, 0);
+                       rowStart = rowStart + rowNum;
+                   }
                }
            }
        }

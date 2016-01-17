@@ -278,7 +278,7 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(" select a.CourseId,a.CourseName from Course AS a  ");
-            strSql.Append(" left join ClassCourse AS b on a.CourseId = b.CourseID ");
+            strSql.Append(" left join CourseTeacher AS b on a.CourseId = b.CourseID ");
             strSql.Append(" where a.Status = 1 and b.ClassId = '"+classId+"'  ");
             strSql.Append(" order by  a.TeachTime desc ");
 

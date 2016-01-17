@@ -1044,12 +1044,32 @@ namespace TrainerEvaluate.BLL
             } 
 	    }
 
-
-
-
-        public DataTable GetTeacherReport()
+        public DataTable GetTotalReport(string classId)
         {
-            var sql = string.Format("exec GetTeacherReport ");
+            try
+            {
+                var sql = string.Format("exec GetTotalReportByClassId '" + classId + "' ");
+                var ds = DbHelperSQL.Query(sql);
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    return ds.Tables[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
+
+        public DataTable GetTeacherReport(string classId)
+        {
+            var sql = string.Format("exec GetTeacherReportByClassId '"+classId+"' ");
             var ds = DbHelperSQL.Query(sql);
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -1062,9 +1082,9 @@ namespace TrainerEvaluate.BLL
         }
 
 
-        public DataTable GetCourseReport()
+        public DataTable GetCourseReport(string classId)
         {
-            var sql = string.Format("exec GetCourseReport ");
+            var sql = string.Format("exec GetCourseReportByClassId '" + classId + "' ");
             var ds = DbHelperSQL.Query(sql);
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -1074,12 +1094,12 @@ namespace TrainerEvaluate.BLL
             {
                 return null;
             }
-        } 
-        
-        
-        public DataTable GetOrgReport()
+        }
+
+
+        public DataTable GetOrgReport(string classId)
         {
-            var sql = string.Format("exec GetOrgReport ");
+            var sql = string.Format("exec GetOrgReportByClassId '" + classId + "'  ");
             var ds = DbHelperSQL.Query(sql);
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -1321,9 +1341,9 @@ namespace TrainerEvaluate.BLL
          /// 根据教师id，获取教师的评估信息
          /// </summary>
          /// <returns></returns>
-         public DataTable GetTeacherSatifyById(string teacherId)
+         public DataTable GetTeacherSatifyById(string teacherId,string classId)
          {
-             var sql = string.Format("exec GetTeacherSatifyById '{0}' ", teacherId);
+             var sql = string.Format("exec GetTeacherSatifyById '{0}','{1}' ", teacherId,classId);
              var ds = DbHelperSQL.Query(sql);
              if (ds != null && ds.Tables.Count > 0)
              {
@@ -1358,9 +1378,9 @@ namespace TrainerEvaluate.BLL
          /// 根据课程id，获取课程的评估信息
          /// </summary>
          /// <returns></returns>
-         public DataTable GetCourseSatifyById(string courseId)
+         public DataTable GetCourseSatifyById(string courseId,string classId)
          {
-             var sql = string.Format("exec GetCourseSatifyById '{0}' ", courseId);
+             var sql = string.Format("exec GetCourseSatifyById '{0}','{1}' ", courseId,classId);
              var ds = DbHelperSQL.Query(sql);
              if (ds != null && ds.Tables.Count > 0)
              {

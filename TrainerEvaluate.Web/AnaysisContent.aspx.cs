@@ -19,33 +19,33 @@ namespace TrainerEvaluate.Web
                 container1.Visible = false;
                 analysisTable.Visible = false;
                 theYear.Visible = false;
-                divReports.Visible = true; 
-
+                divReports.Visible = true;
+                var classId = Request.QueryString["classId"];
                 switch (Request.QueryString["sid"])
                 {
                     case "1":
                         // 课程评估总体情况统计表
-                        SetTotalReports();
+                        SetTotalReports(classId);
                         break;
                     case "2":
                         // 课程内容各指标满意度分布表
-                        SetCourseReports();
+                        SetCourseReports(classId);
                         break; 
                     case "3":
                         // 培训讲师各指标满意度分布表
-                        SetTeacherReports();
+                        SetTeacherReports(classId);
                         break; 
                     case "4":
                         // 培训组织和管理满意度分布表
-                        SetOrgReports();
+                        SetOrgReports(classId);
                         break;
                     case "5":
                         // 培训教师满意度
-                        SetTrainTeachReports();
+                        SetTrainTeachReports(classId);
                         break;
                     case "6":
                         // 培训课程满意度
-                        SetTrainCourseReports();
+                        SetTrainCourseReports(classId);
                         break;
                     default:
                         break; 
@@ -77,7 +77,7 @@ namespace TrainerEvaluate.Web
         /// <summary>
         /// 课程评估总体情况表
         /// </summary>
-        private void SetTotalReports()
+        private void SetTotalReports(string classId)
         {
             var str = new StringBuilder(); 
 
@@ -102,7 +102,7 @@ namespace TrainerEvaluate.Web
             str.Append("</tr>");
              
             var report = new BLL.Questionnaire();
-            var dt = report.GetTotalReport();
+            var dt = report.GetTotalReport(classId);
             var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             { 
@@ -148,8 +148,8 @@ namespace TrainerEvaluate.Web
             str.Append("</tr>");
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
-            str.Append("<td colspan='11'>"); 
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTotalReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<td colspan='11'>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTotalReports('" + classId + "')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>"); 
 
@@ -158,7 +158,7 @@ namespace TrainerEvaluate.Web
         }
 
 
-        private void SetTeacherReports()
+        private void SetTeacherReports(string classId)
         {
             var str = new StringBuilder();
 
@@ -184,7 +184,7 @@ namespace TrainerEvaluate.Web
             str.Append("<td><strong>与学员沟通和互动有效</strong></td>");
             str.Append("</tr>");  
             var report = new BLL.Questionnaire();
-            var dt = report.GetTeacherReport();
+            var dt = report.GetTeacherReport(classId);
             var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -232,7 +232,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTeacherReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTeacherReports('"+classId+"')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 
@@ -240,8 +240,8 @@ namespace TrainerEvaluate.Web
             divReports.InnerHtml = str.ToString();
         }
 
-        
-        private void SetCourseReports()
+
+        private void SetCourseReports(string classId)
         {
             var str = new StringBuilder();
 
@@ -266,7 +266,7 @@ namespace TrainerEvaluate.Web
             str.Append("<td><strong>课程内容有助于个人发展</strong></td>");
             str.Append("</tr>");
             var report = new BLL.Questionnaire();
-            var dt = report.GetCourseReport();
+            var dt = report.GetCourseReport(classId);
             var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -313,7 +313,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='7'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getCourseReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getCourseReports('" + classId + "')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 
@@ -322,7 +322,7 @@ namespace TrainerEvaluate.Web
         }
 
 
-        private void SetOrgReports()
+        private void SetOrgReports(string classId)
         {
             var str = new StringBuilder();
 
@@ -345,7 +345,7 @@ namespace TrainerEvaluate.Web
             str.Append("<td><strong>培训场所、设备安排到位</strong></td>"); 
             str.Append("</tr>");
             var report = new BLL.Questionnaire();
-            var dt = report.GetOrgReport();
+            var dt = report.GetOrgReport(classId);
             var i = 0;
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -384,7 +384,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getOrgReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getOrgReports('"+classId+"')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 
@@ -437,7 +437,7 @@ namespace TrainerEvaluate.Web
         /// <summary>
         /// 培训教师满意度
         /// </summary>
-        private void SetTrainTeachReports()
+        private void SetTrainTeachReports(string classId)
         {
             var str = new StringBuilder();
 
@@ -463,7 +463,7 @@ namespace TrainerEvaluate.Web
                     var rowNum = 1;
                     string teacherId = row["TeacherId"].ToString();
                     DataTable dtInfo = new DataTable();
-                    dtInfo = report.GetTeacherSatifyById(teacherId);
+                    dtInfo = report.GetTeacherSatifyById(teacherId,classId);
                     rowNum = dtInfo.Rows.Count;
 
                     if(rowNum>1)
@@ -509,7 +509,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainTeachReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainTeachReports('" + classId + "')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 
@@ -520,7 +520,7 @@ namespace TrainerEvaluate.Web
         /// <summary>
         /// 培训课程满意度
         /// </summary>
-        private void SetTrainCourseReports()
+        private void SetTrainCourseReports(string classId)
         {
             var str = new StringBuilder();
 
@@ -537,8 +537,6 @@ namespace TrainerEvaluate.Web
             str.Append("<td><strong>满意度</strong></td>");
             str.Append("</tr>");
 
-
-            var classId = Request.QueryString["classId"];    // 班级id
             var courseId = Request.QueryString["courseId"];  // 课程id
             var report = new BLL.Questionnaire();
             var dt = report.GetCourseEvaluate();
@@ -550,7 +548,7 @@ namespace TrainerEvaluate.Web
                     var rowNum = 1;
                     string tempCourseId = row["CourseId"].ToString();
                     DataTable dtInfo = new DataTable();
-                    dtInfo = report.GetCourseSatifyById(tempCourseId);
+                    dtInfo = report.GetCourseSatifyById(tempCourseId, classId);
                     rowNum = dtInfo.Rows.Count;
 
                     if (rowNum > 1)
@@ -596,7 +594,7 @@ namespace TrainerEvaluate.Web
 
             str.Append("<tr  height=\"35\" bgcolor=\"#FFFFFF\" > ");
             str.Append("<td colspan='10'>");
-            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainCourseReports()\" style=\"width: 120px\">导出</a>");
+            str.Append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton c6\" iconcls=\"icon-ok\" onclick=\"getTrainCourseReports('" + classId + "')\" style=\"width: 120px\">导出</a>");
             str.Append("</td>");
             str.Append("</tr>");
 
@@ -658,7 +656,7 @@ namespace TrainerEvaluate.Web
                     level.InnerText = question.GetLevel((Convert.ToDouble(row["Satisfy"])));
                 }
 
-                var dsrr = question.GetTotalReport();
+                var dsrr = question.GetTotalReport(classId);
                 if (dsrr != null && dsrr.Rows.Count > 0)
                 {
                     var result = dsrr.Select(string.Format(" CourseId='{0}'",courseId));

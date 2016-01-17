@@ -97,7 +97,7 @@ namespace TrainerEvaluate.DAL
             parameters[18].Value = model.OrgService;
             parameters[19].Value = model.OrgTime;
             parameters[20].Value = model.OrgArrange;
-            parameters[21].Value = Guid.NewGuid();
+            parameters[21].Value = model.AppraiserId;
             parameters[22].Value = model.AppraiserTime;
             parameters[23].Value = model.Suggest;
             parameters[24].Value = model.Total;

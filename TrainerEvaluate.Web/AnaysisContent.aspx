@@ -55,31 +55,31 @@
         }
 
 
-        function getTotalReports() {
-            var url = "QuestionnaireHadler.ashx?t=extotal";
+        function getTotalReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=extotal&classId=" + classId;
             window.location = url;
         }
 
-        function getCourseReports() {
-            var url = "QuestionnaireHadler.ashx?t=excourse";
+        function getCourseReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=excourse&classId=" + classId;
             window.location = url;
         }
-        function getTeacherReports() {
-            var url = "QuestionnaireHadler.ashx?t=exteacher";
+        function getTeacherReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=exteacher&classId=" + classId;
             window.location = url;
         }
-        function getOrgReports() {
-            var url = "QuestionnaireHadler.ashx?t=exorg";
+        function getOrgReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=exorg&classId=" + classId;
             window.location = url;
         }
         // 导出教师满意度
-        function getTrainTeachReports() {
-            var url = "QuestionnaireHadler.ashx?t=extrainteach";
+        function getTrainTeachReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=extrainteach&classId=" + classId;
             window.location = url;
         }
         // 导出培训课程满意度
-        function getTrainCourseReports() {
-            var url = "QuestionnaireHadler.ashx?t=extraincourse";
+        function getTrainCourseReports(classId) {
+            var url = "QuestionnaireHadler.ashx?t=extraincourse&classId=" + classId;
             window.location = url;
         }
 
