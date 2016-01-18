@@ -38,7 +38,7 @@ namespace TrainerEvaluate.Web
                     dataType = "职称";
                     break;
                 case "stuj":
-                    dataType = "学员职称";
+                    dataType = "职称";
                     break; 
                 case "t":
                     dataType = "课程类型";
