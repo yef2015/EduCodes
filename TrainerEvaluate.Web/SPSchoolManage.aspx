@@ -62,11 +62,11 @@
             <thead>
                 <tr>
                     <th field="SchoolId" width="0" hidden="true">编号</th>
-                    <th field="SchoolName" width="260" sortable="true">名称</th>
-                    <th field="SchDisName" width="200" sortable="true">所属学区</th>
-                    <th field="RunNatureName" width="100" sortable="true">办学性质</th>
-                    <th field="SchoolTypeName" width="150" sortable="true">学校类型</th>
-                    <th field="LegalName" width="100" sortable="true">法人名称</th>
+                    <th field="SchoolName" width="25%" sortable="true">名称</th>
+                    <th field="SchDisName" width="25%" sortable="true">所属学区</th>
+                    <th field="RunNatureName" width="15%" sortable="true">办学性质</th>
+                    <th field="SchoolTypeName" width="18%" sortable="true">学校类型</th>
+                    <th field="LegalName" width="15%" sortable="true">法人名称</th>
                 </tr>
             </thead>
         </table>
@@ -81,59 +81,59 @@
         </div>
     </div>
 
-    <div id="dlg" class="easyui-dialog" style="width: 500px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 500px; height: 520px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons">
         <div class="ftitle">详细信息</div>
         <form id="fm" method="post">
             <div class="fitem">
-                <label>名称:</label>
+                <label>名称：</label>
                 <input name="SchoolName" id="SchoolName" class="easyui-textbox" style="width:260px;" required="true">
             </div>
             <div class="fitem">
-                <label>所属学区:</label>                
+                <label>所属学区：</label>                
                 <select class="easyui-combobox" name="SchDisName" id="SchDisName" style="width: 260px;"    data-options="url:'ComboxGetDropData.ashx?t=sdn',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
             <div class="fitem">
-                <label>办学性质</label> 
+                <label>办学性质：</label> 
                  <select class="easyui-combobox" name="RunNatureName" id="RunNatureName" style="width: 260px;"    data-options="url:'ComboboxGetData.ashx?t=rc',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
             <div class="fitem">
-                <label>学校类型:</label> 
+                <label>学校类型：</label> 
                   <select class="easyui-combobox" name="SchoolTypeName" id="SchoolTypeName" style="width: 260px;"  data-options="url:'ComboboxGetData.ashx?t=st',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                </select>
             </div>
             <div class="fitem">
-                <label>校址数:</label>
+                <label>校址数：</label>
                 <input name="AddrNum" id="AddrNum" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>班级数:</label>
+                <label>班级数：</label>
                 <input name="ClassNum" id="ClassNum" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>学生数:</label>
+                <label>学生数：</label>
                 <input name="StudentNum" id="StudentNum" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>教师数:</label>
+                <label>教师数：</label>
                 <input name="TeacherNum" id="TeacherNum" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>党员数:</label>
+                <label>党员数：</label>
                 <input name="PartyNum" id="PartyNum" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>法人名称:</label>
+                <label>法人名称：</label>
                 <input name="LegalName" id="LegalName" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>联系电话:</label>
+                <label>联系电话：</label>
                 <input name="LinkTel" id="LinkTel" class="easyui-textbox" style="width:260px;">
             </div>
             <div class="fitem">
-                <label>描述:</label>
+                <label>描述：</label>
                 <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 65px;width:260px;">
             </div>
         </form>
@@ -454,11 +454,11 @@
         }
 
         function clearCondition() {
-            $('#StuName11').textbox('clear');
-            $('#School11').textbox('clear');
-            $('#Gender11').combobox("setValue", "");
-            $('#Title11').textbox("setText", "");
-            $('#IdentityNo11').textbox("setText", "");
+            $('#SchoolName1').textbox('clear');
+            $('#SchDisName1').textbox('clear');
+            $('#RunNatureName1').combobox('clear');
+            $('#LegalName1').textbox('clear');
+            $('#SchoolTypeName1').combobox('clear');
         }
 
 

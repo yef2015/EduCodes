@@ -37,8 +37,8 @@
             <thead>
                 <tr>
                     <th field="SchDisId" width="0" hidden="true">编号</th>
-                    <th field="SchDisName" width="200" sortable="true">名称</th>
-                    <th field="Description" width="400" sortable="true">描述</th>
+                    <th field="SchDisName" width="42%" sortable="true">名称</th>
+                    <th field="Description" width="55%" sortable="true">描述</th>
                 </tr>
             </thead>
         </table>

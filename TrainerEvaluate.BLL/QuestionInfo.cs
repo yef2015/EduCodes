@@ -186,10 +186,11 @@ namespace TrainerEvaluate.BLL
 
         public int GetRecordCountNew(string  strWhere)
         {
-            var sql = " select COUNT(b.RId) as num " +
+            var sql = "  select * from ( select b.RId,case  ISNULL(a.Status,1) when 1 then '未生成'  when 2 then '已生成' when 3 then '已取消' end   QuestionInfoStatus, " +
+                      "  b.TeacherName,b.ClassName,b.CoursName as CourseName,d.TeachPlace " +
                       " from CourseTeacher b " +
                       " left join QuestionInfo a on b.RId = a.ClassCourseID " +
-                      " inner join Course d on d.CourseId = b.CourseId ";
+                      " inner join Course d on d.CourseId = b.CourseId ) AA ";
              
             StringBuilder strSql = new StringBuilder();
             strSql.Append(sql);
@@ -197,15 +198,13 @@ namespace TrainerEvaluate.BLL
             {
                 strSql.Append(" where " + strWhere);
             }
-            object obj = DbHelperSQL.GetSingle(strSql.ToString());
-            if (obj == null)
+            int iCount = 0;
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            if (ds != null &&ds.Tables[0].Rows.Count>0)
             {
-                return 0;
+                iCount = ds.Tables[0].Rows.Count;
             }
-            else
-            {
-                return Convert.ToInt32(obj);
-            }            
+            return iCount;
         }
 
 

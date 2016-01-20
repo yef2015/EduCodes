@@ -442,13 +442,14 @@ namespace TrainerEvaluate.BLL
 	    public DataSet GetDataForExport(string strWhere)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select TeacherName,case Gender when 1 then '男' else '女' end as GenderName,IdentityNo,Dept,Title,Post,ResearchBigName+'  '+Research ,Mobile,Description ");
-            strSql.Append(" FROM Teacher ");
+            strSql.Append(" select TeacherName,case Gender when 1 then '男' else '女' end as GenderName,IdentityNo,Dept,c.Name as Title,Post,ResearchBigName+'  '+Research as Research ,Mobile,Description ");
+            strSql.Append(" FROM Teacher a ");
+            strSql.Append(" left join Dictionaries c on a.Title=c.ID ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
             }
-            strSql.Append(" order by TeacherName asc, CreateTime desc ");
+            strSql.Append(" order by TeacherName asc, a.CreateTime desc ");
             return DbHelperSQL.Query(strSql.ToString());
 	    }
 

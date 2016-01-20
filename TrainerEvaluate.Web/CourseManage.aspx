@@ -56,11 +56,11 @@
                 <tr>
                     <th field="CourseId" width="0" hidden="true">编号</th>
                     <th field="TeacherId" width="0" hidden="false">教师编号</th>
-                    <th field="CourseName" width="300" sortable="true">课程名称</th>
+                    <th field="CourseName" width="30%" sortable="true">课程名称</th>
                     <th field="TeacherName" width="0" hidden="false">授课教师</th>
-                    <th field="TeachPlace" width="100" sortable="true">授课地点</th>
+                    <th field="TeachPlace" width="30%" sortable="true">授课地点</th>
                     <th field="TeachTime" width="0" hidden="false">授课时间</th>
-                    <th field="Description" width="200" sortable="true">描述</th>
+                    <th field="Description" width="38%" sortable="true">描述</th>
                 </tr>
             </thead>
         </table>

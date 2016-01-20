@@ -440,26 +440,18 @@
 
         function exportData() {
             var url = "TeacherInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#StuName11").textbox('getText')) + "&sch=" + $("#School11").textbox('getText')
-                + "&title=" + $("#Title11").textbox('getText') + "&gender=" + $('#Gender11').combobox("getValue")
+                + "&title=" + $("#Title11").textbox('getValue') + "&gender=" + $('#Gender11').combobox("getValue")
             + "&idno=" + $("#IdentityNo11").textbox('getText');
             window.location = url;
         }
 
 
         function clearCondition() {
-            //$('#School11').textbox("setText", "");
-            //$('#Title11').textbox("setText", "");
-            //$('#IdentityNo11').textbox("setText", "");
-            //$('#TelNo11').textbox("setText", "");
-            //$('#StuName11').textbox("setText", "");
-            //$('#Gender11').combobox("setValue", "");
-
             $('#StuName11').textbox('clear');
             $('#School11').textbox('clear');
-            $('#Gender11').combobox("setValue", "");
-            $('#Title11').textbox("setText", "");
-            $('#IdentityNo11').textbox("setText", "");
-
+            $('#Gender11').combobox('clear');
+            $('#IdentityNo11').textbox('clear');
+            $('#Title11').combobox('clear');
         }
 
 
@@ -470,7 +462,7 @@
                 name: $("#StuName11").textbox('getText'),
                 sch: $("#School11").textbox('getText'),
                 gender: $("#Gender11").combobox("getValue"),
-                title:$("#Title11").combobox("getValue"), 
+                title: $("#Title11").combobox("getValue"),
                 idno: $("#IdentityNo11").textbox('getText')
             });
         }

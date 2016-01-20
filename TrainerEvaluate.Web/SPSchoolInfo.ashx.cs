@@ -315,66 +315,29 @@ namespace TrainerEvaluate.Web
             var legalname = context.Request["legalname"].Trim();
             var ds = new DataSet();
             var shBll = new BLL.SPSchool();
-            var strWhere = "";
+            var strWhere = " Status = 1 ";
             if (!string.IsNullOrEmpty(schoolname))
             {
-                strWhere = string.Format(" SchoolName like '%" + schoolname + "%' ");
+                strWhere += string.Format(" and SchoolName like '%" + schoolname + "%' ");
             }
             if (!string.IsNullOrEmpty(schdisname))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  SchDisName = '" + schdisname + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Dept SchDisName = '" + schdisname + "' ");
-                }
+                strWhere += string.Format(" and  SchDisName like '%" + schdisname + "%' ");
             }
 
             if (!string.IsNullOrEmpty(legalname))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  LegalName like '%" + legalname + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" LegalName like '%" + legalname + "%' ");
-                }
+                strWhere += string.Format(" and  LegalName like '%" + legalname + "%' ");
             }
             if (!string.IsNullOrEmpty(runnature))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  RunNatureCode = '" + runnature + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" RunNatureCode = '" + runnature + "' ");
-                }
+                strWhere += string.Format(" and  RunNatureCode = '" + runnature + "' ");
             }
 
             if (!string.IsNullOrEmpty(schooltype))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  SchoolTypeName = '" + schooltype + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" SchoolTypeName = '" + schooltype + "' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere = string.Format(" Status = 1 ");
-            }
+                strWhere += string.Format(" and  SchoolTypeCode = '" + schooltype + "' ");
+            }            
 
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);

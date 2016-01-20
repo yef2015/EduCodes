@@ -89,64 +89,35 @@ namespace TrainerEvaluate.Web
 
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
-             
 
-           var className= context.Request["ClassName"];
-           var status = context.Request["Status"];
-           var courseName = context.Request["CourseName"];
-           var teacher = context.Request["Teacher"];
-           var place = context.Request["Place"];
 
-            var strWhere = "";
+            var className = context.Request["ClassName"];
+            var status = context.Request["Status"];
+            var courseName = context.Request["CourseName"];
+            var teacher = context.Request["Teacher"];
+            var place = context.Request["Place"];
+
+            var strWhere = " 1=1 ";
             if (!string.IsNullOrEmpty(className))
             {
-                strWhere = string.Format(" ClassName like '%" + className + "%' ");
+                strWhere += string.Format(" and ClassName like '%" + className + "%' ");
             }
-            if (!string.IsNullOrEmpty(status)&&status!="0")
+            if (!string.IsNullOrEmpty(status))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Status  = " + status + " ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Status  = " + status + " ");
-                }
+                strWhere += string.Format(" and  QuestionInfoStatus  = '" + status + "' ");
             }
             if (!string.IsNullOrEmpty(courseName))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  CourseName  like '%" + courseName + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" CourseName  like '%" + courseName + "%' ");
-                }
+                strWhere += string.Format(" and  CourseName  like '%" + courseName + "%' ");
             }
             if (!string.IsNullOrEmpty(teacher))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeacherName  like '%" + teacher + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeacherName  like '%" + teacher + "%' ");
-                }
+                strWhere += string.Format(" and  TeacherName  like '%" + teacher + "%' ");
             }
             if (!string.IsNullOrEmpty(place))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachPlace  like '%" + place + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachPlace  like '%" + place + "%' ");
-                }
+                strWhere += string.Format(" and  TeachPlace  like '%" + place + "%' ");
             }
-
 
             ds = questioninfo.GetListByPageNew(strWhere, sort, startIndex, endIndex);
             var num = questioninfo.GetRecordCountNew(strWhere);

@@ -757,14 +757,15 @@ namespace TrainerEvaluate.Web
                         {
                             foreach (DataRow row in dtDouble.Rows)
                             {
-                                var row1 =
-                                    dt.Select(string.Format("课程名称='{0}' and  授课时间='{1}'", row["CourseName"].ToString().Trim(),
-                                         row["TeachTime"].ToString().Trim()));
+                                //var row1 =
+                                //    dt.Select(string.Format("课程名称='{0}' and  授课时间='{1}'", row["CourseName"].ToString().Trim(),
+                                //         row["TeachTime"].ToString().Trim()));
+                                var row1 = dt.Select(string.Format("课程名称='{0}'", row["CourseName"].ToString().Trim()));
                                 sqllist.Add(
                                     string.Format(
-                                        " update Course set CourseName='{0}',TeacherName='{1}',TeachTime='{2}',TeachPlace='{3}',LastModifyTime=GETDATE()" +
-                                        " where CourseName='{0}' and TeachTime='{2}'", row1[0]["课程名称"].ToString().Trim(), row1[0]["授课教师"].ToString().Trim(),
-                                       Convert.ToDateTime(row1[0]["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd"), row1[0]["授课地点"].ToString().Trim()));
+                                        " update Course set CourseName='{0}',TeachPlace='{1}',Type={2},Description='{3}',LastModifyTime=GETDATE()" +
+                                        " where CourseName='{0}'", row1[0]["课程名称"].ToString().Trim(), row1[0]["授课地点"].ToString().Trim(),
+                                       BLL.Common.GetDicValuefromName(row1[0]["课程类型"].ToString().Trim()),row1[0]["描述"].ToString().Trim()));
 
                                 dt.Rows.Remove(row1[0]);
                                 dt.AcceptChanges();
@@ -779,12 +780,10 @@ namespace TrainerEvaluate.Web
                             //   row["授课教师"].ToString().Trim(), Convert.ToDateTime(row["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd"), row["授课地点"].ToString().Trim()));
 
                             sqllist.Add(string.Format(
-                                 "insert into   Course (Status,CourseId, CourseName,TeacherName, TeachTime,TeachPlace,CreatTime,LastModifyTime,Type) values" +
-                                 "  (1, NEWID(),'{0}','{1}','{2}','{3}',GETDATE(),GETDATE(),{4})", row["课程名称"].ToString().Trim(),
-                                 row["授课教师"].ToString().Trim(), Convert.ToDateTime(row["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd"),
-                                 row["授课地点"].ToString().Trim(), BLL.Common.GetDicValuefromName(row["课程类型"].ToString().Trim())));
-
-
+                                "insert into  Course (Status,CourseId, CourseName,TeacherName, TeachTime,TeachPlace,CreatTime,LastModifyTime,Type,Description) values" +
+                                "  (1, NEWID(),'{0}','{1}','{2}','{3}',GETDATE(),GETDATE(),{4},'{5}')", row["课程名称"].ToString().Trim(),
+                                "", System.DateTime.Now.ToString("yyyy-MM-dd"),
+                                row["授课地点"].ToString().Trim(), BLL.Common.GetDicValuefromName(row["课程类型"].ToString().Trim()), row["描述"].ToString().Trim()));
                         }
 
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
@@ -828,7 +827,7 @@ namespace TrainerEvaluate.Web
                     if (!string.IsNullOrEmpty(sb1.ToString()))
                     {
                         sb1.Append(string.Format(",'{0}'", row["课程名称"].ToString().Trim()));
-                        sb2.Append(string.Format(",'{0}'", row["授课时间"].ToString().Trim()));
+                        //sb2.Append(string.Format(",'{0}'", row["授课时间"].ToString().Trim()));
                         // sb2.Append(string.Format(",'{0}'", Convert.ToDateTime(row["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd")));
                         //sb2.Append(string.Format(",'{0}'", 
                         //    DateTime.ParseExact(row["授课时间"].ToString().Trim(), "dd/MM/yy",
@@ -837,7 +836,7 @@ namespace TrainerEvaluate.Web
                     else
                     {
                         sb1.Append(string.Format("'{0}'", row["课程名称"].ToString().Trim()));
-                        sb2.Append(string.Format("'{0}'", row["授课时间"].ToString().Trim()));
+                        //sb2.Append(string.Format("'{0}'", row["授课时间"].ToString().Trim()));
                         // sb2.Append(string.Format("'{0}'", Convert.ToDateTime(row["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd")));
                         //sb2.Append(string.Format("'{0}'",
                         //    DateTime.ParseExact(row["授课时间"].ToString().Trim(), "dd/MM/yy",
@@ -847,8 +846,9 @@ namespace TrainerEvaluate.Web
                     }
                 }
 
-                var sql = string.Format(" select CourseName,TeachTime   from Course where CourseName in ({0}) and TeachTime in({1})   ",
-                    sb1.ToString(), sb2.ToString());
+                //var sql = string.Format(" select CourseName,TeachTime   from Course where CourseName in ({0}) and TeachTime in({1})   ",
+                //    sb1.ToString(), sb2.ToString());
+                var sql = string.Format(" select CourseName  from Course where CourseName in ({0})  ", sb1.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
                 if (dtresult != null && dtresult.Tables.Count > 0 && dtresult.Tables[0].Rows.Count > 0) //有重复数据要提醒
@@ -881,7 +881,7 @@ namespace TrainerEvaluate.Web
                             sqllist.Add(string.Format(
                                 "insert into   Course (Status,CourseId, CourseName,TeacherName, TeachTime,TeachPlace,CreatTime,LastModifyTime,Type,Description) values" +
                                 "  (1, NEWID(),'{0}','{1}','{2}','{3}',GETDATE(),GETDATE(),{4},'{5}')", row["课程名称"].ToString().Trim(),
-                                row["授课教师"].ToString().Trim(), Convert.ToDateTime(row["授课时间"].ToString().Trim()).ToString("yyyy-MM-dd"),
+                                "", System.DateTime.Now.ToString("yyyy-MM-dd"),
                                 row["授课地点"].ToString().Trim(), BLL.Common.GetDicValuefromName(row["课程类型"].ToString().Trim()), row["描述"].ToString().Trim()));
 
                         }

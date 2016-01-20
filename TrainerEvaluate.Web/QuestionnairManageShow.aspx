@@ -118,7 +118,7 @@
             $('#dg').datagrid('reload', {
                 t: "q",
                 ClassName: $("#tClassName").textbox('getText'),
-                Status: $("#tStatus").combobox('getValue'),
+                Status: $("#tStatus").combobox('getText'),
                 CourseName: $('#tCourseName').textbox("getText"),
                 Teacher: $("#tTeacher").textbox('getText'),
                 Place: $("#tPlace").textbox('getText')
@@ -127,10 +127,10 @@
 
         function clearCondition() {
             $('#tClassName').textbox('clear');
-            $('#tStatus').textbox('clear');
-            $('#tCourseName').textbox("setText", "");
-            $('#tTeacher').textbox("setText", "");
-            $('#tPlace').textbox("setText", "");
+            $('#tStatus').combobox('clear');
+            $('#tCourseName').textbox('clear');
+            $('#tTeacher').textbox('clear');
+            $('#tPlace').textbox('clear');
         }
 
         function newUser() {

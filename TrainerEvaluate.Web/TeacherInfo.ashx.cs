@@ -339,65 +339,27 @@ namespace TrainerEvaluate.Web
             var idno = context.Request["idno"].Trim();
             var ds = new DataSet();
             var teaBll = new BLL.Teacher();
-            var strWhere = "";
+            var strWhere = "  Status = 1 ";
             if (!string.IsNullOrEmpty(teachName))
             {
-                strWhere = string.Format(" TeacherName like '%" + teachName + "%' ");
+                strWhere += string.Format(" and TeacherName like '%" + teachName + "%' ");
             }
             if (!string.IsNullOrEmpty(school))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Dept like '%" + school + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Dept like '%" + school + "%' ");
-                }
+                strWhere += string.Format(" and  Dept like '%" + school + "%' ");
             }
             if (!string.IsNullOrEmpty(gender) && gender != "0")
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Gender like '%" + gender + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Gender like '%" + gender + "%' ");
-                }
+                strWhere += string.Format(" and  Gender = '" + gender + "' ");
             }
             if (!string.IsNullOrEmpty(title))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Title = '" + title + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Title = '" + title + "' ");
-                }
+                strWhere += string.Format(" and  Title = '" + title + "' ");
             }
             if (!string.IsNullOrEmpty(idno))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  IdentityNo like '%" + idno + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" IdentityNo like '%" + idno + "%' ");
-                }
+                strWhere += string.Format(" and  IdentityNo like '%" + idno + "%' ");
             }
-
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere = string.Format(" Status = 1 ");
-            }
-            // ds = teaBll.GetList(strWhere);
 
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
@@ -412,9 +374,6 @@ namespace TrainerEvaluate.Web
 
             var num = teaBll.GetRecordCount(strWhere);
             ds = teaBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
-
-
-
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
@@ -453,69 +412,29 @@ namespace TrainerEvaluate.Web
             var gender = context.Request["gender"].Trim();
             var title = context.Request["title"].Trim();
             var idno = context.Request["idno"].Trim();
-            //var post = context.Request["post"].Trim();
-            //var research = context.Request["research"].Trim();
-            //var mobile = context.Request["mobile"].Trim();
-            //var description = context.Request["description"].Trim();
+
             var ds = new DataSet();
             var teaBll = new BLL.Teacher();
-            var strWhere = "";
+            var strWhere = " Status = 1 ";
             if (!string.IsNullOrEmpty(teachName))
             {
-                strWhere = string.Format(" TeacherName like '%" + teachName + "%' ");
+                strWhere += string.Format(" and TeacherName like '%" + teachName + "%' ");
             }
             if (!string.IsNullOrEmpty(school))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Dept like '%" + school + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Dept like '%" + school + "%' ");
-                }
+                strWhere += string.Format(" and  Dept like '%" + school + "%' ");
             }
             if (!string.IsNullOrEmpty(gender) && gender != "0")
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Gender like '%" + gender + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Gender like '%" + gender + "%' ");
-                }
+                strWhere += string.Format(" and  Gender = '" + gender + "' ");
             }
             if (!string.IsNullOrEmpty(title))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Title like '%" + title + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Title like '%" + title + "%' ");
-                }
+                strWhere += string.Format(" and  Title = '" + title + "' ");
             }
             if (!string.IsNullOrEmpty(idno))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  IdentityNo like '%" + idno + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" IdentityNo like '%" + idno + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere = string.Format(" Status = 1 ");
+                strWhere += string.Format(" and  IdentityNo like '%" + idno + "%' ");
             }
 
             ds = teaBll.GetDataForExport(strWhere);
