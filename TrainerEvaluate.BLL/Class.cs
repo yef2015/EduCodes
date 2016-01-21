@@ -342,9 +342,8 @@ namespace TrainerEvaluate.BLL
         public DataSet GetDataByClassId(string classId)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select a.ClassId,b.Name,a.CourseID from ClassCourse a  ");
-            strSql.Append(" left join Class b on a.ClassId = b.ID ");
-            strSql.Append(" where b.ID = '"+classId+"' and b.Status = 1  ");
+            strSql.Append(" select ClassId,ClassName,CourseID from CourseTeacher  ");
+            strSql.Append(" where ClassId = '" + classId + "' ");
             return DbHelperSQL.Query(strSql.ToString());
         }
 

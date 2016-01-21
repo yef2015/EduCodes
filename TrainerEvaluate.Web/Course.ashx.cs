@@ -699,7 +699,7 @@ namespace TrainerEvaluate.Web
                 ds = clBll.GetDataByClassId(classId);
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
-                    str = "export|" + ds.Tables[0].Rows[0]["Name"].ToString() + "|" + ds.Tables[0].Rows.Count;
+                    str = "export|" + ds.Tables[0].Rows[0]["ClassName"].ToString() + "|" + ds.Tables[0].Rows.Count;
                 }
             }
             catch (Exception ex)

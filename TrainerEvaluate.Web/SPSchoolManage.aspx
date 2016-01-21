@@ -246,6 +246,7 @@
         <input type="file" id="upData" name="upData" />
         <div id="fileQueue"></div>
     </div>
+    <input type="hidden" id="beforeSchoolName" name="beforeSchoolName" />
 
     <script type="text/javascript">
 
@@ -273,6 +274,8 @@
                 $('#dlg').dialog('open').dialog('setTitle', '编辑');
 
                 $('#SchoolName').textbox("setText", row.SchoolName);
+                $('#beforeSchoolName').val(row.SchoolName);
+
                 $('#SchDisName').combobox("setValue", row.SchDisId);
                 $('#RunNatureName').combobox("setValue", row.RunNatureCode);
                 $('#SchoolTypeName').combobox("setValue", row.SchoolTypeCode);
@@ -316,6 +319,7 @@
         function saveSchool() {
             var data = {
                 SchoolName: $('#SchoolName').textbox("getText"),
+                BeforeSchoolName: $('#beforeSchoolName').val(),
                 SchDisId: $('#SchDisName').combobox("getValue"),
                 SchDisName: $('#SchDisName').textbox("getText"),
                 RunNatureCode: $('#RunNatureName').combobox("getValue"),
@@ -331,13 +335,14 @@
                 LinkTel: $('#LinkTel').textbox("getText"),
                 Description: $('#Description').textbox("getText")
             };
-            $.post(url, data, function (result) {
+            $.post(url, data, function (result) {                
                 if (result == "") {
                     $('#dlg').dialog('close');
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    alert(result);
+                    //$.messager.alert('提示', result, 'warning');
                 }
             });
         }

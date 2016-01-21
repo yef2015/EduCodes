@@ -236,24 +236,16 @@ namespace TrainerEvaluate.BLL
             strSql.Append(" from CourseTeacher b ");
             strSql.Append(" left join QuestionInfo a on b.RId = a.ClassCourseID ");
             strSql.Append(" inner join Course d on d.CourseId = b.CourseId )   T ");
-            strSql.Append(" ) TT");
-
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 strSql.Append(" WHERE " + strWhere);
-                strSql.AppendFormat(" and TT.Row between {0} and {1}", startIndex, endIndex);
             }
-            else
-            {
-                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-            }
-          
+            strSql.Append(" ) TT");
+
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+
             return DbHelperSQL.Query(strSql.ToString());
         }
-
-
-
-
 
 
         public bool CreateQuesInfo(string name, string classCourseId, string startTime, string endTime, out string msg)

@@ -206,6 +206,14 @@ namespace TrainerEvaluate.BLL
             return dt;
         }
 
+         /// <summary>
+        /// 是否存在该记录,根据学校名称
+        /// </summary>
+        public bool ExistsBySchoolName(string SchoolName)
+        {
+            return dal.ExistsBySchoolName(SchoolName);
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

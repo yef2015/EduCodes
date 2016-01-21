@@ -535,3 +535,57 @@ ClientConnectionId:cb0f1c60-73bd-4265-80da-261b556df8d1：2016-01-12 21:53:21
    在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
    在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
 ClientConnectionId:8a2fbcc3-6808-4e1c-ad44-f4c79ea49772：2016-01-13 20:46:55
+无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。|System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "TR0108"。登录失败。
+用户 'sa' 登录失败。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:99006389-2681-4861-98e2-46c3ef4fa240：2016-01-14 22:03:56
+'GetTotalReport1' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReport1' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:999b0324-a559-4fcf-b717-f9cd667c8904：2016-01-17 22:17:57
+'GetTotalReport1' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReport1' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:999b0324-a559-4fcf-b717-f9cd667c8904：2016-01-17 22:18:20
+'GetTotalReport1' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReport1' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:999b0324-a559-4fcf-b717-f9cd667c8904：2016-01-17 22:18:34
+'GetTotalReport1' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReport1' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:999b0324-a559-4fcf-b717-f9cd667c8904：2016-01-17 22:19:13
+关键字 'null' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 关键字 'null' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:83a0ef81-b439-42f8-87ac-18f21c78ee02：2016-01-21 00:08:42
+关键字 'null' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 关键字 'null' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:6855428f-68bf-495b-b9b4-a5884eaf8c6c：2016-01-21 00:11:04
+'GetTotalReportByClassId' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReportByClassId' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:8657b27d-7929-4784-996b-943a05e15b65：2016-01-21 20:57:43
+'GetTotalReportByClassId' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReportByClassId' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:8657b27d-7929-4784-996b-943a05e15b65：2016-01-21 20:57:51
+'GetTotalReportByClassId' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): 'GetTotalReportByClassId' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:8657b27d-7929-4784-996b-943a05e15b65：2016-01-21 20:58:04
+'校长' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '校长' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 146
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:73f81b99-17e9-4da3-80a6-07466f9997e5：2016-01-21 21:38:38
+'校长' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '校长' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ade48558-e637-40c7-9db1-7a2d9e395112：2016-01-21 21:40:57
+'校长' 附近有语法错误。|System.Data.SqlClient.SqlException (0x80131904): '校长' 附近有语法错误。
+   在 TrainerEvaluate.Utility.DB.DbHelperSQL.ExecuteSql(String SQLString) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\DB\DbHelperSQL.cs:行号 142
+   在 TrainerEvaluate.Utility.LogHelper.WriteLogofExceptioin(Exception ex) 位置 c:\Users\Administrator\Source\Repos\EduCodes\TrainerEvaluate.Utility\LogHelper.cs:行号 63
+ClientConnectionId:ade48558-e637-40c7-9db1-7a2d9e395112：2016-01-21 21:41:32

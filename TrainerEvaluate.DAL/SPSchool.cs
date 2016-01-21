@@ -424,6 +424,21 @@ namespace TrainerEvaluate.DAL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
+        /// <summary>
+        /// 是否存在该记录,根据学校名称
+        /// </summary>
+        public bool ExistsBySchoolName(string SchoolName)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from School");
+            strSql.Append(" where SchoolName=@SchoolName ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@SchoolName", SqlDbType.NVarChar,50)	};
+            parameters[0].Value = SchoolName;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
         #endregion  ExtensionMethod
     }
 }

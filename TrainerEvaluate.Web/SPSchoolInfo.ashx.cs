@@ -456,30 +456,42 @@ namespace TrainerEvaluate.Web
         private void AddData(HttpContext context)
         {
             var shModel = new Models.SPSchool();
+            var shBll = new BLL.SPSchool();
+            var msg = "";
 
             shModel.SchoolId = Guid.NewGuid();
             SetModelValue(shModel, context);
-            shModel.CreatedDate = DateTime.Now;
-            shModel.LastModifyTime = DateTime.Now;
-            shModel.Status = 1;
-            var shBll = new BLL.SPSchool();
-            var result = false;
-            var msg = "";
-            try
-            {
-                result = shBll.Add(shModel);
 
-                if (!result)
-                {
-                    msg = "保存失败！";
-                }
+            // 判断学校是否重复
+            bool isFlag = shBll.ExistsBySchoolName(shModel.SchoolName);
+            if (isFlag)
+            {
+                msg = "新增学校已经存在，请核实。";
             }
-            catch (Exception ex)
+            else
             {
-                LogHelper.WriteLogofExceptioin(ex);
-                result = false;
-                msg = ex.Message;
+                shModel.CreatedDate = DateTime.Now;
+                shModel.LastModifyTime = DateTime.Now;
+                shModel.Status = 1;
 
+                var result = false;
+                
+                try
+                {
+                    result = shBll.Add(shModel);
+
+                    if (!result)
+                    {
+                        msg = "保存失败！";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteLogofExceptioin(ex);
+                    result = false;
+                    msg = ex.Message;
+
+                }
             }
             context.Response.Write(msg);
         }
@@ -494,10 +506,29 @@ namespace TrainerEvaluate.Web
             try
             {
                 SetModelValue(shModel, context);
-                result = shBll.Update(shModel);
-                if (!result)
+
+                bool isFlag = false;
+                var beforeSchoolName = string.Empty;
+                if (!string.IsNullOrEmpty(context.Request["BeforeSchoolName"]))
                 {
-                    msg = "保存失败！";
+                    beforeSchoolName = context.Request["BeforeSchoolName"];
+                }
+
+                if (beforeSchoolName != shModel.SchoolName)
+                {
+                    isFlag = shBll.ExistsBySchoolName(shModel.SchoolName);
+                    if (isFlag)
+                    {
+                        msg = "编辑学校已经存在，请核实。";
+                    }
+                }
+                if (!isFlag)
+                {
+                    result = shBll.Update(shModel);
+                    if (!result)
+                    {
+                        msg = "保存失败！";
+                    }
                 }
             }
             catch (Exception ex)
