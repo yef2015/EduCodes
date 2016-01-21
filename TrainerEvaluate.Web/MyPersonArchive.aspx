@@ -340,22 +340,36 @@
                         if (item.JobTitleName != null) {
                             $('#aJobTitle').text(item.JobTitleName);
                         }
-                        $('#aIdentityNo').text(item.IdentityNo);
-                        $('#aTelNo').text(item.TelNo);
+                        if (item.IdentityNo != null) {
+                            $('#aIdentityNo').text(item.IdentityNo);
+                        }
+                        if (item.TelNo != null) {
+                            $('#aTelNo').text(item.TelNo);
+                        }
                         if (item.Birthday != null) {
                             $('#aBirthday').text(StringToDate(item.Birthday));
                         }
                         if (item.NationName != null) {
                             $('#aNation').text(item.NationName);
                         }
-                        $('#aFirstRecord').text(item.FirstRecord);
-                        $('#aFirstSchool').text(item.FirstSchool);
-                        $('#aLastRecord').text(item.LastRecord);
-                        $('#aLastSchool').text(item.LastSchool); 
+                        if (item.FirstRecord != null) {
+                            $('#aFirstRecord').text(item.FirstRecord);
+                        }
+                        if (item.FirstSchool != null) {
+                            $('#aFirstSchool').text(item.FirstSchool);
+                        }
+                        if (item.LastRecord != null) {
+                            $('#aLastRecord').text(item.LastRecord);
+                        }
+                        if (item.LastSchool != null) {
+                            $('#aLastSchool').text(item.LastSchool);
+                        }
                         if (item.PoliticsStatusName != null) {
                             $('#aPoliticsStaus').text(item.PoliticsStatusName);
                         }
-                        $('#aRank').text(item.Rank);
+                        if (item.Rank != null) {
+                            $('#aRank').text(item.Rank);
+                        }
                         if (item.RankTime != null) {
                             $('#aRankTime').text(StringToDate(item.RankTime));
                         }
@@ -370,10 +384,18 @@
                         if (item.PostTime != null) {
                             $('#aPostTime').text(StringToDate(item.PostTime));
                         }
-                        $('#aMobile').text(item.Mobile);
-                        $('#aDescription').text(item.Description);
-                        $('#aTeachNo').text(item.TeachNo);
-                        $('#aSchool').text(item.School);
+                        if (item.Mobile != null) {
+                            $('#aMobile').text(item.Mobile);
+                        }
+                        if (item.Description != null) {
+                            $('#aDescription').text(item.Description);
+                        }
+                        if (item.TeachNo != null) {
+                            $('#aTeachNo').text(item.TeachNo);
+                        }
+                        if (item.School != null) {
+                            $('#aSchool').text(item.School);
+                        }
                     });
                 }
             });

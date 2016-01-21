@@ -46,6 +46,19 @@ namespace TrainerEvaluate.DAL
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
+        public bool ExistsAccountByAC(string userAccount)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from SysUser");
+            strSql.Append(" where UserAccount=@UserAccount ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserAccount", SqlDbType.VarChar,50)};
+            parameters[0].Value = userAccount;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
+
 
 
 		/// <summary>

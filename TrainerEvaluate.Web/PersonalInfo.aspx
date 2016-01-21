@@ -64,6 +64,9 @@
             </td>
         </tr>
     </table>
+
+    <input type="hidden" id="beforeUserAccount" name="beforeUserAccount" />
+
     <script type="text/javascript">
 
         function saveUserInfo() {
@@ -77,14 +80,19 @@
             };--%>
             var data = {
                 t: 'e',
-                uid: ' <%= UserId %>', UserName: $("#StuName").textbox("getText"), Gender: $("#Gender").combobox("getValue"),
-                UserAccount: $("#UserAccount").textbox("getText"), UserPassWord: $("#UserPassWord").textbox("getText")  
+                uid: ' <%= UserId %>', UserName: $("#StuName").textbox("getText"),
+                Gender: $("#Gender").combobox("getValue"),
+                UserAccount: $("#UserAccount").textbox("getText"),
+                BeforeUserAccount: $("#beforeUserAccount").val(),
+                UserPassWord: $("#UserPassWord").textbox("getText")
              };
              $.post(url, data, function (result) {
                  if (result == "") {
-                     $.messager.alert('提示', '保存成功!', 'info');
+                     //$.messager.alert('提示', '保存成功!', 'info');
+                     alert('保存成功!');
                  } else {
-                     $.messager.alert('提示', result, 'warning');
+                     //$.messager.alert('提示', result, 'warning');
+                     alert(result);
                  }
              });
          }
@@ -119,6 +127,7 @@
                                     break;
                                 case "UserAccount":
                                     $("#UserAccount").textbox("setText", stu[1]);
+                                    $("#beforeUserAccount").val(stu[1]);
                                     break;
                                 case "UserPassWord":
                                     $("#UserPassWord").textbox("setText", stu[1]);

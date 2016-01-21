@@ -189,6 +189,11 @@ namespace TrainerEvaluate.BLL
 	    }
 
 
+        public bool ExistsAccountByAC(string userAccount)
+	    {
+            return dal.ExistsAccountByAC(userAccount);
+	    }
+
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

@@ -37,10 +37,29 @@ namespace TrainerEvaluate.Web
                 var userId = new Guid(context.Request["uid"]);
                 var userBll = new BLL.SysUser();
 
-                if (userBll.GetAccountExsist(context.Request["UserAccount"], userId))  //登录账户不能重复
+                var beforeUserAccount = string.Empty;
+                var UserAccount = context.Request["UserAccount"];
+                bool isFlag = false;
+
+                if (!string.IsNullOrEmpty(context.Request["BeforeUserAccount"]))
+                {
+                    beforeUserAccount = context.Request["BeforeUserAccount"];
+
+                    if (beforeUserAccount != UserAccount)
+                    {
+                        isFlag = userBll.ExistsAccountByAC(UserAccount);
+                    }
+                }
+
+                if (isFlag)
                 {
                     return "该账号已存在！";
                 }
+
+                //if (userBll.GetAccountExsist(context.Request["UserAccount"], userId))  //登录账户不能重复
+                //{
+                //    return "该账号已存在！";
+                //}
 
                 var userModel = userBll.GetModel(userId);
 
@@ -61,7 +80,10 @@ namespace TrainerEvaluate.Web
                     stuModel.StuName = context.Request["UserName"];
                     stuModel.School = context.Request["School"];
                     stuModel.LastModifyTime = DateTime.Now;
-                    stuModel.IdentityNo = context.Request["IdentityNo"];
+                    if (!string.IsNullOrEmpty(context.Request["IdentityNo"]))
+                    {
+                        stuModel.IdentityNo = context.Request["IdentityNo"];
+                    }
                     stubll.Update(stuModel);
 
 
