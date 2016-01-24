@@ -25,7 +25,7 @@
         }
 
         // 批量导出课程评估表
-        function getAllReport() {
+        function getAllReport(e) {
             var url = "Course.ashx?t=tips";
             var data = { ClassId: $("#hClassid").val() };
             $.post(url, data, function (result) {
@@ -34,8 +34,7 @@
                     if (tips.length > 0) {
                         if (tips[0] == "export") {
                             $('#atipsClass').text(tips[1]);
-                            $('#atipsCourse').text(tips[2]);
-                            
+                            $('#atipsCourse').text(tips[2]); 
                             $('#dlg6').dialog('open').dialog('setTitle', '批量导出课程评估表');
                         }
                     }
@@ -209,7 +208,7 @@
             <tr>
                 <td align="center" colspan="7" bgcolor="#FFFFFF">
                     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getReport()" style="width: 180px">导出评估报告单及学员建议</a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getAllReport()" style="width: 200px">批量导出评估报告单及学员建议</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="getAllReport(event)" style="width: 200px">批量导出评估报告单及学员建议</a>
                 </td>
             </tr>
         </table>
@@ -302,7 +301,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="exportSuggestion()">导出</a>
     </div>
 
-     <div id="dlg6" class="easyui-dialog" style="width: 450px; height: 200px; padding: 10px 20px" data-options="modal:true,top:500"
+     <div id="dlg6" class="easyui-dialog" style="width: 450px; height: 200px; padding: 10px 20px" data-options="modal:true,top:600"
             closed="true" buttons="#dlg-buttons6">
             <form id="fm1" method="post">
                 <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">

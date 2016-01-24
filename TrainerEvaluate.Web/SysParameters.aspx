@@ -175,7 +175,7 @@
                 url = "SysParameters.ashx?t=edit&id=" + row.ID;
             } else {
                 alert("请选择要修改的行！");
-                //   $.messager.alert("提示", "请选择要修改的行！", 'warning');
+                //   messageAlert("提示", "请选择要修改的行！", 'warning');
             }
         }
 
@@ -190,13 +190,13 @@
                             $('#dg').datagrid('reload');
                         } else {
                             alert(result);
-                            //  $.messager.alert('提示', result, 'warning');
+                            //  messageAlert('提示', result, 'warning');
                         }
                     });
                 }
             } else {
                 alert("请选择要删除的行！");
-                //  $.messager.alert("提示", "请选择要删除的行！", 'warning');
+                //  messageAlert("提示", "请选择要删除的行！", 'warning');
             }
         }
 
@@ -234,7 +234,7 @@
                     $('#dg').datagrid('reload');
                 } else {
                     alert(result);
-                    //  $.messager.alert('提示', result, 'warning');
+                    //  messageAlert('提示', result, 'warning');
                 }
             });
         }

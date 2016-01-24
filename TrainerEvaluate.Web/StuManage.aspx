@@ -25,7 +25,7 @@
                 <div align="center">职称：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" class="gray10a" height="26"> 
-              <select class="easyui-combobox" name="Title11" id="Title11" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+              <select class="easyui-combobox" name="Title11" id="Title11" style="width: 165px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name'">
                </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="26">
@@ -115,7 +115,7 @@
                     <div align="center">所在学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
+                    <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name'" > 
                     </select>
                 </td>
             </tr>
@@ -124,7 +124,7 @@
                     <div align="center">职称：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="JobTitle" id="JobTitle" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=stuj',method:'get',valueField:'ID',textField:'Name'">
                      </select>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
@@ -523,7 +523,8 @@
                 $('#TeachNo').textbox("setText", row.TeachNo);
                 url = 'StudentsInfo.ashx' + '?t=e&id=' + row.StudentId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                // messageAlert('提示', '请选择要编辑的行!', 'warning');  
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -576,7 +577,7 @@
                 $('#aSchool').text(row.School);
 
             } else {
-                $.messager.alert('提示', '请选择要查看的行!', 'warning');
+                messageAlert('提示', '请选择要查看的行!', 'warning');
             }
         }
 
@@ -606,19 +607,19 @@
                 PostOptId: $('#PostOptName ').combobox("getValue")
             };
             if (data.StuName == "") {
-                $.messager.alert('提示', "请填写姓名", 'warning');
+                messageAlert('提示', "请填写姓名", 'warning');
                 return;
             }
             if (data.IdentityNo == "") {
-                $.messager.alert('提示', "请填写身份证号", 'warning');
+                messageAlert('提示', "请填写身份证号", 'warning');
                 return;
             }
             if (data.Mobile == "") {
-                $.messager.alert('提示', "请填写手机号码", 'warning');
+                messageAlert('提示', "请填写手机号码", 'warning');
                 return;
             }
             if (data.TeachNo == "") {
-                $.messager.alert('提示', "请填写继教号", 'warning');
+                messageAlert('提示', "请填写继教号", 'warning');
                 return;
             }
             $.post(url, data, function (result) {
@@ -626,7 +627,7 @@
                     $('#dlg').dialog('close');
                     $('#dg').datagrid('reload');
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -642,13 +643,13 @@
                             if (result == "" || result == null) {
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
-                                $.messager.alert('提示', result, 'warning');
+                                messageAlert('提示', result, 'warning');
                             }
                         });
                     }
                 });
             } else {
-                $.messager.alert('标题', '请选择要删除的行!', 'warning');
+                messageAlert('标题', '请选择要删除的行!', 'warning');
             }
         }
 
@@ -724,7 +725,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

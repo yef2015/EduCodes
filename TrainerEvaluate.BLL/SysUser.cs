@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Security;
+using System.Text;
 using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
 
@@ -202,6 +203,155 @@ namespace TrainerEvaluate.BLL
 
             return dal.GetModelByIdentityNo(identityNo);
         }
+
+
+
+
+        /// <summary>
+        /// 取班级负责人信息
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <param name="orderby"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
+        public DataSet GetPrjChargebyClassInfo(string classId, string orderby, int startIndex, int endIndex)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append("order by T." + orderby + " desc, " + "T.UserName   asc ");
+            }
+            else
+            {
+                strSql.Append("order by T.TeacherName asc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.UserId,a.UserName, a.Dept, case ISNULL(b.RId,'00000000-0000-0000-0000-000000000000')  when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck    ");
+            strSql.Append(string.Format("  from SysUser a left join  ClassTeacher b on a.UserId=b.TeacherId and b.ClassId={0}  where a.Status=1 and a.UserRole=3   )  ", classId));
+            strSql.Append("  T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+
+
+        /// <summary>
+        /// 班级项目负责人信息(全选)
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public bool SaveChooseForAllofClass(string classId)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(classId))
+                {
+                    var lstSql = new List<string>();
+                    var sql1 = string.Format("    insert into ClassTeacher select NEWID(),'{0}',  UserId  from SysUser a where a.Status=1 and a.UserRole=3  ", classId);
+                    lstSql.Add(sql1);
+                    DbHelperSQL.ExecuteSqlTran(lstSql);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        ///  班级项目负责人信息(全不选)
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public bool DeletTeacherofClass(string classId)
+        {
+            try
+            {
+                var strs = new List<string>();
+                var sql = string.Format("  delete from ClassTeacher where ClassId='{0}' ", classId);
+                strs.Add(sql);
+                DbHelperSQL.ExecuteSqlTran(strs);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return false;
+            }
+        }
+
+
+
+       /// <summary>
+       /// 保存班级的项目负责人信息
+       /// </summary>
+       /// <param name="teaids"></param>
+       /// <param name="classId"></param>
+       /// <returns></returns>
+        public bool SaveChooseTeacherofClass(string[] teaids, string classId)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(classId))
+                {
+                    if (teaids != null && teaids.Length > 0)
+                    {
+                        var lstSql = new List<string>();
+                        var sb = new StringBuilder();
+                        lstSql.Add(string.Format(" delete from  ClassTeacher  where ClassId={0} ", classId));
+                        foreach (var teaId in teaids)
+                        {
+                            if (!string.IsNullOrEmpty(teaId))
+                            {
+                                sb.Append("'" + teaId + "',");
+                                var sql1 =
+                                    string.Format(
+                                        "insert into ClassTeacher values(NEWID(),{0},'{1}')  ", classId,
+                                        teaId);
+                                lstSql.Add(sql1);
+                            }
+                        }
+                        sb = sb.Remove(sb.Length - 1, 1);
+                        var sql2 = string.Format(" select UserName from SysUser  where UserId in  ({0})  ", sb);
+                        var ds = DbHelperSQL.Query(sql2);
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            var sb1 = new StringBuilder();
+                            foreach (DataRow row in ds.Tables[0].Rows)
+                            {
+                                sb1.Append(row["UserName"] + ",");
+                            }
+                            sb1 = sb1.Remove(sb1.Length - 1, 1);
+                            var sq3 = string.Format(" update Class  set  Teacher='{1}' where ID={0} ", classId, sb1);
+                            lstSql.Add(sq3);
+                        }
+                        DbHelperSQL.ExecuteSqlTran(lstSql);
+                    }
+                    else
+                    {
+                        var lstSql = new List<string>();
+                        lstSql.Add(string.Format(" update Class set Teacher='' where ID={0}  ", classId));
+                        DbHelperSQL.ExecuteSqlTran(lstSql);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return false;
+            }
+        }
+
 
 
 	    #endregion  ExtensionMethod

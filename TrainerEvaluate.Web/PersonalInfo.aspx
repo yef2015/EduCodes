@@ -88,10 +88,10 @@
              };
              $.post(url, data, function (result) {
                  if (result == "") {
-                     //$.messager.alert('提示', '保存成功!', 'info');
+                     //messageAlert('提示', '保存成功!', 'info');
                      alert('保存成功!');
                  } else {
-                     //$.messager.alert('提示', result, 'warning');
+                     //messageAlert('提示', result, 'warning');
                      alert(result);
                  }
              });

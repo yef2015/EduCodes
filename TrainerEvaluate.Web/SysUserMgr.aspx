@@ -108,7 +108,7 @@
 
                 url = 'SysUser.ashx' + '?t=e&id=' + row.UserId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -128,7 +128,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -144,13 +144,13 @@
                             if (result == "" || result == null) {
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
-                                $.messager.alert('提示', result, 'warning');
+                                messageAlert('提示', result, 'warning');
                             }
                         });
                     }
                 });
             } else {
-                $.messager.alert('提示', '请选择要删除的行!', 'warning');
+                messageAlert('提示', '请选择要删除的行!', 'warning');
             }
         }
 

@@ -481,19 +481,19 @@
                 PostOptId: $('#PostOptName ').combobox("getValue")
             };
             if (data.StuName == "") {
-                $.messager.alert('提示', "请填写姓名", 'warning');
+                messageAlert('提示', "请填写姓名", 'warning');
                 return;
             }
             if (data.IdentityNo == "") {
-                $.messager.alert('提示', "请填写身份证号", 'warning');
+                messageAlert('提示', "请填写身份证号", 'warning');
                 return;
             }
             if (data.Mobile == "") {
-                $.messager.alert('提示', "请填写手机号码", 'warning');
+                messageAlert('提示', "请填写手机号码", 'warning');
                 return;
             }
             if (data.TeachNo == "") {
-                $.messager.alert('提示', "请填写继教号", 'warning');
+                messageAlert('提示', "请填写继教号", 'warning');
                 return;
             }
             $.post(url, data, function (result) {
@@ -501,7 +501,7 @@
                     $('#dlg').dialog('close');
                     personArchive();
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

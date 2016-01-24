@@ -206,7 +206,7 @@
                     personArchive();
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

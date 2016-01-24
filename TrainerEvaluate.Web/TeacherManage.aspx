@@ -40,7 +40,7 @@
                 <div align="center">职称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-              <select class="easyui-combobox" name="Title11" id="Title11"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+              <select class="easyui-combobox" name="Title11" id="Title11"  style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name'">
                </select>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25"></td>
@@ -107,7 +107,7 @@
             </div>
             <div class="fitem">
                 <label>职称:</label> 
-                  <select class="easyui-combobox" name="Title" id="Title" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                  <select class="easyui-combobox" name="Title" id="Title" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name'">
                </select>
             </div>
             <div class="fitem">
@@ -289,7 +289,7 @@
                 $('#Description').textbox("setText", row.Description);
                 url = 'TeacherInfo.ashx' + '?t=e&id=' + row.TeacherId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -307,7 +307,7 @@
                 $('#aTitle').text(row.JobTitleName);
                 $('#aDescription').text(row.Description);
             } else {
-                $.messager.alert('提示', '请选择要查看的行!', 'warning');
+                messageAlert('提示', '请选择要查看的行!', 'warning');
             }
         }
 
@@ -330,7 +330,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -356,7 +356,7 @@
                 });
             }
             else {
-                $.messager.alert('标题', '请选择要删除的行!', 'warning');
+                messageAlert('标题', '请选择要删除的行!', 'warning');
             }
         }
 
@@ -432,7 +432,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
