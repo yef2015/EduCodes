@@ -8,7 +8,7 @@ using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
 using System.Data.SqlClient;
 
-namespace TrainerEvaluate.BLL
+namespace TrainerEvaluate.BLL 
 {
     /// <summary>
     /// 学校信息表
