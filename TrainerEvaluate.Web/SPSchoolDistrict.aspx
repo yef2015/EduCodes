@@ -134,7 +134,7 @@
                 $('#Description').textbox("setText", row.Description);
                 url = 'SPSchoolDistrictInfo.ashx' + '?t=e&id=' + row.SchDisId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -145,7 +145,7 @@
                 $('#aSchDisName').text(row.SchDisName);
                 $('#aDescription').text(row.Description);
             } else {
-                $.messager.alert('提示', '请选择要查看的行!', 'warning');
+                messageAlert('提示', '请选择要查看的行!', 'warning');
             }
         }
 
@@ -160,7 +160,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -188,7 +188,7 @@
                 });
             }
             else {
-                $.messager.alert('标题', '请选择要删除的行!', 'warning');
+                messageAlert('标题', '请选择要删除的行!', 'warning');
             }
         }
 
@@ -262,7 +262,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

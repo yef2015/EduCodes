@@ -43,8 +43,20 @@
             login();
         }
 
-    </script>
 
+        function pwdkeypress() { 
+            if (event.keyCode == 13) {
+                login();
+            }
+        }
+
+
+        $(function () {
+            if (window.parent != null && window.parent.frames.length>0) {
+              window.parent.location.reload();
+            }
+        }); 
+    </script> 
 
 </head>
 
@@ -88,7 +100,7 @@
                                 <tr>
                                     <td width="58">&nbsp;</td>
                                     <td width="131">
-                                        <input type="password" name="pwd" id="pwd" size="23" onchange="pwdChange()">
+                                        <input type="password" name="pwd" id="pwd" size="23"    onkeypress="pwdkeypress()">
                                     </td>
                                 </tr>
                                 <tr>

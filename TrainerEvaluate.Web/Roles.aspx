@@ -148,7 +148,7 @@
     
     
         
-        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 450px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
             <div class="ftitle">请选择该角色对应的用户</div> 
                 <table id="dg2" class="easyui-datagrid"
@@ -216,7 +216,7 @@
                 url = "Roles.ashx?t=edit&id=" + row.ID;
             } else {
                 alert("请选择要修改的行！");
-                //   $.messager.alert("提示", "请选择要修改的行！", 'warning');
+                //   messageAlert("提示", "请选择要修改的行！", 'warning');
             }
         }
 
@@ -236,13 +236,13 @@
                             $('#dg').datagrid('reload');
                         } else {
                             alert(result);
-                            //  $.messager.alert('提示', result, 'warning');
+                            //  messageAlert('提示', result, 'warning');
                         }
                     });
                 }
             } else {
                 alert("请选择要删除的行！");
-                //  $.messager.alert("提示", "请选择要删除的行！", 'warning');
+                //  messageAlert("提示", "请选择要删除的行！", 'warning');
             }
         }
 
@@ -264,7 +264,7 @@
                     $('#dg').datagrid('reload');
                 } else {
                     alert(result);
-                    //  $.messager.alert('提示', result, 'warning');
+                    //  messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -286,12 +286,12 @@
 
         function editAuth() { 
             var row = $('#dg').datagrid('getSelected');
-            if (row) {
+            if (row) { 
                 $('#dlg1').dialog('open').dialog('setTitle', '角色权限设置');
                 $("#hRoleID").val(row.ID);
                 $('#dg1').datagrid('reload', { t: 'gr', rId: $("#hRoleID").val() });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             } 
         } 
 
@@ -355,7 +355,7 @@
                     funcids = "";
                     unfuncids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg2').dialog('close');
                     $('#dg2').datagrid('load');
                     $('#dg').datagrid('reload');
@@ -372,12 +372,16 @@
         function editUser() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
+                if (row.Name == "学员" || row.Name == "教师") {
+                    alert("角色名称为【" + row.Name + "】,可从相应的管理模块录入数据，不用设置！");
+                    return;
+                }  
                 $('#dlg2').dialog('open').dialog('setTitle', '角色用户设置');
                 $("#hRoleID").val(row.ID);
                 $("#hRoleName").val(row.Name);
                 $('#dg2').datagrid('reload', { t: 'gu', rId: $("#hRoleID").val() ,rName:$("#hRoleName").val()});
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
 
@@ -443,7 +447,7 @@
                     userids = "";
                     unuserids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg2').dialog('close');
                     $('#dg2').datagrid('load');
                     $('#dg').datagrid('reload');

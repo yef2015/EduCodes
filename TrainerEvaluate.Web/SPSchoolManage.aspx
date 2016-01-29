@@ -91,7 +91,7 @@
             </div>
             <div class="fitem">
                 <label>所属学区：</label>                
-                <select class="easyui-combobox" name="SchDisName" id="SchDisName" style="width: 260px;"    data-options="url:'ComboxGetDropData.ashx?t=sdn',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
+                <select class="easyui-combobox" name="SchDisName" id="SchDisName" style="width: 260px;"    data-options="url:'ComboxGetDropData.ashx?t=sdn',method:'post',valueField:'Id',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
             <div class="fitem">
@@ -291,7 +291,7 @@
 
                 url = 'SPSchoolInfo.ashx' + '?t=e&id=' + row.SchoolId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -312,7 +312,7 @@
                 $('#aLinkTel').text(row.LinkTel);
                 $('#aDescription').text(row.Description);
             } else {
-                $.messager.alert('提示', '请选择要查看的行!', 'warning');
+                messageAlert('提示', '请选择要查看的行!', 'warning');
             }
         }
 
@@ -342,7 +342,7 @@
                 }
                 else {
                     alert(result);
-                    //$.messager.alert('提示', result, 'warning');
+                    //messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -368,7 +368,7 @@
                 });
             }
             else {
-                $.messager.alert('标题', '请选择要删除的行!', 'warning');
+                messageAlert('标题', '请选择要删除的行!', 'warning');
             }
         }
 
@@ -443,7 +443,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

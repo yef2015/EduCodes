@@ -222,8 +222,8 @@ namespace TrainerEvaluate.Web
 
             var roleBll = new BLL.Roles();
             ds = roleBll.GetRoleUserListByPage(roleId,roleName, "ck", startIndex, endIndex);
-            var num = roleBll.GetUserRecordCount(" Status = 1 ");
- 
+            var num = roleBll.GetUserRecordCount(" UserRole =3 and Status = 1 ");
+
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }

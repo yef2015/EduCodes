@@ -49,6 +49,20 @@
     
     
    <script type="text/javascript">
+       function messageAlert(tle, cont, tp) {
+           //// '提示', "请填写姓名", 'warning' 
+           // $.messager.show({
+           //     title: tle,
+           //     msg: cont,
+           //     showType: 'show',
+           //     style: {
+           //         right: '',
+           //         bottom: ''
+           //     }
+           // });
+
+           alert(cont);
+       }
 
        function formatterdate(val, row) {
            if (val != "" && val != undefined) {

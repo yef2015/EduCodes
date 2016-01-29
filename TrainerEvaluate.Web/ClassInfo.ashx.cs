@@ -254,13 +254,23 @@ namespace TrainerEvaluate.Web
             SetModelValue(classModel, context);
 
             var classBll = new BLL.Class();
-            if (classBll.GetId() == 1)
-            {               
-                classModel.ID = 2015000 + classBll.GetId();
+            var currentId = classBll.GetId();
+            if (currentId == 1)
+            {
+                var year = DateTime.Now.Year*1000;
+                classModel.ID = year + currentId;
             }
             else
             {
-                classModel.ID = classBll.GetId();
+                var year = DateTime.Now.Year;
+                if (year*1000 > currentId)  //新的一年
+                {
+                    classModel.ID = year*1000 + 1;
+                }
+                else
+                {
+                    classModel.ID = currentId;
+                } 
             }
 
             classModel.Status = 1; //进行中，2--结束，0--删除

@@ -184,7 +184,7 @@
                 $("#hCourseid").val(row.CourseId);
                 $('#dg1').datagrid('reload', { t: 'g', coId: $("#hCourseid").val() });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
 
@@ -257,7 +257,7 @@
                     teacherids = "";
                     unteaids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg1').dialog('close');
                     $('#dg').datagrid('reload');
                     teacherids = "";
@@ -296,7 +296,7 @@
 
                 url = 'Course.ashx' + '?t=e&id=' + row.CourseId;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -322,7 +322,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -352,7 +352,7 @@
                     }
                 });
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -431,7 +431,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

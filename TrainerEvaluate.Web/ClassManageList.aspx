@@ -171,8 +171,8 @@
                     <thead>
                         <tr>
                             <th data-options="field:'ck',checkbox:true"></th>
-                            <th data-options="field:'TeacherId'" hidden="true">TeacherId</th>
-                            <th data-options="field:'TeacherName'">姓名</th>
+                            <th data-options="field:'UserId'" hidden="true">UserId</th>
+                            <th data-options="field:'UserName'">姓名</th>
                             <th data-options="field:'Dept'">所在单位</th>
                         </tr>
                     </thead>
@@ -369,7 +369,7 @@
 
                 url = 'ClassInfo.ashx' + '?t=e&id=' + row.ID;
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -394,7 +394,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -419,7 +419,7 @@
                     }
                 });
             } else {
-                $.messager.alert('提示', '请选择要编辑的行!', 'warning');
+                messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
         }
 
@@ -435,7 +435,7 @@
                 var url = "ClassInfo.ashx?t=exdi&classId=" + row.ID + "&className=" + row.Name;
                 window.location = url;
             } else {
-                $.messager.alert('提示', '请选择要导出班级所在的行!', 'warning');
+                messageAlert('提示', '请选择要导出班级所在的行!', 'warning');
             }
         }
 
@@ -450,7 +450,7 @@
                 $("#hClassid").val(row.ID);
                 $('#dg3').datagrid('reload', { t: 'gc', cId: row.ID });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
 
@@ -468,7 +468,7 @@
                 $("#hClassid").val(row.ID);
                 $("#hClassName").val(row.Name);
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
 
@@ -481,7 +481,7 @@
                 $("#hClassid").val(row.ID);
                 $('#dg5').datagrid('reload', { t: 'dcct', cId: $("#hClassid").val() });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
         
@@ -547,7 +547,7 @@
                     uncourseids = "";
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg3').dialog('close');
                     $('#dg3').datagrid('load');
                     $('#dg').datagrid('reload');
@@ -583,7 +583,7 @@
                     alert("设置成功。");
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -604,7 +604,7 @@
                     cctids = "";
                     uncctids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg5').dialog('close');
                     $('#dg5').datagrid('load');
                     $('#dg').datagrid('reload');
@@ -673,7 +673,7 @@
                 $("#hClassid").val(row.ID);
                 $('#dg1').datagrid('reload', { t: 'cs', coId: $("#hClassid").val() });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
 
         }
@@ -737,7 +737,7 @@
                     stuids = "";
                     unstuids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg1').dialog('close');
                     $('#dg1').datagrid('load');
                     $('#dg').datagrid('reload');
@@ -759,7 +759,7 @@
                 $("#hClassid").val(row.ID);
                 $('#dg2').datagrid('reload', { t: 'gt', cId: $("#hClassid").val() });
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
 
@@ -778,20 +778,20 @@
                     for (var i = 0; i < rows.length; i++) {
                         var row1 = rows[i];
                         if (teacherids != "") {
-                            teacherids = teacherids + "|" + row1.TeacherId;
+                            teacherids = teacherids + "|" + row1.UserId;
                         } else {
-                            teacherids = row1.TeacherId;
+                            teacherids = row1.UserId;
                         }
                     }
                 }
-                teacherids = teacherids + "|" + row.TeacherId;
+                teacherids = teacherids + "|" + row.UserId;
                 $("#hTeacherIds").val(teacherids);
             },
             onUnselect: function (index, row) {
                 if (unteacherids != "") {
-                    unteacherids = unteacherids + "|" + row.TeacherId;
+                    unteacherids = unteacherids + "|" + row.UserId;
                 } else {
-                    unteacherids = row.TeacherId;
+                    unteacherids = row.UserId;
                 }
                 $("#hUnTeacherIds").val(unteacherids);
             },
@@ -823,7 +823,7 @@
                     stuids = "";
                     unstuids = "";
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                     $('#dlg2').dialog('close');
                     $('#dg2').datagrid('load');
                     $('#dg').datagrid('reload');
@@ -850,7 +850,7 @@
                 SetUploadTmpStuData(row.ID);
                 $('#dlgUpload').dialog('open');
             } else {
-                $.messager.alert('提示', '请选择要设置的行!', 'warning');
+                messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
         
@@ -913,7 +913,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -928,7 +928,7 @@
                     $('#dg').datagrid('reload');
                 }
                 else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }

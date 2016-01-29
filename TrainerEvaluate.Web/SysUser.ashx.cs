@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using TrainerEvaluate.Utility;
 
@@ -46,6 +47,9 @@ namespace TrainerEvaluate.Web
                 return false;
             }
         }
+
+
+
 
 
         private string GetData(HttpContext context)

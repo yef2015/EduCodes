@@ -50,8 +50,8 @@ namespace TrainerEvaluate.Web
                 case "ex":
                     ExportTeacherInfo(context);
                     break;   
-                case "gt":
-                    GetTeacherInfoClass(context);
+                case "gt":  //提取项目负责人信息
+                    GetPrjChargeInfoClass(context);
                     break;
                 case "pah":
                     var strph = GetPersonArchive(context);
@@ -78,14 +78,14 @@ namespace TrainerEvaluate.Web
         private void SaveClassTeacher(HttpContext context)
         {
             var msg = "";
-            var courseId = context.Request["ClassId"];
+            var classId = context.Request["ClassId"];
             var isAll = context.Request["IsAll"];
             if (!string.IsNullOrEmpty(isAll)) //全选
             {
                 if (isAll == "1")
                 {
-                    var teacherBll = new BLL.Teacher();
-                    var result = teacherBll.SaveChooseForAllofClass(courseId);
+                    var sysuerBll = new BLL.SysUser();
+                    var result = sysuerBll.SaveChooseForAllofClass(classId);
                     if (!result)
                     {
                         msg = "保存失败！";
@@ -93,8 +93,8 @@ namespace TrainerEvaluate.Web
                 }
                 else //全不选
                 {
-                    var teacherBll = new BLL.Teacher();
-                    var result = teacherBll.DeletTeacherofClass(courseId);
+                    var sysuerBll = new BLL.SysUser();
+                    var result = sysuerBll.DeletTeacherofClass(classId);
                     if (!result)
                     {
                         msg = "保存失败！";
@@ -132,10 +132,10 @@ namespace TrainerEvaluate.Web
                                 teaList.Add(sid);
                             }
                         }
-                    }  
+                    }
 
-                    var teaBll = new BLL.Teacher();
-                    var result = teaBll.SaveChooseTeacherofClass(teaList.ToArray(), courseId);
+                    var sysuerBll = new BLL.SysUser();
+                    var result = sysuerBll.SaveChooseTeacherofClass(teaList.ToArray(), classId);
                     if (!result)
                     {
                         msg = "保存失败！";
@@ -143,8 +143,8 @@ namespace TrainerEvaluate.Web
                 }
                 else
                 {
-                    var teaBll = new BLL.Teacher();
-                    var result = teaBll.SaveChooseTeacherofClass(null, courseId);
+                    var sysuerBll = new BLL.SysUser();
+                    var result = sysuerBll.SaveChooseTeacherofClass(null, classId);
                     if (!result)
                     {
                         msg = "保存失败！";
@@ -255,6 +255,27 @@ namespace TrainerEvaluate.Web
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
+
+        /// <summary>
+        /// 班级项目负责人
+        /// </summary>
+        /// <param name="context"></param>
+        private void GetPrjChargeInfoClass(HttpContext context)
+        {
+            var ds = new DataSet();
+            var classId = context.Request["cId"];
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var  sysUserBll = new BLL.SysUser();
+            var num = sysUserBll.GetRecordCount(" UserRole =3 and Status = 1 ");
+            ds = sysUserBll.GetPrjChargebyClassInfo(classId, "ck", startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            context.Response.Write(str);
+        }
+
 
 
         private void GetDataTeacher(HttpContext context)

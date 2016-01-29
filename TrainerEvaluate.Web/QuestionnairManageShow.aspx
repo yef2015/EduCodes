@@ -142,7 +142,7 @@
                 $("#Parameter").textbox("setText", row.CourseName + "--调查问卷");
                 quid = row.ID;
             } else {
-                $.messager.alert('提示', '请选择课程', 'warning');
+                messageAlert('提示', '请选择课程', 'warning');
             }
         }
 
@@ -161,7 +161,7 @@
                 $("#EndTime").datebox("setValue", row.EndTime);
                 quid = row.ID;
             } else {
-                $.messager.alert('提示', '请选择课程', 'warning');
+                messageAlert('提示', '请选择课程', 'warning');
             }
 
 
@@ -181,7 +181,7 @@
                             $('#dlg').dialog('close');
                             $('#dg').datagrid('reload'); // reload the user data
                         } else {
-                            $.messager.alert('提示', result, 'warning');
+                            messageAlert('提示', result, 'warning');
                         }
                     });
                 }
@@ -199,13 +199,13 @@
                             if (result == "" || result == null) {
                                 $('#dg').datagrid('reload'); // reload the user data
                             } else {
-                                $.messager.alert('提示', result, 'warning');
+                                messageAlert('提示', result, 'warning');
                             }
                         });
                     }
                 });
             } else {
-                $.messager.alert('提示', '请选择课程', 'warning');
+                messageAlert('提示', '请选择课程', 'warning');
             }
         }
 
@@ -216,7 +216,7 @@
                 var url = "QuestionnaireHadler.ashx?t=ex&id=" + row.CourseId;
                 window.location = url;
             } else {
-                $.messager.alert('提示', '请选择课程', 'warning');
+                messageAlert('提示', '请选择课程', 'warning');
             }
         }
 

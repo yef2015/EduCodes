@@ -180,7 +180,7 @@
                             $('#dlgQuestion').dialog('close');
                             $('#tg').treegrid('reload');
                         } else {
-                            $.messager.alert('提示', result, 'warning');
+                            messageAlert('提示', result, 'warning');
                         }
                     });
                 }
@@ -199,7 +199,7 @@
                     $('#dlgQuestion').dialog('close');
                     $('#tg').treegrid('reload');
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -236,7 +236,7 @@
                             $('#dlgAnswer').dialog('close');
                             $('#tg').treegrid('reload');
                         } else {
-                            $.messager.alert('提示', result, 'warning');
+                            messageAlert('提示', result, 'warning');
                         }
                     });
                 }
@@ -271,7 +271,7 @@
                     $('#dlgAnswerRadio').dialog('close');
                     $('#tg').treegrid('reload');
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
@@ -288,7 +288,7 @@
                     $('#dlgAnswerText').dialog('close');
                     $('#tg').treegrid('reload');
                 } else {
-                    $.messager.alert('提示', result, 'warning');
+                    messageAlert('提示', result, 'warning');
                 }
             });
         }
