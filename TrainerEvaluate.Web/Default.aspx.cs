@@ -154,7 +154,8 @@ namespace TrainerEvaluate.Web
                             //    classManage.Style["font-weight"] = "bold";
                             //    break;
                             case "studentManage":
-                                ifrcont.Attributes["src"] = "StuManage.aspx";
+                                //ifrcont.Attributes["src"] = "StuManage.aspx";
+                                ifrcont.Attributes["src"] = "StuFrame.aspx";
                                 studentManage.Style["color"] = "#000000";
                                 studentManage.Style["font-weight"] = "bold";
                                 break;

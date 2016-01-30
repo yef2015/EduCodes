@@ -34,10 +34,10 @@
             <thead>
                 <tr>
                     <th field="UserId" width="0" hidden="true">编号</th>
-                    <th field="UserName" width="250" sortable="true">姓名</th>
-                    <th field="IdentityNo" width="250" sortable="true">身份证号</th>
-                    <th field="Dept" width="100" sortable="true">单位</th>
-                    <th field="UserAccount" width="200" sortable="true">登陆帐号</th>
+                    <th field="UserName" width="25%" sortable="true">姓名</th>
+                    <th field="IdentityNo" width="25%" sortable="true">身份证号</th>
+                    <th field="Dept" width="28%" sortable="true">单位</th>
+                    <th field="UserAccount" width="20%" sortable="true">登陆帐号</th>
                     <th field="UserPassWord" width="0" hidden="true">密码</th>
                 </tr>
             </thead>
@@ -53,24 +53,24 @@
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
                 <div class="fitem">
-                    <label>姓名:</label>
+                    <label>姓名：</label>
                     <input name="UserName" id="UserName" class="easyui-textbox" required="true" style="width:280px;"/>
                 </div>
                 <div class="fitem" >
-                    <label>身份证号</label>  
+                    <label>身份证号：</label>  
                      <input name="IdentityNo" id="IdentityNo" class="easyui-textbox" required="true" style="width:280px;"/>
                 </div>
                 <div class="fitem" >
-                    <label>单位</label>  
+                    <label>单位：</label>  
                      <input name="Dept" id="Dept" class="easyui-textbox" required="true" style="width:280px;"/>
                 </div>
                 <div class="fitem">
-                    <label>登录账号:</label>
+                    <label>登录账号：</label>
                     <input name="UserAccount" id="UserAccount" class="easyui-textbox" style="width:280px;"/>
                      <input type="hidden" id="UserAccountOld" />
                 </div>
                 <div class="fitem">
-                    <label>密码:</label>
+                    <label>密码：</label>
                     <input name="Pwd" id="Pwd" class="easyui-textbox" style="width:280px;"/>
                 </div>
             </form>

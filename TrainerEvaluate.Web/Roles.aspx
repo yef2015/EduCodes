@@ -122,7 +122,7 @@
     </div>
     
      
-        <div id="dlg1" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg1" class="easyui-dialog" style="width: 400px; height: 465px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons1">
             <div class="ftitle">请选择该角色拥有的权限</div> 
                 <table id="dg1" class="easyui-datagrid"
@@ -148,7 +148,7 @@
     
     
         
-        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 450px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 465px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
             <div class="ftitle">请选择该角色对应的用户</div> 
                 <table id="dg2" class="easyui-datagrid"

@@ -39,7 +39,8 @@
                 url = "CourseManage.aspx";
                 break;
             case "studentManage":
-                url = "StuManage.aspx";
+                //url = "StuManage.aspx";
+                url = "StuFrame.aspx";
                 break;
             case "teacherManage":
                 url = "TeacherManage.aspx";

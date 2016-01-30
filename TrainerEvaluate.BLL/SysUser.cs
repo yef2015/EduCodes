@@ -217,7 +217,6 @@ namespace TrainerEvaluate.BLL
         /// <returns></returns>
         public DataSet GetPrjChargebyClassInfo(string classId, string orderby, int startIndex, int endIndex)
         {
-
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ( ");
             strSql.Append(" SELECT ROW_NUMBER() OVER (");
@@ -231,7 +230,10 @@ namespace TrainerEvaluate.BLL
             }
             strSql.Append(")AS Row, T.*  from   ");
             strSql.Append(" ( select a.UserId,a.UserName, a.Dept, case ISNULL(b.RId,'00000000-0000-0000-0000-000000000000')  when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck    ");
-            strSql.Append(string.Format("  from SysUser a left join  ClassTeacher b on a.UserId=b.TeacherId and b.ClassId={0}  where a.Status=1 and a.UserRole=3   )  ", classId));
+            strSql.Append(string.Format("  from SysUser a left join  ClassTeacher b on a.UserId=b.TeacherId and b.ClassId={0}  where a.Status=1 and a.UserRole=3  "
+                + " and a.UserId in(select a.UserId from dbo.SysRoleUser a "
+                + " left join Roles b on a.RoleId = b.ID where b.Name = '项目负责人' and b.Rstatus = 1) "
+                +"  )  ", classId));
             strSql.Append("  T ");
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);

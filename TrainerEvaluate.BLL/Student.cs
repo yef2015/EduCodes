@@ -371,7 +371,112 @@ namespace TrainerEvaluate.BLL
             return string.IsNullOrEmpty(studentId) ? "null" : studentId;
         }
 
+
+        public DataSet GetStudentTree()
+        {
+            StringBuilder strSql = new StringBuilder();
+
+            strSql.Append(" select * from( ");
+            strSql.Append(" select SchDisId as id ,SchDisName as name,'open' as state, ");
+            strSql.Append(" '00000000-0000-0000-0000-000000000000' as parentid ,CreatedDate as time ");
+            strSql.Append("  from dbo.SchoolDistrict where Status = 1 ");
+            strSql.Append(" union all ");
+            strSql.Append(" select SchoolId as id,SchoolName as name,'open' as state,  ");
+            strSql.Append(" SchDisId as parentid ,CreatedDate as time ");
+            strSql.Append(" from School where Status = 1 and SchDisId <> ''  ");
+            strSql.Append(" ) TT  ");
+            strSql.Append(" order by time asc ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
         #endregion  ExtensionMethod
     }
+
+     public class EasyUITree
+     {
+         public List<JsonTree> initTree(DataTable dt)
+         {
+             DataRow[] drList = dt.Select("parentid='00000000-0000-0000-0000-000000000000'");
+             List<JsonTree> rootNode = new List<JsonTree>();
+             foreach (DataRow dr in drList)
+             {
+                 JsonTree jt = new JsonTree();
+                 jt.id = dr["id"].ToString();
+                 jt.text = dr["name"].ToString();
+                 jt.state = dr["state"].ToString();
+                 //jt.attributes = CreateUrl(dt, jt);
+                 jt.children = CreateChildTree(dt, jt);
+                 rootNode.Add(jt);
+             }
+             return rootNode;
+         }
+ 
+         private List<JsonTree> CreateChildTree(DataTable dt, JsonTree jt)
+         {
+             string keyid = jt.id;                                        //根节点ID
+             List<JsonTree> nodeList = new List<JsonTree>();
+             DataRow[] children = dt.Select("Parentid='" + keyid + "'");
+             foreach (DataRow dr in children)
+             {
+                 JsonTree node = new JsonTree();
+                 node.id = dr["id"].ToString();
+                 node.text = dr["name"].ToString();
+                 node.state = dr["state"].ToString();
+                 //node.attributes = CreateUrl(dt, node);
+                 node.children = CreateChildTree(dt, node);
+                 nodeList.Add(node);
+             }
+             return nodeList;
+         }
+ 
+ 　　　　
+         private Dictionary<string, string> CreateUrl(DataTable dt, JsonTree jt)    //把Url属性添加到attribute中，如果需要别的属性，也可以在这里添加
+         {
+             Dictionary<string, string> dic = new Dictionary<string, string>();
+             string keyid = jt.id;
+             DataRow[] urlList = dt.Select("id='" + keyid + "'");
+             string url = urlList[0]["Url"].ToString();
+             dic.Add("url", url);
+             return dic;
+         }
+     }
+
+    public class JsonTree
+     {
+         private string _id;
+         private string _text;
+         private string _state="open";
+         private Dictionary<string, string> _attributes=new Dictionary<string, string>();
+         private object _children;        
+         
+         public string id
+         {
+             get { return _id; }
+             set { _id = value; }
+         }
+         public string text
+         {
+             get { return _text; }
+             set { _text = value; }
+         }
+         public string state
+         {
+             get { return _state; }
+             set { _state = value; }
+         }
+         public Dictionary<string, string> attributes
+         {
+             get { return _attributes; }
+             set { _attributes = value; }
+         }
+         public object children
+         {
+             get { return _children; }
+             set { _children = value; }
+         }
+     }
+
+
 }
 

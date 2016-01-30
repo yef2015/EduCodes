@@ -270,7 +270,11 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
             var  sysUserBll = new BLL.SysUser();
-            var num = sysUserBll.GetRecordCount(" UserRole =3 and Status = 1 ");
+            var num = sysUserBll.GetRecordCount(" UserRole =3 and Status = 1 "
+                        + " and UserId in(select a.UserId from dbo.SysRoleUser a "
+                        + " left join Roles b on a.RoleId = b.ID "
+                        + " where b.Name = '项目负责人' and b.Rstatus = 1) ");
+
             ds = sysUserBll.GetPrjChargebyClassInfo(classId, "ck", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);

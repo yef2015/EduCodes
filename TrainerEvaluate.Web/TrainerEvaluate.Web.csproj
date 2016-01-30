@@ -170,6 +170,8 @@
     <Content Include="Scripts\zh-cn.js" />
     <Content Include="SPSchoolDistrict.aspx" />
     <Content Include="SPSchoolManage.aspx" />
+    <Content Include="StudentList.aspx" />
+    <Content Include="StuFrame.aspx" />
     <Content Include="StuManage.aspx" />
     <Content Include="Styles\pgxt.css" />
     <Content Include="SysParameters.aspx" />
@@ -686,8 +688,22 @@
     <Compile Include="SPSchoolManage.aspx.designer.cs">
       <DependentUpon>SPSchoolManage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StudentList.aspx.cs">
+      <DependentUpon>StudentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentList.aspx.designer.cs">
+      <DependentUpon>StudentList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StudentsInfo.ashx.cs">
       <DependentUpon>StudentsInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="StuFrame.aspx.cs">
+      <DependentUpon>StuFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StuFrame.aspx.designer.cs">
+      <DependentUpon>StuFrame.aspx</DependentUpon>
     </Compile>
     <Compile Include="StuManage.aspx.cs">
       <DependentUpon>StuManage.aspx</DependentUpon>
