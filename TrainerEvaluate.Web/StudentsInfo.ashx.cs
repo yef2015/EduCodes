@@ -79,7 +79,7 @@ namespace TrainerEvaluate.Web
             }
             if (schoolname != "all")
             {
-                strWhere += " and School = '"+schoolname+"' ";
+                strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
 
             var ds = new DataSet();
@@ -195,7 +195,7 @@ namespace TrainerEvaluate.Web
 
             if (schoolname != "all")
             {
-                strWhere += " and School = '" + schoolname + "' ";
+                strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
 
             /*
@@ -434,7 +434,7 @@ namespace TrainerEvaluate.Web
             }
             if (schoolname != "all")
             {
-                strWhere += " and School = '" + schoolname + "' ";
+                strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
            
             

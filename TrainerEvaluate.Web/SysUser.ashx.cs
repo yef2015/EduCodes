@@ -162,8 +162,12 @@ namespace TrainerEvaluate.Web
             sysUserModel.UserId = Guid.NewGuid();
             SetModelValue(sysUserModel, context);
             sysUserModel.CreateTime = DateTime.Now;
-
+            sysUserModel.UserId = Guid.NewGuid();
             var sysUserBll = new BLL.SysUser();
+
+            var roleId = context.Request["RoleId"];
+            var roleBll = new BLL.Roles();
+
             var result = false;
             var msg = "";
             try
@@ -174,6 +178,7 @@ namespace TrainerEvaluate.Web
                 }
                 else
                 {
+                    roleBll.SaveUserRoleRelation(sysUserModel.UserId.ToString(), roleId);
                     result = sysUserBll.Add(sysUserModel);
 
                     if (!result)
@@ -210,6 +215,9 @@ namespace TrainerEvaluate.Web
                 SetModelEditValue(sysUserModel, context);
                 var userAccountOld = context.Request["UserAccountOld"];
 
+                var roleId = context.Request["RoleId"];
+                var roleBll = new BLL.Roles();
+
                 if (userAccountOld != sysUserModel.UserAccount)
                 {
                     if (sysUserBll.GetAccountExsist(sysUserModel.UserAccount, sysUserModel.UserId))
@@ -218,6 +226,8 @@ namespace TrainerEvaluate.Web
                     }
                     else
                     {
+                        roleBll.SaveUserRoleRelation(sysUserModel.UserId.ToString(), roleId);
+
                         result = sysUserBll.Update(sysUserModel);
                         if (!result)
                         {
@@ -227,6 +237,7 @@ namespace TrainerEvaluate.Web
                 }
                 else
                 {
+                    roleBll.SaveUserRoleRelation(sysUserModel.UserId.ToString(), roleId);
                     result = sysUserBll.Update(sysUserModel);
                     if (!result)
                     {

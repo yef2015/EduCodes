@@ -70,8 +70,8 @@
         </tr>
     </table>
 
-    <div style="margin: 10px; width: 99%">
-        <table id="dg" title="角色信息列表" class="easyui-datagrid" style="margin: 10px; width: 99%"
+    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
+        <table id="dg" title="角色信息列表" class="easyui-datagrid" style="margin: 10px; width: 100%"
             url="Roles.ashx"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
@@ -80,7 +80,7 @@
                     <th field="ID" width="0" hidden="true">编号</th>
                     <th field="Name" width="20%" sortable="true">角色名称</th> 
                     <th field="Description" width="40%" sortable="true">描述</th>
-                    <th field="Rstatus" width="15%" sortable="true" formatter="formatterRoleStatus">状态</th>
+                    <th field="Rstatus" width="18%" sortable="true" formatter="formatterRoleStatus">状态</th>
                     <th field="CreateTime" width="20%" sortable="true" formatter="formatterdate">创建时间</th>
                 </tr>
             </thead>

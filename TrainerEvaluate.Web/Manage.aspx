@@ -58,7 +58,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="msysmgr" name="sysmgr" style="width: 100%; height: 1271px; font-size: 14px; margin-left: 5px;">
+    <div id="msysmgr" name="sysmgr" style="width: 100%; height: 1200px; font-size: 14px; margin-left: 5px;">
         <ul id="sysmanage">
         <%--    <li value="1">系统参数设置</li>--%>
             <li value="2">数据字典设置</li>
@@ -67,6 +67,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <iframe id="ifrMgrContent" width="100%" height="1271" frameborder="0" scrolling="auto" src="SysUserMgr.aspx"> 
+    <iframe id="ifrMgrContent" width="100%" height="1200" frameborder="0" scrolling="auto" src="SysUserMgr.aspx"> 
     </iframe>   
 </asp:Content>

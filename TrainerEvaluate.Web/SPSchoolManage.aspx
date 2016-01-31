@@ -54,7 +54,7 @@
         </tr>
     </table>
 
-    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
+    <div style="margin-top: 10px; margin-left: 20px; width: 99%">
         <table id="dg" title="学校信息" class="easyui-datagrid" style="width: 100%"
             url="SPSchoolInfo.ashx"
             toolbar="#toolbar" pagination="true"

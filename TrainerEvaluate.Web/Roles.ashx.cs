@@ -46,7 +46,12 @@ namespace TrainerEvaluate.Web
                     SaveUserRole(context);
                     break;   
                 case "g":
-                    GetdataForCombobox(context);
+                    var strCmb = GetdataForCombobox(context);
+                    context.Response.Write(strCmb);
+                    break;
+                case "grs":
+                    var strCmbRS = GetDataForComboxRoleSet(context);
+                    context.Response.Write(strCmbRS);
                     break;
                 default:
                     var str = GetData(context);
@@ -91,7 +96,13 @@ namespace TrainerEvaluate.Web
             return str;
         }
 
-
+        private string GetDataForComboxRoleSet(HttpContext context)
+        {
+            var rolesBll = new BLL.Roles();
+            var dt = rolesBll.GetDataForComboxRoleSet();
+            var str = JsonConvert.SerializeObject(dt);
+            return str;
+        }
 
         private void SetModelValue(Models.Roles roleModel, HttpContext context)
         {

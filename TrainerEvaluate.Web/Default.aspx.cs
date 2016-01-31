@@ -60,6 +60,7 @@ namespace TrainerEvaluate.Web
             schooldistrict.Visible = false;
             schoolManage.Visible = false;
             classTreeManage.Visible = false;
+            stuQueResult.Visible = false;   // 评估结果
             personArchive.Visible = false;  // 个人档案
             trainExper.Visible = false;     // 培训经历
             teacherArchive.Visible = false; // 教师的个人档案
@@ -71,6 +72,7 @@ namespace TrainerEvaluate.Web
                 ifrcont.Attributes["src"] = "MyQuestionnaireNew.aspx";
                 personArchive.Visible = true;
                 trainExper.Visible = true;
+                stuQueResult.Visible = true;
             }
             else if (Profile.CurrentUser.UserRole == 2)
             {

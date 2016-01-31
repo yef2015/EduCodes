@@ -26,19 +26,20 @@
             </td>
         </tr>
     </table>
-    <div style="margin: 10px; width: 99%">
-        <table id="dg" title="用户信息" class="easyui-datagrid" style="width: 99%;"
+    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
+        <table id="dg" title="用户信息" class="easyui-datagrid" style="width: 100%;"
             url="SysUser.ashx"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
                     <th field="UserId" width="0" hidden="true">编号</th>
-                    <th field="UserName" width="25%" sortable="true">姓名</th>
-                    <th field="IdentityNo" width="25%" sortable="true">身份证号</th>
-                    <th field="Dept" width="28%" sortable="true">单位</th>
+                    <th field="UserName" width="15%" sortable="true">姓名</th>
+                    <th field="IdentityNo" width="22%" sortable="true">身份证号</th>
+                    <th field="Dept" width="25%" sortable="true">单位</th>
                     <th field="UserAccount" width="20%" sortable="true">登陆帐号</th>
-                    <th field="UserPassWord" width="0" hidden="true">密码</th>
+                    <th field="RoleName" width="15%" sortable="true">所属角色</th>
+                    <th field="UserPassWord" width="0" hidden="true">密码</th>                    
                 </tr>
             </thead>
         </table>
@@ -67,11 +68,16 @@
                 <div class="fitem">
                     <label>登录账号：</label>
                     <input name="UserAccount" id="UserAccount" class="easyui-textbox" style="width:280px;"/>
-                     <input type="hidden" id="UserAccountOld" />
+                    <input type="hidden" id="UserAccountOld" />
                 </div>
                 <div class="fitem">
                     <label>密码：</label>
                     <input name="Pwd" id="Pwd" class="easyui-textbox" style="width:280px;"/>
+                </div>
+                <div class="fitem">
+                    <label>所属角色：</label>
+                    <select class="easyui-combobox" name="SysRoles" id="SysRoles" style="width:280px;"  data-options="url:'Roles.ashx?t=grs',method:'post',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                    </select>
                 </div>
             </form>
         </div>
@@ -90,6 +96,7 @@
             $('#UserAccount').textbox("setText", "");
             $('#Pwd').textbox("setText", "");
             $('#Dept').textbox("setText", "");
+            $('#SysRoles').combobox("setValue", "");
 
             url = 'SysUser.ashx' + '?t=n';
         }
@@ -105,6 +112,7 @@
                 $('#Pwd').textbox("setText", row.UserPassWord);
                 $('#Dept').textbox("setText", row.Dept);
                 $("#UserAccountOld").val(row.UserAccount);
+                $('#SysRoles').combobox("setValue", row.RoleName);
 
                 url = 'SysUser.ashx' + '?t=e&id=' + row.UserId;
             } else {
@@ -120,7 +128,8 @@
                 UserAccount: $('#UserAccount').textbox("getText"),
                 UserAccountOld:$("#UserAccountOld").val(), 
                 IdentityNo: $('#IdentityNo').textbox("getText"),
-                UserPassWord: $('#Pwd').textbox("getText")
+                UserPassWord: $('#Pwd').textbox("getText"),
+                RoleId: $('#SysRoles').combobox("getValue")
             };
             $.post(url, data, function (result) {
                 if (result == "") {

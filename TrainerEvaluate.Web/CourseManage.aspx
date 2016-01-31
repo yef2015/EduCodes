@@ -47,8 +47,8 @@
             </td>
         </tr>
     </table>
-    <div style="margin: 10px; width: 99%">
-        <table id="dg" title="课程信息" class="easyui-datagrid" style="width: 99%"
+    <div style="margin-top: 10px; margin-left: 20px; width: 99%">
+        <table id="dg" title="课程信息" class="easyui-datagrid" style="width: 100%"
             url="Course.ashx"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">

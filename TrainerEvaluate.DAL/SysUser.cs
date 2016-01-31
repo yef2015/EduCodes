@@ -81,7 +81,7 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@Status", SqlDbType.Int,4),
 					new SqlParameter("@Dept", SqlDbType.NVarChar,50),
 					new SqlParameter("@IdentityNo", SqlDbType.NVarChar,50)};
-            parameters[0].Value = Guid.NewGuid();
+            parameters[0].Value = model.UserId;
             parameters[1].Value = model.UserRole;
             parameters[2].Value = model.UserName;
             parameters[3].Value = model.UserPassWord;
@@ -366,7 +366,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetListByPage(string strWhere, string sort, int startIndex, int endIndex,string order)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("SELECT  UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo  FROM ( ");
+            strSql.Append("SELECT  UserId,UserRole,case UserRole when 1 then '学员' when 2 then '教师' when 3 then '管理员' when 4 then '课程管理员'  end UserRoleName,UserName,UserPassWord,CreateTime,UserAccount,Dept,IdentityNo,RoleName  FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(sort.Trim()))
 			{
@@ -376,7 +376,9 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append("order by T.UserId desc");
 			}
-			strSql.Append(")AS Row, T.*  from SysUser T ");
+			strSql.Append(")AS Row, T.*, ");
+            strSql.Append(" (select top 1 Name from Roles RL left join SysRoleUser  SR on RL.ID = SR.RoleId where SR.UserId = t.UserId) as RoleName ");
+            strSql.Append(" from SysUser T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);

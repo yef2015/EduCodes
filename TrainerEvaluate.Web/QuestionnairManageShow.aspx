@@ -59,7 +59,7 @@
             </td>
         </tr>
     </table>
-    <div style="margin: 10px; width: 98%">
+    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
         <table id="dg" title="问卷信息" class="easyui-datagrid" style="width: 100%"
             url="QuestionnaireHadlerNew.ashx"
             toolbar="#toolbar" pagination="true"

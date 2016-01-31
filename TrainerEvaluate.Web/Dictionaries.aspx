@@ -28,17 +28,17 @@
         </tr>
     </table>
 
-    <div style="margin: 10px; width: 99%">
-        <table id="dg" title="字典信息列表" class="easyui-datagrid" style="margin: 10px; width: 99%"
+    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
+        <table id="dg" title="字典信息列表" class="easyui-datagrid" style="margin: 10px; width: 100%"
             url="Dictionaries.ashx"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
                     <th field="ID" width="0" hidden="true">编号</th>
-                    <th field="Name" width="150" sortable="true">字典名称</th>
-                    <th field="DType" width="100" sortable="true">字典类型</th>
-                    <th field="CreateTime" width="150" sortable="true"    formatter="formatterdate">创建时间</th> 
+                    <th field="Name" width="35%" sortable="true">字典名称</th>
+                    <th field="DType" width="32%" sortable="true">字典类型</th>
+                    <th field="CreateTime" width="30%" sortable="true"    formatter="formatterdate">创建时间</th> 
                 </tr>
             </thead>
         </table>

@@ -419,7 +419,26 @@ namespace TrainerEvaluate.BLL
             }
         }
 
+        public bool SaveUserRoleRelation(string userId, string roleId)
+        {
+            try
+            {
 
+                var lstSql = new List<string>();
+                lstSql.Add(string.Format(" delete from  SysRoleUser  where UserId='{0}' ", userId));
+                var sql1 = string.Format(" insert into SysRoleUser values(NEWID(),'{0}','{1}')  ", roleId, userId);
+                lstSql.Add(sql1);
+
+                DbHelperSQL.ExecuteSqlTran(lstSql);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return false;
+            }
+        }
 
         public bool DeletRoleUserbyRoleId(string roleId)
         {
@@ -458,7 +477,24 @@ namespace TrainerEvaluate.BLL
             return dt;
         }
 
-
+        public DataTable GetDataForComboxRoleSet()
+        {
+            var dt = new DataTable();
+            try
+            {
+                var sql = string.Format("  select ID,Name from Roles where Rstatus=1 and Name in ('系统管理员','项目负责人') ");
+                var result = DbHelperSQL.Query(sql);
+                if (result != null && result.Tables.Count > 0)
+                {
+                    dt = result.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+            return dt;
+        }
 
 	    public DataTable GetCurrentUserRoleInfo(Guid userid)
 	    {

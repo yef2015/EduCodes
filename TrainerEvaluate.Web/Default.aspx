@@ -54,6 +54,9 @@
             case "stuQue":
                 url = "MyQuestionnaireNew.aspx";
                 break;
+            case "stuQueResult":
+                url = "MyQuestionnaireResult.aspx";
+                break;
             case "schooldistrict":
                 url = "SPSchoolDistrict.aspx";
                 break;
@@ -134,7 +137,8 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="qustionManage" onclick="toMenu('qustionManage')" runat="server" >培训评估</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="analysis" onclick="toMenu('analysis')" runat="server" >统计分析</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="manage" onclick="toMenu('manage')" runat="server" >系统管理</div>
-                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQue" onclick="toMenu('stuQue')"  runat="server" >问卷调查</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQue" onclick="toMenu('stuQue')"  runat="server" >问卷评估</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQueResult" onclick="toMenu('stuQueResult')"  runat="server" >评估结果</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="personArchive" onclick="toMenu('personArchive')"  runat="server" >个人档案</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="trainExper" onclick="toMenu('trainExper')"  runat="server" >培训经历</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="teacherArchive" onclick="toMenu('teacherArchive')"  runat="server" >个人档案</div>

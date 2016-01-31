@@ -141,6 +141,7 @@
     <Content Include="MyPersonArchive.aspx" />
     <Content Include="MyProfessExper.aspx" />
     <Content Include="MyQuestionnaireNew.aspx" />
+    <Content Include="MyQuestionnaireResult.aspx" />
     <Content Include="MyTeacherArchive.aspx" />
     <Content Include="MyTrainExper.aspx" />
     <Content Include="PersonalInfo.aspx" />
@@ -591,6 +592,13 @@
     </Compile>
     <Compile Include="MyQuestionnaireNew.aspx.designer.cs">
       <DependentUpon>MyQuestionnaireNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyQuestionnaireResult.aspx.cs">
+      <DependentUpon>MyQuestionnaireResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyQuestionnaireResult.aspx.designer.cs">
+      <DependentUpon>MyQuestionnaireResult.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyTeacherArchive.aspx.cs">
       <DependentUpon>MyTeacherArchive.aspx</DependentUpon>

@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PageContent.Master" AutoEventWireup="true" CodeBehind="ClassManageList.aspx.cs" Inherits="TrainerEvaluate.Web.ClassManageList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
-    
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">  
 
     <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin: 20px;">
         <tr>
@@ -42,8 +41,8 @@
             </td>
         </tr>
     </table>
-    <div style="margin: 10px; width: 99%">  
-        <table id="dg" title="<%=yearLevel %> 班级信息" class="easyui-datagrid" style="width: 99%"
+    <div style="margin-top: 10px; margin-left: 20px; width: 98%">
+        <table id="dg" title="<%=yearLevel %> 班级信息" class="easyui-datagrid" style="width: 100%"
             url="ClassInfo.ashx"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
