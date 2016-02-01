@@ -1752,8 +1752,14 @@ namespace TrainerEvaluate.BLL
                {
                    DataRow dr = ds.Tables[0].Rows[0];
                    Object = dr["Object"].ToString();
-                   StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("yyyy-MM-dd");
-                   FinishDate = Convert.ToDateTime(dr["FinishDate"]).ToString("yyyy-MM-dd");
+                   if (!string.IsNullOrEmpty(dr["StartDate"].ToString()))
+                   {
+                       StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("yyyy-MM-dd");
+                   }
+                   if (!string.IsNullOrEmpty(dr["FinishDate"].ToString()))
+                   {
+                       FinishDate = Convert.ToDateTime(dr["FinishDate"]).ToString("yyyy-MM-dd");
+                   }
                    AreaName = dr["AreaName"].ToString();
                    TypeName = dr["TypeName"].ToString();
                    PointTypeName = dr["PointTypeName"].ToString();

@@ -409,62 +409,25 @@ namespace TrainerEvaluate.Web
         private void Query(HttpContext context)
         {
             var corName = context.Request["name"].Trim();
-            var teaName = context.Request["teaName"].Trim();
             var teaplace = context.Request["teaplace"].Trim();
-            var teaTime = context.Request["teaTime"].Trim();
+
             var ds = new DataSet();
             var courBll = new BLL.Course();
-            var strWhere = "";
+            var strWhere = "Status = 1";
             if (!string.IsNullOrEmpty(corName))
             {
-                strWhere = string.Format(" CourseName like '%" + corName + "%' ");
+                strWhere += string.Format(" and CourseName like '%" + corName + "%' ");
             }
-            if (!string.IsNullOrEmpty(teaName))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeacherName  like '%" + teaName + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeacherName like '%" + teaName + "%' ");
-                }
-            }
+            
             if (!string.IsNullOrEmpty(teaplace))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachPlace  like '%" + teaplace + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachPlace like '%" + teaplace + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(teaTime))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachTime  like '%" + teaTime + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachTime like '%" + teaTime + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere += string.Format("Status = 1 ");
-            }
+                strWhere += string.Format(" and  TeachPlace  like '%" + teaplace + "%' ");
+            }   
 
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
 
-            var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "TeachTime" : context.Request["sort"];
+            var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "CourseName" : context.Request["sort"];
             var order = string.IsNullOrEmpty(context.Request["order"]) ? "asc" : context.Request["order"];
 
             var startIndex = (page - 1) * rows + 1;
