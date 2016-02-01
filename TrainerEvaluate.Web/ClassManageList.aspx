@@ -266,7 +266,7 @@
         </div>
 
 
-        <div id="dlg6" class="easyui-dialog" style="width: 550px; height: 300px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg6" class="easyui-dialog" style="width: 550px; height: 360px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons6">
             <form id="fm1" method="post">
                 <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
@@ -305,6 +305,14 @@
                         </td>
                         <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
                             <span id="aNotExistCount"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" bgcolor="FFFFFF" class="gray10a" height="25">
+                            <div align="center">身份证号为空的人数：</div>
+                        </td>
+                        <td width="60%" bgcolor="FFFFFF" height="25" class="gray10a">
+                            <span id="aNULLidentityNo"></span>
                         </td>
                     </tr>
                 </table>            
@@ -879,6 +887,7 @@
                                 $('#aExportCount').text(result[2]);
                                 $('#aRepeatCount').text(result[3]);
                                 $('#aNotExistCount').text(result[4]);
+                                $('#aNULLidentityNo').text(result[5]+'  ( 注：身份证号为空的学员，不允许入库 ) ');
                                 $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
                             }
                             else

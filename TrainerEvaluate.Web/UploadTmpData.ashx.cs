@@ -489,13 +489,16 @@ namespace TrainerEvaluate.Web
             if (HttpContext.Current.Session["cclstudatat"] != null)
             {
                 var dt = (DataTable)HttpContext.Current.Session["cclstudatat"];
-                var dtExist = (DataTable)HttpContext.Current.Session["cclstudatatDouble"];
                 var ccCount = (int)HttpContext.Current.Session["cclstudatatCount"];                
 
                 if (dt != null)
                 {
                     try
                     {
+                        var sql = string.Format(" select IdentityNo from Student where Status = 1 ");
+                        var dsExist = DbHelperSQL.Query(sql);
+                        var dtExist = dsExist.Tables[0];
+
                         var sqllist = new List<string>();
 
                         var stuBll = new BLL.Student();
@@ -505,11 +508,14 @@ namespace TrainerEvaluate.Web
                         i = i + Convert.ToInt32(startNo);
                         var uid = Guid.Empty;
                         bool isExist = false;
-                        var iCount = 0;
-
 
                         foreach (DataRow row in dt.Rows)
                         {
+                            if (string.IsNullOrEmpty(row["身份证号"].ToString()))
+                            {
+                                // 身份证为空的学员，不允许入库
+                                continue;
+                            }
                             foreach (DataRow drCur in dtExist.Rows)
                             {
                                 if (row["身份证号"].ToString() == drCur["IdentityNo"].ToString())
@@ -601,16 +607,29 @@ namespace TrainerEvaluate.Web
                 // 要导入人数
                 var exportCount = dt.Rows.Count;
                 
+                // 身份证号为空的人数
+                var identityNoNULLCount = 0;
+                foreach (DataRow drExp in dt.Rows)
+                {
+                    if (string.IsNullOrEmpty(drExp["身份证号"].ToString().Trim()))
+                    {
+                        identityNoNULLCount++;
+                    }
+                }
+
                 // 重复的人数
                 var repeatCount = 0;
                 foreach (DataRow dr in dtCurStu.Tables[0].Rows)
                 {
                     foreach (DataRow drExp in dt.Rows)
                     {
-                        if (dr["IdentityNo"].ToString() == drExp["身份证号"].ToString().Trim())
+                        if (!string.IsNullOrEmpty(drExp["身份证号"].ToString().Trim()))
                         {
-                            repeatCount++;
-                            break;
+                            if (dr["IdentityNo"].ToString() == drExp["身份证号"].ToString().Trim())
+                            {
+                                repeatCount++;
+                                break;
+                            }
                         }
                     }
                 }
@@ -624,31 +643,41 @@ namespace TrainerEvaluate.Web
                 var sb1 = new StringBuilder();
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (!string.IsNullOrEmpty(sb1.ToString()))
+                    if (!string.IsNullOrEmpty(row["身份证号"].ToString().Trim()))
                     {
-                        sb1.Append(string.Format(",'{0}'", row["身份证号"].ToString().Trim()));
-                    }
-                    else
-                    {
-                        sb1.Append(string.Format("'{0}'", row["身份证号"].ToString().Trim()));
+                        if (!string.IsNullOrEmpty(sb1.ToString()))
+                        {
+                            sb1.Append(string.Format(",'{0}'", row["身份证号"].ToString().Trim()));
+                        }
+                        else
+                        {
+                            sb1.Append(string.Format("'{0}'", row["身份证号"].ToString().Trim()));
+                        }
                     }
                 }
 
-                var sql = string.Format(" select distinct(IdentityNo) from Student where IdentityNo in ({0}) and Status = 1 ", sb1.ToString());
-                var dtExist = DbHelperSQL.Query(sql);
-
-                if (dtExist != null && dtExist.Tables.Count > 0 && dtExist.Tables[0].Rows.Count > 0) 
+                if (!string.IsNullOrEmpty(sb1.ToString()))
                 {
-                    notExistCount = exportCount - dtExist.Tables[0].Rows.Count;
+                    var sql = string.Format(" select distinct(IdentityNo) from Student where IdentityNo in ({0}) and Status = 1 ", sb1.ToString());
+                    var dtExist = DbHelperSQL.Query(sql);
+
+                    if (dtExist != null && dtExist.Tables.Count > 0 && dtExist.Tables[0].Rows.Count > 0)
+                    {
+                        notExistCount = exportCount - dtExist.Tables[0].Rows.Count - identityNoNULLCount;
+                    }
+                }
+                else
+                {
+                    notExistCount = 0;
                 }
 
                 var basePath = HttpContext.Current.Server.MapPath("UploadTemplate/");
                 System.IO.File.Delete(basePath + filename);
 
-                msg = "studentexport|" + curCount + "|" + exportCount + "|" + repeatCount + "|" + notExistCount + "|";
+                msg = "studentexport|" + curCount + "|" + exportCount + "|" + repeatCount + "|" + notExistCount + "|" + identityNoNULLCount;
                 HttpContext.Current.Session.Add("cclstudatat", dt);
                 HttpContext.Current.Session.Add("cclstudatatDouble", dtCurStu.Tables[0]);
-                HttpContext.Current.Session.Add("cclstudatatCount", curCount + exportCount-repeatCount);
+                HttpContext.Current.Session.Add("cclstudatatCount", curCount + exportCount - repeatCount - identityNoNULLCount);
                 return false;
             }
             else
