@@ -215,12 +215,12 @@
             <form id="fmCourse" method="post">
                 <div class="fitem">
                     <label>选择课程:</label>
-                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name'" > 
                     </select>
                 </div>
                 <div class="fitem">
                     <label>授课老师:</label> 
-                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name'" > 
                     </select>
                 </div>
                 <div class="fitem">
