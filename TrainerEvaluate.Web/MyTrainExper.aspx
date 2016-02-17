@@ -7,7 +7,7 @@
     
     <div style="margin: 10px; width: 99%">  
         <table id="dg" title="参加培训班级" class="easyui-datagrid" style="width: 99%"
-            url="ClassInfo.ashx?t=stcl&studentId=<%= UserId %>>"
+            url="ClassInfo.ashx?t=stcl&studentId=<%= UserId %>"
              pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>

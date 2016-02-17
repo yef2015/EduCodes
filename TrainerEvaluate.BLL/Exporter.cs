@@ -143,6 +143,7 @@ namespace TrainerEvaluate.BLL
             // Scale SVG document to requested width.
             svgDoc.Transforms = new SvgTransformCollection();
             float scalar = (float)this.Width / (float)svgDoc.Width;
+            scalar = 1.5f;
             svgDoc.Transforms.Add(new SvgScale(scalar, scalar));
             svgDoc.Width = new SvgUnit(svgDoc.Width.Type, svgDoc.Width * scalar);
             svgDoc.Height = new SvgUnit(svgDoc.Height.Type, svgDoc.Height * scalar);
@@ -356,7 +357,7 @@ namespace TrainerEvaluate.BLL
             width= bm.Width;
             height = bm.Height;
             MemoryStream ms = new MemoryStream();
-            bm.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            bm.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             byte[] bytes = ms.GetBuffer();  //byte[]   bytes=   ms.ToArray(); 这两句都可以，至于区别么，下面有解释
             ms.Close(); 
             return bytes; 

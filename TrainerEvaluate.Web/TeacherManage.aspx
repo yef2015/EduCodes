@@ -211,33 +211,26 @@
                     <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"></td>
                 </tr>
             </table>
-            <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
-                <tr>
-                    <td colspan="8" bgcolor="FFFFFF" class="gray10a" height="25">
-                        <div align="center">授课情况：</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="10%" bgcolor="F0F9FF" class="gray10a" height="25">
-                        <div align="center">编号</div>
-                    </td>
-                    <td width="10%" bgcolor="F0F9FF" height="25" class="gray10a">
-                        <div align="center">课程名称</div>
-                    </td>
-                    <td width="10%" bgcolor="F0F9FF" height="25" class="gray10a">
-                        <div align="center">授课地点</div>
-                    </td>
-                    <td width="10%" bgcolor="F0F9FF" height="25" class="gray10a">
-                        <div align="center">授课时间</div>
-                    </td>
-                    <td width="10%" bgcolor="F0F9FF" height="25" class="gray10a">
-                        <div align="center">授课班级</div>
-                    </td>
-                    <td width="10%" bgcolor="F0F9FF" height="25" class="gray10a">
-                        <div align="center">满意度</div>
-                    </td>
-                </tr>
-            </table>
+            <div style="margin: 0px; margin-left:6px;margin-top:10px; width: 99%;">  
+                <table id="dg-train" title="任教经历信息" class="easyui-datagrid" style="width: 99%;height:250px;"
+                    data-options="rownumbers:true,singleSelect:false,url:'ClassInfo.ashx?t=stcp',method:'post'">
+                    <thead>
+                        <tr>
+                            <th field="Id" width="0" hidden="true">编号</th>
+                            <th field="CourseName" width="100">课程名称</th>
+                            <th field="TeachPlace" width="100" sortable="true">授课地点</th>
+                            <th field="ClassName" width="100" sortable="true">班级名称</th>
+                            <th field="Object" width="100" sortable="true">培训对象</th>
+                            <th field="Description" width="100" sortable="true">培训内容</th>
+                            <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
+                            <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
+                            <th field="StudentCount" width="100" sortable="true">学员人数</th>
+                            <th field="Point" width="100" sortable="true">学时</th>
+                            <th field="Teacher" width="100" sortable="true">项目负责人</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </form>
     </div>
     <div id="dlg-buttons1">
@@ -306,6 +299,8 @@
                 $('#aResearch').text(row.ResearchBigName + "  " + row.Research);
                 $('#aTitle').text(row.JobTitleName);
                 $('#aDescription').text(row.Description);
+
+                $('#dg-train').datagrid('reload', { t: 'stcl', teacherId: row.TeacherId });
             } else {
                 messageAlert('提示', '请选择要查看的行!', 'warning');
             }
