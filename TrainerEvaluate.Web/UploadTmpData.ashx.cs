@@ -1010,7 +1010,7 @@ namespace TrainerEvaluate.Web
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
                                   " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ",
                                   row["姓名"].ToString().Trim(),
-                                  pwd.Next(999999).ToString(),
+                                  "000000",
                                   "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'),
                                   uid,
                                   row["身份证号"].ToString().Trim(),
@@ -1116,7 +1116,7 @@ namespace TrainerEvaluate.Web
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
                                   " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ",
                                   row["姓名"].ToString().Trim(),
-                                  pwd.Next(999999).ToString(),
+                                  "000000",
                                   "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'),
                                   uid,
                                   row["身份证号"].ToString().Trim(),
@@ -1230,7 +1230,7 @@ namespace TrainerEvaluate.Web
                                                      row["继教号"].ToString().Trim(), row["描述"].ToString().Trim()));
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
-                                                      " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), pwd.Next(999999).ToString(),
+                                                      " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), "000000",
                                                       "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'), uid,
                                                       row["身份证号"].ToString().Trim(), (int)EnumUserRole.Student));
 
@@ -1350,7 +1350,7 @@ namespace TrainerEvaluate.Web
 
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
-                                                         " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), pwd.Next(999999).ToString(),
+                                                         " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), "000000",
                                                          "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'), uid,
                                                          row["身份证号"].ToString().Trim(), (int)EnumUserRole.Student));
 

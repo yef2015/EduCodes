@@ -317,6 +317,36 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        /// <summary>
+        /// 通过课程id和班级id，获取通过过程中的中青年干部教育管理培训班课程评估表的课程基本信息
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public DataTable GetCourseInfoByCourseIdAndClassId(string courseId,string classId)
+        {
+             var dt = new DataTable();
+             try
+             {
+                 StringBuilder strSql = new StringBuilder();
+                 strSql.Append(" select a.CourseName,a.TeachPlace,b.TeacherName,b.StartDate,b.FinishDate  ");
+                 strSql.Append(" from Course a,CourseTeacher b ");
+                 strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '" + courseId + "' ");
+                 strSql.Append(" and b.ClassId = '" + classId + "' ");
+                 var result = DbHelperSQL.Query(strSql.ToString());
+                 if (result != null && result.Tables.Count > 0)
+                 {
+                     dt = result.Tables[0];
+                 }
+             }
+             catch (Exception ex)
+             {
+                 dt = new DataTable();
+                 LogHelper.WriteLogofExceptioin(ex);
+             }
+            return dt;
+        }
+
         public static DataTable GetCourseByCorIdStuId(string corId,string stuId)
         {
             var dt = new DataTable();

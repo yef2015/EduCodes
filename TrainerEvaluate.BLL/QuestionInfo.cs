@@ -208,7 +208,7 @@ namespace TrainerEvaluate.BLL
         }
 
 
-        public DataSet GetListByPageNew(string strWhere, string orderby, int startIndex, int endIndex)
+        public DataSet GetListByPageNew(string strWhere, string orderby,string order, int startIndex, int endIndex)
         {
 
             StringBuilder strSql = new StringBuilder();
@@ -216,7 +216,7 @@ namespace TrainerEvaluate.BLL
             strSql.Append(" SELECT ROW_NUMBER() OVER (");
             if (!string.IsNullOrEmpty(orderby.Trim()))
             {
-                strSql.Append("order by T." + orderby);
+                strSql.Append("order by T." + orderby + " " + order);
             }
             else
             {

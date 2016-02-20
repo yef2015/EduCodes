@@ -771,13 +771,13 @@ namespace TrainerEvaluate.BLL
             var coubll= new BLL.Course();
             var couModel = coubll.GetModel(courseId);
 
-            DataSet dsCourse = coubll.GetCourseInfoByCourseId(courseId.ToString());
+            DataTable dtCourse = coubll.GetCourseInfoByCourseIdAndClassId(courseId.ToString(), classid);
             string teacherName = string.Empty;
             string trainTime = string.Empty;
 
-            if (dsCourse != null && dsCourse.Tables[0].Rows.Count > 0)
+            if (dtCourse.Rows.Count > 0)
             {
-                DataRow dro = dsCourse.Tables[0].Rows[0];
+                DataRow dro = dtCourse.Rows[0];
                 teacherName = dro["TeacherName"].ToString();
                 trainTime = "从" + Convert.ToDateTime(dro["StartDate"]).ToString("yyyy-MM-dd") + "到" +
                     Convert.ToDateTime(dro["FinishDate"]).ToString("yyyy-MM-dd");
@@ -874,40 +874,35 @@ namespace TrainerEvaluate.BLL
                 cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
                 SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
-                var resultTotalReport = question.GetTotalReport(classid);
+                var resultTotalReport = question.GetTotalReportByClassIdAndCourseId(classid,courseId.ToString());
                 if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
                 {
-                    var cr = resultTotalReport.Select(string.Format(" CourseId='{0}'", courseId));
-                    if (cr.Length > 0)
-                    {
-                        IRow row5 = sheet1.CreateRow(5);
-                        ICell cell51 = row5.CreateCell(0);
-                        cell51.CellStyle = cellstyleConTitle;
-                        cell51.SetCellValue("课程内容");
-                        ICell cell52 = row5.CreateCell(1);
-                        cell52.CellStyle = cellstyleContent;
-                      //  cell52.SetCellValue(cr[0]["TotalCourse"].ToString());
-                        cell52.SetCellValue(Convert.ToDouble(cr[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalCourse"])) * 100)));
-                        ICell cell53 = row5.CreateCell(2);
-                        cell53.CellStyle = cellstyleConTitle;
-                        cell53.SetCellValue("培训讲师");
-                        ICell cell54 = row5.CreateCell(3);
-                        cell54.CellStyle = cellstyleContent;
-                      //  cell54.SetCellValue(cr[0]["TotalTeacher"].ToString());
-                        cell54.SetCellValue(Convert.ToDouble(cr[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalTeacher"])) * 100)));
-                   
-                        ICell cell55 = row5.CreateCell(4);
-                        cell55.CellStyle = cellstyleConTitle;
-                        cell55.SetCellValue("培组织管理");
-                        ICell cell56 = row5.CreateCell(5);
-                        cell56.CellStyle = cellstyleContent;
-                       // cell56.SetCellValue(cr[0]["TotalOrg"].ToString()); 
-                        cell56.SetCellValue(Convert.ToDouble(cr[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalOrg"])) * 100)));
-                   
-                    } 
+                    IRow row5 = sheet1.CreateRow(5);
+                    ICell cell51 = row5.CreateCell(0);
+                    cell51.CellStyle = cellstyleConTitle;
+                    cell51.SetCellValue("课程内容");
+                    ICell cell52 = row5.CreateCell(1);
+                    cell52.CellStyle = cellstyleContent;
+                    //  cell52.SetCellValue(cr[0]["TotalCourse"].ToString());
+                    cell52.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalCourse"])) * 100)));
+                    ICell cell53 = row5.CreateCell(2);
+                    cell53.CellStyle = cellstyleConTitle;
+                    cell53.SetCellValue("培训讲师");
+                    ICell cell54 = row5.CreateCell(3);
+                    cell54.CellStyle = cellstyleContent;
+                    //  cell54.SetCellValue(cr[0]["TotalTeacher"].ToString());
+                    cell54.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalTeacher"])) * 100)));
+
+                    ICell cell55 = row5.CreateCell(4);
+                    cell55.CellStyle = cellstyleConTitle;
+                    cell55.SetCellValue("培组织管理");
+                    ICell cell56 = row5.CreateCell(5);
+                    cell56.CellStyle = cellstyleContent;
+                    // cell56.SetCellValue(cr[0]["TotalOrg"].ToString()); 
+                    cell56.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalOrg"])) * 100)));
                 }
 
-                var reportBody = question.GetReport(courseId, classid);
+                var reportBody = question.GetReportByCourseAndClassId(courseId, classid);
                 if (reportBody != null && reportBody.Tables.Count > 0)
                 {
                     var result = new Dictionary<int, double[]>();
@@ -1266,13 +1261,13 @@ namespace TrainerEvaluate.BLL
                {
                    ISheet sheet1 = hssfworkbook.CreateSheet(model.CourseName.Replace("/", "-") + "课程评估报告单");
 
-                   DataSet dsCourse = coubll.GetCourseInfoByCourseId(model.CourseId.ToString());
+                   DataTable dtCourse = coubll.GetCourseInfoByCourseIdAndClassId(model.CourseId.ToString(), classid);
                    string teacherName = string.Empty;
                    string trainTime = string.Empty;
 
-                   if (dsCourse != null && dsCourse.Tables[0].Rows.Count > 0)
+                   if (dtCourse.Rows.Count > 0)
                    {
-                       DataRow dro = dsCourse.Tables[0].Rows[0];
+                       DataRow dro = dtCourse.Rows[0];
                        teacherName = dro["TeacherName"].ToString();
                        trainTime = "从" + Convert.ToDateTime(dro["StartDate"]).ToString("yyyy-MM-dd") + "到" +
                            Convert.ToDateTime(dro["FinishDate"]).ToString("yyyy-MM-dd");
@@ -1443,36 +1438,32 @@ namespace TrainerEvaluate.BLL
                        cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
                        SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
-                       var resultTotalReport = question.GetTotalReport(classid);
+                       var resultTotalReport = question.GetTotalReportByClassIdAndCourseId(classid, model.CourseId.ToString());
                        if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
                        {
-                           var cr = resultTotalReport.Select(string.Format(" CourseId='{0}'", model.CourseId));
-                           if (cr.Length > 0)
-                           {
-                               IRow row5 = sheet1.CreateRow(5);
-                               ICell cell51 = row5.CreateCell(0);
-                               cell51.CellStyle = cellstyleConTitle;
-                               cell51.SetCellValue("课程内容");
-                               ICell cell52 = row5.CreateCell(1);
-                               cell52.CellStyle = cellstyleContent;
-                               cell52.SetCellValue(Convert.ToDouble(cr[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalCourse"])) * 100)));
-                               ICell cell53 = row5.CreateCell(2);
-                               cell53.CellStyle = cellstyleConTitle;
-                               cell53.SetCellValue("培训讲师");
-                               ICell cell54 = row5.CreateCell(3);
-                               cell54.CellStyle = cellstyleContent;
-                               cell54.SetCellValue(Convert.ToDouble(cr[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalTeacher"])) * 100)));
+                           IRow row5 = sheet1.CreateRow(5);
+                           ICell cell51 = row5.CreateCell(0);
+                           cell51.CellStyle = cellstyleConTitle;
+                           cell51.SetCellValue("课程内容");
+                           ICell cell52 = row5.CreateCell(1);
+                           cell52.CellStyle = cellstyleContent;
+                           cell52.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalCourse"])) * 100)));
+                           ICell cell53 = row5.CreateCell(2);
+                           cell53.CellStyle = cellstyleConTitle;
+                           cell53.SetCellValue("培训讲师");
+                           ICell cell54 = row5.CreateCell(3);
+                           cell54.CellStyle = cellstyleContent;
+                           cell54.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalTeacher"])) * 100)));
 
-                               ICell cell55 = row5.CreateCell(4);
-                               cell55.CellStyle = cellstyleConTitle;
-                               cell55.SetCellValue("培组织管理");
-                               ICell cell56 = row5.CreateCell(5);
-                               cell56.CellStyle = cellstyleContent;
-                               cell56.SetCellValue(Convert.ToDouble(cr[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(cr[0]["TotalOrg"])) * 100)));
-                           }
+                           ICell cell55 = row5.CreateCell(4);
+                           cell55.CellStyle = cellstyleConTitle;
+                           cell55.SetCellValue("培组织管理");
+                           ICell cell56 = row5.CreateCell(5);
+                           cell56.CellStyle = cellstyleContent;
+                           cell56.SetCellValue(Convert.ToDouble(resultTotalReport.Rows[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(resultTotalReport.Rows[0]["TotalOrg"])) * 100)));
                        }
 
-                       var reportBody = question.GetReport(model.CourseId, classid);
+                       var reportBody = question.GetReportByCourseAndClassId(model.CourseId, classid);
                        if (reportBody != null && reportBody.Tables.Count > 0)
                        {
                            var result = new Dictionary<int, double[]>();

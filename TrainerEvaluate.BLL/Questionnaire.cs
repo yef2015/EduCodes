@@ -992,7 +992,27 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-
+        /// <summary>
+        /// 通过课程id，班级id，获取中青年干部教育管理培训班课程评估表的具体评估信息
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public DataSet GetReportByCourseAndClassId(Guid courseId, string classId)
+        {
+            try
+            {
+                var ds = new DataSet();
+                var sql = string.Format(" exec GetReportByClassIdAndCourseId '{0}','{1}' ", courseId, classId);
+                ds = DbHelperSQL.Query(sql);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
 
         public string GetLevel(double satisify)
         {
@@ -1049,6 +1069,34 @@ namespace TrainerEvaluate.BLL
             try
             {
                 var sql = string.Format("exec GetTotalReportByClassId '" + classId + "' ");
+                var ds = DbHelperSQL.Query(sql);
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    return ds.Tables[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 通过班级id，课程id，获取评估总体情况
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
+        public DataTable GetTotalReportByClassIdAndCourseId(string classId,string courseId)
+        {
+            try
+            {
+                var sql = string.Format("exec GetTotalReportByClassIdAndCourseId '" + classId + "','" + courseId + "' ");
                 var ds = DbHelperSQL.Query(sql);
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -1301,13 +1349,13 @@ namespace TrainerEvaluate.BLL
                 string courseId = Guid.Empty.ToString();
 
                 StringBuilder strBuilder = new StringBuilder();
-                strBuilder.Append(" select * from ClassCourse ");
-                strBuilder.Append(" where ID = '" + ccId + "' ");
+                strBuilder.Append(" select * from CourseTeacher ");
+                strBuilder.Append(" where RId = '" + ccId + "' ");
 
                 DataSet ds = DbHelperSQL.Query(strBuilder.ToString());
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    courseId = ds.Tables[0].Rows[0]["CourseID"].ToString();
+                    courseId = ds.Tables[0].Rows[0]["CourseId"].ToString();
                 }
                 return courseId;
             }

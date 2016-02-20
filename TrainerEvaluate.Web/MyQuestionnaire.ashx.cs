@@ -43,8 +43,6 @@ namespace TrainerEvaluate.Web
                     GetDataForCombobox(context);
                     break;
             }
-
-            GetDataForCombobox(context);
         }
 
         public bool IsReusable

@@ -640,7 +640,6 @@ namespace TrainerEvaluate.Web
             var msg = "";
             try
             {
-                LogHelper.WriteLogofExceptioin(new Exception("begin"));
                 var stuModel = new Models.Student();
                 stuModel.StudentId = Guid.NewGuid();
                 SetModelValue(stuModel, context);
@@ -654,9 +653,11 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserRole = (int) EnumUserRole.Student;
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
-                sysUserMo.UserPassWord = stuBll.GetPwd();
+                //sysUserMo.UserPassWord = stuBll.GetPwd();
+                sysUserMo.UserPassWord = "000000";
                 sysUserMo.UserAccount = stuBll.GetStuAccount();
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
                 
                 sysuserbll.AddComeStudent(sysUserMo);
 
@@ -698,6 +699,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
 
                 sysuserbll.Update(sysUserMo);
 

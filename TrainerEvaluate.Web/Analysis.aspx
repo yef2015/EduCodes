@@ -71,7 +71,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="CourseNames" name="CourseNames" style="height: 1271px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;">
+    <div id="CourseNames" name="CourseNames" style="width: 100%; height: 1200px; font-size: 14px; margin-left: 5px;">
         
         <span style="margin-left: 5px; font-weight: bold; font-size: 15px;">评估班级选择：</span>
         <div>
@@ -187,7 +187,7 @@
      
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-   <iframe id="ifrAnalysisContent" width="100%" height="1271" frameborder="0" scrolling="auto"> 
-    </iframe>   
+   <iframe id="ifrAnalysisContent" width="100%" height="1200" frameborder="0" scrolling="auto" > 
+   </iframe>   
 
 </asp:Content>

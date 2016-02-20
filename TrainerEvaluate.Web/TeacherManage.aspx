@@ -89,42 +89,42 @@
         <div class="ftitle">详细信息</div>
         <form id="fm" method="post">
             <div class="fitem">
-                <label>姓名:</label>
+                <label>姓名：</label>
                 <input name="TeacherName" id="TeacherName" class="easyui-textbox" style="width:280px;" required="true">
             </div>
             <div class="fitem">
-                <label>性别</label> 
-                 <select class="easyui-combobox" name="Gender" id="Gender" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                <label>性别：</label> 
+                 <select class="easyui-combobox" name="Gender" id="Gender" style="width:280px;" required="true" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </div>
             <div class="fitem">
-                <label>身份证号:</label>
-                <input name="IdentityNo" id="IdentityNo" style="width:280px;" class="easyui-textbox">
+                <label>身份证号：</label>
+                <input name="IdentityNo" id="IdentityNo" style="width:280px;" class="easyui-textbox" required="true">
             </div>
             <div class="fitem">
-                <label>所在单位:</label>
+                <label>所在单位：</label>
                 <input name="Dept" id="Dept" style="width:280px;" class="easyui-textbox">
             </div>
             <div class="fitem">
-                <label>职称:</label> 
+                <label>职称：</label> 
                   <select class="easyui-combobox" name="Title" id="Title" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=j',method:'get',valueField:'ID',textField:'Name'">
                </select>
             </div>
             <div class="fitem">
-                <label>职务:</label>
+                <label>职务：</label>
                 <input name="Post" id="Post" class="easyui-textbox" style="width:280px;">
             </div>
             <div class="fitem">
-                <label>研究方向:</label>                
+                <label>研究方向：</label>                
                 <input name="ResearchBigName" id="ResearchBigName" class="easyui-textbox" style="width:138px;">
                 <input name="Research" id="Research" class="easyui-textbox" style="width:138px;">
             </div>
             <div class="fitem">
-                <label>手机号:</label>
+                <label>手机号：</label>
                 <input name="Mobile" id="Mobile" class="easyui-textbox" style="width:280px;">
             </div>
             <div class="fitem">
-                <label>描述:</label>
+                <label>描述：</label>
                 <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 80px;width:280px;">
             </div>
         </form>
@@ -320,6 +320,18 @@
                 Mobile: $('#Mobile').textbox("getText"),
                 Description: $('#Description').textbox("getText")
             };
+            if (data.TeacherName == "") {
+                messageAlert('提示', "请填写姓名", 'warning');
+                return;
+            }
+            if (data.Gender == "") {
+                messageAlert('提示', "请选择性别", 'warning');
+                return;
+            }
+            if (data.IdentityNo == "") {
+                messageAlert('提示', "请填写身份证号", 'warning');
+                return;
+            }
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');

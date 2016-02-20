@@ -124,7 +124,7 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
             var num = questioninfo.GetRecordCountNew("");
-            ds = questioninfo.GetListByPageNew("",sort, startIndex, endIndex);
+            ds = questioninfo.GetListByPageNew("", sort, order, startIndex, endIndex);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;

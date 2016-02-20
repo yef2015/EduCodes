@@ -64,6 +64,7 @@ namespace TrainerEvaluate.Web
                 }
                 else
                 {
+                    // 中青年干部教育管理培训班课程评估表
                     //theYear.InnerText = DateTime.Now.Year + "年中青年干部教育管理培训班课程评估表";
                     container1.Visible = false;
                     divReports.Visible = false;
@@ -635,10 +636,11 @@ namespace TrainerEvaluate.Web
                 var classbll = new BLL.Class();
                 theYear.InnerText = classbll.GetClassInfoByClassId(classId) + "年中青年干部教育管理培训班课程评估表";
 
-                DataSet dsCourse = coursebll.GetCourseInfoByCourseId(courseId.ToString());
-                if (dsCourse != null && dsCourse.Tables[0].Rows.Count > 0)
+                //DataSet dsCourse = coursebll.GetCourseInfoByCourseId(courseId.ToString());
+                DataTable dtCourse = coursebll.GetCourseInfoByCourseIdAndClassId(courseId.ToString(), classId);
+                if (dtCourse.Rows.Count> 0)
                 {
-                    DataRow dro = dsCourse.Tables[0].Rows[0];
+                    DataRow dro = dtCourse.Rows[0];
                     courseName.InnerText = dro["CourseName"].ToString(); 
                     coursePlace.InnerText = dro["TeachPlace"].ToString(); 
                     teacherName.InnerText = dro["TeacherName"].ToString();
@@ -656,16 +658,12 @@ namespace TrainerEvaluate.Web
                     level.InnerText = question.GetLevel((Convert.ToDouble(row["Satisfy"])));
                 }
 
-                var dsrr = question.GetTotalReport(classId);
+                var dsrr = question.GetTotalReportByClassIdAndCourseId(classId,courseId.ToString());
                 if (dsrr != null && dsrr.Rows.Count > 0)
                 {
-                    var result = dsrr.Select(string.Format(" CourseId='{0}'",courseId));
-                    if (result.Length > 0)
-                    {
-                        divCourseContent.InnerText = Convert.ToDouble(result[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(result[0]["TotalCourse"])) * 100));
-                        divTeacher.InnerText = Convert.ToDouble(result[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(result[0]["TotalTeacher"])) * 100));
-                        divOrg.InnerText = Convert.ToDouble(result[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(result[0]["TotalOrg"])) * 100));
-                    }
+                    divCourseContent.InnerText = Convert.ToDouble(dsrr.Rows[0]["TotalCourse"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(dsrr.Rows[0]["TotalCourse"])) * 100));
+                    divTeacher.InnerText = Convert.ToDouble(dsrr.Rows[0]["TotalTeacher"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(dsrr.Rows[0]["TotalTeacher"])) * 100));
+                    divOrg.InnerText = Convert.ToDouble(dsrr.Rows[0]["TotalOrg"]) >= 1.0 ? "100%" : string.Format("{0:N2}" + "%", ((Convert.ToDecimal(dsrr.Rows[0]["TotalOrg"])) * 100));
                 }
 
                 //var totalAvg = question.GetTotalAvg(courseId.ToString());
@@ -754,7 +752,7 @@ namespace TrainerEvaluate.Web
             {
                 classId = "2015006";
             }
-            var reportBody = report.GetReport(coid, classId);
+            var reportBody = report.GetReportByCourseAndClassId(coid, classId);
             var result = new Dictionary<int, double[]>();
             if (reportBody != null && reportBody.Tables.Count > 0)
             {
@@ -858,7 +856,7 @@ namespace TrainerEvaluate.Web
 
             var str = new StringBuilder();
             str.Append(
-                "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"98%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\"  style=\"border-collapse:collapse;font-size: 14px;\" >");
+                "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bordercolor=\"#000000\" bgcolor=\"#FFFFFF\"  style=\"border-collapse:collapse;font-size: 14px;\" >");
 
             str.Append("<tr   height=\"35\">");
             str.Append(

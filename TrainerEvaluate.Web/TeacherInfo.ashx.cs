@@ -500,8 +500,10 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserName = teaModel.TeacherName;
                 sysUserMo.UserId = teaModel.TeacherId;
                 sysUserMo.UserPassWord = teaBll.GetPwd();
+                sysUserMo.UserPassWord = "000000";
                 sysUserMo.UserAccount = teaBll.GetTeacherAccount();
                 sysUserMo.IdentityNo = teaModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
 
                 sysuserbll.Add(sysUserMo);
 
@@ -544,6 +546,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserName = teaModel.TeacherName;
                 sysUserMo.UserId = teaModel.TeacherId;
                 sysUserMo.IdentityNo = teaModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
 
                 sysuserbll.Update(sysUserMo);
 
@@ -571,7 +574,10 @@ namespace TrainerEvaluate.Web
 
         private void SetModelValue(Models.Teacher teaModel, HttpContext context)
         {
-            teaModel.Gender = Convert.ToInt32(context.Request["Gender"]);
+            if (!string.IsNullOrEmpty(context.Request["Gender"]))
+            {
+                teaModel.Gender = Convert.ToInt32(context.Request["Gender"]);
+            } 
             if (!string.IsNullOrEmpty(context.Request["Title"]))
             {
                 teaModel.Title = Convert.ToInt32(context.Request["Title"]);

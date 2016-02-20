@@ -104,7 +104,7 @@
         <div style="text-align: center; width: 100%">
             <span id="theYear" runat="server" style="font-size: 25px; font-weight: bold">2013年中青年干部教育管理培训班课程评估表</span><br />
         </div>
-        <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="analysisTable" runat="server">
+        <table width="99%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="analysisTable" runat="server">
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">课程名称：</div>
@@ -218,7 +218,7 @@
         <%--<div>
             <a  class="easyui-linkbutton c6" iconcls="icon-ok"  style="width: 120px" id="exportImg">导出</a>
         </div>--%>
-        <div style="background-color: #FFFFFF; width: 98%; margin: 0 auto;" id="divReports" runat="server">
+        <div style="background-color: #FFFFFF; width: 99%; margin: 0 auto;" id="divReports" runat="server">
         </div>
         <div>
             <input type="hidden" runat="server" id="htp1" name="htp1" />

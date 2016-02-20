@@ -61,7 +61,7 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@ResearchId", SqlDbType.NVarChar,50),
 					new SqlParameter("@ResearchBigName", SqlDbType.NVarChar,50),
 					new SqlParameter("@ResearchBigId", SqlDbType.NVarChar,50)};
-			parameters[0].Value = Guid.NewGuid();
+			parameters[0].Value = model.TeacherId;
 			parameters[1].Value = model.IdentityNo;
 			parameters[2].Value = model.TeacherName;
 			parameters[3].Value = model.Gender;

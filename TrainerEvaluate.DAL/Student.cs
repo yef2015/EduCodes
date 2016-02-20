@@ -70,7 +70,7 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@PostOptName", SqlDbType.NVarChar,50),
 					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50)};
-            parameters[0].Value = Guid.NewGuid();
+            parameters[0].Value = model.StudentId;
             parameters[1].Value = model.IdentityNo;
             parameters[2].Value = model.StuName;
             parameters[3].Value = model.Gender;

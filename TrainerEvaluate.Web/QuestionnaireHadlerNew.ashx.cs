@@ -66,7 +66,7 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
             var num = questioninfo.GetRecordCountNew("");
-            ds = questioninfo.GetListByPageNew("", sort, startIndex, endIndex);
+            ds = questioninfo.GetListByPageNew("", sort, order, startIndex, endIndex);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
@@ -119,7 +119,7 @@ namespace TrainerEvaluate.Web
                 strWhere += string.Format(" and  TeachPlace  like '%" + place + "%' ");
             }
 
-            ds = questioninfo.GetListByPageNew(strWhere, sort, startIndex, endIndex);
+            ds = questioninfo.GetListByPageNew(strWhere, sort, order, startIndex, endIndex);
             var num = questioninfo.GetRecordCountNew(strWhere);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
