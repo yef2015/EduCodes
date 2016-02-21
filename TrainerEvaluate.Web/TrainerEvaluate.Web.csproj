@@ -145,8 +145,10 @@
     <Content Include="MyTeacherArchive.aspx" />
     <Content Include="MyTrainExper.aspx" />
     <Content Include="NetForAdmin.aspx" />
+    <Content Include="NetForAdminInfo.ashx" />
     <Content Include="NetForStudent.aspx" />
     <Content Include="NetForStudentEve.aspx" />
+    <Content Include="NetForStudentInfo.ashx" />
     <Content Include="NetForStudentJoin.aspx" />
     <Content Include="NetForStudentYet.aspx" />
     <Content Include="PersonalInfo.aspx" />
@@ -435,8 +437,6 @@
     <Content Include="MyQuestionnaire.ashx" />
     <Content Include="ExportCharts.ashx" />
     <Content Include="ComboxGetDropData.ashx" />
-    <Content Include="NetForAdminInfo.ashx" />
-    <Content Include="NetForStudentInfo.ashx" />
     <None Include="Properties\PublishProfiles\pub.pubxml" />
     <Content Include="StudentsInfo.ashx" />
     <Content Include="TeacherInfo.ashx" />
@@ -630,6 +630,7 @@
     </Compile>
     <Compile Include="NetForAdminInfo.ashx.cs">
       <DependentUpon>NetForAdminInfo.ashx</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="NetForStudent.aspx.cs">
       <DependentUpon>NetForStudent.aspx</DependentUpon>
@@ -647,6 +648,7 @@
     </Compile>
     <Compile Include="NetForStudentInfo.ashx.cs">
       <DependentUpon>NetForStudentInfo.ashx</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="NetForStudentJoin.aspx.cs">
       <DependentUpon>NetForStudentJoin.aspx</DependentUpon>
