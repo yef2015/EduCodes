@@ -107,7 +107,7 @@
         <table width="99%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" id="analysisTable" runat="server">
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">课程名称：</div>
+                    <div align="center">课程名称： </div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
                     <div runat="server" id="courseName">XXX课程培训</div>
@@ -121,13 +121,13 @@
             </tr>
             <tr bgcolor="#FFFFFF">
                 <td width="16%" class="gray10a" height="26">
-                    <div align="center">培训讲师：</div>
+                    <div align="center">培训讲师： </div>
                 </td>
                 <td width="35%" class="gray10a" height="26">
                     <div runat="server" id="teacherName">张一山</div>
                 </td>
                 <td width="15%" class="gray10a" height="26">
-                    <div align="center">培训时间：</div>
+                    <div align="center">培训时间： </div>
                 </td>
                 <td width="34%" class="gray10a" height="26"  colspan="3">
                     <div runat="server" id="trainTime">2014-9-20</div>
@@ -135,7 +135,7 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">应评人数：</div>
+                    <div align="center">应评人数： </div>
                 </td>
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <div runat="server" id="totalPeople">0</div>
@@ -147,7 +147,7 @@
                     <div runat="server" id="totalDone">0</div>
                 </td>
                   <td width="11%" bgcolor="FFFFFF" height="25" class="gray10a"  >
-                    <div align="center">评估进度</div>
+                    <div align="center">评估进度： </div>
                 </td>
                   <td width="12%" bgcolor="FFFFFF" height="25" class="gray10a" >
                     <div runat="server" id="evProgress"  onclick="getNoFinish();" style="cursor: pointer">0</div>
@@ -155,7 +155,7 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">总平均分：</div>
+                    <div align="center">总平均分： </div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
                     <div runat="server" id="spTotalAvg">0 分（满分52）</div>
@@ -167,7 +167,7 @@
                     <div runat="server" id="satisfaction">0</div>
                 </td>
                   <td width="11%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">等级: </div>
+                    <div align="center">等级： </div>
                 </td>
                 <td width="12%" bgcolor="F0F9FF" height="25" class="gray10a">
                     <div runat="server" id="level">0</div>
@@ -175,7 +175,7 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">课程内容 ：</div>
+                    <div align="center">课程内容： </div>
                 </td>
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                    <div runat="server" id="divCourseContent">0</div>
@@ -189,7 +189,7 @@
                     <div runat="server" id="divTeacher">0</div>
                 </td>
                    <td width="11%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">培组织管理: </div>
+                    <div align="center">培训组织管理： </div>
                 </td>
                 <td width="12%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <div runat="server" id="divOrg">0</div>
@@ -198,7 +198,7 @@
 
 
             <tr bgcolor="4A5C69">
-                <td height="21" colspan="7" class="white10">详细情况：</td>
+                <td height="21" colspan="7" class="white10">详细情况： </td>
             </tr>
             <tr>
                 <td colspan="7" bgcolor="#FFFFFF">
