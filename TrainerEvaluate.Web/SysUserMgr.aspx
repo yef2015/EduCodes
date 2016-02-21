@@ -147,8 +147,8 @@
             url = 'SysUser.ashx' + '?t=d';
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $.messager.confirm('确认', '确定删除吗?', function (r) {
-                    if (r) {
+             //   $.messager.confirm('确认', '确定删除吗?', function (r) {
+                    if (confirm('确定删除吗?')) {
                         $.post(url, { id: row.UserId }, function (result) {
                             if (result == "" || result == null) {
                                 $('#dg').datagrid('reload');    // reload the user data
@@ -157,7 +157,7 @@
                             }
                         });
                     }
-                });
+              //  });
             } else {
                 messageAlert('提示', '请选择要删除的行!', 'warning');
             }
