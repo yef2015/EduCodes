@@ -65,14 +65,17 @@ namespace TrainerEvaluate.Web
             trainExper.Visible = false;     // 培训经历
             teacherArchive.Visible = false; // 教师的个人档案
             professExper.Visible = false;   // 任教经历
+            netForAdmin.Visible = false;    // 网上报名：管理员
+            netForStudent.Visible = false;  // 网上报名：学生
 
             if (Profile.CurrentUser.UserRole==1)
             {  
                 stuQue.Visible = true;
-                ifrcont.Attributes["src"] = "MyQuestionnaireNew.aspx";
+                ifrcont.Attributes["src"] = "NetForStudent.aspx";
                 personArchive.Visible = true;
                 trainExper.Visible = true;
                 stuQueResult.Visible = true;
+                netForStudent.Visible = true;
             }
             else if (Profile.CurrentUser.UserRole == 2)
             {
@@ -127,6 +130,10 @@ namespace TrainerEvaluate.Web
                         if (row["FuncCode"].ToString() == "classTreeManage")
                         {
                             classTreeManage.Visible = true;
+                        }
+                        if (row["FuncCode"].ToString() == "netForAdmin")
+                        {
+                            netForAdmin.Visible = true;
                         }
                     }
 
@@ -183,6 +190,11 @@ namespace TrainerEvaluate.Web
                                 break;
                             case "classTreeManage":
                                 ifrcont.Attributes["src"] = "ClassTreeManage.aspx";
+                                qustionManage.Style["color"] = "#000000";
+                                qustionManage.Style["font-weight"] = "bold";
+                                break;
+                            case "netForAdmin":
+                                ifrcont.Attributes["src"] = "NetForAdmin.aspx";
                                 qustionManage.Style["color"] = "#000000";
                                 qustionManage.Style["font-weight"] = "bold";
                                 break;

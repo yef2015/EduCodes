@@ -144,6 +144,11 @@
     <Content Include="MyQuestionnaireResult.aspx" />
     <Content Include="MyTeacherArchive.aspx" />
     <Content Include="MyTrainExper.aspx" />
+    <Content Include="NetForAdmin.aspx" />
+    <Content Include="NetForStudent.aspx" />
+    <Content Include="NetForStudentEve.aspx" />
+    <Content Include="NetForStudentJoin.aspx" />
+    <Content Include="NetForStudentYet.aspx" />
     <Content Include="PersonalInfo.aspx" />
     <Content Include="QuestionnaireManage.aspx" />
     <Content Include="QuestionnairManageShow.aspx" />
@@ -430,6 +435,8 @@
     <Content Include="MyQuestionnaire.ashx" />
     <Content Include="ExportCharts.ashx" />
     <Content Include="ComboxGetDropData.ashx" />
+    <Content Include="NetForAdminInfo.ashx" />
+    <Content Include="NetForStudentInfo.ashx" />
     <None Include="Properties\PublishProfiles\pub.pubxml" />
     <Content Include="StudentsInfo.ashx" />
     <Content Include="TeacherInfo.ashx" />
@@ -613,6 +620,47 @@
     </Compile>
     <Compile Include="MyTrainExper.aspx.designer.cs">
       <DependentUpon>MyTrainExper.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForAdmin.aspx.cs">
+      <DependentUpon>NetForAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForAdmin.aspx.designer.cs">
+      <DependentUpon>NetForAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForAdminInfo.ashx.cs">
+      <DependentUpon>NetForAdminInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudent.aspx.cs">
+      <DependentUpon>NetForStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudent.aspx.designer.cs">
+      <DependentUpon>NetForStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentEve.aspx.cs">
+      <DependentUpon>NetForStudentEve.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentEve.aspx.designer.cs">
+      <DependentUpon>NetForStudentEve.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentInfo.ashx.cs">
+      <DependentUpon>NetForStudentInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentJoin.aspx.cs">
+      <DependentUpon>NetForStudentJoin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentJoin.aspx.designer.cs">
+      <DependentUpon>NetForStudentJoin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentYet.aspx.cs">
+      <DependentUpon>NetForStudentYet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentYet.aspx.designer.cs">
+      <DependentUpon>NetForStudentYet.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageContent.Master.cs">
       <DependentUpon>PageContent.Master</DependentUpon>

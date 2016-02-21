@@ -26,60 +26,66 @@
             changeMenu(mid);
             var url = "";
             switch (mid) {
-            case "analysis":
-                url = "Analysis.aspx";
-                break;
-            case "qustionManage":
-                url = "QuestionnaireManage.aspx";
-                break;
-            case "classManage":
-                url = "ClassManage.aspx";
-                break;
-            case "courseManage":
-                url = "CourseManage.aspx";
-                break;
-            case "studentManage":
-                //url = "StuManage.aspx";
-                url = "StuFrame.aspx";
-                break;
-            case "teacherManage":
-                url = "TeacherManage.aspx";
-                break;
-            case "manage":
-                url = "Manage.aspx";
-                break;
-            case "personalInfo":
-                url = "PersonalInfo.aspx";
-                break;
-            case "stuQue":
-                url = "MyQuestionnaireNew.aspx";
-                break;
-            case "stuQueResult":
-                url = "MyQuestionnaireResult.aspx";
-                break;
-            case "schooldistrict":
-                url = "SPSchoolDistrict.aspx";
-                break;
-            case "schoolManage":
-                url = "SPSchoolManage.aspx";
-                break;
-            case "classTreeManage":
-                url = "ClassTreeManage.aspx";
-                break;
-            case "personArchive":
-                url = "MyPersonArchive.aspx";
-                break;
-            case "trainExper":
-                url = "MyTrainExper.aspx";
-                break;
-            case "teacherArchive":
-                url = "MyTeacherArchive.aspx";
-                break;
-            case "professExper":
-                url = "MyProfessExper.aspx";
-                break;
-            default:
-                break;
+                case "analysis":
+                    url = "Analysis.aspx";
+                    break;
+                case "qustionManage":
+                    url = "QuestionnaireManage.aspx";
+                    break;
+                case "classManage":
+                    url = "ClassManage.aspx";
+                    break;
+                case "courseManage":
+                    url = "CourseManage.aspx";
+                    break;
+                case "studentManage":
+                    //url = "StuManage.aspx";
+                    url = "StuFrame.aspx";
+                    break;
+                case "teacherManage":
+                    url = "TeacherManage.aspx";
+                    break;
+                case "manage":
+                    url = "Manage.aspx";
+                    break;
+                case "personalInfo":
+                    url = "PersonalInfo.aspx";
+                    break;
+                case "stuQue":
+                    url = "MyQuestionnaireNew.aspx";
+                    break;
+                case "stuQueResult":
+                    url = "MyQuestionnaireResult.aspx";
+                    break;
+                case "schooldistrict":
+                    url = "SPSchoolDistrict.aspx";
+                    break;
+                case "schoolManage":
+                    url = "SPSchoolManage.aspx";
+                    break;
+                case "classTreeManage":
+                    url = "ClassTreeManage.aspx";
+                    break;
+                case "personArchive":
+                    url = "MyPersonArchive.aspx";
+                    break;
+                case "trainExper":
+                    url = "MyTrainExper.aspx";
+                    break;
+                case "teacherArchive":
+                    url = "MyTeacherArchive.aspx";
+                    break;
+                case "professExper":
+                    url = "MyProfessExper.aspx";
+                    break;
+                case "netForAdmin":
+                    url = "NetForAdmin.aspx";
+                    break;
+                case "netForStudent":
+                    url = "NetForStudent.aspx";
+                    break;
+                default:
+                    break;
             }
             if (mid == "analysis") {
                 $("#CourseNames").show();
@@ -136,7 +142,9 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="classTreeManage" onclick="toMenu('classTreeManage')"  runat="server" >班级管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="qustionManage" onclick="toMenu('qustionManage')" runat="server" >培训评估</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="analysis" onclick="toMenu('analysis')" runat="server" >统计分析</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="netForAdmin" onclick="toMenu('netForAdmin')" runat="server" >网上报名</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="manage" onclick="toMenu('manage')" runat="server" >系统管理</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="netForStudent" onclick="toMenu('netForStudent')" runat="server" >网上报名</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQue" onclick="toMenu('stuQue')"  runat="server" >问卷评估</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQueResult" onclick="toMenu('stuQueResult')"  runat="server" >评估结果</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="personArchive" onclick="toMenu('personArchive')"  runat="server" >个人档案</div>

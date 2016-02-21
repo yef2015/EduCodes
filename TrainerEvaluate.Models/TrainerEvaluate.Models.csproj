@@ -43,6 +43,8 @@
     <Compile Include="Class.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="Dictionaries.cs" />
+    <Compile Include="NetEnterFor.cs" />
+    <Compile Include="NetEnterStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionInfo.cs" />
     <Compile Include="Questionnaire.cs" />
