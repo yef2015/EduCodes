@@ -398,6 +398,43 @@ namespace TrainerEvaluate.DAL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
+        /// <summary>
+        /// 报名
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool EditEnterForNum(Guid guid)
+        {
+            string sql = "update NetEnterFor set EnterForNum = EnterForNum + 1 where Guid = '" + guid + "'";
+            int rows = DbHelperSQL.ExecuteSql(sql);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 取消报名
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool EditCancelNum(string guid)
+        {
+            string sql = "update NetEnterFor set EnterForNum = EnterForNum - 1 where Guid = '" + guid + "'";
+            int rows = DbHelperSQL.ExecuteSql(sql);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion  ExtensionMethod
     }
 }

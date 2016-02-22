@@ -309,8 +309,75 @@ namespace TrainerEvaluate.BLL
                 return new DataSet();
             }
         }
-        
 
+
+        public DataSet GetClassInfoByStudentId(string studentId, string name, string desp, int startIndex, int endIndex)
+        {
+            try
+            {
+                var sql = string.Format("select a.* from Class a left join ClassStudents b on a.ID = b.ClassId "
+                   + " where b.StudentId = '{0}' and a.Status = 1 ", studentId);
+
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM ( ");
+                strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                strSql.Append("order by StartDate desc");
+                strSql.Append(")AS Row, T.*  from   ");
+                strSql.Append(" ( " + sql + "  ) ");
+                strSql.Append(" T ");
+
+                string strWhere = string.Empty;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    strWhere += " and  Name like '%" + name + "%'";
+                }
+                if (!string.IsNullOrEmpty(desp))
+                {
+                    strWhere += " and  Description like '%" + desp + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(strWhere.Trim()))
+                {
+                    strSql.Append(" WHERE 1 = 1 " + strWhere);
+                }
+
+                strSql.Append(" ) TT");
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+        public int GetRecordCountByStudentId(string studentId, string name, string desp)
+        {
+            string strWhere = string.Empty;
+            if (!string.IsNullOrEmpty(name)) 
+            {
+                strWhere += " and  a.Name like '%" + name + "%'";
+            }
+            if (!string.IsNullOrEmpty(desp))
+            {
+                strWhere += " and  a.Description like '%" + desp + "%'";
+            }
+
+            var sql = string.Format("select count(1) from Class a left join ClassStudents b on a.ID = b.ClassId "
+                    + " where b.StudentId = '{0}' {1} and a.Status = 1 ", studentId, strWhere);
+
+            object obj = DbHelperSQL.GetSingle(sql);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
 
 
         public DataSet GetProfessExperByTeacherId(string teacherId)

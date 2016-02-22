@@ -53,9 +53,9 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@LastUpdateTime", SqlDbType.DateTime),
 					new SqlParameter("@IsDelete", SqlDbType.Bit,1)};
             parameters[0].Value = Guid.NewGuid();
-            parameters[1].Value = Guid.NewGuid();
+            parameters[1].Value = model.StudentId;
             parameters[2].Value = model.StuName;
-            parameters[3].Value = Guid.NewGuid();
+            parameters[3].Value = model.NetEnteryId;
             parameters[4].Value = model.NetEnterName;
             parameters[5].Value = model.CreateId;
             parameters[6].Value = model.CreateName;
@@ -361,6 +361,26 @@ namespace TrainerEvaluate.DAL
 
         #endregion  BasicMethod
         #region  ExtensionMethod
+
+        /// <summary>
+        /// 取消报名,删除报名记录
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool CancelEnterFor(string userid, string netid)
+        {
+            string sql = "update NetEnterStudent set IsDelete = 1,LastUpdateTime = getdate() where StudentId = '" + userid + "' and NetEnteryId = '" + netid + "' ";
+            int rows = DbHelperSQL.ExecuteSql(sql);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         #endregion  ExtensionMethod
     }

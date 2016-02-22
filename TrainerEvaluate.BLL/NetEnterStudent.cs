@@ -168,6 +168,156 @@ namespace TrainerEvaluate.BLL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
+        /// <summary>
+        /// 取消报名，删除报名记录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool CancelEnterFor(string userid,string netid)
+        {
+            return dal.CancelEnterFor(userid, netid);
+        }
+
+        public DataSet GetNetStudentYet(string studentId, string name, string desp, int startIndex, int endIndex)
+        {
+            try
+            {
+                var sql = string.Format("select * from NetEnterFor where IsDelete = 0 "
+                   + " and Guid in( select NetEnteryId from NetEnterStudent where StudentId = '{0}' and IsDelete = 0)", studentId);
+
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM ( ");
+                strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                strSql.Append("order by TrainName asc");
+                strSql.Append(")AS Row, T.*  from   ");
+                strSql.Append(" ( " + sql + "  ) ");
+                strSql.Append(" T ");
+
+                string strWhere = string.Empty;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    strWhere += " and  TrainName like '%" + name + "%'";
+                }
+                if (!string.IsNullOrEmpty(desp))
+                {
+                    strWhere += " and  explain like '%" + desp + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(strWhere.Trim()))
+                {
+                    strSql.Append(" WHERE 1 = 1 " + strWhere);
+                }
+
+                strSql.Append(" ) TT");
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+        public int GetNetStudentYetCount(string studentId, string name, string desp)
+        {
+            string strWhere = string.Empty;
+            if (!string.IsNullOrEmpty(name))
+            {
+                strWhere += " and TrainName like '%" + name + "%'";
+            }
+            if (!string.IsNullOrEmpty(desp))
+            {
+                strWhere += " and explain like '%" + desp + "%'";
+            }
+
+            var sql = string.Format("select COUNT(1) from NetEnterFor where IsDelete = 0 "
+                    + " and Guid in( select NetEnteryId from NetEnterStudent "
+                    + " where StudentId = '{0}' and IsDelete = 0) {1} ", studentId, strWhere);
+
+            object obj = DbHelperSQL.GetSingle(sql);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+
+        public DataSet GetNetStudentEve(string studentId, string name, string desp, int startIndex, int endIndex)
+        {
+            try
+            {
+                var sql = string.Format("select * from NetEnterFor where IsDelete = 0 "
+                   + " and Guid not in( select NetEnteryId from NetEnterStudent where StudentId = '{0}' and IsDelete = 0)", studentId);
+
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM ( ");
+                strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                strSql.Append("order by TrainName asc");
+                strSql.Append(")AS Row, T.*  from   ");
+                strSql.Append(" ( " + sql + "  ) ");
+                strSql.Append(" T ");
+
+                string strWhere = string.Empty;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    strWhere += " and  TrainName like '%" + name + "%'";
+                }
+                if (!string.IsNullOrEmpty(desp))
+                {
+                    strWhere += " and  explain like '%" + desp + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(strWhere.Trim()))
+                {
+                    strSql.Append(" WHERE 1 = 1 " + strWhere);
+                }
+
+                strSql.Append(" ) TT");
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+        public int GetNetStudentEveCount(string studentId, string name, string desp)
+        {
+            string strWhere = string.Empty;
+            if (!string.IsNullOrEmpty(name))
+            {
+                strWhere += " and TrainName like '%" + name + "%'";
+            }
+            if (!string.IsNullOrEmpty(desp))
+            {
+                strWhere += " and explain like '%" + desp + "%'";
+            }
+
+            var sql = string.Format("select COUNT(1) from NetEnterFor where IsDelete = 0 "
+                    + " and Guid not in( select NetEnteryId from NetEnterStudent "
+                    + " where StudentId = '{0}' and IsDelete = 0) {1} ", studentId, strWhere);
+
+            object obj = DbHelperSQL.GetSingle(sql);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+
         #endregion  ExtensionMethod
     }
 }

@@ -168,6 +168,26 @@ namespace TrainerEvaluate.BLL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
+        /// <summary>
+        /// 报名
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool EditEnterForNum(Guid guid)
+        {
+            return dal.EditEnterForNum(guid);
+        }
+
+        /// <summary>
+        /// 取消报名
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool EditCancelNum(string guid)
+        {
+            return dal.EditCancelNum(guid);
+        }
+        
         #endregion  ExtensionMethod
     }
 }

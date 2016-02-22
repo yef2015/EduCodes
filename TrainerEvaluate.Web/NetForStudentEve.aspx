@@ -30,7 +30,7 @@
 
     <div style="margin-top: 10px; margin-left: 20px; width: 99%">
         <table id="dg" title="即将报名" class="easyui-datagrid" style="width: 100%"
-            url="NetForAdminInfo.ashx"
+            url="NetForStudentInfo.ashx?t=qeve&studentId=<%= UserId %>"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
@@ -46,63 +46,44 @@
             </thead>
         </table>
         <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newInfo()">报名</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="save()">报名</a>
         </div>
     </div>
 
     <script type="text/javascript">
 
-        var url = 'NetForAdminInfo.ashx';
-        function newInfo() {
-            $('#dlg').dialog('open').dialog('setTitle', '新增');
-
-            $('#TrainName').textbox("setText", "");
-            $('#Explain').textbox("setText", "");
-            $('#BeginTime').textbox("setText", "");
-            $('#EndTime').textbox("setText", "");
-            $('#PersonMax').textbox("setText", "");
-
-            url = 'NetForAdminInfo.ashx' + '?t=n';
-        }
-        function edit() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                $('#dlg').dialog('open').dialog('setTitle', '编辑');
-                //  $('#fm').form('load', row);
-
-                $('#TrainName').textbox("setText", row.TrainName);
-                $('#Explain').textbox("setText", row.explain);
-                $('#BeginTime').datebox("setValue", row.BeginTime);
-                $('#EndTime').datebox("setValue", row.EndTime);
-                $('#PersonMax').textbox("setText", row.PersonMax);
-
-                url = 'NetForAdminInfo.ashx' + '?t=e&id=' + row.Guid;
-            } else {
-                messageAlert('提示', '请选择要编辑的行!', 'warning');
-            }
-        }
+        var url = 'NetForStudentInfo.ashx';
 
         function save() {
-            var data = {
-                TrainName: $('#TrainName').textbox("getText"),
-                Explain: $('#Explain').textbox("getText"),
-                BeginTime: $('#BeginTime').textbox("getText"),
-                EndTime: $('#EndTime').textbox("getText"),
-                PersonMax: $('#PersonMax').textbox("getText")
-            };
-            if (data.TrainName == "") {
-                alert("请填写培训班名称！");
-                return;
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                var max = row.PersonMax;
+                var num = row.EnterForNum;
+                if (max <= num)
+                {
+                    alert("此培训班已经报满，请选择其他培训班进行报名。");
+                    return;
+                }
+                
+                var data = {
+                    t: "teve",
+                    userid: "<%= UserId %>",
+                    username: "<%= UserName %>",
+                    trainname: row.TrainName,
+                    trainid: row.Guid
+                };
+                $.post(url, data, function (result) {
+                    if (result == "") {
+                        alert("报名成功。");
+                        $('#dg').datagrid('reload');
+                    }
+                    else {
+                        messageAlert('提示', result, 'warning');
+                    }
+                });
+            } else {
+                messageAlert('提示', '请选择要报名的行!', 'warning');
             }
-            $.post(url, data, function (result) {
-                if (result == "") {
-                    $('#dlg').dialog('close');
-                    $('#dg').datagrid('reload');
-                }
-                else {
-                    messageAlert('提示', result, 'warning');
-                }
-            });
         }
 
         function clearCondition() {
@@ -112,9 +93,10 @@
 
         function query() {
             $('#dg').datagrid('load', {
-                t: "q",
-                trainName: $("#TrainName1").textbox('getText'),
-                explain: $("#Explain1").textbox('getText')
+                t: "qeve",
+                studentId: "<%= UserId %>",
+                name: $("#TrainName1").textbox('getText'),
+                desp: $("#Explain1").textbox('getText')
             });
         }
 

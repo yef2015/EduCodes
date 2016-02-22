@@ -23,17 +23,23 @@ namespace TrainerEvaluate.Web
             var id = context.Request["id"];
             switch (opType)
             {
-                case "n":
-                    AddData(context);
+                case "teve":
+                    SaveNetFor(context);
                     break;
-                case "e":
-                    EditData(id, context);
+                case "tyet":
+                    SaveNetCancel(context);
                     break;
-                case "d":
-                    DelData(id, context);
+                case "qeve":
+                    var strEve=  GetForStudentEve(context);
+                    context.Response.Write(strEve);
                     break;
-                case "q":
-                    Query(context);
+                case "qyet":
+                  var strYet=  GetForStudentYet(context);
+                  context.Response.Write(strYet);
+                    break;
+                case "qjoin":
+                    var stcla = GetClassInfoByStudentId(context);
+                    context.Response.Write(stcla);
                     break;
                 default:
                     var str = GetData(context);
@@ -48,6 +54,34 @@ namespace TrainerEvaluate.Web
             {
                 return false;
             }
+        }
+
+        private string GetClassInfoByStudentId(HttpContext context)
+        {
+            var str = string.Empty;
+
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var name = context.Request["name"];
+            var desp = context.Request["desp"];
+
+            var ds = new DataSet();
+            var classBll = new BLL.Class();
+            var studentId = context.Request["studentId"];
+
+            if (!string.IsNullOrEmpty(studentId))
+            {
+                var num = classBll.GetRecordCountByStudentId(studentId, name, desp);
+
+                ds = classBll.GetClassInfoByStudentId(studentId, name, desp, startIndex, endIndex);
+
+                str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            }
+
+            return str;
         }
 
         private string GetData(HttpContext context)
@@ -69,133 +103,79 @@ namespace TrainerEvaluate.Web
             return str;
         }
 
-
-
-        private void Query(HttpContext context)
+        private string GetForStudentYet(HttpContext context)
         {
-            var name = context.Request["name"].Trim();
-            var desp = context.Request["desp"].Trim();
             var ds = new DataSet();
-            var sdBll = new BLL.SPSchoolDistrict();
-            var strWhere = "";
-            if (!string.IsNullOrEmpty(name))
-            {
-                strWhere = string.Format(" SchDisName like '%" + name + "%' ");
-            }
-            if (!string.IsNullOrEmpty(desp))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Description like '%" + desp + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + desp + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere = string.Format(" Status = 1 ");
-            }
+            var dsBll = new BLL.NetEnterStudent();
 
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
-            var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "SchDisName" : context.Request["sort"];
-            var order = string.IsNullOrEmpty(context.Request["order"]) ? "asc" : context.Request["order"];
+            var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "LastUpdateTime" : context.Request["sort"];
+            var order = string.IsNullOrEmpty(context.Request["order"]) ? "desc" : context.Request["order"];
+
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = sdBll.GetRecordCount(strWhere);
-            ds = sdBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
+            var name = context.Request["name"];
+            var desp = context.Request["desp"];
+            var studentId = context.Request["studentId"];
 
+            var num = dsBll.GetNetStudentYetCount(studentId, name, desp);
+            ds = dsBll.GetNetStudentYet(studentId, name, desp, startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
-            context.Response.Write(str);
+            return str;
         }
 
-
-
-        private DataSet QueryDataResultForExp(HttpContext context)
+        private string GetForStudentEve(HttpContext context)
         {
-            var name = context.Request["name"].Trim();
-            var desp = context.Request["desp"].Trim();
             var ds = new DataSet();
-            var sdBll = new BLL.SPSchoolDistrict();
-            var strWhere = "";
-            if (!string.IsNullOrEmpty(name))
-            {
-                strWhere = string.Format(" SchDisName like '%" + name + "%' ");
-            }
-            if (!string.IsNullOrEmpty(desp))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Description like '%" + desp + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + desp + "%' ");
-                }
-            }
+            var dsBll = new BLL.NetEnterStudent();
 
-            if (!string.IsNullOrEmpty(strWhere))
-            {
-                strWhere += string.Format(" and  Status = 1 ");
-            }
-            else
-            {
-                strWhere = string.Format(" Status = 1 ");
-            }
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
 
-            ds = sdBll.GetDataForExport(strWhere);
-            return ds;
+            var name = context.Request["name"];
+            var desp = context.Request["desp"];
+            var studentId = context.Request["studentId"];
+
+            var num = dsBll.GetNetStudentEveCount(studentId, name, desp);
+            ds = dsBll.GetNetStudentEve(studentId, name, desp, startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
         }
 
-        private void AddData(HttpContext context)
+        /// <summary>
+        /// 报名
+        /// </summary>
+        /// <param name="context"></param>
+        private void SaveNetFor(HttpContext context)
         {
-            var sdModel = new Models.SPSchoolDistrict();
-            sdModel.SchDisId = Guid.NewGuid();
-            SetModelValue(sdModel, context);
-            sdModel.CreatedDate = DateTime.Now;
-            sdModel.LastModifyTime = DateTime.Now;
-            sdModel.Status = 1;
-            var sdBll = new BLL.SPSchoolDistrict();
             var result = false;
             var msg = "";
             try
             {
-                result = sdBll.Add(sdModel);
+                var stuModel = new Models.NetEnterStudent();
+                stuModel.StudentId = Guid.NewGuid();
 
-                if (!result)
-                {
-                    msg = "保存失败！";
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.WriteLogofExceptioin(ex);
-                result = false;
-                msg = ex.Message;
-            }
+                stuModel.StudentId = Guid.Parse(context.Request["userid"]);
+                stuModel.StuName = context.Request["username"];
+                stuModel.NetEnteryId = Guid.Parse(context.Request["trainid"]);
+                stuModel.NetEnterName = context.Request["trainname"];
+                stuModel.CreateId = stuModel.StudentId.ToString();
+                stuModel.CreateName = stuModel.StuName;
+                stuModel.CreateTime = DateTime.Now;
+                stuModel.LastUpdateTime = DateTime.Now;
+                stuModel.IsDelete = false;
 
-            context.Response.Write(msg);
-        }
+                var stuBll = new BLL.NetEnterStudent();
+                result = stuBll.Add(stuModel);
 
-        private void EditData(string id, HttpContext context)
-        {
-            var sdBll = new BLL.SPSchoolDistrict();
-            var sdModel = sdBll.GetModel(new Guid(id));
-            sdModel.LastModifyTime = DateTime.Now;
-            var result = false;
-            var msg = "";
-            try
-            {
-                SetModelValue(sdModel, context);
-                result = sdBll.Update(sdModel);
+                // 更新培训班的人数
+                var sbll = new BLL.NetEnterFor();
+                sbll.EditEnterForNum(stuModel.NetEnteryId);
+
                 if (!result)
                 {
                     msg = "保存失败！";
@@ -208,27 +188,34 @@ namespace TrainerEvaluate.Web
                 msg = ex.Message;
 
             }
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
 
-        private void SetModelValue(Models.SPSchoolDistrict teaModel, HttpContext context)
-        {
-            teaModel.SchDisName = context.Request["SchDisName"];
-            teaModel.Description = context.Request["Description"];
-        }
 
-        private void DelData(string id, HttpContext context)
+        /// <summary>
+        /// 取消报名
+        /// </summary>
+        /// <param name="context"></param>
+        private void SaveNetCancel(HttpContext context)
         {
-            var sdBll = new BLL.SPSchoolDistrict();
             var result = false;
             var msg = "";
             try
             {
-                result = sdBll.Delete(new Guid(id));
+                var userid = context.Request["userid"];
+                var netid = context.Request["trainid"];
+                // 取消报名，删除报名的记录
+                var stuBll = new BLL.NetEnterStudent();
+                result = stuBll.CancelEnterFor(userid, netid);
+
+                // 取消报名更新培训班的报名人数
+                var sbll = new BLL.NetEnterFor();
+                sbll.EditCancelNum(netid);
 
                 if (!result)
                 {
-                    msg = "删除失败！";
+                    msg = "保存失败！";
                 }
             }
             catch (Exception ex)
@@ -236,7 +223,9 @@ namespace TrainerEvaluate.Web
                 LogHelper.WriteLogofExceptioin(ex);
                 result = false;
                 msg = ex.Message;
+
             }
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
     }

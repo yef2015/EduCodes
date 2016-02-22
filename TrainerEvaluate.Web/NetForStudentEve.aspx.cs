@@ -13,5 +13,15 @@ namespace TrainerEvaluate.Web
         {
 
         }
+
+        public string UserId
+        {
+            get { return Profile.CurrentUser.UserId.ToString(); }
+        }
+
+        public string UserName
+        {
+            get { return Profile.CurrentUser.UserName; }
+        }
     }
 }
