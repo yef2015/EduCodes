@@ -229,8 +229,12 @@
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <input name="TeachNo" id="TeachNo" class="easyui-textbox" required="true" />
                 </td>
-                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25"></td>
-                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"></td>
+                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center" id="pwdLabel">重置密码：</div>
+                </td>
+                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                    <input type="checkbox" name="chkSetPwd" id="chkSetPwd" value="SetPwd" />
+                </td>
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
@@ -438,8 +442,12 @@
 
     <script type="text/javascript">
         var url = 'StudentsInfo.ashx';
-        function newUser() {
+        function newUser() {           
             $('#dlg').dialog('open').dialog('setTitle', '新增学员信息');
+
+            document.getElementById("pwdLabel").style.display = "none";
+            document.getElementById("chkSetPwd").style.display = "none";
+
             $('#School').combobox("setText", "");
             $('#JobTitle').combobox("setValue", "");
             $('#IdentityNo').textbox("setText", "");
@@ -467,6 +475,11 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg').dialog('open').dialog('setTitle', '编辑学员信息');
+
+                document.getElementById("pwdLabel").style.display = "block";
+                document.getElementById("chkSetPwd").style.display = "block";
+                $("[name='chkSetPwd']").removeAttr("checked"); // 取消选中  
+
                 $('#School').combobox("setText", row.School);
                 if (row.JobTitle != 0) {
                     // 职称
@@ -568,6 +581,12 @@
         }
 
         function saveUser() {
+            // 是否重置密码
+            var IsSetPwd = "no";
+            if ($('#chkSetPwd').is(':checked'))
+            {
+                IsSetPwd = "yes";
+            }
             var data = {
                 StuName: $('#StuName').textbox("getText"),
                 Gender: $('#Gender').combobox("getValue"),
@@ -590,7 +609,8 @@
                 Description: $('#Description').textbox("getText"),
                 TeachNo: $('#TeachNo').textbox("getText"),
                 PostOptName: $('#PostOptName ').combobox("getText"),
-                PostOptId: $('#PostOptName ').combobox("getValue")
+                PostOptId: $('#PostOptName ').combobox("getValue"),
+                SetPwd: IsSetPwd
             };
             if (data.StuName == "") {
                 messageAlert('提示', "请填写姓名", 'warning');

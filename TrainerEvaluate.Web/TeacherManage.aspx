@@ -127,6 +127,12 @@
                 <label>描述：</label>
                 <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 80px;width:280px;">
             </div>
+            <div class="fitem">
+                <span id="pwdLabel" style="height:25px;float:left;">重置密码：</span>
+                <span style="float:left;">
+                    <input type="checkbox" name="chkSetPwd" id="chkSetPwd" value="SetPwd" />
+                </span>
+            </div>
         </form>
     </div>
     <div id="dlg-buttons">
@@ -250,6 +256,8 @@
         function newUser() {
             $('#dlg').dialog('open').dialog('setTitle', '新增');
             // $('#fm').form('clear');
+            document.getElementById("pwdLabel").style.display = "none";
+            document.getElementById("chkSetPwd").style.display = "none";
 
             $('#TeacherName').textbox("setText", "");
             $('#IdentityNo').textbox("setText", "");
@@ -270,6 +278,9 @@
             if (row) {
                 $('#dlg').dialog('open').dialog('setTitle', '编辑');
                 //  $('#fm').form('load', row);
+                document.getElementById("pwdLabel").style.display = "block";
+                document.getElementById("chkSetPwd").style.display = "block";
+                $("[name='chkSetPwd']").removeAttr("checked"); // 取消选中  
 
                 $('#TeacherName').textbox("setText", row.TeacherName);
                 $('#IdentityNo').textbox("setText", row.IdentityNo);
@@ -308,6 +319,12 @@
         }
 
         function saveUser() {
+            // 是否重置密码
+            var IsSetPwd = "no";
+            if ($('#chkSetPwd').is(':checked')) {
+                IsSetPwd = "yes";
+            }
+
             var data = {
                 TeacherName: $('#TeacherName').textbox("getText"),
                 Gender: $('#Gender').combobox("getValue"),
@@ -318,7 +335,8 @@
                 Research: $('#Research').textbox("getText"),
                 ResearchBigName: $('#ResearchBigName').textbox("getText"),
                 Mobile: $('#Mobile').textbox("getText"),
-                Description: $('#Description').textbox("getText")
+                Description: $('#Description').textbox("getText"),
+                SetPwd: IsSetPwd
             };
             if (data.TeacherName == "") {
                 messageAlert('提示', "请填写姓名", 'warning');

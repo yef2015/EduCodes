@@ -693,13 +693,17 @@ namespace TrainerEvaluate.Web
             try
             { 
                 SetModelValue(stuModel,context);
-
+                var isSet = context.Request["SetPwd"];
                 var sysuserbll = new BLL.SysUser();
                 var sysUserMo = sysuserbll.GetModel(stuModel.StudentId);
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
                 sysUserMo.CreateTime = System.DateTime.Now;
+                if (isSet == "yes")
+                {
+                    sysUserMo.UserPassWord = "000000";
+                }
 
                 sysuserbll.Update(sysUserMo);
 

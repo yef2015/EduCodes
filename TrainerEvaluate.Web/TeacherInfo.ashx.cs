@@ -541,12 +541,17 @@ namespace TrainerEvaluate.Web
             {
                 SetModelValue(teaModel, context);
 
+                var isSet = context.Request["SetPwd"];
                 var sysuserbll = new BLL.SysUser();
                 var sysUserMo = sysuserbll.GetModel(new Guid(id));
                 sysUserMo.UserName = teaModel.TeacherName;
                 sysUserMo.UserId = teaModel.TeacherId;
                 sysUserMo.IdentityNo = teaModel.IdentityNo;
                 sysUserMo.CreateTime = System.DateTime.Now;
+                if (isSet == "yes")
+                {
+                    sysUserMo.UserPassWord = "000000";
+                }
 
                 sysuserbll.Update(sysUserMo);
 
