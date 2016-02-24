@@ -830,28 +830,29 @@ namespace TrainerEvaluate.BLL
                 cell26.SetCellValue(trainTime);
                 SetCellRangeAddress(sheet1, 2, 2, 3, 5);
 
-
-                 IRow row3 = sheet1.CreateRow(3);
-                ICell cell31 = row3.CreateCell(0);
-                cell31.CellStyle = cellstyleConTitle;
-                cell31.SetCellValue("应评人数"); 
-                ICell cell32 = row3.CreateCell(1);
-                cell32.CellStyle = cellstyleContent;
-                cell32.SetCellValue(datarow["totalNum"].ToString()+"人"); 
-                ICell cell33 = row3.CreateCell(2);
-                cell33.CellStyle = cellstyleConTitle;
-                cell33.SetCellValue("实评人数"); 
-                ICell cell34 = row3.CreateCell(3);
-                cell34.CellStyle = cellstyleContent;
-                cell34.SetCellValue(datarow["totalDone"].ToString() + "人"); 
-                ICell cell35 = row3.CreateCell(4);
-                cell35.CellStyle = cellstyleContent;
-                cell35.SetCellValue(datarow["totalDone"].ToString() + "人"); 
-                ICell cell36 = row3.CreateCell(5);
-                cell36.CellStyle = cellstyleContent;
-                cell36.SetCellValue(datarow["totalDone"].ToString() + "人"); 
-                SetCellRangeAddress(sheet1, 3, 3, 3, 5);
-
+                var statifyPercent = question.GetSatisfyPercent(courseId, classid);
+                if (statifyPercent != null)
+                {
+                    IRow row3 = sheet1.CreateRow(3);
+                    ICell cell31 = row3.CreateCell(0);
+                    cell31.CellStyle = cellstyleConTitle;
+                    cell31.SetCellValue("应评人数");
+                    ICell cell32 = row3.CreateCell(1);
+                    cell32.CellStyle = cellstyleContent;
+                    cell32.SetCellValue(statifyPercent[6].ToString() + "人");
+                    ICell cell33 = row3.CreateCell(2);
+                    cell33.CellStyle = cellstyleConTitle;
+                    cell33.SetCellValue("实评人数");
+                    ICell cell34 = row3.CreateCell(3);
+                    cell34.CellStyle = cellstyleContent;
+                    cell34.SetCellValue(statifyPercent[7].ToString() + "人");
+                    ICell cell35 = row3.CreateCell(4);
+                    cell35.CellStyle = cellstyleConTitle;
+                    cell35.SetCellValue("评估进度");
+                    ICell cell36 = row3.CreateCell(5);
+                    cell36.CellStyle = cellstyleContent;
+                    cell36.SetCellValue(string.Format("{0:N2}%", ((statifyPercent[7] / statifyPercent[6]) * 100)));
+                }
 
                 IRow row4 = sheet1.CreateRow(4);
                 ICell cell41 = row4.CreateCell(0);
@@ -872,7 +873,6 @@ namespace TrainerEvaluate.BLL
                 ICell cell46 = row4.CreateCell(5);
                 cell46.CellStyle = cellstyleContent;
                 cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
-                SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
                 var resultTotalReport = question.GetTotalReportByClassIdAndCourseId(classid,courseId.ToString());
                 if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
@@ -1396,26 +1396,29 @@ namespace TrainerEvaluate.BLL
                        SetCellRangeAddress(sheet1, 2, 2, 3, 5);
 
 
-                       IRow row3 = sheet1.CreateRow(3);
-                       ICell cell31 = row3.CreateCell(0);
-                       cell31.CellStyle = cellstyleConTitle;
-                       cell31.SetCellValue("应评人数");
-                       ICell cell32 = row3.CreateCell(1);
-                       cell32.CellStyle = cellstyleContent;
-                       cell32.SetCellValue(datarow["totalNum"].ToString() + "人");
-                       ICell cell33 = row3.CreateCell(2);
-                       cell33.CellStyle = cellstyleConTitle;
-                       cell33.SetCellValue("实评人数");
-                       ICell cell34 = row3.CreateCell(3);
-                       cell34.CellStyle = cellstyleContent;
-                       cell34.SetCellValue(datarow["totalDone"].ToString() + "人");
-                       ICell cell35 = row3.CreateCell(4);
-                       cell35.CellStyle = cellstyleContent;
-                       cell35.SetCellValue(datarow["totalDone"].ToString() + "人");
-                       ICell cell36 = row3.CreateCell(5);
-                       cell36.CellStyle = cellstyleContent;
-                       cell36.SetCellValue(datarow["totalDone"].ToString() + "人");
-                       SetCellRangeAddress(sheet1, 3, 3, 3, 5);
+                       var statifyPercent = question.GetSatisfyPercent(model.CourseId, classid);
+                       if (statifyPercent != null)
+                       {
+                           IRow row3 = sheet1.CreateRow(3);
+                           ICell cell31 = row3.CreateCell(0);
+                           cell31.CellStyle = cellstyleConTitle;
+                           cell31.SetCellValue("应评人数");
+                           ICell cell32 = row3.CreateCell(1);
+                           cell32.CellStyle = cellstyleContent;
+                           cell32.SetCellValue(statifyPercent[6].ToString() + "人");
+                           ICell cell33 = row3.CreateCell(2);
+                           cell33.CellStyle = cellstyleConTitle;
+                           cell33.SetCellValue("实评人数");
+                           ICell cell34 = row3.CreateCell(3);
+                           cell34.CellStyle = cellstyleContent;
+                           cell34.SetCellValue(statifyPercent[7].ToString() + "人");
+                           ICell cell35 = row3.CreateCell(4);
+                           cell35.CellStyle = cellstyleConTitle;
+                           cell35.SetCellValue("评估进度");
+                           ICell cell36 = row3.CreateCell(5);
+                           cell36.CellStyle = cellstyleContent;
+                           cell36.SetCellValue(string.Format("{0:N2}%", ((statifyPercent[7] / statifyPercent[6]) * 100)));
+                       }
 
                        IRow row4 = sheet1.CreateRow(4);
                        ICell cell41 = row4.CreateCell(0);
@@ -1436,7 +1439,6 @@ namespace TrainerEvaluate.BLL
                        ICell cell46 = row4.CreateCell(5);
                        cell46.CellStyle = cellstyleContent;
                        cell46.SetCellValue(question.GetLevel(Convert.ToDouble(datarow["Satisfy"])));
-                       SetCellRangeAddress(sheet1, 4, 4, 3, 5);
 
                        var resultTotalReport = question.GetTotalReportByClassIdAndCourseId(classid, model.CourseId.ToString());
                        if (resultTotalReport != null && resultTotalReport.Rows.Count > 0)
