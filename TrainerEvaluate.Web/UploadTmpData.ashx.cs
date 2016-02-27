@@ -188,7 +188,7 @@ namespace TrainerEvaluate.Web
                                 sqllist.Add(
                                     string.Format(
                                         " update SchoolDistrict set SchDisName='{0}',Description='{1}',LastModifyTime=GETDATE()" +
-                                        " where SchDisName='{0}' ", row["SchDisName"].ToString().Trim(), Description));
+                                        " where SchDisName='{0}' and Status = 1 ", row["SchDisName"].ToString().Trim(), Description));
 
                                 dt.Rows.Remove(row1[0]);
                                 dt.AcceptChanges();
@@ -244,7 +244,7 @@ namespace TrainerEvaluate.Web
                     }
                 }
 
-                var sql = string.Format(" select  SchDisName  from SchoolDistrict where SchDisName in ({0}) ",
+                var sql = string.Format(" select  SchDisName  from SchoolDistrict where Status = 1 and SchDisName in ({0}) ",
                     sb1.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
@@ -334,7 +334,7 @@ namespace TrainerEvaluate.Web
                                         "StudentNum='{8}',TeacherNum='{9}',PartyNum='{10}'," +
                                         "LegalName='{11}',LinkTel='{12}'," +
                                         "Description='{13}',SchDisId='{14}',LastModifyTime=GETDATE()" +
-                                        " where SchoolName='{0}' ", row1[0]["名称"].ToString().Trim(),
+                                        " where SchoolName='{0}' and Status = 1 ", row1[0]["名称"].ToString().Trim(),
                                         row1[0]["所属学区"].ToString().Trim(), BLL.Common.GetDicValuefromName(row1[0]["办学性质"].ToString().Trim()),
                                          row1[0]["办学性质"].ToString().Trim(), BLL.Common.GetDicValuefromName(row1[0]["学校类型"].ToString().Trim()),
                                         row1[0]["学校类型"].ToString().Trim(), row1[0]["校址数"].ToString().Trim(),
@@ -409,7 +409,7 @@ namespace TrainerEvaluate.Web
                     }
                 }
 
-                var sql = string.Format(" select  SchoolName  from School where SchoolName in ({0}) ",
+                var sql = string.Format(" select  SchoolName  from School where Status = 1 and SchoolName in ({0}) ",
                     sb1.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
@@ -596,7 +596,7 @@ namespace TrainerEvaluate.Web
             if (dt != null && dt.Rows.Count > 0)
             {
                 // 班级现有人数
-                string sqlStu = "select b.IdentityNo,b.StuName from ClassStudents  a left join Student b on b.StudentId = a.StudentId where a.ClassId = '"+classId+"'";
+                string sqlStu = "select b.IdentityNo,b.StuName from ClassStudents  a left join Student b on b.StudentId = a.StudentId where a.ClassId = '" + classId + "' and b.Status = 1 ";
                 var dtCurStu = DbHelperSQL.Query(sqlStu);
                 var curCount = 0;
                 if (dtCurStu != null && dtCurStu.Tables.Count > 0 && dtCurStu.Tables[0].Rows.Count > 0)
@@ -793,7 +793,7 @@ namespace TrainerEvaluate.Web
                                 sqllist.Add(
                                     string.Format(
                                         " update Course set CourseName='{0}',TeachPlace='{1}',Type={2},Description='{3}',LastModifyTime=GETDATE()" +
-                                        " where CourseName='{0}'", row1[0]["课程名称"].ToString().Trim(), row1[0]["授课地点"].ToString().Trim(),
+                                        " where CourseName='{0}' and Status = 1 ", row1[0]["课程名称"].ToString().Trim(), row1[0]["授课地点"].ToString().Trim(),
                                        BLL.Common.GetDicValuefromName(row1[0]["课程类型"].ToString().Trim()),row1[0]["描述"].ToString().Trim()));
 
                                 dt.Rows.Remove(row1[0]);
@@ -877,7 +877,7 @@ namespace TrainerEvaluate.Web
 
                 //var sql = string.Format(" select CourseName,TeachTime   from Course where CourseName in ({0}) and TeachTime in({1})   ",
                 //    sb1.ToString(), sb2.ToString());
-                var sql = string.Format(" select CourseName  from Course where CourseName in ({0})  ", sb1.ToString());
+                var sql = string.Format(" select CourseName  from Course where CourseName in ({0}) and Status = 1 ", sb1.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
                 if (dtresult != null && dtresult.Tables.Count > 0 && dtresult.Tables[0].Rows.Count > 0) //有重复数据要提醒
@@ -967,7 +967,7 @@ namespace TrainerEvaluate.Web
                                     string.Format(
                                         " update Teacher set TeacherName='{0}',IdentityNo='{1}',Gender={2},Dept='{3}',Title='{4}'," +
                                         " Post = '{5}',Research = '{6}',Mobile = '{7}',Description = '{8}',LastModifyTime=GETDATE()" +
-                                        " where TeacherName='{0}' and IdentityNo='{1}'",
+                                        " where TeacherName='{0}' and IdentityNo='{1}' and Status = 1 ",
                                         row["TeacherName"].ToString().Trim(), row1[0]["身份证号"].ToString(),
                                         BLL.Common.GetDicValuefromName(row1[0]["性别"].ToString().Trim()),
                                         row1[0]["所在单位"].ToString().Trim(),
@@ -1064,7 +1064,7 @@ namespace TrainerEvaluate.Web
                     }
                 }
 
-                var sql = string.Format(" select  TeacherName,IdentityNo  from Teacher where TeacherName in ({0}) and IdentityNo in({1})   ",
+                var sql = string.Format(" select TeacherName,IdentityNo  from Teacher where TeacherName in ({0}) and IdentityNo in({1}) and Status = 1 ",
                     sb1.ToString(), sb2.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
@@ -1108,7 +1108,7 @@ namespace TrainerEvaluate.Web
                             i++;
 
                             sqllist.Add(string.Format(
-                                "insert into   Teacher (Status,TeacherId, IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Post, Research, Mobile, Description) values" +
+                                "insert into Teacher (Status,TeacherId, IdentityNo,TeacherName,Gender,Title,Dept,CreateTime,LastModifyTime, Post, Research, Mobile, Description) values" +
                                 "  (1,'{9}','{0}','{1}',{2},{3},'{4}',GETDATE(),GETDATE(), '{5}', '{6}','{7}', '{8}')", row["身份证号"].ToString().Trim(),
                                 row["姓名"].ToString().Trim(), BLL.Common.GetDicValuefromName(row["性别"].ToString().Trim()), BLL.Common.GetDicValuefromName(row["职称"].ToString().Trim()), row["所在单位"].ToString().Trim(), row["职务"].ToString().Trim(),
                                row["研究方向"].ToString().Trim(), row["手机号"].ToString().Trim(), row["描述"].ToString().Trim(), uid));
@@ -1183,7 +1183,7 @@ namespace TrainerEvaluate.Web
                                         "PoliticsStatus='{12}',Rank='{13}',RankTime='{14}'," +
                                         "Post='{15}',PostTime='{16}',Mobile='{17}'," +
                                         "TeachNo='{18}',Description='{19}',LastModifyTime=GETDATE() " +
-                                        " where StuName='{0}' and TelNo='{5}'",
+                                        " where StuName='{0}' and TelNo='{5}' and Status = 1 ",
                                         row1[0]["姓名"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["性别"].ToString().Trim()), row1[0]["身份证号"].ToString(),
                                         row1[0]["所在学校"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["职称"].ToString().Trim()), row1[0]["联系电话"].ToString(),
                                         row1[0]["出生日期"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["民族"].ToString().Trim()), row1[0]["全日制学历"].ToString(),
@@ -1193,7 +1193,7 @@ namespace TrainerEvaluate.Web
                                         row1[0]["继教号"].ToString(), row1[0]["描述"].ToString()));
 
                                 sqllist.Add(string.Format(" update SysUser set IdentityNo='{0}' where UserId in" +
-                                    " (select StudentId from Student  where StuName='{1}' and TelNo='{2}' )",
+                                    " (select StudentId from Student  where StuName='{1}' and TelNo='{2}' and Status = 1 )",
                                     row1[0]["身份证号"].ToString(), row1[0]["姓名"].ToString(), row1[0]["联系电话"].ToString()));
 
                                 dt.Rows.Remove(row1[0]);
@@ -1292,7 +1292,7 @@ namespace TrainerEvaluate.Web
                     }
                 }
 
-                var sql = string.Format(" select StuName,TelNo   from Student where StuName in ({0}) and TelNo in({1})   ",
+                var sql = string.Format(" select StuName,TelNo from Student where Status = 1 and StuName in ({0}) and TelNo in({1})   ",
                     sb1.ToString(), sb2.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
