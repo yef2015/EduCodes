@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TrainerEvaluate.Web
 {
-    public partial class Manage : System.Web.UI.Page
+    public partial class Manage : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

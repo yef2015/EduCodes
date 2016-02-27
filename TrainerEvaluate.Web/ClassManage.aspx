@@ -148,7 +148,7 @@
                             <th data-options="field:'ck',checkbox:true"></th>
                             <th data-options="field:'StudentId'" hidden="true">StudentId</th>
                             <th data-options="field:'StuName'">姓名</th>
-                            <th data-options="field:'LastSchool'">所在单位</th>
+                            <th data-options="field:'School'">所在学校</th>
                         </tr>
                     </thead>
                 </table>

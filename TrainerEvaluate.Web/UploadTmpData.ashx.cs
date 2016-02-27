@@ -547,7 +547,7 @@ namespace TrainerEvaluate.Web
                                                        "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
                                                        "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
                                                         uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
-                                                         row["身份证号"].ToString().Trim(), row["所在单位"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
+                                                         row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                          row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                          row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                          row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
@@ -1185,7 +1185,7 @@ namespace TrainerEvaluate.Web
                                         "TeachNo='{18}',Description='{19}',LastModifyTime=GETDATE() " +
                                         " where StuName='{0}' and TelNo='{5}'",
                                         row1[0]["姓名"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["性别"].ToString().Trim()), row1[0]["身份证号"].ToString(),
-                                        row1[0]["所在单位"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["职称"].ToString().Trim()), row1[0]["联系电话"].ToString(),
+                                        row1[0]["所在学校"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["职称"].ToString().Trim()), row1[0]["联系电话"].ToString(),
                                         row1[0]["出生日期"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["民族"].ToString().Trim()), row1[0]["全日制学历"].ToString(),
                                         row1[0]["全日制学校"].ToString(), row1[0]["在职学历"].ToString(), row1[0]["在职学校"].ToString(),
                                         BLL.Common.GetDicIDfromName(row1[0]["政治面貌"].ToString().Trim()), row1[0]["现任级别"].ToString(), row1[0]["任现任级别时间"].ToString(),
@@ -1222,7 +1222,7 @@ namespace TrainerEvaluate.Web
                                                    "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
                                                    "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
                                                     uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
-                                                     row["身份证号"].ToString().Trim(), row["所在单位"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
+                                                     row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                      row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                      row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                      row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
@@ -1341,7 +1341,7 @@ namespace TrainerEvaluate.Web
                                                        "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
                                                        "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
                                                         uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
-                                                         row["身份证号"].ToString().Trim(), row["所在单位"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
+                                                         row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                          row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                          row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                          row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),

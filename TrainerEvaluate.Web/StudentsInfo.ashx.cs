@@ -606,7 +606,7 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("姓名");
             fieldsNames.Add("性别");
             fieldsNames.Add("身份证号");
-            fieldsNames.Add("所在单位");
+            fieldsNames.Add("所在学校");
             fieldsNames.Add("职称");
             fieldsNames.Add("联系电话");
             fieldsNames.Add("出生日期");
