@@ -79,7 +79,7 @@
                 </tr>
             </table>            
     </div>
-    <div style="text-align:center;margin-top:10px;">
+    <div style="text-align:center;margin-top:10px;display:none;">
         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="editUser()" style="width: 120px">编辑个人信息</a>
     </div>
 
