@@ -158,6 +158,11 @@ namespace TrainerEvaluate.BLL
             return dal.GetListByPage(strWhere, sort, startIndex, endIndex, order);
         }
 
+        public DataSet GetStudentInfo(string strWhere, string sort, int startIndex, int endIndex, string order)
+        {
+            return dal.GetStudentInfo(strWhere, sort, startIndex, endIndex, order);
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

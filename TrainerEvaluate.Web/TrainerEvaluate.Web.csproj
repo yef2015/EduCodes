@@ -152,6 +152,8 @@
     <Content Include="NetForStudentJoin.aspx" />
     <Content Include="NetForStudentYet.aspx" />
     <Content Include="PersonalInfo.aspx" />
+    <Content Include="PersonalInfoStudent.aspx" />
+    <Content Include="PersonalInfoTeacher.aspx" />
     <Content Include="QuestionnaireManage.aspx" />
     <Content Include="QuestionnairManageShow.aspx" />
     <Content Include="QuestionnairTreeContent.aspx" />
@@ -684,6 +686,20 @@
     </Compile>
     <Compile Include="PersonalInfo.aspx.designer.cs">
       <DependentUpon>PersonalInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalInfoStudent.aspx.cs">
+      <DependentUpon>PersonalInfoStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonalInfoStudent.aspx.designer.cs">
+      <DependentUpon>PersonalInfoStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalInfoTeacher.aspx.cs">
+      <DependentUpon>PersonalInfoTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonalInfoTeacher.aspx.designer.cs">
+      <DependentUpon>PersonalInfoTeacher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionnaireHadler.ashx.cs">

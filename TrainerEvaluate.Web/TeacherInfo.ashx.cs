@@ -20,7 +20,7 @@ namespace TrainerEvaluate.Web
         {
             context.Response.ContentType = "text/plain";
             var opType = context.Request["t"];
-            var id = context.Request["id"]; 
+            var id = context.Request["id"];
             switch (opType)
             {
                 case "n":
@@ -43,20 +43,27 @@ namespace TrainerEvaluate.Web
                     break;
                 case "s":
                     SaveCourseTeacher(context);
-                    break;     
+                    break;
                 case "ct":
                     SaveClassTeacher(context);
                     break;
                 case "ex":
                     ExportTeacherInfo(context);
-                    break;   
+                    break;
                 case "gt":  //提取项目负责人信息
                     GetPrjChargeInfoClass(context);
                     break;
                 case "pah":
                     var strph = GetPersonArchive(context);
                     context.Response.Write(strph);
-                    break; 
+                    break;
+                case "ptinf":
+                    var strinfo = GetPersonTeacherInfo(context);
+                    context.Response.Write(strinfo);
+                    break;
+                case "etinf":
+                    EditDataPerson(id, context);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -251,7 +258,7 @@ namespace TrainerEvaluate.Web
             var teaBll = new BLL.Teacher();
             var teacherbll = new BLL.Teacher();
             var num = teacherbll.GetRecordCount("Status=1");
-            ds = teacherbll.GetClassTeacherListByPage(classId, "ck", startIndex, endIndex); 
+            ds = teacherbll.GetClassTeacherListByPage(classId, "ck", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
@@ -269,7 +276,7 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var  sysUserBll = new BLL.SysUser();
+            var sysUserBll = new BLL.SysUser();
             var num = sysUserBll.GetRecordCount(" UserRole =3 and Status = 1 "
                         + " and UserId in(select a.UserId from dbo.SysRoleUser a "
                         + " left join Roles b on a.RoleId = b.ID "
@@ -289,8 +296,8 @@ namespace TrainerEvaluate.Web
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
             var startIndex = (page - 1) * rows + 1;
-            var endIndex = startIndex + rows - 1; 
-     
+            var endIndex = startIndex + rows - 1;
+
             var teacherbll = new BLL.Teacher();
             var num = teacherbll.GetRecordCount("Status=1");
             //  ds = questionbll.GetCourseStudentState(courseId);
@@ -574,7 +581,44 @@ namespace TrainerEvaluate.Web
             context.Response.Write(msg);
         }
 
+        private void EditDataPerson(string id, HttpContext context)
+        {
+            var teaBll = new BLL.Teacher();
+            var teaModel = teaBll.GetModel(new Guid(id));
+            teaModel.LastModifyTime = DateTime.Now;
+            var result = false;
+            var msg = "";
+            try
+            {
+                SetModelValue(teaModel, context);
 
+                var sysuserbll = new BLL.SysUser();
+                var sysUserMo = sysuserbll.GetModel(new Guid(id));
+                sysUserMo.UserName = teaModel.TeacherName;
+                sysUserMo.UserId = teaModel.TeacherId;
+                sysUserMo.IdentityNo = teaModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
+                sysUserMo.UserPassWord = context.Request["UserPassWord"];
+
+                sysuserbll.Update(sysUserMo);
+
+                result = teaBll.Update(teaModel);
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            }
+
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            context.Response.Write(msg);
+        }
 
 
         private void SetModelValue(Models.Teacher teaModel, HttpContext context)
@@ -582,7 +626,7 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["Gender"]))
             {
                 teaModel.Gender = Convert.ToInt32(context.Request["Gender"]);
-            } 
+            }
             if (!string.IsNullOrEmpty(context.Request["Title"]))
             {
                 teaModel.Title = Convert.ToInt32(context.Request["Title"]);
@@ -642,6 +686,22 @@ namespace TrainerEvaluate.Web
             }
             return str;
         }
-       
+
+        private string GetPersonTeacherInfo(HttpContext context)
+        {
+            var ds = new DataSet();
+            var teaBll = new BLL.Teacher();
+
+            var teaId = context.Request["uid"];
+
+            ds = teaBll.GetPersonTeacherInfo(" Status = 1   and TeacherId = '" + teaId + "' ", "TeacherName", 1, 5, "asc");
+            var str = string.Empty;
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                str = JsonConvert.SerializeObject(new { rows = ds.Tables[0] });
+            }
+            return str;
+        }
     }
 }

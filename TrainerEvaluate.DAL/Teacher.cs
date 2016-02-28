@@ -400,6 +400,33 @@ namespace TrainerEvaluate.DAL
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 
+        public DataSet GetPersonTeacherInfo(string strWhere, string sort, int startIndex, int endIndex, string order)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(sort.Trim()))
+            {
+                strSql.Append("order by T." + sort + " " + order);
+            }
+            else
+            {
+                strSql.Append("order by T.TeacherName asc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.*,b.Name as GenderName,c.Name as JobTitleName,");
+            strSql.Append(" (select UserPassWord from SysUser where UserId = a.TeacherId) as UserPassWord ");
+            strSql.Append(" from  Teacher a left join   Dictionaries b  on a.Gender=b.ID  left join Dictionaries c on a.Title=c.ID where a.Status=1  ) ");
+            strSql.Append(" T ");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" WHERE " + strWhere);
+            }
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
 		/*
 		/// <summary>
 		/// 分页获取数据列表

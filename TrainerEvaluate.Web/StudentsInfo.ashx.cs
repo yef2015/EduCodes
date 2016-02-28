@@ -16,48 +16,55 @@ namespace TrainerEvaluate.Web
     public class StudentsInfo : IHttpHandler, IRequiresSessionState
     {
 
-          public void ProcessRequest(HttpContext context)
+        public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             var opType = context.Request["t"];
             var id = context.Request["id"];
             switch (opType)
-            { 
+            {
                 case "n":
                     AddData(context);
-                    break;   
+                    break;
                 case "e":
-                    EditData(id,context);
+                    EditData(id, context);
                     break;
                 case "d":
-                    DelData(id,context);
+                    DelData(id, context);
                     break;
                 case "q":
-                    Query(context); 
-                    break; 
+                    Query(context);
+                    break;
                 case "ex":
-                    ExportStuInfo(context); 
+                    ExportStuInfo(context);
                     break;
                 case "cs":
-                    GetClassStu(context); 
+                    GetClassStu(context);
                     break;
                 case "sc":
-                    SaveClassStuData(context); 
+                    SaveClassStuData(context);
                     break;
                 case "pah":
-                   var strph = GetPersonArchive(context);
+                    var strph = GetPersonArchive(context);
                     context.Response.Write(strph);
+                    break;
+                case "psdif":
+                    var strinfo = GetPersonStudentInfo(context);
+                    context.Response.Write(strinfo);
+                    break;
+                case "esif":
+                    EditDataPerson(id, context);
                     break;
                 case "stree":
                     Guid dui = Guid.Empty;
                     var stree = GetStudentTree();
                     context.Response.Write(stree);
-                    break; 
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
-                    break;  
-            }  
+                    break;
+            }
         }
 
         public bool IsReusable
@@ -84,8 +91,8 @@ namespace TrainerEvaluate.Web
 
             var ds = new DataSet();
             var stuBll = new BLL.Student();
-            var page =Convert.ToInt32(context.Request["page"]) ;
-            var rows =Convert.ToInt32(context.Request["rows"]) ;
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
             var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "StuName" : context.Request["sort"];
             var order = string.IsNullOrEmpty(context.Request["order"]) ? "asc" : context.Request["order"];
 
@@ -94,8 +101,8 @@ namespace TrainerEvaluate.Web
                 sort = "Gender";
             }
 
-            var startIndex = (page - 1)*rows+1;
-            var endIndex = startIndex + rows-1;
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
 
             var num = stuBll.GetRecordCount(strWhere);
             ds = stuBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
@@ -114,12 +121,12 @@ namespace TrainerEvaluate.Web
 
             var stuBll = new BLL.Student();
 
-            var startIndex = (page - 1)*rows + 1;
+            var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
             var num = stuBll.GetRecordCount(" Status=1 ");
             var ds = stuBll.GetClassStuListByPage(coId, "ck", startIndex, endIndex);
-            var str = JsonConvert.SerializeObject(new {total = num, rows = ds.Tables[0]});
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
 
@@ -138,7 +145,7 @@ namespace TrainerEvaluate.Web
             if (context.Session["SchoolName"] != null)
             {
                 schoolname = context.Session["SchoolName"].ToString();
-            }            
+            }
 
             var stuName = string.IsNullOrEmpty(context.Request["name"]) ? "" : context.Request["name"].Trim();
             var school = string.IsNullOrEmpty(context.Request["sch"]) ? "" : context.Request["sch"].Trim();
@@ -146,6 +153,8 @@ namespace TrainerEvaluate.Web
             var telno = string.IsNullOrEmpty(context.Request["telno"]) ? "" : context.Request["telno"].Trim();
             var gender = string.IsNullOrEmpty(context.Request["gender"]) ? "" : context.Request["gender"].Trim();
             var idno = string.IsNullOrEmpty(context.Request["idno"]) ? "" : context.Request["idno"].Trim();
+            var rank = string.IsNullOrEmpty(context.Request["rank"]) ? "" : context.Request["rank"].Trim();
+
             /*
             var birthday = string.IsNullOrEmpty(context.Request["birthday"]) ? "" : context.Request["birthday"].Trim();
             var nation = string.IsNullOrEmpty(context.Request["nation"]) ? "" : context.Request["nation"].Trim();
@@ -184,14 +193,18 @@ namespace TrainerEvaluate.Web
             {
                 strWhere += string.Format(" and  TelNo  like '%" + telno + "%' ");
             }
-            if (!string.IsNullOrEmpty(gender)&& gender!="0")
+            if (!string.IsNullOrEmpty(gender) && gender != "0")
             {
                 strWhere += string.Format(" and  Gender  like '%" + gender + "%' ");
             }
             if (!string.IsNullOrEmpty(idno))
             {
                 strWhere += string.Format(" and  IdentityNo  like '%" + idno + "%' ");
-            }            
+            }
+            if (!string.IsNullOrEmpty(rank))
+            {
+                strWhere += string.Format(" and  Rank  like '%" + rank + "%' ");
+            }
 
             if (schoolname != "all")
             {
@@ -353,7 +366,7 @@ namespace TrainerEvaluate.Web
                 }
             }
              * */
-           
+
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
             var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "StuName" : context.Request["sort"];
@@ -362,13 +375,13 @@ namespace TrainerEvaluate.Web
             {
                 sort = "Gender";
             }
-            var startIndex = (page - 1)*rows + 1;
+            var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
             var num = stuBll.GetRecordCount(strWhere);
-            ds = stuBll.GetListByPage(strWhere, sort, startIndex, endIndex,order); 
+            ds = stuBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
 
-            var str = JsonConvert.SerializeObject(new {total = num, rows = ds.Tables[0]});
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
 
@@ -388,6 +401,8 @@ namespace TrainerEvaluate.Web
             var telno = string.IsNullOrEmpty(context.Request["telno"]) ? "" : context.Request["telno"].Trim();
             var gender = string.IsNullOrEmpty(context.Request["gender"]) ? "" : context.Request["gender"].Trim();
             var idno = string.IsNullOrEmpty(context.Request["idno"]) ? "" : context.Request["idno"].Trim();
+            var rank = string.IsNullOrEmpty(context.Request["rank"]) ? "" : context.Request["rank"].Trim();
+
             /*
             var birthday = string.IsNullOrEmpty(context.Request["birthday"]) ? "" : context.Request["birthday"].Trim();
             var nation = string.IsNullOrEmpty(context.Request["nation"]) ? "" : context.Request["nation"].Trim();
@@ -432,12 +447,17 @@ namespace TrainerEvaluate.Web
             {
                 strWhere += string.Format(" and  IdentityNo  like '%" + idno + "%' ");
             }
+            if (!string.IsNullOrEmpty(rank))
+            {
+                strWhere += string.Format(" and  Rank  like '%" + rank + "%' ");
+            }
+
             if (schoolname != "all")
             {
                 strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
-           
-            
+
+
             /*
             if (!string.IsNullOrEmpty(birthday))
             {
@@ -615,17 +635,17 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("全日制学校");
             fieldsNames.Add("在职学历");
             fieldsNames.Add("在职学校");
-            fieldsNames.Add("政治面貌"); 
+            fieldsNames.Add("政治面貌");
             fieldsNames.Add("现任级别");
             fieldsNames.Add("任现任级别时间");
-            fieldsNames.Add("现任职务"); 
+            fieldsNames.Add("现任职务");
             fieldsNames.Add("任职时间");
-            fieldsNames.Add("手机号"); 
+            fieldsNames.Add("手机号");
             fieldsNames.Add("继教号");
             fieldsNames.Add("描述");
-             
-            var ds = QueryDataResultForExp(context); 
-            var filename =DateTime.Now.ToString("yyyy-MM-dd")+ "-学员信息.xls";
+
+            var ds = QueryDataResultForExp(context);
+            var filename = DateTime.Now.ToString("yyyy-MM-dd") + "-学员信息.xls";
 
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -645,12 +665,12 @@ namespace TrainerEvaluate.Web
                 SetModelValue(stuModel, context);
                 stuModel.CreateTime = DateTime.Now;
                 stuModel.LastModifyTime = DateTime.Now;
-                var stuBll = new BLL.Student(); 
+                var stuBll = new BLL.Student();
 
                 // 添加内容到sysuser表中
                 var sysUserMo = new Models.SysUser();
                 var sysuserbll = new BLL.SysUser();
-                sysUserMo.UserRole = (int) EnumUserRole.Student;
+                sysUserMo.UserRole = (int)EnumUserRole.Student;
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
                 //sysUserMo.UserPassWord = stuBll.GetPwd();
@@ -658,7 +678,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserAccount = stuBll.GetStuAccount();
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
                 sysUserMo.CreateTime = System.DateTime.Now;
-                
+
                 sysuserbll.AddComeStudent(sysUserMo);
 
                 // 添加内容到Student表中
@@ -675,7 +695,7 @@ namespace TrainerEvaluate.Web
                 result = false;
                 msg = ex.Message;
 
-            } 
+            }
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
@@ -684,15 +704,15 @@ namespace TrainerEvaluate.Web
 
 
         private void EditData(string id, HttpContext context)
-        { 
+        {
             var stuBll = new BLL.Student();
             var stuModel = stuBll.GetModel(new Guid(id));
             stuModel.LastModifyTime = DateTime.Now;
             var result = false;
             var msg = "";
             try
-            { 
-                SetModelValue(stuModel,context);
+            {
+                SetModelValue(stuModel, context);
                 var isSet = context.Request["SetPwd"];
                 var sysuserbll = new BLL.SysUser();
                 var sysUserMo = sysuserbll.GetModel(stuModel.StudentId);
@@ -721,36 +741,72 @@ namespace TrainerEvaluate.Web
 
             }
 
-          //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
 
+        private void EditDataPerson(string id, HttpContext context)
+        {
+            var stuBll = new BLL.Student();
+            var stuModel = stuBll.GetModel(new Guid(id));
+            stuModel.LastModifyTime = DateTime.Now;
+            var result = false;
+            var msg = "";
+            try
+            {
+                SetModelValue(stuModel, context);
+                var sysuserbll = new BLL.SysUser();
+                var sysUserMo = sysuserbll.GetModel(stuModel.StudentId);
+                sysUserMo.UserName = stuModel.StuName;
+                sysUserMo.UserId = stuModel.StudentId;
+                sysUserMo.IdentityNo = stuModel.IdentityNo;
+                sysUserMo.CreateTime = System.DateTime.Now;
+                sysUserMo.UserPassWord = context.Request["UserPassWord"]; ;
 
+                sysuserbll.Update(sysUserMo);
+
+                result = stuBll.Update(stuModel);
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            }
+
+            //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
+            context.Response.Write(msg);
+        }
 
 
         private void SetModelValue(Models.Student stuModel, HttpContext context)
         {
             if (!string.IsNullOrEmpty(context.Request["Gender"]))
             {
-                 stuModel.Gender = Convert.ToInt32(context.Request["Gender"]);
-            } 
+                stuModel.Gender = Convert.ToInt32(context.Request["Gender"]);
+            }
             stuModel.StuName = context.Request["StuName"];
             stuModel.IdentityNo = context.Request["IdentityNo"];
             stuModel.School = context.Request["School"];
             if (!string.IsNullOrEmpty(context.Request["JobTitle"]))
             {
                 stuModel.JobTitle = Convert.ToInt32(context.Request["JobTitle"]);
-            } 
-            
+            }
+
             stuModel.TelNo = context.Request["TelNo"];
             if (!string.IsNullOrEmpty(context.Request["Birthday"]))
             {
-                   stuModel.Birthday = DateTime.Parse(context.Request["Birthday"]);
+                stuModel.Birthday = DateTime.Parse(context.Request["Birthday"]);
             }
             if (!string.IsNullOrEmpty(context.Request["Nation"]))
             {
                 stuModel.Nation = Convert.ToInt32(context.Request["Nation"]);
-            } 
+            }
             stuModel.FirstRecord = context.Request["FirstRecord"];
             stuModel.FirstSchool = context.Request["FirstSchool"];
             stuModel.LastRecord = context.Request["LastRecord"];
@@ -758,18 +814,18 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["PoliticsStaus"]))
             {
                 stuModel.PoliticsStatus = Convert.ToInt32(context.Request["PoliticsStaus"]);
-            } 
+            }
             stuModel.Rank = context.Request["Rank"];
             if (!string.IsNullOrEmpty(context.Request["RankTime"]))
             {
                 stuModel.RankTime = DateTime.Parse(context.Request["RankTime"]);
-            } 
+            }
             stuModel.Post = context.Request["Post"];
             if (!string.IsNullOrEmpty(context.Request["PostTime"]))
             {
                 stuModel.PostTime = DateTime.Parse(context.Request["PostTime"]);
             }
-          
+
             stuModel.Mobile = context.Request["Mobile"];
             stuModel.TeachNo = context.Request["TeachNo"];
             stuModel.Description = context.Request["Description"];
@@ -780,19 +836,19 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["PostOptId"]))
             {
                 stuModel.PostOptId = context.Request["PostOptId"];
-            } 
+            }
         }
 
 
 
-        private void DelData(string id,HttpContext context)
+        private void DelData(string id, HttpContext context)
         {
-            var stuBll = new BLL.Student(); 
+            var stuBll = new BLL.Student();
             var result = false;
             var msg = "";
             try
-            {　   
-                result= stuBll.Delete(new Guid(id)); 
+            {
+                result = stuBll.Delete(new Guid(id));
                 var sysuserbll = new BLL.SysUser();
                 sysuserbll.Delete(new Guid(id));
 
@@ -807,9 +863,9 @@ namespace TrainerEvaluate.Web
                 result = false;
                 msg = ex.Message;
 
-            } 
+            }
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
-            context.Response.Write(msg); 
+            context.Response.Write(msg);
         }
 
 
@@ -904,11 +960,29 @@ namespace TrainerEvaluate.Web
             var stuId = context.Request["uid"];
 
             ds = stuBll.GetListByPage(" Status = 1   and StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
-            var str =string.Empty;
+            var str = string.Empty;
 
-            if(ds!=null&&ds.Tables[0].Rows.Count>0)
-            { 
-                str = JsonConvert.SerializeObject(new {rows = ds.Tables[0] });
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                str = JsonConvert.SerializeObject(new { rows = ds.Tables[0] });
+            }
+            return str;
+        }
+
+
+        private string GetPersonStudentInfo(HttpContext context)
+        {
+            var ds = new DataSet();
+            var stuBll = new BLL.Student();
+
+            var stuId = context.Request["uid"];
+
+            ds = stuBll.GetStudentInfo(" Status = 1   and StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
+            var str = string.Empty;
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                str = JsonConvert.SerializeObject(new { rows = ds.Tables[0] });
             }
             return str;
         }
@@ -929,5 +1003,5 @@ namespace TrainerEvaluate.Web
 
 
     }
-    
+
 }

@@ -492,6 +492,37 @@ namespace TrainerEvaluate.DAL
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public DataSet GetStudentInfo(string strWhere, string sort, int startIndex, int endIndex, string order)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(sort.Trim()))
+            {
+                strSql.Append("order by   " + sort + " " + order);
+            }
+            else
+            {
+                strSql.Append("order by  StuName asc");
+            }
+            strSql.Append(" )AS Row, a.*,b.Name as GenderName,c.Name as JobTitleName,d.Name as NationName, e.Name as PoliticsStatusName,  ");
+            strSql.Append(" (select UserPassWord from SysUser where UserId = a.StudentId) as UserPassWord ");
+            strSql.Append(" from Student a left join Dictionaries b   on  a.Gender=b.ID ");
+            strSql.Append("  left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID ");
+            strSql.Append(" where a.Status=1  ");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" and " + strWhere);
+            }
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+
 		/*
 		/// <summary>
 		/// 分页获取数据列表

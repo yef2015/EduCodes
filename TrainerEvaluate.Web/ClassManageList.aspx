@@ -224,12 +224,12 @@
                     </select>
                 </div>
                 <div class="fitem">
-                    <label>开始日期:</label>
-                    <input name="CusStartDate" id="CusStartDate" class="easyui-datebox" style="width:260px;"  />
+                    <label>开始时间:</label>
+                    <input name="CusStartDate" id="CusStartDate" class="easyui-datetimebox" style="width:260px;"  />
                 </div>
                 <div class="fitem">
-                    <label>结束日期:</label>
-                    <input name="CusFinishDate" id="CusFinishDate" class="easyui-datebox" style="width:260px;" />
+                    <label>结束时间:</label>
+                    <input name="CusFinishDate" id="CusFinishDate" class="easyui-datetimebox" style="width:260px;" />
                 </div>
                 <input type="hidden" id="hClassName" /> 
             </form>
@@ -251,8 +251,8 @@
                             <th data-options="field:'RId'" hidden="true">RId</th>
                             <th  width="35%" data-options="field:'CoursName'">课程名称</th>
                             <th  width="20%" data-options="field:'TeacherName'">教师姓名</th>
-                            <th field="StartDate" width="18%" sortable="true" formatter="formatterdate">开始日期</th>
-                            <th field="FinishDate" width="18%" sortable="true" formatter="formatterdate">结束日期</th>
+                            <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
+                            <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th>
                         </tr>
                     </thead>
                 </table> 
@@ -944,6 +944,13 @@
         function formatterdate(val, row) {
             if (val != "" && val != undefined) {
                 return val.substring(0, 10);
+            }
+            else { return val; }
+        }
+
+        function formatterdatemore(val, row) {
+            if (val != "" && val != undefined) {
+                return val.substring(0, 10) +" "+ val.substring(11, 19);
             }
             else { return val; }
         }

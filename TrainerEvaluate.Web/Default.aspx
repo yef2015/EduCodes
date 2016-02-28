@@ -51,6 +51,12 @@
                 case "personalInfo":
                     url = "PersonalInfo.aspx";
                     break;
+                case "personalInfoStudent":
+                    url = "PersonalInfoStudent.aspx";
+                    break;
+                case "personalInfoTeacher":
+                    url = "PersonalInfoTeacher.aspx";
+                    break;
                 case "stuQue":
                     url = "MyQuestionnaireNew.aspx";
                     break;
@@ -152,6 +158,8 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="teacherArchive" onclick="toMenu('teacherArchive')"  runat="server" >个人档案</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="professExper" onclick="toMenu('professExper')"  runat="server" >任教经历</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="personalInfo" onclick="toMenu('personalInfo')" runat="server" >个人信息修改</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="personalInfoStudent" onclick="toMenu('personalInfoStudent')" runat="server" >个人信息修改</div>
+                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="personalInfoTeacher" onclick="toMenu('personalInfoTeacher')" runat="server" >个人信息修改</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" onclick="logout()" id="logoutSys" runat="server" >系统退出</div> 
                   <%--  <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" onclick="logout()" id="logoutStu" runat="server" >系统退出</div>--%>
                 </div>

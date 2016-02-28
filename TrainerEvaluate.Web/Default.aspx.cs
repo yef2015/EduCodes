@@ -54,7 +54,9 @@ namespace TrainerEvaluate.Web
             studentManage.Visible = false;
             courseManage.Visible = false;
             qustionManage.Visible = false;
-            personalInfo.Visible = true;
+            personalInfo.Visible = false;   // 个人信息
+            personalInfoStudent.Visible = false;  // 学员信息
+            personalInfoTeacher.Visible = false;  // 教师信息
             //classManage.Visible = false;
             stuQue.Visible = false;
             schooldistrict.Visible = false;
@@ -76,15 +78,18 @@ namespace TrainerEvaluate.Web
                 trainExper.Visible = true;
                 stuQueResult.Visible = true;
                 netForStudent.Visible = true;
+                personalInfoStudent.Visible = true;
             }
             else if (Profile.CurrentUser.UserRole == 2)
             {
                 ifrcont.Attributes["src"] = "MyTeacherArchive.aspx";
                 teacherArchive.Visible = true;
                 professExper.Visible = true;
+                personalInfoTeacher.Visible = true;
             }
             else
             {
+                personalInfo.Visible = true;
                 var roleBll = new BLL.Roles();
                 var dt = roleBll.GetCurrentUserRoleInfo(Profile.CurrentUser.UserId);
                 if (dt != null)

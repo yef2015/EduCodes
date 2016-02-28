@@ -49,6 +49,18 @@
             </td>
         </tr>
         <tr>
+            <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                <div align="center">现任级别：</div>
+            </td>
+            <td width="35%" bgcolor="FFFFFF" class="gray10a" height="25">
+                <input name="Rank" id="Rank1" class="easyui-textbox" style="width:165px;" />
+            </td>
+            <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                </td>
+            <td width="34%" bgcolor="FFFFFF" class="gray10a" height="25">
+            </td>
+        </tr>
+        <tr>
             <td colspan="4" align="center" bgcolor="FFFFFF">
                 <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryUser()" style="width: 90px">查询</a>
                 &nbsp;&nbsp; 
@@ -64,12 +76,13 @@
             <thead>
                 <tr>
                     <th field="StudentId" width="0" hidden="true">编号</th>
-                    <th field="StuName" width="15%" sortable="true">姓名</th>
-                    <th field="GenderName" width="10%" sortable="true">性别</th>
+                    <th field="StuName" width="12%" sortable="true">姓名</th>
+                    <th field="GenderName" width="8%" sortable="true">性别</th>
                     <th field="IdentityNo" width="22%" sortable="true">身份证号</th>
                     <th field="School" width="20%" sortable="true">所在学校</th>
-                    <th field="JobTitleName" width="15%" sortable="true">职称</th>
-                    <th field="TelNo" width="15%" sortable="true">联系电话</th>
+                    <th field="JobTitleName" width="12%" sortable="true">职称</th>
+                    <th field="TelNo" width="12%" sortable="true">联系电话</th>
+                    <th field="Rank" width="12%" sortable="true">现任级别</th>
                 </tr>
             </thead>
         </table>
@@ -736,9 +749,6 @@
                 }
             });
         }
-    </script>
-
-    <script type="text/javascript">
 
         function clearCondition() {
             $('#School11').textbox('clear');
@@ -747,6 +757,7 @@
             $('#TelNo11').textbox("setText", "");
             $('#StuName11').textbox("setText", "");
             $('#Gender11').combobox("setValue", "");
+            $('#Rank1').textbox("setText", "");
         }
 
 
@@ -758,14 +769,15 @@
                 title: $("#Title11").combobox("getValue"),
                 telno: $("#TelNo11").textbox('getText'),
                 gender: $('#Gender11').combobox("getValue"),
-                idno: $("#IdentityNo11").textbox('getText')
+                idno: $("#IdentityNo11").textbox('getText'),
+                rank: $("#Rank1").textbox("getText")
             });
         }
 
         function exportData() {
             var url = "StudentsInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#StuName11").textbox('getText')) + "&sch=" + $("#School11").textbox('getText')
                 + "&title=" + $("#Title11").textbox('getText') + "&telno=" + $("#TelNo11").textbox('getText') + "&gender=" + $('#Gender11').combobox("getValue")
-            + "&idno=" + $("#IdentityNo11").textbox('getText');
+            + "&idno=" + $("#IdentityNo11").textbox('getText') + "&rank=" + $("#Rank1").textbox('getText');
             window.location = url;
         }
 
