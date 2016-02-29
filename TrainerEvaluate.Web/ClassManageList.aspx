@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PageContent.Master" AutoEventWireup="true" CodeBehind="ClassManageList.aspx.cs" Inherits="TrainerEvaluate.Web.ClassManageList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">  
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin: 20px;">
         <tr>
@@ -22,15 +23,15 @@
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">培训形式：</div>
             </td>
-            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a"> 
-               <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                 </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">培训层次： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-               <select class="easyui-combobox" name="tType" id="tType" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                <select class="easyui-combobox" name="tType" id="tType" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                 </select>
             </td>
         </tr>
@@ -79,56 +80,56 @@
             <form id="fm" method="post">
                 <div class="fitem">
                     <label>班级名称:</label>
-                    <input name="Name" id="Name" class="easyui-textbox" style="width:280px;" required="true">
+                    <input name="Name" id="Name" class="easyui-textbox" style="width: 280px;" required="true">
                 </div>
                 <div class="fitem">
                     <label>培训对象:</label>
-                    <input name="Object" id="Object" class="easyui-textbox" style="width:280px;" />
+                    <input name="Object" id="Object" class="easyui-textbox" style="width: 280px;" />
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
-                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px;width:280px;" />
+                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px; width: 280px;" />
                 </div>
                 <div class="fitem">
                     <label>开始日期:</label>
-                    <input name="StartDate" id="StartDate" class="easyui-datebox" style="width:280px;"  />
+                    <input name="StartDate" id="StartDate" class="easyui-datebox" style="width: 280px;" />
                 </div>
                 <div class="fitem">
                     <label>结束日期:</label>
-                    <input name="FinishDate" id="FinishDate" class="easyui-datebox" style="width:280px;" />
+                    <input name="FinishDate" id="FinishDate" class="easyui-datebox" style="width: 280px;" />
                 </div>
                 <div class="fitem">
                     <label>学员人数:</label>
-                    <input name="Students" id="Students" class="easyui-textbox" style="width:280px;" disabled="true" />
+                    <input name="Students" id="Students" class="easyui-textbox" style="width: 280px;" disabled="true" />
                 </div>
                 <div class="fitem">
                     <label>学时:</label>
-                    <input name="Point" id="Point" class="easyui-textbox" style="width:280px;">
+                    <input name="Point" id="Point" class="easyui-textbox" style="width: 280px;">
                 </div>
                 <div class="fitem">
-                    <label>学时类型:</label> 
-                <select class="easyui-combobox" name="PointType" id="PointType" style="width:280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                </select>
+                    <label>学时类型:</label>
+                    <select class="easyui-combobox" name="PointType" id="PointType" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
 
                 </div>
                 <div class="fitem">
                     <label>项目负责人:</label>
-                    <input name="Teacher" id="Teacher" class="easyui-textbox" style="width:280px;" disabled="true">
+                    <input name="Teacher" id="Teacher" class="easyui-textbox" style="width: 280px;" disabled="true">
                 </div>
                 <div class="fitem">
-                    <label>培训形式:</label>  
-                  <select class="easyui-combobox" name="Area" id="Area" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                </select>
+                    <label>培训形式:</label>
+                    <select class="easyui-combobox" name="Area" id="Area" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </div>
-<%--                <div class="fitem">
+                <%--                <div class="fitem">
                     <label>培训级别:</label>  
                 <select class="easyui-combobox" name="Level" id="Level" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
                 </div>--%>
                 <div class="fitem">
-                    <label>培训层次:</label> 
-                     <select class="easyui-combobox" name="Type" id="Type" style="width:280px;"   data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                </select>
+                    <label>培训层次:</label>
+                    <select class="easyui-combobox" name="Type" id="Type" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </div>
             </form>
         </div>
@@ -137,24 +138,60 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width: 90px">取消</a>
         </div>
 
-        <div id="dlg1" class="easyui-dialog" style="width: 400px; height: 470px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg1" class="easyui-dialog" style="width: 630px; height: 560px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons1">
-            <div class="ftitle">请选择学生</div> 
-                <table id="dg1" class="easyui-datagrid"
-                    data-options="rownumbers:true,singleSelect:false,url:'StudentsInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'ck',checkbox:true"></th>
-                            <th data-options="field:'StudentId'" hidden="true">StudentId</th>
-                            <th data-options="field:'StuName'">姓名</th>
-                            <th data-options="field:'School'">所在学校</th>
-                        </tr>
-                    </thead>
-                </table>
-                <input type="hidden" id="hClassid" />
-                <input type="hidden" id="hIsAllStu" />
-                <input type="hidden" id="hStuIds" />
-                <input type="hidden" id="hUnStuIds" /> 
+            <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin-bottom:10px;">
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="auto-style1">
+                        <div align="center">学校名称：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" class="auto-style1">
+                        <input name="SchoolName11" id="SchoolName11" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="auto-style1">
+                        <div align="center">姓名： </div>
+                    </td>
+                    <td width="34%" bgcolor="F0F9FF" class="auto-style1">
+                        <input name="StudentName11" id="StudentName11" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">证件号：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <input name="CardCode11" id="CardCode11" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">继教号： </div>
+                    </td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <input name="JijiaoCode11" id="JijiaoCode11" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td colspan="4" class="gray10a" height="26" align="middle">
+                        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryStudent()" style="width: 90px">查询</a>
+                    </td>
+                </tr>
+            </table>
+            <table id="dg1" class="easyui-datagrid"
+                data-options="rownumbers:true,singleSelect:false,url:'StudentsInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'StudentId'" hidden="true">StudentId</th>
+                        <th data-options="field:'StuName'" width="18%">姓名</th>
+                        <th data-options="field:'School'" width="35%">所在学校</th>
+                        <th data-options="field:'IdentityNo'" width="24%">证件号</th>
+                        <th data-options="field:'TeachNo'" width="16%">继教号</th>
+                    </tr>
+                </thead>
+            </table>
+            <input type="hidden" id="hClassid" />
+            <input type="hidden" id="hIsAllStu" />
+            <input type="hidden" id="hStuIds" />
+            <input type="hidden" id="hUnStuIds" />
         </div>
         <div id="dlg-buttons1">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseStu()" style="width: 90px">保存</a>
@@ -164,21 +201,21 @@
         <div id="dlg2" class="easyui-dialog" style="width: 400px; height: 470px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons2">
             <div class="ftitle">请选择项目负责人</div>
-           
-                <table id="dg2" class="easyui-datagrid"
-                    data-options="rownumbers:true,singleSelect:false,url:'TeacherInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'ck',checkbox:true"></th>
-                            <th data-options="field:'UserId'" hidden="true">UserId</th>
-                            <th data-options="field:'UserName'">姓名</th>
-                            <th data-options="field:'Dept'">所在单位</th>
-                        </tr>
-                    </thead>
-                </table> 
-                <input type="hidden" id="hIsAllTeacher" />
-                <input type="hidden" id="hTeacherIds" />
-                <input type="hidden" id="hUnTeacherIds" /> 
+
+            <table id="dg2" class="easyui-datagrid"
+                data-options="rownumbers:true,singleSelect:false,url:'TeacherInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'UserId'" hidden="true">UserId</th>
+                        <th data-options="field:'UserName'">姓名</th>
+                        <th data-options="field:'Dept'">所在单位</th>
+                    </tr>
+                </thead>
+            </table>
+            <input type="hidden" id="hIsAllTeacher" />
+            <input type="hidden" id="hTeacherIds" />
+            <input type="hidden" id="hUnTeacherIds" />
         </div>
         <div id="dlg-buttons2">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseTeacher()" style="width: 90px">保存</a>
@@ -189,25 +226,25 @@
         <div id="dlg3" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons3">
             <div class="ftitle">请选择课程</div>
-           
-                <table id="dg3" class="easyui-datagrid"
-                    data-options="rownumbers:true,singleSelect:false,url:'Course.ashx',method:'post',checkOnSelect:true, pagination:true">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'ck',checkbox:true"></th>
-                            <th data-options="field:'CourseId'" hidden="true">CourseId</th>
-                            <th data-options="field:'CourseName'">课程名称</th>
-                        </tr>
-                    </thead>
-                </table> 
+
+            <table id="dg3" class="easyui-datagrid"
+                data-options="rownumbers:true,singleSelect:false,url:'Course.ashx',method:'post',checkOnSelect:true, pagination:true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'CourseId'" hidden="true">CourseId</th>
+                        <th data-options="field:'CourseName'">课程名称</th>
+                    </tr>
+                </thead>
+            </table>
             <input type="hidden" id="hCourseIsAll" />
-            <input type="hidden" id="hCourseIds" /> 
-            <input type="hidden" id="hUnCourseIds" /> 
+            <input type="hidden" id="hCourseIds" />
+            <input type="hidden" id="hUnCourseIds" />
         </div>
         <div id="dlg-buttons3">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseCourse()" style="width: 90px">保存</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg3').dialog('close'); " style="width: 90px">取消</a>
-        </div> 
+        </div>
 
         <div id="dlg4" class="easyui-dialog" style="width: 450px; height: 350px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons4">
@@ -215,50 +252,50 @@
             <form id="fmCourse" method="post">
                 <div class="fitem">
                     <label>选择课程:</label>
-                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name'" > 
+                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name'">
                     </select>
                 </div>
                 <div class="fitem">
-                    <label>授课老师:</label> 
-                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width:260px;"  data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name'" > 
+                    <label>授课老师:</label>
+                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name'">
                     </select>
                 </div>
                 <div class="fitem">
                     <label>开始时间:</label>
-                    <input name="CusStartDate" id="CusStartDate" class="easyui-datetimebox" style="width:260px;"  />
+                    <input name="CusStartDate" id="CusStartDate" class="easyui-datetimebox" style="width: 260px;" />
                 </div>
                 <div class="fitem">
                     <label>结束时间:</label>
-                    <input name="CusFinishDate" id="CusFinishDate" class="easyui-datetimebox" style="width:260px;" />
+                    <input name="CusFinishDate" id="CusFinishDate" class="easyui-datetimebox" style="width: 260px;" />
                 </div>
-                <input type="hidden" id="hClassName" /> 
+                <input type="hidden" id="hClassName" />
             </form>
         </div>
         <div id="dlg-buttons4">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseCourseNew()" style="width: 90px">保存</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg4').dialog('close'); " style="width: 90px">取消</a>
-        </div> 
+        </div>
 
-         <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons5">
             <div class="ftitle">请选择要删除的课程</div>
-           
-                <table id="dg5" class="easyui-datagrid"
-                    data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'ck',checkbox:true"></th>
-                            <th data-options="field:'RId'" hidden="true">RId</th>
-                            <th  width="35%" data-options="field:'CoursName'">课程名称</th>
-                            <th  width="20%" data-options="field:'TeacherName'">教师姓名</th>
-                            <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
-                            <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th>
-                        </tr>
-                    </thead>
-                </table> 
-                <input type="hidden" id="hcctIsAll" />
-                <input type="hidden" id="hcctIds" /> 
-                <input type="hidden" id="hUncctIds" /> 
+
+            <table id="dg5" class="easyui-datagrid"
+                data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'RId'" hidden="true">RId</th>
+                        <th width="35%" data-options="field:'CoursName'">课程名称</th>
+                        <th width="20%" data-options="field:'TeacherName'">教师姓名</th>
+                        <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
+                        <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th>
+                    </tr>
+                </thead>
+            </table>
+            <input type="hidden" id="hcctIsAll" />
+            <input type="hidden" id="hcctIds" />
+            <input type="hidden" id="hUncctIds" />
         </div>
         <div id="dlg-buttons5">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveDeleteCourse()" style="width: 90px">保存</a>
@@ -315,13 +352,13 @@
                             <span id="aNULLidentityNo"></span>
                         </td>
                     </tr>
-                </table>            
+                </table>
             </form>
         </div>
         <div id="dlg-buttons6">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveClassAndStudent()" style="width: 120px">确认导入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg6').dialog('close'); " style="width: 120px">取消导入</a>
-        </div> 
+        </div>
 
 
 
@@ -332,8 +369,8 @@
         <input type="file" id="upData" name="upData" />
         <div id="fileQueue"></div>
     </div>
-    <input type="hidden" id="setClassIdForStu" /> 
-    <input type="hidden" id="setClassNameStu" /> 
+    <input type="hidden" id="setClassIdForStu" />
+    <input type="hidden" id="setClassNameStu" />
 
     <script type="text/javascript">
 
@@ -411,20 +448,20 @@
             url = 'ClassInfo.ashx' + '?t=d';
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-              //  $.messager.confirm('确认', '确定删除吗?', function (r) {
+                //  $.messager.confirm('确认', '确定删除吗?', function (r) {
                 if (confirm('确定删除吗?')) {
-                        $.post(url, { id: row.ID }, function (result) {
-                            if (result == "" || result == null) {
-                                $('#dg').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result
-                                });
-                            }
-                        });
-                    }
-              //  });
+                    $.post(url, { id: row.ID }, function (result) {
+                        if (result == "" || result == null) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result
+                            });
+                        }
+                    });
+                }
+                //  });
             } else {
                 messageAlert('提示', '请选择要编辑的行!', 'warning');
             }
@@ -449,8 +486,8 @@
         var courseids = "";
         var uncourseids = "";
         function setCourse() {
-             courseids = "";
-             uncourseids = "";
+            courseids = "";
+            uncourseids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg3').dialog('open').dialog('setTitle', '课程设置');
@@ -491,9 +528,9 @@
                 messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
-        
 
-      
+
+
         $('#dg3').datagrid({
             onSelectAll: function () {
                 $("#hCourseIsAll").val("1");
@@ -600,7 +637,7 @@
             if ($("#hcctIsAll").val() == "1") {
                 data = { IsAll: 1, ClassId: $("#hClassid").val() };
             } else {
-                data = { CctIds: $("#hcctIds").val(), ClassId: $("#hClassid").val()};
+                data = { CctIds: $("#hcctIds").val(), ClassId: $("#hClassid").val() };
             }
             var url = "Course.ashx?t=cctdel";
             $.post(url, data, function (result) {
@@ -672,11 +709,17 @@
         var unstuids = "";
 
         function setStu() {
-              stuids = "";
-              unstuids = "";
+            stuids = "";
+            unstuids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg1').dialog('open').dialog('setTitle', '学员设置');
+
+                $('#SchoolName11').textbox("setText", "");
+                $('#StudentName11').textbox("setText", "");
+                $('#CardCode11').textbox("setText", "");
+                $('#JijiaoCode11').textbox("setText", "");
+
                 $("#hClassid").val(row.ID);
                 $('#dg1').datagrid('reload', { t: 'cs', coId: $("#hClassid").val() });
             } else {
@@ -685,7 +728,19 @@
 
         }
 
-   
+        function queryStudent()
+        {
+            var schoolname = $('#SchoolName11').textbox("getText");
+            var studentname = $('#StudentName11').textbox("getText");
+            var cardcode = $('#CardCode11').textbox("getText");
+            var jijiaocode = $('#JijiaoCode11').textbox("getText");
+
+            $('#dg1').datagrid('reload', {
+                t: 'csq', coId: $("#hClassid").val(), school: schoolname,
+                student: studentname, card: cardcode, code: jijiaocode
+            });
+        }
+
         $('#dg1').datagrid({
             onSelectAll: function () {
                 $("#hIsAllStu").val("1");
@@ -757,9 +812,9 @@
         var teacherids = "";
         var unteacherids = "";
 
-        function setTeacher() { 
-              teacherids = "";
-              unteacherids = "";
+        function setTeacher() {
+            teacherids = "";
+            unteacherids = "";
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg2').dialog('open').dialog('setTitle', '项目负责人设置');
@@ -770,7 +825,7 @@
             }
         }
 
-       
+
         $('#dg2').datagrid({
             onSelectAll: function () {
                 $("#hIsAllTeacher").val("1");
@@ -860,8 +915,8 @@
                 messageAlert('提示', '请选择要设置的行!', 'warning');
             }
         }
-        
-        function SetUploadTmpStuData(classId){
+
+        function SetUploadTmpStuData(classId) {
             $('#upData').uploadify({
                 'swf': 'Scripts/uploadify.swf',
                 'uploader': 'UploadTmpData.ashx?t=stet&d=' + classId,
@@ -881,23 +936,21 @@
                     if (data != "" && data != "1") {
                         var result = data.split('|');
                         if (result.length > 0) {
-                            if (result[0] == "studentexport")
-                            {
+                            if (result[0] == "studentexport") {
                                 $('#aCurPerson').text(result[1]);
                                 $('#aExportCount').text(result[2]);
                                 $('#aRepeatCount').text(result[3]);
                                 $('#aNotExistCount').text(result[4]);
-                                $('#aNULLidentityNo').text(result[5]+'  ( 注：身份证号为空的学员，不允许入库 ) ');
+                                $('#aNULLidentityNo').text(result[5] + '  ( 注：身份证号为空的学员，不允许入库 ) ');
                                 $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
                             }
-                            else
-                            {
+                            else {
                                 ifConfirmCover(result[1]);
                             }
                         } else {
                             alert(data);
                         }
-                    } 
+                    }
                 },
                 'onUploadError': function (file, errorCode, errorMsg, errorString) {
                     $('#permissions_hint').show();
@@ -911,8 +964,7 @@
             });
         }
 
-        function saveClassAndStudent()
-        {
+        function saveClassAndStudent() {
             var url = "UploadTmpData.ashx?t=cstet&d=" + $("#setClassIdForStu").val();
             var data = { "fname": "" };
             $.post(url, data, function (result) {
@@ -928,8 +980,8 @@
 
 
         function ifConfirmCover(filename) {
-            var url = "UploadTmpData.ashx?t=cstet&d="+ $("#setClassIdForStu").val();
-            var data = { "fname": filename};
+            var url = "UploadTmpData.ashx?t=cstet&d=" + $("#setClassIdForStu").val();
+            var data = { "fname": filename };
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');
@@ -950,7 +1002,7 @@
 
         function formatterdatemore(val, row) {
             if (val != "" && val != undefined) {
-                return val.substring(0, 10) +" "+ val.substring(11, 19);
+                return val.substring(0, 10) + " " + val.substring(11, 19);
             }
             else { return val; }
         }
@@ -979,5 +1031,5 @@
         }
 
     </script>
-    
+
 </asp:Content>

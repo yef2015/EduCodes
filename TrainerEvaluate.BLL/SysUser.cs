@@ -172,14 +172,31 @@ namespace TrainerEvaluate.BLL
 
         public Models.SysUser GetSysUserByIdentityNo(string identityNo, string pwd)
         {
-            var userList = GetModelList(string.Format(" (UserAccount = '{0}' or IdentityNo = '{1}') and UserPassWord = '{2}'", identityNo, identityNo, pwd));
+            var userList = new List<TrainerEvaluate.Models.SysUser>();
+
+            // 先进行学员的登录验证，主要验证身份证号、继教号、手机号
+            DataSet ds = GetStudentInfoByCondition(identityNo);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    string guid = ds.Tables[0].Rows[0]["StudentId"].ToString();
+                    userList = GetModelList(string.Format(" UserId = '{0}' and UserPassWord = '{1}'", guid, pwd));
+                }
+                else
+                {
+                    userList = GetModelList(string.Format(" (UserAccount = '{0}' or IdentityNo = '{1}') and UserPassWord = '{2}'", identityNo, identityNo, pwd));
+                }
+            }
+            
+
             if (userList != null && userList.Count == 1)
             {
                 return userList[0];
             }
             else
             {
-                LogHelper.WriteLogofExceptioin(new Exception("用户信息重复或为找到"));
+                LogHelper.WriteLogofExceptioin(new Exception("用户信息重复或未找到"));
                 return null;
             }
         }
@@ -354,7 +371,13 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-
+        public DataSet GetStudentInfoByCondition(string loginname)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select * from Student  ");
+            strSql.Append(string.Format(" where (Mobile = '{0}' or TeachNo = '{0}' or IdentityNo = '{0}') and Status = 1 ",loginname));
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
 	    #endregion  ExtensionMethod
 	}

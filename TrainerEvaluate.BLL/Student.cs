@@ -262,7 +262,27 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-
+        public DataSet GetClassStuListByPageCondition(string classId,string strWhere, string orderby, int startIndex, int endIndex)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append("order by T." + orderby + " desc, " + "T.StuName  asc ");
+            }
+            else
+            {
+                strSql.Append("order by T.StuName asc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.*,case ISNULL(b.RId,'00000000-0000-0000-0000-000000000000')  when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck ");
+            strSql.Append(string.Format("  from Student a left join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where {1}  )  ", classId, strWhere));
+            strSql.Append("  T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
 
         public bool SaveClassStuForAll(string classId)

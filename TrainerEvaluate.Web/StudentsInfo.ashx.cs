@@ -41,6 +41,9 @@ namespace TrainerEvaluate.Web
                 case "cs":
                     GetClassStu(context);
                     break;
+                case "csq":
+                    GetClassStuByConditon(context);
+                    break;
                 case "sc":
                     SaveClassStuData(context);
                     break;
@@ -126,6 +129,46 @@ namespace TrainerEvaluate.Web
 
             var num = stuBll.GetRecordCount(" Status=1 ");
             var ds = stuBll.GetClassStuListByPage(coId, "ck", startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            context.Response.Write(str);
+        }
+
+
+        private void GetClassStuByConditon(HttpContext context)
+        {
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var coId = context.Request["coId"]; //班级id
+            var school = context.Request["school"];
+            var student = context.Request["student"];
+            var card = context.Request["card"];
+            var code = context.Request["code"];
+
+            var strWhere = " Status=1 ";
+            if (!string.IsNullOrEmpty(school))
+            {
+                strWhere += string.Format(" and School like '%" + school + "%' ");
+            }
+            if (!string.IsNullOrEmpty(student))
+            {
+                strWhere += string.Format(" and  StuName  like '%" + student + "%' ");
+            }
+            if (!string.IsNullOrEmpty(card))
+            {
+                strWhere += string.Format(" and  IdentityNo  like '%" + card + "%' ");
+            }
+            if (!string.IsNullOrEmpty(code))
+            {
+                strWhere += string.Format(" and  TeachNo  like '%" + code + "%' ");
+            }
+
+            var stuBll = new BLL.Student();
+
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var num = stuBll.GetRecordCount(strWhere);
+            var ds = stuBll.GetClassStuListByPageCondition(coId, strWhere, "ck", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
