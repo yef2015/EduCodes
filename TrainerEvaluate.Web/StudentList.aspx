@@ -96,7 +96,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="ArcInfo()">学员档案</a>
         </div>
     </div>
-    <div id="dlg" class="easyui-dialog" style="width: 700px; height: 530px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg" class="easyui-dialog" style="width: 700px; height: 590px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons2">
         <div class="ftitle">详细信息</div>
         <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
@@ -251,11 +251,20 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">描述：</div>
+                    <div align="center">主管工作：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a" colspan="3">
+                    <input name="ManageWork" id="ManageWork" class="easyui-textbox" 
+                        data-options="multiline:true" style="height: 60px;width:500px;" />
+                </td>
+            </tr>
+            <tr>
+                <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center">描述：</div>
+                </td>
+                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a" colspan="3">
                     <input name="Description" id="Description" class="easyui-textbox" 
-                        data-options="multiline:true" style="height: 65px;width:500px;" />
+                        data-options="multiline:true" style="height: 60px;width:500px;" />
                 </td>
             </tr>
         </table>
@@ -418,8 +427,12 @@
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aCredit"></span>
                 </td>
-                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25"></td>
-                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"></td>
+                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center">主管工作：</div>
+                </td>
+                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                    <span id="aManageWork"></span>
+                </td>
             </tr>
         </table>
 
@@ -482,6 +495,8 @@
             $('#Mobile').textbox("setText", "");
             $('#Description').textbox("setText", "");
             $('#TeachNo').textbox("setText", "");
+            $('#ManageWork').textbox("setText", "");
+
             url = 'StudentsInfo.ashx' + '?t=n';
         }
         function editUser() {
@@ -532,6 +547,8 @@
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
                 $('#TeachNo').textbox("setText", row.TeachNo);
+                $('#ManageWork').textbox("setText", row.ManageWork);
+
                 url = 'StudentsInfo.ashx' + '?t=e&id=' + row.StudentId;
             } else {
                 // messageAlert('提示', '请选择要编辑的行!', 'warning');  
@@ -586,7 +603,8 @@
                 $('#aDescription').text(row.Description);
                 $('#aTeachNo').text(row.TeachNo);
                 $('#aSchool').text(row.School);
-
+                $('#aManageWork').text(row.ManageWork);
+                
                 $('#dg-train').datagrid('reload', { t: 'stcl', studentId: row.StudentId });
             } else {
                 messageAlert('提示', '请选择要查看的行!', 'warning');
@@ -623,7 +641,8 @@
                 TeachNo: $('#TeachNo').textbox("getText"),
                 PostOptName: $('#PostOptName ').combobox("getText"),
                 PostOptId: $('#PostOptName ').combobox("getValue"),
-                SetPwd: IsSetPwd
+                SetPwd: IsSetPwd,
+                ManageWork: $('#ManageWork').textbox("getText")
             };
             if (data.StuName == "") {
                 messageAlert('提示', "请填写姓名", 'warning');

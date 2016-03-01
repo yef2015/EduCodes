@@ -213,7 +213,7 @@ namespace TrainerEvaluate.BLL
             //strSql.Append("select StuName,case Gender when 1 then '男' else '女' end as GenderName,IdentityNo,School,JobTitle,TelNo, Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description ");
             //strSql.Append(" FROM Student ");
 
-            strSql.Append(" select StuName,b.Name as GenderName,IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo,  Description    ");
+            strSql.Append(" select StuName,b.Name as GenderName,IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo, ManageWork, Description    ");
             strSql.Append(" from Student a left join Dictionaries b  on  a.Gender=b.ID left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID  ");
             strSql.Append(" where a.Status=1   ");
 

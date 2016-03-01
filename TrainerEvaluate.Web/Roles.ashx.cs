@@ -82,8 +82,8 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = rolesBll.GetRecordCount(" Rstatus !=0 ");
-            ds = rolesBll.GetListByPage(" Rstatus = 1  ", sort, startIndex, endIndex, order);
+            var num = rolesBll.GetRecordCount(" Rstatus != 0 ");
+            ds = rolesBll.GetListByPage(" Rstatus != 0  ", sort, startIndex, endIndex, order);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }
@@ -184,7 +184,7 @@ namespace TrainerEvaluate.Web
                     var roleModel = roleBll.GetModel(new Guid(id));
 
                     roleModel.LastModifyTime = System.DateTime.Now;
-                    roleModel.Rstatus = 2;
+                    roleModel.Rstatus = 0;
                     result = roleBll.Update(roleModel);
                     if (!result)
                     {
@@ -251,54 +251,26 @@ namespace TrainerEvaluate.Web
 
             var ds = new DataSet();
             var roleBll = new BLL.Roles();
-            var strWhere = "";
+            var strWhere = " Rstatus != 0 ";
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere = string.Format(" Name like '%" + name + "%' ");
+                strWhere += string.Format(" and Name like '%" + name + "%' ");
             }
             if (!string.IsNullOrEmpty(rstatus))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Rstatus like '%" + rstatus + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Rstatus  like '%" + rstatus + "%' ");
-                }
+                strWhere += string.Format(" and  Rstatus = " + rstatus + " ");
             }
             if (!string.IsNullOrEmpty(description))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Description  like '%" + description + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description  like '%" + description + "%' ");
-                }
+                strWhere += string.Format(" and  Description  like '%" + description + "%' ");
             }
             if (!string.IsNullOrEmpty(createTime))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  CreateTime  >= '" + createTime + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" CreateTime  >= '" + createTime + "' ");
-                }
+                strWhere += string.Format(" and  CreateTime  >= '" + createTime + "' ");
             }
             if (!string.IsNullOrEmpty(endTime))
             {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  CreateTime  <= '" + endTime + "' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" CreateTime  <= '" + endTime + "' ");
-                }
+                strWhere += string.Format(" and  CreateTime  <= '" + endTime + "' ");
             }   
 
             var page = Convert.ToInt32(context.Request["page"]);
@@ -314,7 +286,6 @@ namespace TrainerEvaluate.Web
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
-
         }
 
 

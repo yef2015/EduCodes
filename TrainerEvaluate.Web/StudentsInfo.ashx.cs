@@ -254,162 +254,6 @@ namespace TrainerEvaluate.Web
                 strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
 
-            /*
-            if (!string.IsNullOrEmpty(birthday))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Birthday  like '%" + birthday + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Birthday  like '%" + birthday + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(nation))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Nation  like '%" + nation + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Nation  like '%" + nation + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(firstrecord))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  FirstRecord  like '%" + firstrecord + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" FirstRecord  like '%" + firstrecord + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(firstschool))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  FirstSchool  like '%" + firstschool + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" FirstSchool  like '%" + firstschool + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(lastrecord))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  LastRecord  like '%" + lastrecord + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" LastRecord  like '%" + lastrecord + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(lastschool))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and LastSchool  like '%" + lastschool + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" LastSchool  like '%" + lastschool + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(policticsstatus))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and PoliticsStatus  like '%" + policticsstatus + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" PoliticsStatus  like '%" + policticsstatus + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(rank))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Rank  like '%" + rank + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Rank  like '%" + rank + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(ranktime))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and RankTime  like '%" + ranktime + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" RankTime  like '%" + ranktime + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(post))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Post  like '%" + post + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Post like '%" + post + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(mobile))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Mobile  like '%" + mobile + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Mobile like '%" + mobile + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(teachno))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Teachno  like '%" + teachno + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Teachno like '%" + teachno + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(description))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Description  like '%" + description + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + description + "%' ");
-                }
-            }
-             * */
-
             var page = Convert.ToInt32(context.Request["page"]);
             var rows = Convert.ToInt32(context.Request["rows"]);
             var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "StuName" : context.Request["sort"];
@@ -427,7 +271,6 @@ namespace TrainerEvaluate.Web
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
-
 
 
 
@@ -500,163 +343,6 @@ namespace TrainerEvaluate.Web
                 strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
 
-
-            /*
-            if (!string.IsNullOrEmpty(birthday))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Birthday  like '%" + birthday + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Birthday  like '%" + birthday + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(nation))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  Nation  like '%" + nation + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Nation  like '%" + nation + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(firstrecord))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  FirstRecord  like '%" + firstrecord + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" FirstRecord  like '%" + firstrecord + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(firstschool))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  FirstSchool  like '%" + firstschool + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" FirstSchool  like '%" + firstschool + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(lastrecord))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  LastRecord  like '%" + lastrecord + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" LastRecord  like '%" + lastrecord + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(lastschool))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and LastSchool  like '%" + lastschool + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" LastSchool  like '%" + lastschool + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(policticsstatus))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and PoliticsStatus  like '%" + policticsstatus + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" PoliticsStatus  like '%" + policticsstatus + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(rank))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Rank  like '%" + rank + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Rank  like '%" + rank + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(ranktime))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and RankTime  like '%" + ranktime + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" RankTime  like '%" + ranktime + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(post))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Post  like '%" + post + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Post like '%" + post + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(mobile))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Mobile  like '%" + mobile + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Mobile like '%" + mobile + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(teachno))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Teachno  like '%" + teachno + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Teachno like '%" + teachno + "%' ");
-                }
-            }
-
-            if (!string.IsNullOrEmpty(description))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and Description  like '%" + description + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" Description like '%" + description + "%' ");
-                }
-            }
-             * */
-
             ds = stuBll.GetDataForExport(strWhere);
             return ds;
         }
@@ -685,6 +371,7 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("任职时间");
             fieldsNames.Add("手机号");
             fieldsNames.Add("继教号");
+            fieldsNames.Add("主管工作");
             fieldsNames.Add("描述");
 
             var ds = QueryDataResultForExp(context);
@@ -742,8 +429,6 @@ namespace TrainerEvaluate.Web
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
-
-
 
 
         private void EditData(string id, HttpContext context)
@@ -872,6 +557,8 @@ namespace TrainerEvaluate.Web
             stuModel.Mobile = context.Request["Mobile"];
             stuModel.TeachNo = context.Request["TeachNo"];
             stuModel.Description = context.Request["Description"];
+            stuModel.ManageWork = context.Request["ManageWork"];
+
             if (!string.IsNullOrEmpty(context.Request["PostOptName"]))
             {
                 stuModel.PostOptName = context.Request["PostOptName"];
@@ -910,10 +597,6 @@ namespace TrainerEvaluate.Web
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
-
-
-
-
 
         private void SaveClassStuData(HttpContext context)
         {
@@ -993,8 +676,6 @@ namespace TrainerEvaluate.Web
             context.Response.Write(msg);
         }
 
-
-
         private string GetPersonArchive(HttpContext context)
         {
             var ds = new DataSet();
@@ -1011,7 +692,6 @@ namespace TrainerEvaluate.Web
             }
             return str;
         }
-
 
         private string GetPersonStudentInfo(HttpContext context)
         {
@@ -1043,8 +723,6 @@ namespace TrainerEvaluate.Web
             var json = JsonConvert.SerializeObject(list); //把对象集合转换成Json
             return json;
         }
-
-
     }
 
 }

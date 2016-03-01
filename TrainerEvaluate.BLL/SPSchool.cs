@@ -175,7 +175,7 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from School");
-            strSql.Append(" where SchDisId=@SchDisId ");
+            strSql.Append(" where Status = 1 and SchDisId=@SchDisId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@SchDisId", SqlDbType.NVarChar,50)};
             parameters[0].Value = shdId;

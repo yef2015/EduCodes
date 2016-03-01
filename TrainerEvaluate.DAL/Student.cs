@@ -39,9 +39,9 @@ namespace TrainerEvaluate.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Student(");
-            strSql.Append("StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId)");
+            strSql.Append("StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId,ManageWork)");
             strSql.Append(" values (");
-            strSql.Append("@StudentId,@IdentityNo,@StuName,@Gender,@School,@JobTitle,@TelNo,@CreateTime,@LastModifyTime,@Picture,@Birthday,@Nation,@FirstRecord,@FirstSchool,@LastRecord,@LastSchool,@PoliticsStatus,@Rank,@RankTime,@Post,@PostTime,@Mobile,@TeachNo,@Status,@Description,@PostOptName,@PostOptId)");
+            strSql.Append("@StudentId,@IdentityNo,@StuName,@Gender,@School,@JobTitle,@TelNo,@CreateTime,@LastModifyTime,@Picture,@Birthday,@Nation,@FirstRecord,@FirstSchool,@LastRecord,@LastSchool,@PoliticsStatus,@Rank,@RankTime,@Post,@PostTime,@Mobile,@TeachNo,@Status,@Description,@PostOptName,@PostOptId,@ManageWork)");
             SqlParameter[] parameters = {
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
@@ -69,7 +69,8 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@Status", SqlDbType.Int,4),
 					new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@PostOptName", SqlDbType.NVarChar,50),
-					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50)};
+					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50),
+                    new SqlParameter("@ManageWork", SqlDbType.NVarChar,100)};
             parameters[0].Value = model.StudentId;
             parameters[1].Value = model.IdentityNo;
             parameters[2].Value = model.StuName;
@@ -98,6 +99,7 @@ namespace TrainerEvaluate.DAL
             parameters[24].Value = model.Description;
             parameters[25].Value = model.PostOptName;
             parameters[26].Value = model.PostOptId;
+            parameters[27].Value = model.ManageWork;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -141,7 +143,8 @@ namespace TrainerEvaluate.DAL
             strSql.Append("Status=@Status,");
             strSql.Append("Description=@Description,");
             strSql.Append("PostOptName=@PostOptName,");
-            strSql.Append("PostOptId=@PostOptId");
+            strSql.Append("PostOptId=@PostOptId,");
+            strSql.Append("ManageWork=@ManageWork ");
             strSql.Append(" where StudentId=@StudentId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@IdentityNo", SqlDbType.VarChar,20),
@@ -170,6 +173,7 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@PostOptName", SqlDbType.NVarChar,50),
 					new SqlParameter("@PostOptId", SqlDbType.NVarChar,50),
+                    new SqlParameter("@ManageWork", SqlDbType.NVarChar,100),
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16)};
             parameters[0].Value = model.IdentityNo;
             parameters[1].Value = model.StuName;
@@ -197,7 +201,8 @@ namespace TrainerEvaluate.DAL
             parameters[23].Value = model.Description;
             parameters[24].Value = model.PostOptName;
             parameters[25].Value = model.PostOptId;
-            parameters[26].Value = model.StudentId;
+            parameters[26].Value = model.ManageWork;
+            parameters[27].Value = model.StudentId;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -260,7 +265,7 @@ namespace TrainerEvaluate.DAL
 		{
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId from Student ");
+            strSql.Append("select  top 1 StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday,Nation,FirstRecord,FirstSchool,LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Status,Description,PostOptName,PostOptId,ManageWork from Student ");
             strSql.Append(" where StudentId=@StudentId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16)			};
@@ -400,6 +405,10 @@ namespace TrainerEvaluate.DAL
                 {
                     model.PostOptId = row["PostOptId"].ToString();
                 }
+                if (row["ManageWork"] != null && row["ManageWork"].ToString() != "")
+                {
+                    model.ManageWork = row["ManageWork"].ToString();
+                }
 			}
 			return model;
 		}
@@ -411,7 +420,7 @@ namespace TrainerEvaluate.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			//strSql.Append("select StudentId,IdentityNo,StuName,Gender,School,Title,TelNo,CreateTime,LastModifyTime ");
-            strSql.Append("select StudentId,IdentityNo,StuName,Gender,case Gender when 1 then '男' else '女' end as GenderName,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId  ");
+            strSql.Append("select StudentId,IdentityNo,StuName,Gender,case Gender when 1 then '男' else '女' end as GenderName,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId,ManageWork  ");
 			strSql.Append(" FROM Student ");
 			if(strWhere.Trim()!="")
 			{
@@ -432,7 +441,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId  ");
+            strSql.Append(" StudentId,IdentityNo,StuName,Gender,School,JobTitle,TelNo,CreateTime,LastModifyTime,Picture,Birthday, Nation, FirstRecord, FirstSchool, LastRecord,LastSchool,PoliticsStatus, Rank, RankTime, Post, PostTime, Mobile, TeachNo, Status, Description,PostOptName,PostOptId,ManageWork  ");
 			strSql.Append(" FROM Student ");
 			if(strWhere.Trim()!="")
 			{

@@ -542,17 +542,17 @@ namespace TrainerEvaluate.Web
 
                                 sqllist.Add(string.Format(
                                 "insert into   Student (StudentId,StuName,Gender,IdentityNo,School,JobTitle,TelNo,Birthday,Nation,FirstRecord,FirstSchool," +
-                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description," +
+                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description,ManageWork" +
                                                        "CreateTime,LastModifyTime,Status) values" +
                                                        "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
-                                                       "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
+                                                       "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}',GETDATE(),GETDATE(),1 )",
                                                         uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
                                                          row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                          row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                          row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                          row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
                                                          row["现任职务"].ToString().Trim(), row["任职时间"].ToString().Trim(), row["手机号"].ToString().Trim(),
-                                                         row["继教号"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                                         row["继教号"].ToString().Trim(), row["描述"].ToString().Trim(), row["主管工作"].ToString().Trim()));
 
                                 sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
                                                           " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), pwd.Next(999999).ToString(),
@@ -1170,9 +1170,7 @@ namespace TrainerEvaluate.Web
                         {
                             foreach (DataRow row in dtDouble.Rows)
                             {
-                                var row1 =
-                                    dt.Select(string.Format("姓名='{0}' and  联系电话='{1}'", row[0].ToString().Trim(),
-                                        row[1].ToString().Trim()));
+                                var row1 = dt.Select(string.Format("身份证号='{0}'", row[2].ToString().Trim()));
 
                                 sqllist.Add(
                                     string.Format(
@@ -1182,19 +1180,19 @@ namespace TrainerEvaluate.Web
                                         "FirstSchool='{9}',LastRecord='{10}',LastSchool='{11}'," +
                                         "PoliticsStatus='{12}',Rank='{13}',RankTime='{14}'," +
                                         "Post='{15}',PostTime='{16}',Mobile='{17}'," +
-                                        "TeachNo='{18}',Description='{19}',LastModifyTime=GETDATE() " +
-                                        " where StuName='{0}' and TelNo='{5}' and Status = 1 ",
+                                        "TeachNo='{18}',Description='{19}',ManageWork='{20}',LastModifyTime=GETDATE() " +
+                                        " where IdentityNo = '{2}' and Status = 1 ",
                                         row1[0]["姓名"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["性别"].ToString().Trim()), row1[0]["身份证号"].ToString(),
                                         row1[0]["所在学校"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["职称"].ToString().Trim()), row1[0]["联系电话"].ToString(),
                                         row1[0]["出生日期"].ToString(), BLL.Common.GetDicIDfromName(row1[0]["民族"].ToString().Trim()), row1[0]["全日制学历"].ToString(),
                                         row1[0]["全日制学校"].ToString(), row1[0]["在职学历"].ToString(), row1[0]["在职学校"].ToString(),
                                         BLL.Common.GetDicIDfromName(row1[0]["政治面貌"].ToString().Trim()), row1[0]["现任级别"].ToString(), row1[0]["任现任级别时间"].ToString(),
                                         row1[0]["现任职务"].ToString(), row1[0]["任职时间"].ToString(), row1[0]["手机号"].ToString(),
-                                        row1[0]["继教号"].ToString(), row1[0]["描述"].ToString()));
+                                        row1[0]["继教号"].ToString(), row1[0]["描述"].ToString(), row1[0]["主管工作"].ToString()));
 
-                                sqllist.Add(string.Format(" update SysUser set IdentityNo='{0}' where UserId in" +
-                                    " (select StudentId from Student  where StuName='{1}' and TelNo='{2}' and Status = 1 )",
-                                    row1[0]["身份证号"].ToString(), row1[0]["姓名"].ToString(), row1[0]["联系电话"].ToString()));
+                                sqllist.Add(string.Format(" update SysUser set  UserName='{1}' where UserId in" +
+                                    " (select StudentId from Student  where IdentityNo='{0}' and Status = 1 )",
+                                    row1[0]["身份证号"].ToString(), row1[0]["姓名"].ToString()));
 
                                 dt.Rows.Remove(row1[0]);
                                 dt.AcceptChanges();
@@ -1217,17 +1215,17 @@ namespace TrainerEvaluate.Web
 
                             sqllist.Add(string.Format(
                             "insert into   Student (StudentId,StuName,Gender,IdentityNo,School,JobTitle,TelNo,Birthday,Nation,FirstRecord,FirstSchool," +
-                                                   "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description," +
+                                                   "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description,ManageWork," +
                                                    "CreateTime,LastModifyTime,Status) values" +
                                                    "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
-                                                   "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
+                                                   "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}',GETDATE(),GETDATE(),1 )",
                                                     uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
                                                      row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                      row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                      row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                      row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
                                                      row["现任职务"].ToString().Trim(), row["任职时间"].ToString().Trim(), row["手机号"].ToString().Trim(),
-                                                     row["继教号"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                                     row["继教号"].ToString().Trim(), row["描述"].ToString().Trim(), row["主管工作"].ToString().Trim()));
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
                                                       " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), "000000",
@@ -1282,18 +1280,23 @@ namespace TrainerEvaluate.Web
                 {
                     if (!string.IsNullOrEmpty(sb1.ToString()))
                     {
-                        sb1.Append(string.Format(",'{0}'", row[0].ToString().Trim()));
+                        if (!string.IsNullOrEmpty(row[2].ToString().Trim()))
+                        {
+                            sb1.Append(string.Format(",'{0}'", row[2].ToString().Trim()));
+                        }
                         sb2.Append(string.Format(",'{0}'", row[5].ToString().Trim()));
                     }
                     else
                     {
-                        sb1.Append(string.Format("'{0}'", row[0].ToString().Trim()));
+                        if (!string.IsNullOrEmpty(row[2].ToString().Trim()))
+                        {
+                            sb1.Append(string.Format("'{0}'", row[2].ToString().Trim()));
+                        }
                         sb2.Append(string.Format("'{0}'", row[5].ToString().Trim()));
                     }
                 }
 
-                var sql = string.Format(" select StuName,TelNo from Student where Status = 1 and StuName in ({0}) and TelNo in({1})   ",
-                    sb1.ToString(), sb2.ToString());
+                var sql = string.Format(" select StuName,TelNo,IdentityNo from Student where Status = 1 and IdentityNo in ({0})  ", sb1.ToString());
                 var dtresult = DbHelperSQL.Query(sql);
 
                 if (dtresult != null && dtresult.Tables.Count > 0 && dtresult.Tables[0].Rows.Count > 0) //有重复数据要提醒
@@ -1336,17 +1339,17 @@ namespace TrainerEvaluate.Web
 
                             sqllist.Add(string.Format(
                                 "insert into   Student (StudentId,StuName,Gender,IdentityNo,School,JobTitle,TelNo,Birthday,Nation,FirstRecord,FirstSchool," +
-                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description," +
+                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description,ManageWork," +
                                                        "CreateTime,LastModifyTime,Status) values" +
                                                        "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
-                                                       "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}',GETDATE(),GETDATE(),1 )",
+                                                       "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}',GETDATE(),GETDATE(),1 )",
                                                         uid, row["姓名"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["性别"].ToString().Trim()),
                                                          row["身份证号"].ToString().Trim(), row["所在学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["职称"].ToString().Trim()),
                                                          row["联系电话"].ToString().Trim(), row["出生日期"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["民族"].ToString().Trim()),
                                                          row["全日制学历"].ToString().Trim(), row["全日制学校"].ToString().Trim(), row["在职学历"].ToString().Trim(),
                                                          row["在职学校"].ToString().Trim(), BLL.Common.GetDicIDfromName(row["政治面貌"].ToString().Trim()), row["现任级别"].ToString().Trim(), row["任现任级别时间"].ToString().Trim(),
                                                          row["现任职务"].ToString().Trim(), row["任职时间"].ToString().Trim(), row["手机号"].ToString().Trim(),
-                                                         row["继教号"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                                         row["继教号"].ToString().Trim(), row["描述"].ToString().Trim(), row["主管工作"].ToString().Trim()));
 
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +

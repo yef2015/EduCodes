@@ -38,6 +38,7 @@ namespace TrainerEvaluate.Models
         private string _description;
         private string _postoptname;
         private string _postoptid;
+        private string _managework;
             
 		/// <summary>
 		/// 编号
@@ -213,6 +214,14 @@ namespace TrainerEvaluate.Models
         {
             set { _postoptid = value; }
             get { return _postoptid; }
+        }
+        /// <summary>
+        /// 主管工作
+        /// </summary>
+        public string ManageWork
+        {
+            set { _managework = value; }
+            get { return _managework; }
         }
 		#endregion Model
 
