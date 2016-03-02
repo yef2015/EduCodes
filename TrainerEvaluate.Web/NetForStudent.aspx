@@ -55,7 +55,7 @@
         <ul id="sysmanage">
             <li value="1">我已参加</li>
             <li value="2">我已报名</li>
-            <li value="3">即将开始</li>
+            <li value="3">我要报名</li>
         </ul>
     </div>
 </asp:Content>

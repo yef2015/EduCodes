@@ -74,7 +74,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a>
         </div>
 
-        <div id="dlg" class="easyui-dialog" style="width: 500px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
+        <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons">
             <div class="ftitle">详细信息</div>
             <form id="fm" method="post">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
-                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 75px; width: 280px;" />
+                    <input name="Description" id="Description" class="easyui-textbox" data-options="multiline:true" style="height: 45px; width: 280px;" />
                 </div>
                 <div class="fitem">
                     <label>开始日期:</label>
@@ -130,6 +130,19 @@
                     <label>培训层次:</label>
                     <select class="easyui-combobox" name="Type" id="Type" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                     </select>
+                </div>
+                
+                <div class="fitem">
+                    <label>是否报名班级:</label>
+                    <input type="checkbox" name="chkIsReport" id="chkIsReport" style="width:15px;" value="yes" />
+                </div>
+                <div class="fitem">
+                    <label>报名上线人数:</label>
+                    <input name="ReportMax" id="ReportMax" class="easyui-textbox" style="width: 280px;">
+                </div>
+                <div class="fitem">
+                    <label>报名截止日期:</label>
+                    <input name="CloseDate" id="CloseDate" class="easyui-datebox" style="width: 280px;" />
                 </div>
             </form>
         </div>
@@ -390,6 +403,10 @@
             $('#Area').textbox("setText", "");
             //$('#Level').textbox("setText", "");
             $('#Type').textbox("setText", "");
+            $('#Type').textbox("setText", "");
+            $('#ReportMax').textbox("setText", "");
+            $('#CloseDate').textbox("setText", "");
+            $("[name='chkIsReport']").removeAttr("checked");
 
             url = 'ClassInfo.ashx' + '?t=n';
         }
@@ -410,6 +427,16 @@
                 $('#Area').combobox("setValue", row.Area);
                 //$('#Level').combobox("setValue", row.Level);
                 $('#Type').combobox("setValue", row.Type);
+                $('#ReportMax').textbox("setText", row.ReportMax);
+                $('#CloseDate').datebox("setValue", row.CloseDate);
+
+                var objchk = window.document.getElementById("chkIsReport");
+                if (row.IsReport == 1) {
+                    objchk.checked = true;
+                }
+                else {
+                    objchk.checked = false;
+                }                
 
                 url = 'ClassInfo.ashx' + '?t=e&id=' + row.ID;
             } else {
@@ -418,6 +445,11 @@
         }
 
         function saveClass() {
+            var IsReport = "no";
+            if ($('#chkIsReport').is(':checked')) {
+                IsReport = "yes";
+            }
+
             var data = {
                 Name: $('#Name').textbox("getText"), Object: $('#Object').textbox("getText"),
                 Description: $('#Description').textbox("getText"), StartDate: $('#StartDate').textbox("getText"),
@@ -426,7 +458,10 @@
                 Teacher: $('#Teacher').textbox("getText"),
                 //Level: $('#Level').combobox("getValue"),
                 Type: $('#Type').combobox("getValue"),
-                Area: $('#Area').combobox("getValue")
+                Area: $('#Area').combobox("getValue"),
+                SetIsReport: IsReport,
+                ReportMax: $('#ReportMax').textbox("getText"),
+                CloseDate: $('#CloseDate').textbox("getText")
             };
             if (data.Name == "") {
                 alert("请填写班级名称！");

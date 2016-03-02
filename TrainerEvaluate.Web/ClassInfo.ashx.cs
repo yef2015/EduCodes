@@ -360,6 +360,26 @@ namespace TrainerEvaluate.Web
             {
                 classModel.YearLevel = context.Session["ClassYear"].ToString();
             }
+            if (!string.IsNullOrEmpty(context.Request["SetIsReport"]))
+            {
+                var isSet = context.Request["SetIsReport"];
+                if (isSet == "yes")
+                {
+                    classModel.IsReport = 1;
+                }
+                else
+                {
+                    classModel.IsReport = 0;
+                }
+            }
+            if (!string.IsNullOrEmpty(context.Request["ReportMax"]))
+            {
+                classModel.ReportMax = int.Parse(context.Request["ReportMax"]);
+            }
+            if (!string.IsNullOrEmpty(context.Request["CloseDate"]))
+            {
+                classModel.CloseDate = DateTime.Parse(context.Request["CloseDate"]);
+            }
         }
 
 

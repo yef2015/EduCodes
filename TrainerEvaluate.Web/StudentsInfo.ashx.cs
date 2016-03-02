@@ -489,7 +489,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserId = stuModel.StudentId;
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
                 sysUserMo.CreateTime = System.DateTime.Now;
-                sysUserMo.UserPassWord = context.Request["UserPassWord"]; ;
+                sysUserMo.UserPassWord = context.Request["UserPassWord"]; 
 
                 sysuserbll.Update(sysUserMo);
 

@@ -27,6 +27,9 @@ namespace TrainerEvaluate.Models
         private int? _type;
         private DateTime _createdTime;
         private string _yearlevel;
+        private int? _isreport;
+        private int? _reportmax;
+        private DateTime? _closedate;
             
 		/// <summary>
 		/// 编号
@@ -158,6 +161,31 @@ namespace TrainerEvaluate.Models
             set { _yearlevel = value; }
             get { return _yearlevel; }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? IsReport
+        {
+            set { _isreport = value; }
+            get { return _isreport; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? ReportMax
+        {
+            set { _reportmax = value; }
+            get { return _reportmax; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? CloseDate
+        {
+            set { _closedate = value; }
+            get { return _closedate; }
+        }
+
 		#endregion Model
 
 	}
