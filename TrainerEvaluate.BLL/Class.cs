@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.CompilerServices;
@@ -496,7 +497,7 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-        public int GetNetStudentGoingCount(string name)
+        public int GetNetStudentGoingCount(string name,string userId)
         {
             string strWhere = string.Empty;
             if (!string.IsNullOrEmpty(name))
@@ -505,7 +506,7 @@ namespace TrainerEvaluate.BLL
             }
 
             var sql = string.Format("select COUNT(1) from( select distinct(cast(Object as nvarchar(2000))) as train from Class "
-                    + " where Status = 1 and IsReport = 1 {0} ) A ", strWhere);
+                    + " where  Status = 1 and  IsReport = 1  {0} ) A ", strWhere,userId);
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)
@@ -571,6 +572,44 @@ namespace TrainerEvaluate.BLL
                 return Convert.ToInt32(obj);
             }
         }
+
+
+        /// <summary>
+        /// 保存学生报名信息
+        /// </summary>
+        /// <param name="classid"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+	    public bool SaveStudentSignupInfo(string classid, string userid)
+        {
+            
+
+            var ls = new List<string>();
+	        var sql = string.Format("update Class set HasReportNum=HasReportNum+1 where  ID='{0}'  ", classid);
+	        var sql1 = string.Format(" insert into  ClassStudents values(NEWID(),'{0}','{1}') ", userid, classid);
+	        ls.Add(sql);
+	        ls.Add(sql1);
+	        var result = DbHelperSQL.ExecuteSqlTran(ls);
+
+	        return result == 2;
+	    }
+
+	    public bool IfStudentSignup(string classid, string userid)
+	    {
+
+	        var sqlstr = string.Format(" select COUNT(*) from ClassStudents where StudentId='{0}' and ClassId='{1}' ",
+	            userid, classid);
+	        var re = DbHelperSQL.GetSingle(sqlstr);
+
+	        if (Convert.ToInt32(re) > 0)
+	        {
+	            return false;
+	        }
+	        else
+	        {
+	            return true;
+	        }
+	    }
 
 
 	    #endregion  ExtensionMethod

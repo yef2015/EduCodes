@@ -182,13 +182,45 @@ namespace TrainerEvaluate.BLL
         {
             try
             {
-                var sql = string.Format("select * from NetEnterFor where IsDelete = 0 "
-                   + " and Guid in( select NetEnteryId from NetEnterStudent where StudentId = '{0}' and IsDelete = 0)", studentId);
+                //var sql = string.Format("select * from NetEnterFor where IsDelete = 0 "
+                //   + " and Guid in( select NetEnteryId from NetEnterStudent where StudentId = '{0}' and IsDelete = 0)", studentId);
+
+                //StringBuilder strSql = new StringBuilder();
+                //strSql.Append("SELECT * FROM ( ");
+                //strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                //strSql.Append("order by TrainName asc");
+                //strSql.Append(")AS Row, T.*  from   ");
+                //strSql.Append(" ( " + sql + "  ) ");
+                //strSql.Append(" T ");
+
+                //string strWhere = string.Empty;
+                //if (!string.IsNullOrEmpty(name))
+                //{
+                //    strWhere += " and  TrainName like '%" + name + "%'";
+                //}
+                //if (!string.IsNullOrEmpty(desp))
+                //{
+                //    strWhere += " and  explain like '%" + desp + "%'";
+                //}
+
+                //if (!string.IsNullOrEmpty(strWhere.Trim()))
+                //{
+                //    strSql.Append(" WHERE 1 = 1 " + strWhere);
+                //}
+
+                //strSql.Append(" ) TT");
+                //strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                //DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                //return ds;
+
+
+
+                var sql = string.Format("select a.*  from  Class a ,ClassStudents b  where a.ID=b.ClassId and b.StudentId='{0}'", studentId);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
                 strSql.Append(" SELECT ROW_NUMBER() OVER (");
-                strSql.Append("order by TrainName asc");
+                strSql.Append("order by Name asc");
                 strSql.Append(")AS Row, T.*  from   ");
                 strSql.Append(" ( " + sql + "  ) ");
                 strSql.Append(" T ");
@@ -196,12 +228,12 @@ namespace TrainerEvaluate.BLL
                 string strWhere = string.Empty;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    strWhere += " and  TrainName like '%" + name + "%'";
+                    strWhere += " and  Name like '%" + name + "%'";
                 }
-                if (!string.IsNullOrEmpty(desp))
-                {
-                    strWhere += " and  explain like '%" + desp + "%'";
-                }
+                //if (!string.IsNullOrEmpty(desp))
+                //{
+                //    strWhere += " and  explain like '%" + desp + "%'";
+                //}
 
                 if (!string.IsNullOrEmpty(strWhere.Trim()))
                 {

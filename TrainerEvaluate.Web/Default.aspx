@@ -148,7 +148,7 @@
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="classTreeManage" onclick="toMenu('classTreeManage')"  runat="server" >班级管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="qustionManage" onclick="toMenu('qustionManage')" runat="server" >培训评估</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="analysis" onclick="toMenu('analysis')" runat="server" >统计分析</div>
-                    <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="netForAdmin" onclick="toMenu('netForAdmin')" runat="server" >网上报名</div>
+                  <%--  <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="netForAdmin" onclick="toMenu('netForAdmin')" runat="server" >网上报名</div>--%>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="manage" onclick="toMenu('manage')" runat="server" >系统管理</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer" id="netForStudent" onclick="toMenu('netForStudent')" runat="server" >网上报名</div>
                     <div class="pgxt" style="float: left; margin-right: 20px; cursor: pointer;" id="stuQue" onclick="toMenu('stuQue')"  runat="server" >问卷评估</div>

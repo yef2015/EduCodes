@@ -62,9 +62,10 @@
                 if (max <= num) {
                     alert("此培训班已经报满，请选择其他培训班进行报名。");
                     return;
-                }
+                } 
+                window.location.href = "NetForStudentReportDetail.aspx?cid="+row.ID; 
 
-                var data = {
+              <%--  var data = {
                     t: "teve",
                     userid: "<%= UserId %>",
                     username: "<%= UserName %>",
@@ -79,7 +80,7 @@
                     else {
                         messageAlert('提示', result, 'warning');
                     }
-                });
+                });--%>
             } else {
                 messageAlert('提示', '请选择要报名的行!', 'warning');
             }

@@ -67,7 +67,7 @@ namespace TrainerEvaluate.Web
             trainExper.Visible = false;     // 培训经历
             teacherArchive.Visible = false; // 教师的个人档案
             professExper.Visible = false;   // 任教经历
-            netForAdmin.Visible = false;    // 网上报名：管理员
+     //       netForAdmin.Visible = false;    // 网上报名：管理员
             netForStudent.Visible = false;  // 网上报名：学生
 
             if (Profile.CurrentUser.UserRole==1)
@@ -138,7 +138,7 @@ namespace TrainerEvaluate.Web
                         }
                         if (row["FuncCode"].ToString() == "netForAdmin")
                         {
-                            netForAdmin.Visible = true;
+                   //         netForAdmin.Visible = true;
                         }
                     }
 

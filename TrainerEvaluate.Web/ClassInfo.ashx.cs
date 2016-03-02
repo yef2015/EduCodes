@@ -53,6 +53,10 @@ namespace TrainerEvaluate.Web
                     var stclp = GetProfessExperByTeacherId(context);
                     context.Response.Write(stclp);
                     break;
+                case "pah":
+                    var strInfo= GetClassInfoByClassId(context);
+                    context.Response.Write(strInfo);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -454,5 +458,20 @@ namespace TrainerEvaluate.Web
             }
             return str;
         }
+
+
+        private string GetClassInfoByClassId(HttpContext context)
+        {
+            var str = string.Empty;
+            var classBll = new BLL.Class();
+            var classId = context.Request["classId"];
+            var cinfo = classBll.GetModel(Convert.ToInt32(classId));
+            if (cinfo != null)
+            {
+                str = JsonConvert.SerializeObject(cinfo);
+            }
+            return str;
+        }
+
     }
 }

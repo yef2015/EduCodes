@@ -152,6 +152,7 @@
     <Content Include="NetForStudentInfo.ashx" />
     <Content Include="NetForStudentJoin.aspx" />
     <Content Include="NetForStudentReport.aspx" />
+    <Content Include="NetForStudentReportDetail.aspx" />
     <Content Include="NetForStudentYet.aspx" />
     <Content Include="PersonalInfo.aspx" />
     <Content Include="PersonalInfoStudent.aspx" />
@@ -674,6 +675,13 @@
     </Compile>
     <Compile Include="NetForStudentReport.aspx.designer.cs">
       <DependentUpon>NetForStudentReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentReportDetail.aspx.cs">
+      <DependentUpon>NetForStudentReportDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentReportDetail.aspx.designer.cs">
+      <DependentUpon>NetForStudentReportDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="NetForStudentYet.aspx.cs">
       <DependentUpon>NetForStudentYet.aspx</DependentUpon>

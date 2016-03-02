@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Web.Providers.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -49,6 +50,9 @@ namespace TrainerEvaluate.Web
                 case "goclass":
                     var strClass = GetForStudentClass(context);
                     context.Response.Write(strClass);
+                    break; 
+                case "sv":  //保存报名信息
+                    SaveSignUpInfo(context);  
                     break;
                 default:
                     var str = GetData(context);
@@ -166,8 +170,9 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
             var name = context.Request["name"];
+            var userid = context.Request["uid"];
 
-            var num = dsBll.GetNetStudentGoingCount(name);
+            var num = dsBll.GetNetStudentGoingCount(name,userid);
             ds = dsBll.GetNetStudentGoing(name, startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
@@ -236,6 +241,44 @@ namespace TrainerEvaluate.Web
             //  var str = JsonConvert.SerializeObject(new { success = result, errorMsg = msg});
             context.Response.Write(msg);
         }
+
+
+        //报名成功后，更新报名人数信息，增加班级学生关联信息
+        private void SaveSignUpInfo(HttpContext context)
+        {
+            var result = false;
+            var msg = "";
+            try
+            {
+                var classId = context.Request["cid"];
+                var userId = context.Request["uid"]; 
+
+                var classBll = new BLL.Class();
+
+                result = classBll.IfStudentSignup(classId,userId);
+                if (result)
+                {
+                    result = classBll.SaveStudentSignupInfo(classId, userId);
+                    if (!result)
+                    {
+                        msg = "保存失败！";
+                    }
+                } 
+                else
+                {
+                    msg = "您已经成功报名该班级！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result = false;
+                msg = ex.Message;
+
+            }
+            context.Response.Write(msg);
+        }
+
 
 
         /// <summary>
