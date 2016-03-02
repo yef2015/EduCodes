@@ -464,8 +464,113 @@ namespace TrainerEvaluate.BLL
         }
 
 
+        public DataSet GetNetStudentGoing(string name, int startIndex, int endIndex)
+        {
+            try
+            {
+                string strWhere = string.Empty;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    strWhere += " and Object like '%" + name + "%'";
+                }
 
+                var sql = string.Format("select distinct(cast(Object as nvarchar(2000))) as train from Class "
+                        + " where Status = 1 and IsReport = 1 {0} ", strWhere);
 
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM ( ");
+                strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                strSql.Append("order by train asc");
+                strSql.Append(")AS Row, T.*  from   ");
+                strSql.Append(" ( " + sql + "  ) ");
+                strSql.Append(" T ");
+                strSql.Append(" ) TT");
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+        public int GetNetStudentGoingCount(string name)
+        {
+            string strWhere = string.Empty;
+            if (!string.IsNullOrEmpty(name))
+            {
+                strWhere += " and Object like '%" + name + "%'";
+            }
+
+            var sql = string.Format("select COUNT(1) from( select distinct(cast(Object as nvarchar(2000))) as train from Class "
+                    + " where Status = 1 and IsReport = 1 {0} ) A ", strWhere);
+
+            object obj = DbHelperSQL.GetSingle(sql);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+        public DataSet GetNetStudentClass(string name, int startIndex, int endIndex)
+        {
+            try
+            {
+                string strWhere = string.Empty;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    strWhere += " and Object like '%" + name + "%'";
+                }
+
+                var sql = string.Format("select * from Class "
+                        + " where Status = 1 and IsReport = 1 {0} ", strWhere);
+
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM ( ");
+                strSql.Append(" SELECT ROW_NUMBER() OVER (");
+                strSql.Append("order by Name asc");
+                strSql.Append(")AS Row, T.*  from   ");
+                strSql.Append(" ( " + sql + "  ) ");
+                strSql.Append(" T ");
+                strSql.Append(" ) TT");
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+                DataSet ds = DbHelperSQL.Query(strSql.ToString());
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
+
+        public int GetNetStudentClassCount(string name)
+        {
+            string strWhere = string.Empty;
+            if (!string.IsNullOrEmpty(name))
+            {
+                strWhere += " and Object like '%" + name + "%'";
+            }
+
+            var sql = string.Format("select count(1) from Class "
+                    + " where Status = 1 and IsReport = 1 {0} ", strWhere);
+
+            object obj = DbHelperSQL.GetSingle(sql);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
 
 
 	    #endregion  ExtensionMethod

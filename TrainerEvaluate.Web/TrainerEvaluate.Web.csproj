@@ -148,8 +148,10 @@
     <Content Include="NetForAdminInfo.ashx" />
     <Content Include="NetForStudent.aspx" />
     <Content Include="NetForStudentEve.aspx" />
+    <Content Include="NetForStudentGoOn.aspx" />
     <Content Include="NetForStudentInfo.ashx" />
     <Content Include="NetForStudentJoin.aspx" />
+    <Content Include="NetForStudentReport.aspx" />
     <Content Include="NetForStudentYet.aspx" />
     <Content Include="PersonalInfo.aspx" />
     <Content Include="PersonalInfoStudent.aspx" />
@@ -648,6 +650,13 @@
     <Compile Include="NetForStudentEve.aspx.designer.cs">
       <DependentUpon>NetForStudentEve.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NetForStudentGoOn.aspx.cs">
+      <DependentUpon>NetForStudentGoOn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentGoOn.aspx.designer.cs">
+      <DependentUpon>NetForStudentGoOn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NetForStudentInfo.ashx.cs">
       <DependentUpon>NetForStudentInfo.ashx</DependentUpon>
       <SubType>Code</SubType>
@@ -658,6 +667,13 @@
     </Compile>
     <Compile Include="NetForStudentJoin.aspx.designer.cs">
       <DependentUpon>NetForStudentJoin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetForStudentReport.aspx.cs">
+      <DependentUpon>NetForStudentReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetForStudentReport.aspx.designer.cs">
+      <DependentUpon>NetForStudentReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="NetForStudentYet.aspx.cs">
       <DependentUpon>NetForStudentYet.aspx</DependentUpon>

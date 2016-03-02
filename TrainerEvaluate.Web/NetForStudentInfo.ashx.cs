@@ -41,6 +41,15 @@ namespace TrainerEvaluate.Web
                     var stcla = GetClassInfoByStudentId(context);
                     context.Response.Write(stcla);
                     break;
+                case "going":
+                    // 我要报名
+                    var strGoing = GetForStudentGoing(context);
+                    context.Response.Write(strGoing);
+                    break;
+                case "goclass":
+                    var strClass = GetForStudentClass(context);
+                    context.Response.Write(strClass);
+                    break;
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -142,6 +151,42 @@ namespace TrainerEvaluate.Web
 
             var num = dsBll.GetNetStudentEveCount(studentId, name, desp);
             ds = dsBll.GetNetStudentEve(studentId, name, desp, startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
+        }
+
+        private string GetForStudentGoing(HttpContext context)
+        {
+            var ds = new DataSet();
+            var dsBll = new BLL.Class();
+
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var name = context.Request["name"];
+
+            var num = dsBll.GetNetStudentGoingCount(name);
+            ds = dsBll.GetNetStudentGoing(name, startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            return str;
+        }
+
+        private string GetForStudentClass(HttpContext context)
+        {
+            var ds = new DataSet();
+            var dsBll = new BLL.Class();
+
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+            var name = context.Request["train"];
+            name = System.Web.HttpUtility.UrlDecode(name);
+            var num = dsBll.GetNetStudentClassCount(name);
+            ds = dsBll.GetNetStudentClass(name, startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }

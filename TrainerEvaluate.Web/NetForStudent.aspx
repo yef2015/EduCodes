@@ -37,7 +37,7 @@
                         url = "NetForStudentYet.aspx";
                         break;
                     case 3:
-                        url = "NetForStudentEve.aspx";
+                        url = "NetForStudentGoOn.aspx";
                         break;                    
                     default:
                         break;
@@ -60,6 +60,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <iframe id="ifrMgrContent" width="100%" height="1200" frameborder="0" scrolling="auto" src="NetForStudentEve.aspx"> 
+    <iframe id="ifrMgrContent" width="100%" height="1200" frameborder="0" scrolling="auto" src="NetForStudentGoOn.aspx"> 
     </iframe>   
 </asp:Content>
