@@ -317,7 +317,7 @@ namespace TrainerEvaluate.BLL
             try
             {
                 var sql = string.Format("select a.* from Class a left join ClassStudents b on a.ID = b.ClassId "
-                   + " where b.StudentId = '{0}' and a.Status = 1 ", studentId);
+                   + " where b.StudentId = '{0}' and a.Status = 1 and CloseDate < GETDATE()", studentId);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
@@ -367,7 +367,7 @@ namespace TrainerEvaluate.BLL
             }
 
             var sql = string.Format("select count(1) from Class a left join ClassStudents b on a.ID = b.ClassId "
-                    + " where b.StudentId = '{0}' {1} and a.Status = 1 ", studentId, strWhere);
+                    + " where b.StudentId = '{0}' {1} and a.Status = 1 and CloseDate < GETDATE() ", studentId, strWhere);
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)
@@ -519,7 +519,7 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-        public DataSet GetNetStudentClass(string name, int startIndex, int endIndex)
+        public DataSet GetNetStudentClass(string name, int startIndex, int endIndex, string userId)
         {
             try
             {
@@ -530,7 +530,7 @@ namespace TrainerEvaluate.BLL
                 }
 
                 var sql = string.Format("select * from Class "
-                        + " where Status = 1 and IsReport = 1 {0} ", strWhere);
+                        + " where Status = 1 and IsReport = 1 and  ID not in ( select ClassId  from ClassStudents where   StudentId='{1}')  and   (ReportMax-HasReportNum)>0 and CloseDate > GETDATE() {0} ", strWhere, userId);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
@@ -551,7 +551,7 @@ namespace TrainerEvaluate.BLL
             }
         }
 
-        public int GetNetStudentClassCount(string name)
+        public int GetNetStudentClassCount(string name, string userId)
         {
             string strWhere = string.Empty;
             if (!string.IsNullOrEmpty(name))
@@ -560,7 +560,7 @@ namespace TrainerEvaluate.BLL
             }
 
             var sql = string.Format("select count(1) from Class "
-                    + " where Status = 1 and IsReport = 1 {0} ", strWhere);
+                    + " where Status = 1 and IsReport = 1 and  ID not in ( select ClassId  from ClassStudents where   StudentId='{1}') and (ReportMax-HasReportNum)>0  and CloseDate > GETDATE()  {0} ", strWhere, userId);
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)

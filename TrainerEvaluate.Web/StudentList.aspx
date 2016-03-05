@@ -111,7 +111,7 @@
                     <div align="center">性别： </div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <select class="easyui-combobox" name="Gender" id="Gender" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="Gender" id="Gender" style="width: 153px;"  required="true" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                     </select>
                 </td>
             </tr>
@@ -210,7 +210,7 @@
                 </td>
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
 
-                    <input name="RankTime" id="RankTime" class="easyui-datebox" />
+                    <input name="RankTime" id="RankTime" class="easyui-textbox" />
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">现任职务： </div>
@@ -223,10 +223,10 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">任职时间：</div>
+                   <%-- <div align="center">任职时间：</div>--%>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <input name="PostTime" id="PostTime" class="easyui-datebox" />
+                    <%--<input name="PostTime" id="PostTime" class="easyui-datebox" />--%>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码： </div>
@@ -254,7 +254,7 @@
                     <div align="center">主管工作：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a" colspan="3">
-                    <input name="ManageWork" id="ManageWork" class="easyui-textbox" 
+                    <input name="ManageWork" id="ManageWork" class="easyui-textbox"  required="true" 
                         data-options="multiline:true" style="height: 60px;width:500px;" />
                 </td>
             </tr>
@@ -307,10 +307,10 @@
                     <span id="aSchool"></span>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">职务： </div>
+                   <div align="center">职称： </div> 
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <span id="aJobTitle"></span>
+                    <span id="aJobTitle"></span> 
                 </td>
             </tr>
             <tr>
@@ -329,10 +329,10 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">任职时间：</div>
+                   <%-- <div align="center">任职时间：</div>--%>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <span id="aPostTime"></span>
+                  <%--  <span id="aPostTime"></span>--%>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码：</div>
@@ -475,7 +475,7 @@
             document.getElementById("chkSetPwd").style.display = "none";
 
             $('#School').combobox("setText", "");
-            $('#JobTitle').combobox("setValue", "");
+          //  $('#JobTitle').combobox("setValue", "");
             $('#IdentityNo').textbox("setText", "");
             $('#TelNo').textbox("setText", "");
             $('#StuName').textbox("setText", "");
@@ -491,7 +491,7 @@
             $('#RankTime').textbox("setText", "");
             $('#Post').textbox("setText", "");
             $('#PostOptName').combobox("setText", "");
-            $('#PostTime').textbox("setText", "");
+          //  $('#PostTime').textbox("setText", "");
             $('#Mobile').textbox("setText", "");
             $('#Description').textbox("setText", "");
             $('#TeachNo').textbox("setText", "");
@@ -540,10 +540,10 @@
                     $('#PoliticsStaus').combobox("setValue", "");
                 }
                 $('#Rank').textbox("setText", row.Rank);
-                $('#RankTime').datebox("setValue", row.RankTime);
+                $('#RankTime').textbox("setValue", row.RankTime);
                 $('#Post').textbox("setText", row.Post);
                 $('#PostOptName').combobox("setValue", row.PostOptId);
-                $('#PostTime').datebox("setValue", row.PostTime);
+              //  $('#PostTime').textbox("setValue", row.PostTime);
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
                 $('#TeachNo').textbox("setText", row.TeachNo);
@@ -586,7 +586,7 @@
                 }
                 $('#aRank').text(row.Rank);
                 if (row.RankTime != null) {
-                    $('#aRankTime').text(StringToDate(row.RankTime));
+                    $('#aRankTime').text(row.RankTime);
                 }
                 if (row.Post != null) {
                     if (row.PostOptName != null) {
@@ -596,9 +596,9 @@
                         $('#aPost').text(row.Post);
                     }
                 }
-                if (row.PostTime != null) {
-                    $('#aPostTime').text(StringToDate(row.PostTime));
-                }
+                //if (row.PostTime != null) {
+                //    $('#aPostTime').text(row.PostTime);
+                //}
                 $('#aMobile').text(row.Mobile);
                 $('#aDescription').text(row.Description);
                 $('#aTeachNo').text(row.TeachNo);
@@ -635,7 +635,7 @@
                 Rank: $('#Rank').textbox("getText"),
                 RankTime: $('#RankTime').textbox("getText"),
                 Post: $('#Post').textbox("getText"),
-                PostTime: $('#PostTime').textbox("getText"),
+           //     PostTime: $('#PostTime').textbox("getText"),
                 Mobile: $('#Mobile').textbox("getText"),
                 Description: $('#Description').textbox("getText"),
                 TeachNo: $('#TeachNo').textbox("getText"),
@@ -658,6 +658,17 @@
             }
             if (data.TeachNo == "") {
                 messageAlert('提示', "请填写继教号", 'warning');
+                return;
+            }
+            if (data.ManageWork == "") {
+                messageAlert('提示', "请填主管工作", 'warning');
+                return;
+            }
+            if (data.Post == "") {
+                messageAlert('提示', "请填写现任职务", 'warning');
+                return;
+            } if (data.Gender == "") {
+                messageAlert('提示', "请填写性别", 'warning');
                 return;
             }
             $.post(url, data, function (result) {

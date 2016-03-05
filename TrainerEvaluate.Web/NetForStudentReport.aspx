@@ -29,7 +29,7 @@
 
     <div style="margin-top: 10px; margin-left: 20px; width: 99%">
         <table id="dg" title="我要报名" class="easyui-datagrid" style="width: 100%"
-            url="NetForStudentInfo.ashx?t=goclass&train=<%= Train %>"
+            url="NetForStudentInfo.ashx?t=goclass&train=<%= Train %>&uid=<%= UserId %>"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>

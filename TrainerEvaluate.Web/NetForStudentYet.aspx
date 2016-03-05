@@ -35,13 +35,13 @@
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
-                    <th field="Guid" width="0" hidden="true">编号</th>
+                    <th field="ID" width="0" hidden="true">编号</th>
                     <th field="Name" width="20%" sortable="true">培训班名称</th>
               <%--      <th field="explain" width="28%" sortable="true">说明</th>--%>
                     <th field="StartDate" width="15%" sortable="true" formatter="formatterdate">开始时间</th>
                     <th field="FinishDate" width="15%" sortable="true" formatter="formatterdate">结束时间</th>
                     <th field="ReportMax" width="10%" sortable="true">人数限制</th>
-                   <%-- <th field="EnterForNum" width="10%" sortable="true">已报人数</th>--%>
+                   <th field="HasReportNum" width="10%" sortable="true">已报人数</th> 
                 </tr>
             </thead>
         </table>
@@ -60,7 +60,7 @@
                 var data = {
                     t: "tyet",
                     userid: "<%= UserId %>",
-                    trainid: row.Guid
+                    classid: row.ID
                 };
                 $.post(url, data, function (result) {
                     if (result == "") {

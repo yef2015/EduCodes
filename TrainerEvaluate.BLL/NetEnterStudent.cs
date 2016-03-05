@@ -215,7 +215,7 @@ namespace TrainerEvaluate.BLL
 
 
 
-                var sql = string.Format("select a.*  from  Class a ,ClassStudents b  where a.ID=b.ClassId and b.StudentId='{0}'", studentId);
+                var sql = string.Format("select a.*  from  Class a ,ClassStudents b  where a.ID=b.ClassId and b.StudentId='{0}' and a.CloseDate > GETDATE()  ", studentId);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
@@ -254,19 +254,24 @@ namespace TrainerEvaluate.BLL
 
         public int GetNetStudentYetCount(string studentId, string name, string desp)
         {
-            string strWhere = string.Empty;
-            if (!string.IsNullOrEmpty(name))
-            {
-                strWhere += " and TrainName like '%" + name + "%'";
-            }
-            if (!string.IsNullOrEmpty(desp))
-            {
-                strWhere += " and explain like '%" + desp + "%'";
-            }
+            //string strWhere = string.Empty;
+            //if (!string.IsNullOrEmpty(name))
+            //{
+            //    strWhere += " and TrainName like '%" + name + "%'";
+            //}
+            //if (!string.IsNullOrEmpty(desp))
+            //{
+            //    strWhere += " and explain like '%" + desp + "%'";
+            //}
 
-            var sql = string.Format("select COUNT(1) from NetEnterFor where IsDelete = 0 "
-                    + " and Guid in( select NetEnteryId from NetEnterStudent "
-                    + " where StudentId = '{0}' and IsDelete = 0) {1} ", studentId, strWhere);
+            //var sql = string.Format("select COUNT(1) from NetEnterFor where IsDelete = 0 "
+            //        + " and Guid in( select NetEnteryId from NetEnterStudent "
+            //        + " where StudentId = '{0}' and IsDelete = 0) {1} ", studentId, strWhere);
+
+
+            var sql = string.Format("select count(*)  from  Class a ,ClassStudents b  where a.ID=b.ClassId and b.StudentId='{0}' and a.CloseDate > GETDATE()  ", studentId);
+
+
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)

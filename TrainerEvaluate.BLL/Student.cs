@@ -4,6 +4,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Web.Management;
 using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
 
@@ -174,6 +175,43 @@ namespace TrainerEvaluate.BLL
         #endregion  BasicMethod
 
         #region  ExtensionMethod
+
+
+        /// <summary>
+        /// 取消报名
+        /// </summary>
+        /// <returns></returns>
+        public string CancelReport(string userId,string classId)
+        {
+            var cobj = new BLL.Class();
+            var obj = cobj.GetModel(Convert.ToInt32(classId));
+            if (obj != null)
+            {
+                if (obj.CloseDate < DateTime.Now) //已经结束的不允许取消
+                {
+                    return "报名已经结束,不允许取消!";
+                }
+                else
+                {
+                    var sqllist = new List<string>();
+                    var sql1 = string.Format("delete from  ClassStudents where ClassId='{0}' and StudentId='{1}'  ",classId,userId);
+                    var sql2 = string.Format("");
+
+                    sqllist.Add(sql1);
+                    sqllist.Add(sql2);
+
+                    DbHelperSQL.ExecuteSqlTran(sqllist);
+                    return ""; 
+                }  
+            }
+            else
+            {
+                return "参数错误！";
+            } 
+        }
+
+
+
 
 
         public string GetStuAccount()

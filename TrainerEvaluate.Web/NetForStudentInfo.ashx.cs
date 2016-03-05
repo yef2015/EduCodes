@@ -187,11 +187,12 @@ namespace TrainerEvaluate.Web
             var rows = Convert.ToInt32(context.Request["rows"]);
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
+            var uesrId = context.Request["uid"];
 
             var name = context.Request["train"];
             name = System.Web.HttpUtility.UrlDecode(name);
-            var num = dsBll.GetNetStudentClassCount(name);
-            ds = dsBll.GetNetStudentClass(name, startIndex, endIndex);
+            var num = dsBll.GetNetStudentClassCount(name,uesrId);
+            ds = dsBll.GetNetStudentClass(name, startIndex, endIndex,uesrId);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
         }
@@ -292,19 +293,10 @@ namespace TrainerEvaluate.Web
             try
             {
                 var userid = context.Request["userid"];
-                var netid = context.Request["trainid"];
+                var classid = context.Request["classid"];
                 // 取消报名，删除报名的记录
-                var stuBll = new BLL.NetEnterStudent();
-                result = stuBll.CancelEnterFor(userid, netid);
-
-                // 取消报名更新培训班的报名人数
-                var sbll = new BLL.NetEnterFor();
-                sbll.EditCancelNum(netid);
-
-                if (!result)
-                {
-                    msg = "保存失败！";
-                }
+                var stuBll = new BLL.Student();
+                 msg = stuBll.CancelReport(userid, classid); 
             }
             catch (Exception ex)
             {

@@ -212,10 +212,10 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">任职时间：</div>
+                  <%--  <div align="center">任职时间：</div>--%>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <input name="PostTime" id="PostTime" class="easyui-textbox" />
+                  <%--  <input name="PostTime" id="PostTime" class="easyui-textbox" --%>/>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码： </div>
@@ -283,10 +283,10 @@
                     <span id="aSchool"></span>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">职务： </div>
+                   <%-- <div align="center">职务： </div>--%>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <span id="aJobTitle"></span>
+                <%--    <span id="aJobTitle"></span>--%>
                 </td>
             </tr>
             <tr>
@@ -305,10 +305,10 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">任职时间：</div>
+                   <%-- <div align="center">任职时间：</div>--%>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <span id="aPostTime"></span>
+                   <%-- <span id="aPostTime"></span>--%>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码：</div>

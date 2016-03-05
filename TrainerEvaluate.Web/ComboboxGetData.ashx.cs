@@ -53,7 +53,7 @@ namespace TrainerEvaluate.Web
                     dataType = "培训级别";
                     break;     
                 case "pt":
-                    dataType = "培训类型";
+                    dataType = "培训层次";
                     break;
                 case "rc":
                     dataType = "办学性质";

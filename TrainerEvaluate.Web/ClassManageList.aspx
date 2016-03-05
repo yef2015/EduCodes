@@ -121,7 +121,7 @@
                     <select class="easyui-combobox" name="Area" id="Area" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                     </select>
                 </div>
-                <%--                <div class="fitem">
+               <%--  <div class="fitem">
                     <label>培训级别:</label>  
                 <select class="easyui-combobox" name="Level" id="Level" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
@@ -137,7 +137,7 @@
                     <input type="checkbox" name="chkIsReport" id="chkIsReport" style="width:15px;" value="yes" />
                 </div>
                 <div class="fitem">
-                    <label>报名上线人数:</label>
+                    <label>报名上限人数:</label>
                     <input name="ReportMax" id="ReportMax" class="easyui-textbox" style="width: 280px;">
                 </div>
                 <div class="fitem">
