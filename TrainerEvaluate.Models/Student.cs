@@ -29,9 +29,9 @@ namespace TrainerEvaluate.Models
         private string _lastSchool;
         private int _politicsStatus;
         private string _rank;
-        private DateTime? _rankTime;
+        private string _rankTime;
         private string _post;
-        private DateTime? _postTime;
+        private string _postTime;
         private string _mobile;
         private string _teachNo;
         private int _status;
@@ -164,7 +164,7 @@ namespace TrainerEvaluate.Models
             set { _rank = value; }
             get { return _rank; }
         }
-        public DateTime? RankTime
+        public string RankTime
         {
             set { _rankTime = value; }
             get { return _rankTime; }
@@ -174,7 +174,7 @@ namespace TrainerEvaluate.Models
             set { _post = value; }
             get { return _post; }
         }
-        public DateTime? PostTime
+        public string PostTime
         {
             set { _postTime = value; }
             get { return _postTime; }

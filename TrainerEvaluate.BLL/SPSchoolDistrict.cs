@@ -146,7 +146,7 @@ namespace TrainerEvaluate.BLL
         public DataSet GetDataForExport(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select SchDisName,Description ");
+            strSql.Append(" select SchDisName,AddressInfo,PostCode,Description ");
             strSql.Append(" FROM SchoolDistrict ");
             if (strWhere.Trim() != "")
             {

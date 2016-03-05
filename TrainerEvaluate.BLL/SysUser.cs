@@ -379,6 +379,20 @@ namespace TrainerEvaluate.BLL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+
+
+        public string GetPwd(string idNo)
+        {
+            if (!string.IsNullOrEmpty(idNo) && idNo.Length > 6)
+            {
+                return idNo.Substring(idNo.Length - 6, 6);
+            }
+            else
+            {
+                return "000000";
+            }
+        }
+
 	    #endregion  ExtensionMethod
 	}
 }

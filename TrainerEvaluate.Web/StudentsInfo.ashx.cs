@@ -404,7 +404,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.UserName = stuModel.StuName;
                 sysUserMo.UserId = stuModel.StudentId;
                 //sysUserMo.UserPassWord = stuBll.GetPwd();
-                sysUserMo.UserPassWord = "000000";
+                sysUserMo.UserPassWord = sysuserbll.GetPwd(stuModel.IdentityNo);
                 sysUserMo.UserAccount = stuBll.GetStuAccount();
                 sysUserMo.IdentityNo = stuModel.IdentityNo;
                 sysUserMo.CreateTime = System.DateTime.Now;
@@ -430,6 +430,8 @@ namespace TrainerEvaluate.Web
             context.Response.Write(msg);
         }
 
+    
+
 
         private void EditData(string id, HttpContext context)
         {
@@ -450,7 +452,7 @@ namespace TrainerEvaluate.Web
                 sysUserMo.CreateTime = System.DateTime.Now;
                 if (isSet == "yes")
                 {
-                    sysUserMo.UserPassWord = "000000";
+                    sysUserMo.UserPassWord = sysuserbll.GetPwd(stuModel.IdentityNo);
                 }
 
                 sysuserbll.Update(sysUserMo);
@@ -546,12 +548,14 @@ namespace TrainerEvaluate.Web
             stuModel.Rank = context.Request["Rank"];
             if (!string.IsNullOrEmpty(context.Request["RankTime"]))
             {
-                stuModel.RankTime = DateTime.Parse(context.Request["RankTime"]);
+                // stuModel.RankTime = DateTime.Parse(context.Request["RankTime"]);
+                stuModel.RankTime = context.Request["RankTime"];
             }
             stuModel.Post = context.Request["Post"];
             if (!string.IsNullOrEmpty(context.Request["PostTime"]))
             {
-                stuModel.PostTime = DateTime.Parse(context.Request["PostTime"]);
+              //  stuModel.PostTime = DateTime.Parse(context.Request["PostTime"]);
+                stuModel.PostTime = context.Request["PostTime"] ;
             }
 
             stuModel.Mobile = context.Request["Mobile"];

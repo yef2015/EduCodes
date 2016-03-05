@@ -187,8 +187,8 @@ namespace TrainerEvaluate.Web
                                 Description = row1[0]["描述"].ToString();
                                 sqllist.Add(
                                     string.Format(
-                                        " update SchoolDistrict set SchDisName='{0}',Description='{1}',LastModifyTime=GETDATE()" +
-                                        " where SchDisName='{0}' and Status = 1 ", row["SchDisName"].ToString().Trim(), Description));
+                                        " update SchoolDistrict set SchDisName='{0}',Description='{1}',AddressInfo='{2}',PostCode='{3}',LastModifyTime=GETDATE()" +
+                                        " where SchDisName='{0}' and Status = 1 ", row["SchDisName"].ToString().Trim(), Description, row["AddressInfo"].ToString().Trim(), row["PostCode"].ToString().Trim()));
 
                                 dt.Rows.Remove(row1[0]);
                                 dt.AcceptChanges();
@@ -197,9 +197,9 @@ namespace TrainerEvaluate.Web
                         foreach (DataRow row in dt.Rows)
                         {
                             sqllist.Add(string.Format(
-                               "insert into   SchoolDistrict (Status,SchDisId, SchDisName, Description,CreatedDate,LastModifyTime) values" +
-                               "  (1,NEWID(),'{0}','{1}',GETDATE(),GETDATE())",
-                               row["名称"].ToString().Trim(), row["描述"].ToString().Trim()));
+                               "insert into   SchoolDistrict (Status,SchDisId, SchDisName, Description,AddressInfo,PostCode,CreatedDate,LastModifyTime) values" +
+                               "  (1,NEWID(),'{0}','{1}','{2}','{3}',GETDATE(),GETDATE())",
+                               row["名称"].ToString().Trim(), row["描述"].ToString().Trim(), row["地址"].ToString().Trim(), row["邮编"].ToString().Trim()));
                         }
 
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
@@ -276,9 +276,9 @@ namespace TrainerEvaluate.Web
                         foreach (DataRow row in dt.Rows)
                         {
                             sqllist.Add(string.Format(
-                                "insert into   SchoolDistrict (Status,SchDisId, SchDisName, Description,CreatedDate,LastModifyTime) values" +
-                                "  (1,NEWID(),'{0}','{1}',GETDATE(),GETDATE())",
-                                row["名称"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                "insert into   SchoolDistrict (Status,SchDisId, SchDisName,AddressInfo,PostCode, Description,CreatedDate,LastModifyTime) values" +
+                                "  (1,NEWID(),'{0}','{1}','{2}','{3}',GETDATE(),GETDATE())",
+                                row["名称"].ToString().Trim(), row["地址"].ToString().Trim(), row["邮编"].ToString().Trim(), row["描述"].ToString().Trim()));
 
                         }
                         var basePath = HttpContext.Current.Server.MapPath("UploadTemplate/");
@@ -333,7 +333,7 @@ namespace TrainerEvaluate.Web
                                         "SchoolTypeName='{5}',AddrNum='{6}',ClassNum='{7}'," +
                                         "StudentNum='{8}',TeacherNum='{9}',PartyNum='{10}'," +
                                         "LegalName='{11}',LinkTel='{12}'," +
-                                        "Description='{13}',SchDisId='{14}',LastModifyTime=GETDATE()" +
+                                        "Description='{13}',SchDisId='{14}',AddressInfo='{15}',PostCode='{16}',  LastModifyTime=GETDATE()" +
                                         " where SchoolName='{0}' and Status = 1 ", row1[0]["名称"].ToString().Trim(),
                                         row1[0]["所属学区"].ToString().Trim(), BLL.Common.GetDicValuefromName(row1[0]["办学性质"].ToString().Trim()),
                                          row1[0]["办学性质"].ToString().Trim(), BLL.Common.GetDicValuefromName(row1[0]["学校类型"].ToString().Trim()),
@@ -341,7 +341,8 @@ namespace TrainerEvaluate.Web
                                         row1[0]["班级数"].ToString().Trim(), row1[0]["学生数"].ToString().Trim(),
                                         row1[0]["教师数"].ToString().Trim(), row1[0]["党员数"].ToString().Trim(),
                                         row1[0]["法人名称"].ToString().Trim(), row1[0]["联系电话"].ToString().Trim(),
-                                        row1[0]["描述"].ToString().Trim(), BLL.SPSchoolDistrict.GetDicValuefromName(row1[0]["所属学区"].ToString().Trim())));
+                                        row1[0]["描述"].ToString().Trim(), BLL.SPSchoolDistrict.GetDicValuefromName(row1[0]["所属学区"].ToString().Trim()),
+                                       row1[0]["地址"].ToString().Trim(), row1[0]["邮编"].ToString().Trim() ));
 
                                 dt.Rows.Remove(row1[0]);
                                 dt.AcceptChanges();
@@ -352,11 +353,11 @@ namespace TrainerEvaluate.Web
                             sqllist.Add(string.Format(
                                 "insert into School (SchoolId,SchoolName,SchDisId,SchDisName,RunNatureCode,RunNatureName,SchoolTypeCode,SchoolTypeName" +
                                 ",AddrNum,ClassNum,StudentNum,TeacherNum,PartyNum,LegalName,LinkTel,Status," +
-                                "Description,CreatedDate,LastModifyTime" +
+                                "Description,CreatedDate,LastModifyTime,AddressInfo,PostCode" +
                                 ") values" +
                                 "  (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}'," +
                                 "'{7}','{8}','{9}','{10}','{11}','{12}','{13}',1," +
-                                "'{14}',GETDATE(),GETDATE())",
+                                "'{14}',GETDATE(),GETDATE(),'{15}','{16}')",
                                 row["名称"].ToString().Trim(),
                                 BLL.SPSchoolDistrict.GetDicValuefromName(row["所属学区"].ToString().Trim()), row["所属学区"].ToString().Trim(),
                                 BLL.Common.GetDicValuefromName(row["办学性质"].ToString().Trim()), row["办学性质"].ToString().Trim(),
@@ -364,7 +365,7 @@ namespace TrainerEvaluate.Web
                                 row["校址数"].ToString().Trim(), row["班级数"].ToString().Trim(),
                                 row["学生数"].ToString().Trim(), row["教师数"].ToString().Trim(),
                                 row["党员数"].ToString().Trim(), row["法人名称"].ToString().Trim(),
-                                row["联系电话"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                row["联系电话"].ToString().Trim(), row["描述"].ToString().Trim(), row["地址"].ToString().Trim(), row["邮编"].ToString().Trim()));
                         }
 
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
@@ -443,11 +444,11 @@ namespace TrainerEvaluate.Web
                             sqllist.Add(string.Format(
                                 "insert into School (SchoolId,SchoolName,SchDisId,SchDisName,RunNatureCode,RunNatureName,SchoolTypeCode,SchoolTypeName" +
                                 ",AddrNum,ClassNum,StudentNum,TeacherNum,PartyNum,LegalName,LinkTel,Status," +
-                                "Description,CreatedDate,LastModifyTime" +
+                                "Description,CreatedDate,LastModifyTime,AddressInfo,PostCode" +
                                 ") values" +
                                 "  (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}'," +
                                 "'{7}','{8}','{9}','{10}','{11}','{12}','{13}',1," +
-                                "'{14}',GETDATE(),GETDATE())",
+                                "'{14}',GETDATE(),GETDATE(),'{15}','{16}')",
                                 row["名称"].ToString().Trim(),
                                 BLL.SPSchoolDistrict.GetDicValuefromName(row["所属学区"].ToString().Trim()),
                                 row["所属学区"].ToString().Trim(),
@@ -456,7 +457,7 @@ namespace TrainerEvaluate.Web
                                 row["校址数"].ToString().Trim(), row["班级数"].ToString().Trim(),
                                 row["学生数"].ToString().Trim(), row["教师数"].ToString().Trim(),
                                 row["党员数"].ToString().Trim(), row["法人名称"].ToString().Trim(),
-                                row["联系电话"].ToString().Trim(), row["描述"].ToString().Trim()));
+                                row["联系电话"].ToString().Trim(), row["描述"].ToString().Trim(), row["地址"].ToString().Trim(), row["邮编"].ToString().Trim()));
                         }
                         var basePath = HttpContext.Current.Server.MapPath("UploadTemplate/");
                         var result = DbHelperSQL.ExecuteSqlTran(sqllist);
@@ -1228,7 +1229,7 @@ namespace TrainerEvaluate.Web
                                                      row["继教号"].ToString().Trim(), row["描述"].ToString().Trim(), row["主管工作"].ToString().Trim()));
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
-                                                      " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), "000000",
+                                                      " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), GetPwd(row["身份证号"].ToString().Trim()),
                                                       "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'), uid,
                                                       row["身份证号"].ToString().Trim(), (int)EnumUserRole.Student));
 
@@ -1353,7 +1354,7 @@ namespace TrainerEvaluate.Web
 
 
                             sqllist.Add(string.Format(" insert into SysUser (UserId,UserRole,UserName,UserPassWord,CreateTime,UserAccount,IdentityNo)" +
-                                                         " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), "000000",
+                                                         " values('{3}',{5},'{0}','{1}',GETDATE(),'{2}','{4}') ", row[0].ToString().Trim(), GetPwd(row["身份证号"].ToString().Trim()),
                                                          "HB" + DateTime.Now.Year + i.ToString().PadLeft(3, '0'), uid,
                                                          row["身份证号"].ToString().Trim(), (int)EnumUserRole.Student));
 
@@ -1387,6 +1388,20 @@ namespace TrainerEvaluate.Web
         #endregion
 
 
+
+
+
+        private string GetPwd(string idNo)
+        {
+            if (!string.IsNullOrEmpty(idNo)&&idNo.Length>6)
+            {
+                return idNo.Substring(idNo.Length - 6, 6);
+            }
+            else
+            {
+                return "000000";
+            }
+        }
 
 
 

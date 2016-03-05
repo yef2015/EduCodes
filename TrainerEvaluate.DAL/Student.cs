@@ -368,7 +368,8 @@ namespace TrainerEvaluate.DAL
                 }
                 if (row["RankTime"] != null && row["RankTime"].ToString() != "")
                 {
-                    model.RankTime = DateTime.Parse(row["RankTime"].ToString());
+                  //  model.RankTime = DateTime.Parse(row["RankTime"].ToString());
+                    model.RankTime =row["RankTime"].ToString();
                 }
                 /*Post, PostTime, Mobile, TeachNo, Status, Description*/
                 if (row["Post"] != null && row["Post"].ToString() != "")
@@ -377,7 +378,8 @@ namespace TrainerEvaluate.DAL
                 }
                 if (row["PostTime"] != null && row["PostTime"].ToString() != "")
                 {
-                    model.PostTime = DateTime.Parse(row["PostTime"].ToString());
+                   // model.PostTime = DateTime.Parse(row["PostTime"].ToString());
+                    model.PostTime = row["PostTime"].ToString();
                 }
 
                 if (row["Mobile"] != null && row["Mobile"].ToString() != "")

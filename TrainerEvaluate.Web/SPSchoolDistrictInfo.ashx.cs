@@ -301,16 +301,18 @@ namespace TrainerEvaluate.Web
         }
 
         private void Query(HttpContext context)
-        {
+        { 
             var name = context.Request["name"].Trim();
             var desp = context.Request["desp"].Trim();
+            var addr = context.Request["addr"].Trim();
+            var postc = context.Request["postc"].Trim();
             var ds = new DataSet();
             var sdBll = new BLL.SPSchoolDistrict();
             var strWhere = "";
             if (!string.IsNullOrEmpty(name))
             {
                 strWhere = string.Format(" SchDisName like '%" + name + "%' ");
-            }            
+            }
             if (!string.IsNullOrEmpty(desp))
             {
                 if (!string.IsNullOrEmpty(strWhere))
@@ -320,6 +322,28 @@ namespace TrainerEvaluate.Web
                 else
                 {
                     strWhere = string.Format(" Description like '%" + desp + "%' ");
+                }
+            } 
+            if (!string.IsNullOrEmpty(addr))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and  AddressInfo like '%" + addr + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" AddressInfo like '%" + addr + "%' ");
+                }
+            } 
+            if (!string.IsNullOrEmpty(postc))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and  PostCode like '%" + postc + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" PostCode like '%" + postc + "%' ");
                 }
             }
 
@@ -351,6 +375,8 @@ namespace TrainerEvaluate.Web
             var exXls = new ExportXls();
             var fieldsNames = new List<string>();
             fieldsNames.Add("名称");
+            fieldsNames.Add("地址");
+            fieldsNames.Add("邮编");
             fieldsNames.Add("描述");
 
             var ds = QueryDataResultForExp(context);
@@ -367,6 +393,8 @@ namespace TrainerEvaluate.Web
         {
             var name = context.Request["name"].Trim();
             var desp = context.Request["desp"].Trim();
+            var addr = context.Request["addr"].Trim();
+            var postc = context.Request["postc"].Trim();
             var ds = new DataSet();
             var sdBll = new BLL.SPSchoolDistrict();
             var strWhere = "";
@@ -383,6 +411,29 @@ namespace TrainerEvaluate.Web
                 else
                 {
                     strWhere = string.Format(" Description like '%" + desp + "%' ");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(addr))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and  AddressInfo like '%" + addr + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" AddressInfo like '%" + addr + "%' ");
+                }
+            }
+            if (!string.IsNullOrEmpty(postc))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and  PostCode like '%" + postc + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" PostCode like '%" + postc + "%' ");
                 }
             }
 
@@ -459,6 +510,8 @@ namespace TrainerEvaluate.Web
         {
             teaModel.SchDisName = context.Request["SchDisName"];
             teaModel.Description = context.Request["Description"];
+            teaModel.AddressInfo = context.Request["AddressInfo"];
+            teaModel.PostCode = context.Request["PostCode"];
         }
 
         private void DelData(string id, HttpContext context)

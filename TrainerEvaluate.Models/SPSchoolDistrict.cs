@@ -20,6 +20,8 @@ namespace TrainerEvaluate.Models
         private DateTime _createdate;
         private int _status;
         private string _description;
+        private string _addressInfo;
+        private string _postCode;
         private DateTime _lastmodifytime;
         /// 学区编号
         /// </summary>
@@ -53,6 +55,16 @@ namespace TrainerEvaluate.Models
         {
             set { _description = value; }
             get { return _description; }
+        }
+        public string AddressInfo
+        {
+            set { _addressInfo = value; }
+            get { return _addressInfo; }
+        }
+        public string PostCode
+        {
+            set { _postCode = value; }
+            get { return _postCode; }
         }
 
         /// <summary>

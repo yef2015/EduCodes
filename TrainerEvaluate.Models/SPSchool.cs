@@ -30,6 +30,8 @@ namespace TrainerEvaluate.Models
 		private DateTime _lastmodifytime;
         private int _status;
         private string _description;
+        private string _addressInfo;
+        private string _postCode;
 		/// <summary>
 		/// 学校编号
 		/// </summary>
@@ -152,6 +154,21 @@ namespace TrainerEvaluate.Models
             set { _legalname = value; }
             get { return _legalname; }
         }
+
+
+        public string AddressInfo
+        {
+            set { _addressInfo = value; }
+            get { return _addressInfo; }
+        }
+        public string PostCode
+        {
+            set { _postCode = value; }
+            get { return _postCode; }
+        }
+
+
+
 
         /// <summary>
         /// 联系电话

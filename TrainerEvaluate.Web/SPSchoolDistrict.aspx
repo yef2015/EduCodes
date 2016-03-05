@@ -12,6 +12,20 @@
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
                 <input name="SchDisName1" class="easyui-textbox" id="SchDisName1">
             </td>
+            <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                <div align="center">地址： </div>
+            </td>
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
+                <input name="AddressInfo1" class="easyui-textbox" id="AddressInfo1">
+            </td>
+        </tr> 
+          <tr>
+            <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                <div align="center">邮编：</div>
+            </td>
+            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                <input name="PostCode1" class="easyui-textbox" id="PostCode1">
+            </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">描述： </div>
             </td>
@@ -20,7 +34,7 @@
             </td>
         </tr>
 
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#F0F9FF">
             <td colspan="4" class="gray10a" height="26" align="center">
                 <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="querySchDis()" style="width: 90px">查询</a>
                 &nbsp;&nbsp;
@@ -37,8 +51,10 @@
             <thead>
                 <tr>
                     <th field="SchDisId" width="0" hidden="true">编号</th>
-                    <th field="SchDisName" width="42%" sortable="true">名称</th>
-                    <th field="Description" width="55%" sortable="true">描述</th>
+                    <th field="SchDisName" width="20%" sortable="true">名称</th>
+                    <th field="AddressInfo" width="30%" sortable="true">地址</th>
+                    <th field="PostCode" width="20%" sortable="true">邮编</th>
+                    <th field="Description" width="25%" sortable="true">描述</th>
                 </tr>
             </thead>
         </table>
@@ -61,7 +77,15 @@
         <form id="fm" method="post">
             <div class="fitem">
                 <label>名称:</label>
-                <input name="SchDisName" id="SchDisName" class="easyui-textbox" style="width:300px;" required="true">
+                <input name="SchDisName" id="SchDisName" class="easyui-textbox" style="width: 300px;" required="true">
+            </div>
+            <div class="fitem">
+                <label>地址:</label>
+                <input name="AddressInfo" id="AddressInfo" class="easyui-textbox" style="width: 300px;" >
+            </div>
+            <div class="fitem">
+                <label>邮编:</label>
+                <input name="PostCode" id="PostCode" class="easyui-textbox" style="width: 300px;">
             </div>
             <div class="fitem">
                 <label>描述:</label>
@@ -94,6 +118,22 @@
                 </tr>
                 <tr>
                     <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">地址：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aAddressInfo"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">邮编：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aPostCode"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
                         <div align="center">描述：</div>
                     </td>
                     <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
@@ -121,6 +161,8 @@
 
             $('#SchDisName').textbox("setText", "");
             $('#Description').textbox("setText", "");
+            $('#AddressInfo').textbox("setText", "");
+            $('#PostCode').textbox("setText", "");
 
             url = 'SPSchoolDistrictInfo.ashx' + '?t=n';
         }
@@ -132,6 +174,8 @@
 
                 $('#SchDisName').textbox("setText", row.SchDisName);
                 $('#Description').textbox("setText", row.Description);
+                $('#AddressInfo').textbox("setText", row.AddressInfo);
+                $('#PostCode').textbox("setText", row.PostCode);
                 url = 'SPSchoolDistrictInfo.ashx' + '?t=e&id=' + row.SchDisId;
             } else {
                 messageAlert('提示', '请选择要编辑的行!', 'warning');
@@ -144,6 +188,8 @@
                 $('#dlg1').dialog('open').dialog('setTitle', '学区档案');
                 $('#aSchDisName').text(row.SchDisName);
                 $('#aDescription').text(row.Description);
+                $('#aAddressInfo').text(row.AddressInfo);
+                $('#aPostCode').text(row.PostCode);
             } else {
                 messageAlert('提示', '请选择要查看的行!', 'warning');
             }
@@ -152,7 +198,9 @@
         function saveSchDis() {
             var data = {
                 SchDisName: $('#SchDisName').textbox("getText"),
-                Description: $('#Description').textbox("getText")
+                Description: $('#Description').textbox("getText"),
+                AddressInfo: $('#AddressInfo').textbox("getText"),
+            PostCode: $('#PostCode').textbox("getText")
             };
             $.post(url, data, function (result) {
                 if (result == "") {
@@ -270,20 +318,26 @@
 
         function exportData() {
             var url = "SPSchoolDistrictInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#SchDisName1").textbox('getText'))
-            + "&desp=" + $("#Description1").textbox('getText');
+            + "&desp=" + encodeURIComponent($("#Description1").textbox('getText'))
+            + "&addr=" + encodeURIComponent($("#AddressInfo1").textbox('getText'))
+            + "&postc=" + encodeURIComponent($("#PostCode1").textbox('getText'));
             window.location = url;
         }
 
         function clearCondition() {
             $('#SchDisName1').textbox('clear');
             $('#Description1').textbox('clear');
+            $('#AddressInfo1').textbox('clear');
+            $('#PostCode1').textbox('clear');
         }
 
         function querySchDis() {
             $('#dg').datagrid('load', {
                 t: "q",
                 name: $("#SchDisName1").textbox('getText'),
-                desp: $("#Description1").textbox('getText')
+                desp: $("#Description1").textbox('getText'),
+                addr: $("#AddressInfo1").textbox('getText'),
+                postc: $("#PostCode1").textbox('getText'),  
             });
         }
 

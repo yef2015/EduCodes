@@ -199,7 +199,7 @@
                 </td>
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
 
-                    <input name="RankTime" id="RankTime" class="easyui-datebox" />
+                    <input name="RankTime" id="RankTime" class="easyui-textbox" />
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">现任职务： </div>
@@ -215,7 +215,7 @@
                     <div align="center">任职时间：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <input name="PostTime" id="PostTime" class="easyui-datebox" />
+                    <input name="PostTime" id="PostTime" class="easyui-textbox" />
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码： </div>
@@ -514,10 +514,10 @@
                     $('#PoliticsStaus').combobox("setValue", "");
                 }
                 $('#Rank').textbox("setText", row.Rank);
-                $('#RankTime').datebox("setValue", row.RankTime);
+                $('#RankTime').textbox("setValue", row.RankTime);
                 $('#Post').textbox("setText", row.Post); 
                 $('#PostOptName').combobox("setValue", row.PostOptId);
-                $('#PostTime').datebox("setValue", row.PostTime);
+                $('#PostTime').textbox("setValue", row.PostTime);
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
                 $('#TeachNo').textbox("setText", row.TeachNo);
@@ -558,7 +558,7 @@
                 }
                 $('#aRank').text(row.Rank);
                 if (row.RankTime != null) {
-                    $('#aRankTime').text(StringToDate(row.RankTime));
+                    $('#aRankTime').text(row.RankTime);
                 }
                 if (row.Post != null) {
                     if (row.PostOptName != null) {
@@ -569,7 +569,7 @@
                     }
                 }
                 if (row.PostTime != null) {
-                    $('#aPostTime').text(StringToDate(row.PostTime));
+                    $('#aPostTime').text(row.PostTime);
                 }
                 $('#aMobile').text(row.Mobile);
                 $('#aDescription').text(row.Description);

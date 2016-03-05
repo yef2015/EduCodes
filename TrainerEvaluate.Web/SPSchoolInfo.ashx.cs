@@ -308,11 +308,16 @@ namespace TrainerEvaluate.Web
 
         private void Query(HttpContext context)
         {
+              //addressInfo: $("#AddressInfo1").combobox("getValue"),
+              //  postCode: $("#PostCode1").combobox("getValue"),
+
             var schoolname = context.Request["schoolname"].Trim();
             var schdisname = context.Request["schdisname"].Trim();
             var runnature = context.Request["runnature"].Trim();
             var schooltype = context.Request["schooltype"].Trim();
             var legalname = context.Request["legalname"].Trim();
+            var addressInfo = context.Request["addressInfo"].Trim();
+            var postCode = context.Request["postCode"].Trim();
             var ds = new DataSet();
             var shBll = new BLL.SPSchool();
             var strWhere = " Status = 1 ";
@@ -332,6 +337,14 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(runnature))
             {
                 strWhere += string.Format(" and  RunNatureCode = '" + runnature + "' ");
+            }
+            if (!string.IsNullOrEmpty(addressInfo))
+            {
+                strWhere += string.Format(" and  AddressInfo like '%" + addressInfo + "%' ");
+            }
+            if (!string.IsNullOrEmpty(postCode))
+            {
+                strWhere += string.Format(" and  PostCode like '%" + postCode + "%' ");
             }
 
             if (!string.IsNullOrEmpty(schooltype))
@@ -370,6 +383,8 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("法人名称");
             fieldsNames.Add("联系电话");
             fieldsNames.Add("描述");
+            fieldsNames.Add("地址");
+            fieldsNames.Add("邮编");  
 
             var ds = QueryDataResultForExp(context);
             var filename = DateTime.Now.ToString("yyyy-MM-dd") + "-学校信息.xls";
@@ -388,6 +403,8 @@ namespace TrainerEvaluate.Web
             var rnn = context.Request["rnn"].Trim();
             var lln = context.Request["lln"].Trim();
             var sht = context.Request["sht"].Trim();
+            var addressInfo = context.Request["addressInfo"].Trim();
+            var postCode = context.Request["postCode"].Trim();
             var ds = new DataSet();
             var shBll = new BLL.SPSchool();
             var strWhere = "";
@@ -439,7 +456,28 @@ namespace TrainerEvaluate.Web
                     strWhere = string.Format(" SchoolTypeCode = '" + sht + "' ");
                 }
             }
-
+            if (!string.IsNullOrEmpty(addressInfo))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and   AddressInfo like '%" + addressInfo + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" AddressInfo  like '%" + sht + "%' ");
+                }
+            }
+            if (!string.IsNullOrEmpty(postCode))
+            {
+                if (!string.IsNullOrEmpty(strWhere))
+                {
+                    strWhere += string.Format(" and   PostCode like '%" + postCode + "%' ");
+                }
+                else
+                {
+                    strWhere = string.Format(" PostCode  like '%" + postCode + "%' ");
+                }
+            } 
             if (!string.IsNullOrEmpty(strWhere))
             {
                 strWhere += string.Format(" and  Status = 1 ");
@@ -569,6 +607,20 @@ namespace TrainerEvaluate.Web
             {
                 shModel.SchDisName = context.Request["SchDisName"];
             }
+
+            if (!string.IsNullOrEmpty(context.Request["Description"]))
+            {
+                shModel.Description = context.Request["Description"];
+            }
+            if (!string.IsNullOrEmpty(context.Request["AddressInfo"]))
+            {
+                shModel.AddressInfo = context.Request["AddressInfo"];
+            }
+            if (!string.IsNullOrEmpty(context.Request["PostCode"]))
+            {
+                shModel.PostCode = context.Request["PostCode"];
+            }
+             
 
             shModel.SchoolName = context.Request["SchoolName"];
             shModel.AddrNum = context.Request["AddrNum"];

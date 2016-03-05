@@ -41,9 +41,9 @@ namespace TrainerEvaluate.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into School(");
-            strSql.Append("SchoolId,SchoolName,SchDisName,RunNatureCode,RunNatureName,SchoolTypeCode,SchoolTypeName,AddrNum,ClassNum,StudentNum, TeacherNum, PartyNum, LegalName, LinkTel, Status, Description,CreatedDate,LastModifyTime,SchDisId)");
+            strSql.Append("SchoolId,SchoolName,SchDisName,RunNatureCode,RunNatureName,SchoolTypeCode,SchoolTypeName,AddrNum,ClassNum,StudentNum, TeacherNum, PartyNum, LegalName, LinkTel, Status, Description,CreatedDate,LastModifyTime,SchDisId,AddressInfo,PostCode)");
             strSql.Append(" values (");
-            strSql.Append("@SchoolId,@SchoolName,@SchDisName,@RunNatureCode,@RunNatureName,@SchoolTypeCode,@SchoolTypeName,@AddrNum,@ClassNum,@StudentNum, @TeacherNum, @PartyNum, @LegalName, @LinkTel, @Status, @Description,@CreatedDate,@LastModifyTime,@SchDisId)");
+            strSql.Append("@SchoolId,@SchoolName,@SchDisName,@RunNatureCode,@RunNatureName,@SchoolTypeCode,@SchoolTypeName,@AddrNum,@ClassNum,@StudentNum, @TeacherNum, @PartyNum, @LegalName, @LinkTel, @Status, @Description,@CreatedDate,@LastModifyTime,@SchDisId,@AddressInfo,@PostCode)");
             SqlParameter[] parameters = {
 					new SqlParameter("@SchoolId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@SchoolName", SqlDbType.NVarChar,50),
@@ -63,7 +63,10 @@ namespace TrainerEvaluate.DAL
                     new SqlParameter("@Description", SqlDbType.Text),
                     new SqlParameter("@CreatedDate", SqlDbType.DateTime),
                     new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-                    new SqlParameter("@SchDisId", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@SchDisId", SqlDbType.NVarChar,50),
+                    new SqlParameter("@AddressInfo", SqlDbType.NVarChar),
+                    new SqlParameter("@PostCode", SqlDbType.NVarChar), 
+                                        };
             parameters[0].Value = Guid.NewGuid();
             parameters[1].Value = model.SchoolName;
             parameters[2].Value = model.SchDisName;
@@ -83,6 +86,8 @@ namespace TrainerEvaluate.DAL
             parameters[16].Value = model.CreatedDate;
             parameters[17].Value = model.LastModifyTime;
             parameters[18].Value = model.SchDisId;
+            parameters[19].Value = model.AddressInfo;
+            parameters[20].Value = model.PostCode;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -120,31 +125,37 @@ namespace TrainerEvaluate.DAL
             strSql.Append("LegalName=@LegalName,");
             strSql.Append("LinkTel=@LinkTel,");
             strSql.Append("Description=@Description, ");
-            strSql.Append("LastModifyTime=@LastModifyTime ");
+            strSql.Append("LastModifyTime=@LastModifyTime, ");
+            strSql.Append("AddressInfo=@AddressInfo, ");
+            strSql.Append("PostCode=@PostCode ");
             strSql.Append(" where SchoolId=@SchoolId ");
-            
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@SchoolId", SqlDbType.UniqueIdentifier,16),
-					new SqlParameter("@SchoolName", SqlDbType.NVarChar,50),
-					new SqlParameter("@SchDisName", SqlDbType.NVarChar,50),
-					new SqlParameter("@RunNatureCode", SqlDbType.NVarChar,50),
-                    new SqlParameter("@RunNatureName", SqlDbType.NVarChar,50),
 
-					new SqlParameter("@SchoolTypeCode", SqlDbType.NVarChar,50),
-                    new SqlParameter("@SchoolTypeName", SqlDbType.NVarChar,50),
-                    new SqlParameter("@AddrNum", SqlDbType.NVarChar,50),
-                    new SqlParameter("@ClassNum", SqlDbType.NVarChar,50),
-                    new SqlParameter("@StudentNum", SqlDbType.NVarChar,50),
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@SchoolId", SqlDbType.UniqueIdentifier, 16),
+                new SqlParameter("@SchoolName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@SchDisName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@RunNatureCode", SqlDbType.NVarChar, 50),
+                new SqlParameter("@RunNatureName", SqlDbType.NVarChar, 50),
 
-                    new SqlParameter("@TeacherNum", SqlDbType.NVarChar,50),
-                    new SqlParameter("@PartyNum", SqlDbType.NVarChar,50),
-                    new SqlParameter("@LegalName", SqlDbType.NVarChar,50),
-                    new SqlParameter("@LinkTel", SqlDbType.NVarChar,50),
-                    new SqlParameter("@Description", SqlDbType.Text),
+                new SqlParameter("@SchoolTypeCode", SqlDbType.NVarChar, 50),
+                new SqlParameter("@SchoolTypeName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@AddrNum", SqlDbType.NVarChar, 50),
+                new SqlParameter("@ClassNum", SqlDbType.NVarChar, 50),
+                new SqlParameter("@StudentNum", SqlDbType.NVarChar, 50),
 
-                    new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-                    new SqlParameter("@SchDisId", SqlDbType.NVarChar,50)};
+                new SqlParameter("@TeacherNum", SqlDbType.NVarChar, 50),
+                new SqlParameter("@PartyNum", SqlDbType.NVarChar, 50),
+                new SqlParameter("@LegalName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@LinkTel", SqlDbType.NVarChar, 50),
+                new SqlParameter("@Description", SqlDbType.Text),
+
+                new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
+                new SqlParameter("@SchDisId", SqlDbType.NVarChar, 50), 
+                new SqlParameter("@AddressInfo", SqlDbType.NVarChar),
+                new SqlParameter("@PostCode", SqlDbType.NVarChar), 
+            };
             parameters[0].Value = model.SchoolId;
             parameters[1].Value = model.SchoolName;
             parameters[2].Value = model.SchDisName;
@@ -162,6 +173,8 @@ namespace TrainerEvaluate.DAL
             parameters[14].Value = model.Description;
             parameters[15].Value = model.LastModifyTime;
             parameters[16].Value = model.SchDisId;
+            parameters[17].Value = model.AddressInfo;
+            parameters[18].Value = model.PostCode;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -224,7 +237,7 @@ namespace TrainerEvaluate.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 [SchoolId],[SchoolName],[SchDisId],[SchDisName],[RunNatureCode],[RunNatureName],[SchoolTypeCode],[SchoolTypeName] ");
-            strSql.Append(",[AddrNum],[ClassNum],[StudentNum],[TeacherNum],[PartyNum],[LegalName],[LinkTel],[Status],[Description],[CreatedDate],[LastModifyTime]");
+            strSql.Append(",[AddrNum],[ClassNum],[StudentNum],[TeacherNum],[PartyNum],[LegalName],[LinkTel],[Status],[Description],[CreatedDate],[LastModifyTime],AddressInfo,PostCode");
             strSql.Append("   from School ");
             strSql.Append(" where SchoolId=@SchoolId ");
             SqlParameter[] parameters = {
@@ -328,6 +341,14 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Description = row["Description"].ToString();
                 }
+                if (row["AddressInfo"] != null && row["AddressInfo"].ToString() != "")
+                {
+                    model.AddressInfo = row["AddressInfo"].ToString();
+                }
+                if (row["PostCode"] != null && row["PostCode"].ToString() != "")
+                {
+                    model.PostCode = row["PostCode"].ToString();
+                }
             }
             return model;
         }
@@ -339,7 +360,7 @@ namespace TrainerEvaluate.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select [SchoolId],[SchoolName],[SchDisId],[SchDisName],[RunNatureCode],[RunNatureName],[SchoolTypeCode],[SchoolTypeName] ");
-            strSql.Append(" ,[AddrNum],[ClassNum],[StudentNum],[TeacherNum],[PartyNum],[LegalName],[LinkTel],[Status],[Description],[CreatedDate],[LastModifyTime] ");
+            strSql.Append(" ,[AddrNum],[ClassNum],[StudentNum],[TeacherNum],[PartyNum],[LegalName],[LinkTel],[Status],[Description],[CreatedDate],[LastModifyTime],AddressInfo,PostCode ");
             strSql.Append(" FROM School ");
             if (strWhere.Trim() != "")
             {

@@ -58,7 +58,11 @@ namespace TrainerEvaluate.BLL
             try
             {
                 var sql = string.Format(" select  ID from Dictionaries  where Dstatus=1 and Name='{0}' ", dicName);
-                name = DbHelperSQL.GetSingle(sql).ToString();
+                var res = DbHelperSQL.GetSingle(sql);
+                if (res != null)
+                {
+                    name = DbHelperSQL.GetSingle(sql).ToString();
+                } 
             }
             catch (Exception ex)
             {

@@ -40,22 +40,27 @@ namespace TrainerEvaluate.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
             strSql.Append("insert into SchoolDistrict(");
-            strSql.Append("SchDisId,SchDisName,Status,Description,CreatedDate,LastModifyTime)");
+            strSql.Append("SchDisId,SchDisName,Status,Description,CreatedDate,LastModifyTime,AddressInfo,PostCode)");
 			strSql.Append(" values (");
-            strSql.Append("@SchDisId,@SchDisName,@Status,@Description,@CreatedDate,@LastModifyTime)");
+            strSql.Append("@SchDisId,@SchDisName,@Status,@Description,@CreatedDate,@LastModifyTime,@AddressInfo,@PostCode)");
 			SqlParameter[] parameters = {
 					new SqlParameter("@SchDisId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@SchDisName", SqlDbType.NVarChar,50),
                     new SqlParameter("@Status", SqlDbType.Int),
                     new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
-                    new SqlParameter("@LastModifyTime", SqlDbType.DateTime)};
+                    new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
+                    new SqlParameter("@AddressInfo", SqlDbType.NVarChar),
+                    new SqlParameter("@PostCode", SqlDbType.NVarChar), 
+                                        };
 			parameters[0].Value = Guid.NewGuid();
 			parameters[1].Value = model.SchDisName;
             parameters[2].Value = model.Status;
             parameters[3].Value = model.Description;
             parameters[4].Value = model.CreatedDate;
             parameters[5].Value = model.LastModifyTime;
+            parameters[6].Value = model.AddressInfo;
+            parameters[7].Value = model.PostCode;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -78,7 +83,9 @@ namespace TrainerEvaluate.DAL
             strSql.Append("CreatedDate=@CreatedDate,");
             strSql.Append("LastModifyTime=@LastModifyTime,");
             strSql.Append("Status=@Status,");
-            strSql.Append("Description=@Description ");
+            strSql.Append("Description=@Description, ");
+            strSql.Append("AddressInfo=@AddressInfo, ");
+            strSql.Append("PostCode=@PostCode ");
             strSql.Append(" where SchDisId=@SchDisId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@SchDisName", SqlDbType.NVarChar,50),
@@ -86,7 +93,10 @@ namespace TrainerEvaluate.DAL
                     new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
                     new SqlParameter("@Status", SqlDbType.Int),
                     new SqlParameter("@Description", SqlDbType.Text),
-					new SqlParameter("@SchDisId", SqlDbType.UniqueIdentifier,16)};
+					new SqlParameter("@SchDisId", SqlDbType.UniqueIdentifier,16),
+					new SqlParameter("@AddressInfo", SqlDbType.NVarChar),
+					new SqlParameter("@PostCode", SqlDbType.NVarChar),
+                                        };
 
 			parameters[0].Value = model.SchDisName;
 			parameters[1].Value = model.CreatedDate;
@@ -94,6 +104,8 @@ namespace TrainerEvaluate.DAL
 			parameters[3].Value = model.Status;
 			parameters[4].Value = model.Description;
 			parameters[5].Value = model.SchDisId;
+            parameters[6].Value = model.AddressInfo;
+            parameters[7].Value = model.PostCode;
            
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -153,7 +165,7 @@ namespace TrainerEvaluate.DAL
         public Models.SPSchoolDistrict GetModel(Guid SchDisId)
 		{			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 SchDisId, SchDisName, Status, Description,CreatedDate,LastModifyTime from SchoolDistrict ");
+            strSql.Append("select  top 1 SchDisId, SchDisName, Status, Description,CreatedDate,LastModifyTime,AddressInfo,PostCode from SchoolDistrict ");
             strSql.Append(" where SchDisId=@SchDisId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@SchDisId", SqlDbType.UniqueIdentifier,16)};
@@ -203,6 +215,14 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Description = row["Description"].ToString();
                 }
+                if (row["AddressInfo"] != null && row["AddressInfo"].ToString() != "")
+                {
+                    model.AddressInfo = row["AddressInfo"].ToString();
+                }
+                if (row["PostCode"] != null && row["PostCode"].ToString() != "")
+                {
+                    model.PostCode = row["PostCode"].ToString();
+                }
             }
 			return model;
 		}
@@ -213,7 +233,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select SchDisId,SchDisName,Status,Description, CreatedDate,LastModifyTime ");
+            strSql.Append("select SchDisId,SchDisName,Status,Description, CreatedDate,LastModifyTime,AddressInfo,PostCode ");
             strSql.Append(" FROM SchoolDistrict ");
 			if(strWhere.Trim()!="")
 			{
@@ -234,7 +254,7 @@ namespace TrainerEvaluate.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" SchDisId,SchDisName,Status,Description, CreatedDate,LastModifyTime ");
+            strSql.Append(" SchDisId,SchDisName,Status,Description, CreatedDate,LastModifyTime,AddressInfo,PostCode ");
             strSql.Append(" FROM SchoolDistrict ");
 			if(strWhere.Trim()!="")
 			{
