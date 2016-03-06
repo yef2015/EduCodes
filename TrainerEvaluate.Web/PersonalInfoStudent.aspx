@@ -261,6 +261,10 @@
                  messageAlert('提示', "请填写姓名", 'warning');
                  return;
              }
+             if (data.School == "") {
+                 messageAlert('提示', "请填写学校", 'warning');
+                 return;
+             }
              if (data.IdentityNo == "") {
                  messageAlert('提示', "请填写身份证号", 'warning');
                  return;

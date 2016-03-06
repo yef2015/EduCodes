@@ -268,7 +268,7 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
 
-            strSql.Append(" select StuName,b.Name as GenderName,IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo,  Description    ");
+            strSql.Append(" select StuName,b.Name as GenderName,IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo,  Description,ManageWork    ");
             strSql.Append(" from Student a left join Dictionaries b  on  a.Gender=b.ID left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID  ");
             strSql.Append(" left join ClassStudents f on a.StudentId = f.StudentId  ");
             strSql.Append(" where a.Status=1 and f.ClassId = '"+classId+"'  ");

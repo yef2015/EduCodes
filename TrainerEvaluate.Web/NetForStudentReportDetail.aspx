@@ -343,7 +343,7 @@
                             }
                         }
                         if (item.PostTime != null) {
-                            $('#aPostTime').text(StringToDate(item.PostTime));
+                            $('#aPostTime').text(item.PostTime);
                         }
                         if (item.Mobile != null) {
                             $('#aMobile').text(item.Mobile);

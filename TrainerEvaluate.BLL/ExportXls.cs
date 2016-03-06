@@ -1904,6 +1904,7 @@ namespace TrainerEvaluate.BLL
            fieldsNames.Add("手机号");
            fieldsNames.Add("继教号");
            fieldsNames.Add("描述");
+           fieldsNames.Add("主管工作");
 
            var ds = new DataSet();
            var stuBll = new BLL.Student();
