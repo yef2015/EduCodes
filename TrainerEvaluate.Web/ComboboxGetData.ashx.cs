@@ -63,6 +63,9 @@ namespace TrainerEvaluate.Web
                     break;  
                 case "ptn":
                     dataType = "学员职务";
+                    break; 
+                case "obj":
+                    dataType = "培训对象";
                     break;
                 default:
                     break; 

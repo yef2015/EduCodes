@@ -62,13 +62,13 @@
         <tr>
 
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">项目负责人:：</div>
+                <div align="center">项目负责人：</div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <span id="cTeacher"></span>
             </td>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">培训范围：</div>
+                <div align="center">培训形式：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <span id="cArea"></span>
@@ -76,13 +76,13 @@
         </tr>
         <tr>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">培训级别:：</div>
+               <div align="center">报名截止日期:：</div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <span id="cLevel"></span>
+              <span id="cCloseDate"></span>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">培训类型：</div>
+                <div align="center">培训层次：</div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
                 <span id="cType"></span>
@@ -90,16 +90,16 @@
         </tr>
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">报名上线人数：</div>
+                <div align="center">报名上限人数：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <span id="cReportMax"></span>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">报名截止日期:：</div>
+               
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <span id="cCloseDate"></span>
+                
             </td>
         </tr>
         <tr>
@@ -141,7 +141,7 @@
                     <span id="aIdentityNo"></span>
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">联系电话： </div>
+                    <div align="center">办公电话： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aTelNo"></span>
@@ -182,7 +182,7 @@
                     <span id="aFirstRecord"></span>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">全日制学校：</div>
+                    <div align="center">全日制毕业学校：</div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"><span id="aFirstSchool"></span></td>
             </tr>
@@ -194,7 +194,7 @@
                     <span id="aLastRecord"></span>
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">在职学校： </div>
+                    <div align="center">在职毕业学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aLastSchool"></span>
@@ -214,10 +214,10 @@
             </tr>
             <tr>
                 <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">任现任时间：</div>
+                    <div align="center">主管工作：</div>
                 </td>
                 <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <span id="aRankTime"></span>
+                    <span id="aManageWork"></span>
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">现任职务： </div>
@@ -331,8 +331,8 @@
                         if (item.Rank != null) {
                             $('#aRank').text(item.Rank);
                         }
-                        if (item.RankTime != null) {
-                            $('#aRankTime').text(StringToDate(item.RankTime));
+                        if (item.ManageWork != null) {
+                            $('#aManageWork').text(item.ManageWork);
                         }
                         if (item.Post != null) {
                             if (item.PostOptName != null) {
@@ -373,15 +373,16 @@
                     var dataObj = eval("(" + result + ")");//转换为json对象 
                     if (dataObj != null) { 
                         $('#cName').text(dataObj.Name);
-                        $('#cObject').text(dataObj.Object);
+                        $('#cObject').text(dataObj.ObjectName);
                         $('#cStartDate').text(dataObj.StartDate.substring(0,10));
                         $('#cFinishDate').text(dataObj.FinishDate.substring(0, 10));
                         $('#cDescription').text(dataObj.Description);
-                        $('#cPointType').text(dataObj.PointType);
+                        $('#cPointType').text(dataObj.PointTypeName);
+                        $('#cPoint').text(dataObj.Point);
                         $('#cTeacher').text(dataObj.Teacher);
-                        $('#cArea').text(dataObj.Area);
+                        $('#cArea').text(dataObj.AreaName);
                         $('#cLevel').text(dataObj.Level);
-                        $('#cType').text(dataObj.Type);
+                        $('#cType').text(dataObj.TypeName);
                         $('#cReportMax').text(dataObj.ReportMax);
                         $('#cCloseDate').text(dataObj.CloseDate.substring(0, 10));
                     } 

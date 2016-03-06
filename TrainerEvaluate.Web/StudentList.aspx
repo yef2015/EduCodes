@@ -168,7 +168,7 @@
                     <input name="FirstRecord" id="FirstRecord" class="easyui-textbox" />
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">全日制学校： </div>
+                    <div align="center">全日制毕业学校： </div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
                     <input name="FirstSchool" id="FirstSchool" class="easyui-textbox" />
@@ -182,7 +182,7 @@
                     <input name="LastRecord" id="LastRecord" class="easyui-textbox" />
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">在职学校： </div>
+                    <div align="center">在职毕业学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <input name="LastSchool" id="LastSchool" class="easyui-textbox" />
@@ -362,7 +362,7 @@
                     <span id="aFirstRecord"></span>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">全日制学校：</div>
+                    <div align="center">全日制毕业学校：</div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"><span id="aFirstSchool"></span></td>
             </tr>
@@ -374,7 +374,7 @@
                     <span id="aLastRecord"></span>
                 </td>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">在职学校： </div>
+                    <div align="center">在职毕业学校： </div>
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aLastSchool"></span>

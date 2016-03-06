@@ -472,10 +472,10 @@ namespace TrainerEvaluate.BLL
                 string strWhere = string.Empty;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    strWhere += " and Object like '%" + name + "%'";
+                    strWhere += " and ObjectName like '%" + name + "%'";
                 }
 
-                var sql = string.Format("select distinct(cast(Object as nvarchar(2000))) as train from Class "
+                var sql = string.Format("select distinct(ObjectName) as train from Class "
                         + " where Status = 1 and IsReport = 1 {0} ", strWhere);
 
                 StringBuilder strSql = new StringBuilder();
@@ -502,10 +502,10 @@ namespace TrainerEvaluate.BLL
             string strWhere = string.Empty;
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere += " and Object like '%" + name + "%'";
+                strWhere += " and ObjectName like '%" + name + "%'";
             }
 
-            var sql = string.Format("select COUNT(1) from( select distinct(cast(Object as nvarchar(2000))) as train from Class "
+            var sql = string.Format("select COUNT(1) from( select distinct(ObjectName) as train from Class "
                     + " where  Status = 1 and  IsReport = 1  {0} ) A ", strWhere,userId);
 
             object obj = DbHelperSQL.GetSingle(sql);
@@ -526,7 +526,7 @@ namespace TrainerEvaluate.BLL
                 string strWhere = string.Empty;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    strWhere += " and Object like '%" + name + "%'";
+                    strWhere += " and ObjectName like '%" + name + "%'";
                 }
 
                 var sql = string.Format("select * from Class "

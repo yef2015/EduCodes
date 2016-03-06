@@ -39,14 +39,14 @@ namespace TrainerEvaluate.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Class(");
-            strSql.Append("ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level, Type, CreatedTime,YearLevel,IsReport,ReportMax,CloseDate)");
+            strSql.Append("ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level, Type, CreatedTime,YearLevel,IsReport,ReportMax,CloseDate,ObjectName,PointTypeName,AreaName,TypeName)");
 			strSql.Append(" values (");
-            strSql.Append("@ClassId,@Name,@Status,@Object,@Description,@StartDate,@FinishDate,@Students,@Point,@PointType, @Teacher, @Area, @Level, @Type, @CreatedTime,@YearLevel,@IsReport,@ReportMax,@CloseDate)");
+            strSql.Append("@ClassId,@Name,@Status,@Object,@Description,@StartDate,@FinishDate,@Students,@Point,@PointType, @Teacher, @Area, @Level, @Type, @CreatedTime,@YearLevel,@IsReport,@ReportMax,@CloseDate,@ObjectName,@PointTypeName,@AreaName,@TypeName)");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ClassId", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.VarChar,50),
 					new SqlParameter("@Status", SqlDbType.Int,4),
-					new SqlParameter("@Object", SqlDbType.Text),
+					new SqlParameter("@Object", SqlDbType.Int),
 					new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@StartDate", SqlDbType.DateTime),
 					new SqlParameter("@FinishDate", SqlDbType.DateTime),
@@ -61,7 +61,12 @@ namespace TrainerEvaluate.DAL
                     new SqlParameter("@YearLevel", SqlDbType.NVarChar,50),
 					new SqlParameter("@IsReport", SqlDbType.Int,4),
 					new SqlParameter("@ReportMax", SqlDbType.Int,4),
-					new SqlParameter("@CloseDate", SqlDbType.DateTime)};
+					new SqlParameter("@CloseDate", SqlDbType.DateTime),
+					new SqlParameter("@ObjectName", SqlDbType.NVarChar),
+					new SqlParameter("@PointTypeName", SqlDbType.NVarChar),
+					new SqlParameter("@AreaName", SqlDbType.NVarChar),
+					new SqlParameter("@TypeName", SqlDbType.NVarChar),
+                                        };
 			parameters[0].Value = model.ID;
             parameters[1].Value = model.Name;
             parameters[2].Value = model.Status;
@@ -81,6 +86,10 @@ namespace TrainerEvaluate.DAL
             parameters[16].Value = model.IsReport;
             parameters[17].Value = model.ReportMax;
             parameters[18].Value = model.CloseDate;
+            parameters[19].Value = model.ObjectName;
+            parameters[20].Value = model.PointTypeName;
+            parameters[21].Value = model.AreaName;
+            parameters[22].Value = model.TypeName;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -116,12 +125,16 @@ namespace TrainerEvaluate.DAL
             strSql.Append("YearLevel=@YearLevel,");
             strSql.Append("IsReport=@IsReport,");
             strSql.Append("ReportMax=@ReportMax,");
-            strSql.Append("CloseDate=@CloseDate");
+            strSql.Append("CloseDate=@CloseDate, ");
+            strSql.Append("ObjectName=@ObjectName, ");
+            strSql.Append("PointTypeName=@PointTypeName, ");
+            strSql.Append("AreaName=@AreaName, ");
+            strSql.Append("TypeName=@TypeName  ");
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@Status", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.VarChar,50),
-					new SqlParameter("@Object", SqlDbType.Text),
+					new SqlParameter("@Object", SqlDbType.Int),
 					new SqlParameter("@Description", SqlDbType.Text),
 					new SqlParameter("@StartDate", SqlDbType.DateTime),
 					new SqlParameter("@FinishDate", SqlDbType.DateTime),
@@ -137,7 +150,12 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@IsReport", SqlDbType.Int,4),
 					new SqlParameter("@ReportMax", SqlDbType.Int,4),
 					new SqlParameter("@CloseDate", SqlDbType.DateTime),
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+					new SqlParameter("@ID", SqlDbType.Int,4),
+                    new SqlParameter("@ObjectName", SqlDbType.NVarChar),
+					new SqlParameter("@PointTypeName", SqlDbType.NVarChar),
+					new SqlParameter("@AreaName", SqlDbType.NVarChar),
+					new SqlParameter("@TypeName", SqlDbType.NVarChar),
+                                        };
             parameters[0].Value = model.Status;
             parameters[1].Value = model.Name;
             parameters[2].Value = model.Object;
@@ -157,6 +175,10 @@ namespace TrainerEvaluate.DAL
             parameters[16].Value = model.ReportMax;
             parameters[17].Value = model.CloseDate;
             parameters[18].Value = model.ID;
+            parameters[19].Value = model.ObjectName;
+            parameters[20].Value = model.PointTypeName;
+            parameters[21].Value = model.AreaName;
+            parameters[22].Value = model.TypeName;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -219,7 +241,7 @@ namespace TrainerEvaluate.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select top 1 ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level,CreatedTime, Type,YearLevel,IsReport,ReportMax,CloseDate from Class ");
+            strSql.Append("select top 1 ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level,CreatedTime, Type,YearLevel,IsReport,ReportMax,CloseDate,ObjectName,PointTypeName,AreaName,TypeName from Class ");
             strSql.Append(" where ID=@ClassId and Status = 1");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ClassId", SqlDbType.Int,4)			};
@@ -260,8 +282,12 @@ namespace TrainerEvaluate.DAL
 				}
 				if(row["Object"]!=null)
 				{
-					model.Object=row["Object"].ToString();
+                    model.Object = Convert.ToInt32(row["Object"].ToString());
 				}
+                if (row["ObjectName"] != null)
+                {
+                    model.ObjectName = row["ObjectName"].ToString();
+                }
 				if(row["Description"]!=null)
 				{
                     model.Description = row["Description"].ToString();
@@ -287,7 +313,10 @@ namespace TrainerEvaluate.DAL
                 {
                     model.PointType = int.Parse(row["PointType"].ToString());
                 }
-
+                if (row["PointTypeName"] != null)
+                {
+                    model.PointTypeName = row["PointTypeName"].ToString();
+                }
                 if (row["Teacher"] != null)
                 {
                     model.Teacher = row["Teacher"].ToString();
@@ -296,6 +325,10 @@ namespace TrainerEvaluate.DAL
                 {
                     model.Area = int.Parse(row["Area"].ToString());
                 }
+                if (row["AreaName"] != null)
+                {
+                    model.AreaName = row["AreaName"].ToString();
+                }
                 if (row["Level"] != null && row["Level"].ToString() != "")
                 {
                     model.Level = int.Parse(row["Level"].ToString());
@@ -303,6 +336,10 @@ namespace TrainerEvaluate.DAL
                 if (row["Type"] != null && row["Type"].ToString() != "")
                 {
                     model.Type = int.Parse(row["Type"].ToString());
+                }
+                if (row["TypeName"] != null)
+                {
+                    model.TypeName = row["TypeName"].ToString();
                 }
                 if (row["CreatedTime"] != null && row["CreatedTime"].ToString() != "")
                 {
@@ -393,7 +430,7 @@ namespace TrainerEvaluate.DAL
 		public DataSet GetListByPage(string strWhere, string sort, int startIndex, int endIndex,string order)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("SELECT ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level, Type, CreatedTime,Type,YearLevel,IsReport,ReportMax,CloseDate FROM ( ");
+            strSql.Append("SELECT ID,Name,Status,Object,Description,StartDate,FinishDate,Students,Point,PointType,Teacher,Area,Level, Type, CreatedTime,Type,YearLevel,IsReport,ReportMax,CloseDate,ObjectName,PointTypeName,AreaName,TypeName FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
             if (!string.IsNullOrEmpty(sort.Trim()))
 			{

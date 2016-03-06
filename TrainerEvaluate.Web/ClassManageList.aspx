@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">培训形式：</div>
+                <div align="center">培训范围：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
@@ -51,7 +51,7 @@
                 <tr>
                     <th field="ID" width="0" hidden="true">编号</th>
                     <th field="Name" width="100">班级名称</th>
-                    <th field="Object" width="100" sortable="true">培训对象</th>
+                    <th field="ObjectName" width="100" sortable="true">培训对象</th>
                     <th field="Description" width="100" sortable="true">培训内容</th>
                     <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
                     <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
@@ -83,8 +83,9 @@
                     <input name="Name" id="Name" class="easyui-textbox" style="width: 280px;" required="true">
                 </div>
                 <div class="fitem">
-                    <label>培训对象:</label>
-                    <input name="Object" id="Object" class="easyui-textbox" style="width: 280px;" />
+                    <label>培训对象:</label> 
+                    <select class="easyui-combobox" name="Object" id="Object" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=obj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select> 
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
@@ -109,8 +110,7 @@
                 <div class="fitem">
                     <label>学时类型:</label>
                     <select class="easyui-combobox" name="PointType" id="PointType" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=s',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
-                    </select>
-
+                    </select> 
                 </div>
                 <div class="fitem">
                     <label>项目负责人:</label>
@@ -451,14 +451,22 @@
             }
 
             var data = {
-                Name: $('#Name').textbox("getText"), Object: $('#Object').textbox("getText"),
-                Description: $('#Description').textbox("getText"), StartDate: $('#StartDate').textbox("getText"),
-                FinishDate: $('#FinishDate').textbox("getText"), Students: $('#Students').textbox("getText"),
-                Point: $('#Point').textbox("getText"), PointType: $('#PointType').combobox("getValue"),
+                Name: $('#Name').textbox("getText"),
+                Object: $('#Object').combobox("getValue"),
+                ObjectName: $('#Object').combobox("getText"),
+                Description: $('#Description').textbox("getText"),
+                StartDate: $('#StartDate').textbox("getText"),
+                FinishDate: $('#FinishDate').textbox("getText"),
+                Students: $('#Students').textbox("getText"),
+                Point: $('#Point').textbox("getText"),
+                PointType: $('#PointType').combobox("getValue"),
+                PointTypeName: $('#PointType').combobox("getText"),
                 Teacher: $('#Teacher').textbox("getText"),
                 //Level: $('#Level').combobox("getValue"),
                 Type: $('#Type').combobox("getValue"),
+                TypeName: $('#Type').combobox("getText"),
                 Area: $('#Area').combobox("getValue"),
+                AreaName: $('#Area').combobox("getText"),
                 SetIsReport: IsReport,
                 ReportMax: $('#ReportMax').textbox("getText"),
                 CloseDate: $('#CloseDate').textbox("getText")

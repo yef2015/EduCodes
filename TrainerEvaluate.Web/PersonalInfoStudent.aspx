@@ -32,7 +32,7 @@
                 <div align="center">所在学校： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name',panelHeight:'auto'">
+                <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name'">
                 </select>
             </td>
         </tr>
@@ -45,7 +45,7 @@
                 </select>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">联系电话： </div>
+                <div align="center">办公电话： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
                 <input name="TelNo" id="TelNo" class="easyui-textbox" />
@@ -74,7 +74,7 @@
                 <input name="FirstRecord" id="FirstRecord" class="easyui-textbox" />
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">全日制学校： </div>
+                <div align="center">全日制毕业学校： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
                 <input name="FirstSchool" id="FirstSchool" class="easyui-textbox" />
@@ -88,7 +88,7 @@
                 <input name="LastRecord" id="LastRecord" class="easyui-textbox" />
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">在职学校： </div>
+                <div align="center">在职毕业学校： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                 <input name="LastSchool" id="LastSchool" class="easyui-textbox" />
@@ -105,18 +105,16 @@
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">现任级别： </div>
             </td>
-            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"> 
                 <input name="Rank" id="Rank" class="easyui-textbox" />
             </td>
         </tr>
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">任现任时间：</div>
+                <div align="center">主管工作：</div>
             </td>
-            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-
-                <input name="RankTime" id="RankTime" class="easyui-datebox" />
+            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a"> 
+                <input name="ManageWork" id="ManageWork" class="easyui-textbox" required="true" />
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">现任职务： </div>
@@ -138,7 +136,7 @@
                 <div align="center">手机号码： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="Mobile" id="Mobile" class="easyui-textbox" required="true" />
+                <input name="Mobile" id="Mobile" class="easyui-textbox" required="true" required="true" />
             </td>
         </tr>
         <tr>
@@ -185,7 +183,7 @@
                      var dataObj = eval("(" + result + ")");//转换为json对象 
 
                      $.each(dataObj.rows, function (i, item) {
-                         $('#School').combobox("setText", item.School);
+                         $('#School').textbox("setText", item.School);
                          if (item.JobTitle != 0) {
                              // 职称
                              $('#JobTitle').combobox("setValue", item.JobTitle);
@@ -217,7 +215,8 @@
                              $('#PoliticsStaus').combobox("setValue", "");
                          }
                          $('#Rank').textbox("setText", item.Rank);
-                         $('#RankTime').datebox("setValue", item.RankTime);
+                         $('#ManageWork').textbox("setText", item.ManageWork);
+                     //    $('#RankTime').datebox("setValue", item.RankTime);
                          $('#Post').textbox("setText", item.Post);
                          $('#PostOptName').combobox("setValue", item.PostOptId);
                          $('#PostTime').datebox("setValue", item.PostTime);
@@ -247,7 +246,8 @@
                  LastSchool: $('#LastSchool').textbox("getText"),
                  PoliticsStaus: $('#PoliticsStaus').combobox("getValue"),
                  Rank: $('#Rank').textbox("getText"),
-                 RankTime: $('#RankTime').textbox("getText"),
+                 ManageWork: $('#ManageWork').textbox("getText"),
+             //    RankTime: $('#RankTime').textbox("getText"),
                  Post: $('#Post').textbox("getText"),
                  PostTime: $('#PostTime').textbox("getText"),
                  Mobile: $('#Mobile').textbox("getText"),
@@ -267,6 +267,10 @@
              }
              if (data.Mobile == "") {
                  messageAlert('提示', "请填写手机号码", 'warning');
+                 return;
+             }
+             if (data.ManageWork == "") {
+                 messageAlert('提示', "请填写主管工作", 'warning');
                  return;
              }
              if (data.TeachNo == "") {

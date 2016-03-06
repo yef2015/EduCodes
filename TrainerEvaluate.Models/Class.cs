@@ -14,15 +14,19 @@ namespace TrainerEvaluate.Models
 		private int _id;
 		private string _name;
 		private int _status;
-		private string _object;
-		private string _description;
+		private int _object;
+		private string _objectName;
+        private string _typeName;
+		private string _description; 
 		private DateTime? _startDate;
 		private DateTime? _finishDate;
         private int? _students;
         private int? _point;
         private int? _pointType;
+        private string _pointTypeName;
         private string _teacher;
         private int? _area;
+        private string _areaName;
         private int? _level;
         private int? _type;
         private DateTime _createdTime;
@@ -58,11 +62,18 @@ namespace TrainerEvaluate.Models
 		/// <summary>
 		/// 培训对象
 		/// </summary>
-		public string Object
-		{
-			set{ _object = value;}
+        public int Object
+        {
+            set { _object = value; }
             get { return _object; }
-		}
+        }
+
+        public string ObjectName
+        {
+            set { _objectName = value; }
+            get { return _objectName; }
+        }
+
 		/// <summary>
 		/// 描述
 		/// </summary>
@@ -113,6 +124,14 @@ namespace TrainerEvaluate.Models
             get { return _pointType; }
         }
 
+
+        public string PointTypeName
+        {
+            set { _pointTypeName = value; }
+            get { return _pointTypeName; }
+        }
+
+
         /// <summary>
         /// 项目负责人
         /// </summary>
@@ -129,6 +148,11 @@ namespace TrainerEvaluate.Models
         {
             set { _area = value; }
             get { return _area; }
+        }
+        public string AreaName
+        {
+            set { _areaName = value; }
+            get { return _areaName; }
         }
 
         /// <summary>
@@ -147,6 +171,12 @@ namespace TrainerEvaluate.Models
         {
             set { _type = value; }
             get { return _type; }
+        }    
+        
+        public string TypeName
+        {
+            set { _typeName = value; }
+            get { return _typeName; }
         }
         public DateTime CreatedTime
         {

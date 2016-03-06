@@ -329,7 +329,14 @@ namespace TrainerEvaluate.Web
         private void SetModelValue(Models.Class classModel, HttpContext context)
         {
             classModel.Name = context.Request["Name"];
-            classModel.Object = context.Request["Object"];
+            if (!string.IsNullOrEmpty(context.Request["Object"]))
+            {
+                classModel.Object = Convert.ToInt32(context.Request["Object"]);
+            }   
+            if (!string.IsNullOrEmpty(context.Request["ObjectName"]))
+            {
+                classModel.ObjectName = context.Request["ObjectName"];
+            }  
             classModel.Description = context.Request["Description"];
             if (!string.IsNullOrEmpty(context.Request["StartDate"]))
             {
@@ -347,6 +354,10 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["PointType"]))
             {
                 classModel.PointType = int.Parse(context.Request["PointType"]);
+            }   
+            if (!string.IsNullOrEmpty(context.Request["PointTypeName"]))
+            {
+                classModel.PointTypeName =  context.Request["PointTypeName"];
             }
             //if (!string.IsNullOrEmpty(context.Request["Level"]))
             //{
@@ -355,10 +366,18 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["Type"]))
             {
                 classModel.Type = int.Parse(context.Request["Type"]);
+            }   
+            if (!string.IsNullOrEmpty(context.Request["TypeName"]))
+            {
+                classModel.TypeName =  context.Request["TypeName"];
             }
             if (!string.IsNullOrEmpty(context.Request["Area"]))
             {
                 classModel.Area = int.Parse(context.Request["Area"]);
+            }
+            if (!string.IsNullOrEmpty(context.Request["AreaName"]))
+            {
+                classModel.AreaName = context.Request["AreaName"];
             }
             if (context.Session["ClassYear"] != null)
             {

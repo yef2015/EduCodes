@@ -361,9 +361,9 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("出生日期");
             fieldsNames.Add("民族");
             fieldsNames.Add("全日制学历");
-            fieldsNames.Add("全日制学校");
+            fieldsNames.Add("全日制毕业学校");
             fieldsNames.Add("在职学历");
-            fieldsNames.Add("在职学校");
+            fieldsNames.Add("在职毕业学校");
             fieldsNames.Add("政治面貌");
             fieldsNames.Add("现任级别");
             fieldsNames.Add("任现任级别时间");
