@@ -416,7 +416,7 @@
                 $('#dlg').dialog('open').dialog('setTitle', '编辑');
 
                 $('#Name').textbox("setText", row.Name);
-                $('#Object').textbox("setValue", row.Object);
+                $('#Object').combobox("setValue", row.Object);
                 $('#Description').textbox("setText", row.Description);
                 $('#StartDate').datebox("setValue", row.StartDate);
                 $('#FinishDate').datebox("setValue", row.FinishDate);

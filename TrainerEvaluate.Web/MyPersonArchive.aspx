@@ -257,7 +257,9 @@
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
 
-                    <input name="Rank" id="Rank" class="easyui-textbox" />
+                   <%-- <input name="Rank" id="Rank" class="easyui-textbox" />--%>
+                    <select class="easyui-combobox" name="Rank" id="Rank" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                </select>
                 </td>
             </tr>
             <tr>

@@ -62,7 +62,7 @@
                 <div align="center">民族： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="Nation" id="Nation" style="width: 153px;" data-options="url:'ComboboxGetData.ashx?t=n',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                <select class="easyui-combobox" name="Nation" id="Nation" style="width: 153px;" data-options="url:'ComboboxGetData.ashx?t=n',method:'get',valueField:'ID',textField:'Name'">
                 </select>
             </td>
         </tr>
@@ -105,8 +105,9 @@
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">现任级别： </div>
             </td>
-            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"> 
-                <input name="Rank" id="Rank" class="easyui-textbox" />
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
+               <select class="easyui-combobox" name="Rank" id="Rank" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                </select>
             </td>
         </tr>
         <tr>
@@ -180,15 +181,14 @@
             var data = { t: 'psdif', uid: '<%= UserId %>' };
              $.post(url, data, function (result) {
                  if (result != "") {
-                     var dataObj = eval("(" + result + ")");//转换为json对象 
+                     var dataObj = eval("(" + result + ")"); //转换为json对象 
 
-                     $.each(dataObj.rows, function (i, item) {
+                     $.each(dataObj.rows, function(i, item) {
                          $('#School').textbox("setText", item.School);
                          if (item.JobTitle != 0) {
                              // 职称
                              $('#JobTitle').combobox("setValue", item.JobTitle);
-                         }
-                         else {
+                         } else {
                              $('#JobTitle').combobox("setValue", "");
                          }
                          $('#IdentityNo').textbox("setText", item.IdentityNo);
@@ -199,8 +199,7 @@
                          if (item.Nation != 0) {
                              // 民族
                              $('#Nation').combobox("setValue", item.Nation);
-                         }
-                         else {
+                         } else {
                              $('#Nation').combobox("setValue", "");
                          }
                          $('#FirstRecord').textbox("setText", item.FirstRecord);
@@ -210,13 +209,12 @@
                          if (item.PoliticsStatus != 0) {
                              // 政治面貌
                              $('#PoliticsStaus').combobox("setValue", item.PoliticsStatus);
-                         }
-                         else {
+                         } else {
                              $('#PoliticsStaus').combobox("setValue", "");
                          }
                          $('#Rank').textbox("setText", item.Rank);
                          $('#ManageWork').textbox("setText", item.ManageWork);
-                     //    $('#RankTime').datebox("setValue", item.RankTime);
+                         //    $('#RankTime').datebox("setValue", item.RankTime);
                          $('#Post').textbox("setText", item.Post);
                          $('#PostOptName').combobox("setValue", item.PostOptId);
                          $('#PostTime').datebox("setValue", item.PostTime);
@@ -226,6 +224,8 @@
                          $('#UserPassWord').textbox("setText", item.UserPassWord);
                          url = 'StudentsInfo.ashx' + '?t=esif&id=' + item.StudentId;
                      });
+                 } else {
+                     alert("获取信息失败！");
                  }
              });
          }
@@ -284,6 +284,7 @@
              $.post(url, data, function (result) {
                  if (result == "") {
                      alert('保存成功!');
+                     window.location.href = "NetForStudent.aspx";
                  } else {
                      alert(result);
                  }

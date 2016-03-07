@@ -66,6 +66,9 @@ namespace TrainerEvaluate.Web
                     break; 
                 case "obj":
                     dataType = "培训对象";
+                    break;   
+                case "rank":
+                    dataType = "现任级别";
                     break;
                 default:
                     break; 

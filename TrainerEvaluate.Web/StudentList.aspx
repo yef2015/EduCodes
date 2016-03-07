@@ -52,8 +52,9 @@
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">现任级别：</div>
             </td>
-            <td width="35%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <input name="Rank" id="Rank1" class="easyui-textbox" style="width:165px;" />
+            <td width="35%" bgcolor="FFFFFF" class="gray10a" height="25"> 
+                <select class="easyui-combobox" name="Rank1" id="Rank1" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 </td>
@@ -199,9 +200,9 @@
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">现任级别： </div>
                 </td>
-                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-
-                    <input name="Rank" id="Rank" class="easyui-textbox" />
+                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
+                    <select class="easyui-combobox" name="Rank" id="Rank" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                   </select>
                 </td>
             </tr>
             <tr>
@@ -444,7 +445,7 @@
                     <tr>
                         <th field="ID" width="0" hidden="true">编号</th>
                         <th field="Name" width="150">班级名称</th>
-                        <th field="Object" width="200" sortable="true">培训对象</th>
+                        <th field="ObjectName" width="200" sortable="true">培训对象</th>
                         <th field="Description" width="250" sortable="true">培训内容</th>
                         <th field="StartDate" width="150" sortable="true" formatter="formatterdate">开始日期</th>
                         <th field="FinishDate" width="150" sortable="true" formatter="formatterdate">结束日期</th>
@@ -540,7 +541,7 @@
                     $('#PoliticsStaus').combobox("setValue", "");
                 }
                 $('#Rank').textbox("setText", row.Rank);
-                $('#RankTime').textbox("setValue", row.RankTime);
+                $('#RankTime').textbox("setText", row.RankTime);
                 $('#Post').textbox("setText", row.Post);
                 $('#PostOptName').combobox("setValue", row.PostOptId);
               //  $('#PostTime').textbox("setValue", row.PostTime);
@@ -643,7 +644,7 @@
                 PostOptId: $('#PostOptName ').combobox("getValue"),
                 SetPwd: IsSetPwd,
                 ManageWork: $('#ManageWork').textbox("getText")
-            };
+            }; 
             if (data.StuName == "") {
                 messageAlert('提示', "请填写姓名", 'warning');
                 return;

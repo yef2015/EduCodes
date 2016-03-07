@@ -264,6 +264,7 @@
                         window.parent.location.href = "NetForStudent.aspx";
                     } else {
                         alert("数据保存失败！" + result);
+                        window.parent.location.href = "NetForStudent.aspx";
                     }
                 });
             }
