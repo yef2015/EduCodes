@@ -312,7 +312,7 @@ namespace TrainerEvaluate.DAL
 				{
 					model.School=row["School"].ToString();
 				}
-                if (row["JobTitle"] != null && row["Gender"].ToString() != "")
+                if (row["JobTitle"] != null && row["JobTitle"].ToString() != "")
 				{
                     model.JobTitle =int.Parse( row["JobTitle"].ToString());
 				}
