@@ -131,7 +131,7 @@
                 <div align="center">任职时间：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="PostTime" id="PostTime" class="easyui-datebox" />
+                <input name="PostTime" id="PostTime" class="easyui-textbox" />
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">手机号码： </div>
@@ -217,7 +217,7 @@
                          //    $('#RankTime').datebox("setValue", item.RankTime);
                          $('#Post').textbox("setText", item.Post);
                          $('#PostOptName').combobox("setValue", item.PostOptId);
-                         $('#PostTime').datebox("setValue", item.PostTime);
+                         $('#PostTime').textbox("setValue", item.PostTime);
                          $('#Mobile').textbox("setText", item.Mobile);
                          $('#Description').textbox("setText", item.Description);
                          $('#TeachNo').textbox("setText", item.TeachNo);
