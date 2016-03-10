@@ -81,7 +81,7 @@ namespace TrainerEvaluate.Web
 
         private string GetData(HttpContext context)
         {
-            string strWhere = "Status=1";
+            string strWhere = " ";
             var schoolname = "all";
             if (context.Session["SchoolName"] != null)
             {
@@ -89,7 +89,7 @@ namespace TrainerEvaluate.Web
             }
             if (schoolname != "all")
             {
-                strWhere += " and School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
+                strWhere += "   School in(select SchoolName from School where (SchDisName = '" + schoolname + "' or SchoolName = '" + schoolname + "') and Status = 1) ";
             }
 
             var ds = new DataSet();

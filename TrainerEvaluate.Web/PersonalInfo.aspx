@@ -15,10 +15,8 @@
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">性别： </div>
             </td>
-            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="Gender" id="Gender"  style="width: 165px;">
-                    <option value="1">男</option>
-                    <option value="2">女</option>
+            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
+                <select class="easyui-combobox" name="Gender" id="Gender" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
                 </select>
             </td>
         </tr>
@@ -80,12 +78,28 @@
             };--%>
             var data = {
                 t: 'e',
-                uid: ' <%= UserId %>', UserName: $("#StuName").textbox("getText"),
-                Gender: $("#Gender").combobox("getValue"),
+                uid: ' <%= UserId %>',
+                UserName: $("#StuName").textbox("getText"),
+                Gender: $("#Gender").textbox("getText"),
                 UserAccount: $("#UserAccount").textbox("getText"),
                 BeforeUserAccount: $("#beforeUserAccount").val(),
                 UserPassWord: $("#UserPassWord").textbox("getText")
-             };
+            };
+
+            if (data.UserName == "") {
+                messageAlert('提示', '请输入姓名！', 'warning');
+                return;
+            }
+            if (data.UserAccount == "") {
+                messageAlert('提示', '请输入账号！', 'warning');
+                return;
+            }
+            if (data.UserPassWord == "") {
+                messageAlert('提示', '请输入密码！', 'warning');
+                return;
+            }
+
+
              $.post(url, data, function (result) {
                  if (result == "") {
                      //messageAlert('提示', '保存成功!', 'info');
@@ -111,7 +125,7 @@
                                     $("#StuName").textbox("setText", stu[1]);
                                     break;
                                 case "Gender":
-                                    $("#Gender").combobox("setValue", stu[1]);
+                                    $("#Gender").textbox("setText", stu[1]);
                                     break;
                                 case "School":
                                     $("#School").textbox("setText", stu[1]);

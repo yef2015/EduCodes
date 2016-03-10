@@ -56,6 +56,7 @@
                     <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
                     <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
                     <th field="Students" width="100" sortable="true">学员人数</th>
+                    <th field="HasReportNum" width="100" sortable="true">已报名人数</th>
                     <th field="Point" width="100" sortable="true">学时</th>
                     <th field="Teacher" width="100" sortable="true">项目负责人</th>
                 </tr>

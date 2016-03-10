@@ -459,11 +459,15 @@ namespace TrainerEvaluate.DAL
 		public int GetRecordCount(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) FROM Student ");
-			if(strWhere.Trim()!="")
-			{
-				strSql.Append(" where "+strWhere);
-			}
+            strSql.Append("SELECT count(*) ");  
+            strSql.Append(" from Student  a   inner join SysUser f on a.StudentId=f.UserId left join Dictionaries b   on  a.Gender=b.ID ");
+            strSql.Append("  left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID ");
+            strSql.Append(" where a.Status=1  ");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" and " + strWhere);
+            }
+
 			object obj = DbHelperSQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
@@ -490,8 +494,8 @@ namespace TrainerEvaluate.DAL
 			{
                 strSql.Append("order by  StuName asc");
 			}
-            strSql.Append(" )AS Row, a.*,b.Name as GenderName,c.Name as JobTitleName,d.Name as NationName, e.Name as PoliticsStatusName  ");
-            strSql.Append(" from Student a left join Dictionaries b   on  a.Gender=b.ID ");
+            strSql.Append(" )AS Row, a.*, f.UserPassWord, b.Name as GenderName,c.Name as JobTitleName,d.Name as NationName, e.Name as PoliticsStatusName  ");
+            strSql.Append(" from Student  a   inner join SysUser f on a.StudentId=f.UserId left join Dictionaries b   on  a.Gender=b.ID ");
             strSql.Append("  left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID ");
             strSql.Append(" where a.Status=1  ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))

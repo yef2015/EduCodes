@@ -15,7 +15,9 @@
                 <div align="center">用户部门： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="tDept" class="easyui-textbox" id="tDept" style="width: 165px;"/>
+            <%--    <input name="tDept" class="easyui-textbox" id="tDept" style="width: 165px;"/>--%>
+                <select class="easyui-combobox" name="tGender" id="tGender" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                </select>
             </td>
         </tr>
         <tr bgcolor="#FFFFFF">
@@ -36,7 +38,7 @@
                     <th field="UserId" width="0" hidden="true">编号</th>
                     <th field="UserName" width="15%" sortable="true">姓名</th>
                     <th field="IdentityNo" width="22%" sortable="true">身份证号</th>
-                    <th field="Dept" width="25%" sortable="true">单位</th>
+                    <th field="Dept" width="25%" sortable="true">性别</th>
                     <th field="UserAccount" width="20%" sortable="true">登陆帐号</th>
                     <th field="RoleName" width="15%" sortable="true">所属角色</th>
                     <th field="UserPassWord" width="0" hidden="true">密码</th>                    
@@ -59,20 +61,22 @@
                 </div>
                 <div class="fitem" >
                     <label>身份证号：</label>  
-                     <input name="IdentityNo" id="IdentityNo" class="easyui-textbox" required="true" style="width:280px;"/>
+                     <input name="IdentityNo" id="IdentityNo" class="easyui-textbox"   style="width:280px;"/>
                 </div>
                 <div class="fitem" >
-                    <label>单位：</label>  
-                     <input name="Dept" id="Dept" class="easyui-textbox" required="true" style="width:280px;"/>
+                    <label>性别：</label>  
+                  <%--   <input name="Dept" id="Dept" class="easyui-textbox" required="true" style="width:280px;"/>--%> 
+                    <select class="easyui-combobox" name="Gender" id="Gender" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </div>
                 <div class="fitem">
                     <label>登录账号：</label>
-                    <input name="UserAccount" id="UserAccount" class="easyui-textbox" style="width:280px;"/>
+                    <input name="UserAccount" id="UserAccount" class="easyui-textbox" style="width:280px;" required="true"/>
                     <input type="hidden" id="UserAccountOld" />
                 </div>
                 <div class="fitem">
                     <label>密码：</label>
-                    <input name="Pwd" id="Pwd" class="easyui-textbox" style="width:280px;"/>
+                    <input name="Pwd" id="Pwd" class="easyui-textbox" style="width:280px;" required="true"/>
                 </div>
                 <div class="fitem">
                     <label>所属角色：</label>
@@ -95,7 +99,7 @@
             $('#UserName').textbox("setText", "");
             $('#UserAccount').textbox("setText", "");
             $('#Pwd').textbox("setText", "");
-            $('#Dept').textbox("setText", "");
+            $('#Gender').combobox("setValue", "");
             $('#SysRoles').combobox("setValue", "");
 
             url = 'SysUser.ashx' + '?t=n';
@@ -110,7 +114,7 @@
                 $('#UserAccount').textbox("setText", row.UserAccount);
                 $('#IdentityNo').textbox("setText", row.IdentityNo);
                 $('#Pwd').textbox("setText", row.UserPassWord);
-                $('#Dept').textbox("setText", row.Dept);
+                $('#Gender').textbox("setText", row.Dept);
                 $("#UserAccountOld").val(row.UserAccount);
                 $('#SysRoles').combobox("setValue", row.RoleName);
 
@@ -124,13 +128,28 @@
         function saveUser() {
             var data = {
                 UserName: $('#UserName').textbox("getText"),
-                Dept: $('#Dept').textbox("getText"),
+                Gender: $('#Gender').textbox("getText"),
                 UserAccount: $('#UserAccount').textbox("getText"),
                 UserAccountOld:$("#UserAccountOld").val(), 
                 IdentityNo: $('#IdentityNo').textbox("getText"),
                 UserPassWord: $('#Pwd').textbox("getText"),
                 RoleId: $('#SysRoles').combobox("getValue")
             };
+
+            if (data.UserName == "") {
+                messageAlert('提示', '请输入姓名！', 'warning');
+                return;
+            }
+            if (data.UserAccount == "") {
+                messageAlert('提示', '请输入账号！', 'warning');
+                return;
+            }
+            if (data.UserPassWord == "") {
+                messageAlert('提示', '请输入密码！', 'warning');
+                return;
+            }
+
+
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');

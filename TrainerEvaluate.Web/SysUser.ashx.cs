@@ -266,7 +266,7 @@ namespace TrainerEvaluate.Web
             sysUserModel.UserAccount = context.Request["UserAccount"];
             sysUserModel.UserRole = (int)EnumUserRole.Admin;
             sysUserModel.IdentityNo = context.Request["IdentityNo"];
-            sysUserModel.Dept = context.Request["Dept"];
+            sysUserModel.Dept = context.Request["Gender"];
             //courModel.TeacherId = new Guid(context.Request["TeacherId"]);
             sysUserModel.UserPassWord = context.Request["UserPassWord"];
         }
@@ -276,7 +276,7 @@ namespace TrainerEvaluate.Web
             sysUserModel.UserName = context.Request["UserName"];
             sysUserModel.UserAccount = context.Request["UserAccount"];
             sysUserModel.IdentityNo = context.Request["IdentityNo"];
-            sysUserModel.Dept = context.Request["Dept"];
+            sysUserModel.Dept = context.Request["Gender"];
             //courModel.TeacherId = new Guid(context.Request["TeacherId"]);
             sysUserModel.UserPassWord = context.Request["UserPassWord"];
         }

@@ -195,8 +195,8 @@ namespace TrainerEvaluate.BLL
                 {
                     var sqllist = new List<string>();
                     var sql1 = string.Format("delete from  ClassStudents where ClassId='{0}' and StudentId='{1}'  ",classId,userId);
-                    var sql2 = string.Format("");
-
+                    var sql2 = string.Format("update Class set HasReportNum=HasReportNum-1 where  ID='{0}'  ", classId);
+ 
                     sqllist.Add(sql1);
                     sqllist.Add(sql2);
 

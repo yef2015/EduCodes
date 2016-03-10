@@ -84,6 +84,7 @@
                     <th field="JobTitleName" width="12%" sortable="true">职称</th>
                     <th field="TelNo" width="12%" sortable="true">联系电话</th>
                     <th field="Rank" width="12%" sortable="true">现任级别</th>
+                    <th field="UserPassWord" width="12%" sortable="true">密码</th>
                 </tr>
             </thead>
         </table>

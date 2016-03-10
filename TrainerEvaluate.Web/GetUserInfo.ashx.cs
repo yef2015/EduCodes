@@ -96,8 +96,9 @@ namespace TrainerEvaluate.Web
                 else
                 {
                     userModel.UserAccount = context.Request["UserAccount"];
-                    userModel.UserName = context.Request["UserName"];
+                    userModel.UserName = context.Request["UserName"];  
                     userModel.UserPassWord = context.Request["UserPassWord"];
+                    userModel.Dept = context.Request["Gender"];
                     userModel.CreateTime = DateTime.Now;
                     userBll.Update(userModel);
                 }
@@ -131,6 +132,7 @@ namespace TrainerEvaluate.Web
                     result.Append(",UserAccount:" + userInfo.UserAccount);
                     result.Append(",UserPassWord:" + userInfo.UserPassWord);
                     result.Append(",UserRole:" + userInfo.UserRole);
+                    result.Append(",Gender:" + userInfo.Dept);
 
                 }
                 if (stuInfo != null)
