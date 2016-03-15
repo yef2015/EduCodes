@@ -219,7 +219,8 @@ namespace TrainerEvaluate.Web
 
             var ds = new DataSet();
             var stuBll = new BLL.Student();
-            var strWhere = " status = 1 ";
+            var strWhere = "f.Status=1 ";
+          
             if (!string.IsNullOrEmpty(stuName))
             {
                 strWhere += string.Format(" and StuName like '%" + stuName + "%' ");
@@ -242,7 +243,7 @@ namespace TrainerEvaluate.Web
             }
             if (!string.IsNullOrEmpty(idno))
             {
-                strWhere += string.Format(" and  IdentityNo  like '%" + idno + "%' ");
+                strWhere += string.Format(" and  a.IdentityNo  like '%" + idno + "%' ");
             }
             if (!string.IsNullOrEmpty(rank))
             {

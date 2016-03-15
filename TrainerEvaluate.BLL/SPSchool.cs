@@ -156,7 +156,7 @@ namespace TrainerEvaluate.BLL
         public DataSet GetDataForExport(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select SchoolName,SchDisName,RunNatureName,SchoolTypeName,AddrNum,ClassNum,StudentNum,TeacherNum,PartyNum,LegalName,LinkTel,Description ");
+            strSql.Append(" select SchoolName,SchDisName,RunNatureName,SchoolTypeName,AddrNum,ClassNum,StudentNum,TeacherNum,PartyNum,LegalName,LinkTel,Description,AddressInfo,PostCode ");
             strSql.Append(" FROM School ");
             if (strWhere.Trim() != "")
             {

@@ -403,8 +403,8 @@ namespace TrainerEvaluate.Web
             var rnn = context.Request["rnn"].Trim();
             var lln = context.Request["lln"].Trim();
             var sht = context.Request["sht"].Trim();
-            var addressInfo = context.Request["addressInfo"].Trim();
-            var postCode = context.Request["postCode"].Trim();
+            var addressInfo = context.Request["addr"].Trim();
+            var postCode = context.Request["postc"].Trim();
             var ds = new DataSet();
             var shBll = new BLL.SPSchool();
             var strWhere = "";
