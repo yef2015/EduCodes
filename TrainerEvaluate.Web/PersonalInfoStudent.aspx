@@ -17,7 +17,7 @@
                 <div align="center">性别： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="Gender" id="Gender" style="width: 153px;" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                <select class="easyui-combobox" name="Gender" id="Gender" style="width: 153px;" data-options="url:'ComboboxGetData.ashx?t=g',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" required="true">
                 </select>
             </td>
         </tr>
@@ -32,7 +32,7 @@
                 <div align="center">所在学校： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name'">
+                <select class="easyui-combobox" name="School" id="School" style="width: 153px;" data-options="url:'ComboxGetDropData.ashx?t=shl',method:'get',valueField:'Id',textField:'Name'"  required="true">
                 </select>
             </td>
         </tr>
@@ -121,8 +121,8 @@
                 <div align="center">现任职务： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="Post" id="Post" style="width: 75px;" class="easyui-textbox" />
-                <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;" data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                <input name="Post" id="Post" style="width: 75px;" class="easyui-textbox"  required="true" />
+                <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;" data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'"  required="true">
                 </select>
             </td>
         </tr>
@@ -261,24 +261,36 @@
                  messageAlert('提示', "请填写姓名", 'warning');
                  return;
              }
-             if (data.School == "") {
-                 messageAlert('提示', "请填写学校", 'warning');
+             if (data.Gender == "") {
+                 messageAlert('提示', "请填写性别", 'warning');
                  return;
              }
              if (data.IdentityNo == "") {
                  messageAlert('提示', "请填写身份证号", 'warning');
                  return;
              }
+             if (data.School == "") {
+                 messageAlert('提示', "请选择所在学校", 'warning');
+                 return;
+             }
+             if (data.Post == "") {
+                 messageAlert('提示', "请填写现任职务", 'warning');
+                 return;
+             }
+             if (data.PostOptName == "") {
+                 messageAlert('提示', "请填写选择现任职务", 'warning');
+                 return;
+             }
              if (data.Mobile == "") {
                  messageAlert('提示', "请填写手机号码", 'warning');
                  return;
              }
-             if (data.ManageWork == "") {
-                 messageAlert('提示', "请填写主管工作", 'warning');
-                 return;
-             }
              if (data.TeachNo == "") {
                  messageAlert('提示', "请填写继教号", 'warning');
+                 return;
+             }
+             if (data.ManageWork == "") {
+                 messageAlert('提示', "请填主管工作", 'warning');
                  return;
              }
              $.post(url, data, function (result) {

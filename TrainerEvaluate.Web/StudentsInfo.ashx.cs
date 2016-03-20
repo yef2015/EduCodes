@@ -690,7 +690,7 @@ namespace TrainerEvaluate.Web
 
             var stuId = context.Request["uid"];
 
-            ds = stuBll.GetListByPage(" Status = 1   and StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
+            ds = stuBll.GetListByPage(" StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
             var str = string.Empty;
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -707,7 +707,7 @@ namespace TrainerEvaluate.Web
 
             var stuId = context.Request["uid"];
 
-            ds = stuBll.GetStudentInfo(" Status = 1   and StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
+            ds = stuBll.GetStudentInfo("  StudentId = '" + stuId + "' ", "StuName", 1, 5, "asc");
             var str = string.Empty;
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
