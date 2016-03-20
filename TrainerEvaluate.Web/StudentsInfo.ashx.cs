@@ -127,7 +127,8 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = stuBll.GetRecordCount(" Status=1 ");
+         //   var num = stuBll.GetRecordCount(" Status=1 ");
+            var num = stuBll.GetRecordCount("  ");  // 加入密码后导致问题，已经在后台增加了status=1的判断
             var ds = stuBll.GetClassStuListByPage(coId, "ck", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
@@ -144,7 +145,8 @@ namespace TrainerEvaluate.Web
             var card = context.Request["card"];
             var code = context.Request["code"];
 
-            var strWhere = " Status=1 ";
+            //  var strWhere = " Status=1 ";
+           var strWhere = " 1=1 ";//
             if (!string.IsNullOrEmpty(school))
             {
                 strWhere += string.Format(" and School like '%" + school + "%' ");

@@ -306,6 +306,11 @@ namespace TrainerEvaluate.Web
                 quesModel.TotalCousre = totalCourse;
                 quesModel.TotalTeacher = totalTeacher;
 
+
+                quesModel.TrainRemark = Request.Form["txtRequire"].ToString();
+                 
+                 
+
                 // 保存学生对课程的评估信息
                 //DataTable dt = BLL.Course.GetCourseByCorIdStuId(clacouId, Profile.CurrentUser.UserId.ToString());
                 //if (dt != null && dt.Rows.Count > 0)

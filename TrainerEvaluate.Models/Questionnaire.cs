@@ -39,6 +39,7 @@ namespace TrainerEvaluate.Models
         private int _totalcousre = 0;
         private int _totalteacher = 0;
         private int _totalorg = 0;
+        private string _trainRemark;  //培训需求
         /// <summary>
         /// 问卷Id
         /// </summary>
@@ -94,6 +95,15 @@ namespace TrainerEvaluate.Models
         {
             set { _teachername = value; }
             get { return _teachername; }
+        } 
+        
+        /// <summary>
+        /// 培训需求
+        /// </summary>
+        public string   TrainRemark
+        {
+            set { _trainRemark = value; }
+            get { return _trainRemark; }
         }
         /// <summary>
         /// 总体评价

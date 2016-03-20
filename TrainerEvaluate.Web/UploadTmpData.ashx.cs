@@ -519,7 +519,7 @@ namespace TrainerEvaluate.Web
                             }
                             foreach (DataRow drCur in dtExist.Rows)
                             {
-                                if (row["身份证号"].ToString() == drCur["IdentityNo"].ToString())
+                                if (row["身份证号"].ToString().Trim() == drCur["IdentityNo"].ToString())
                                 {
                                     isExist = true;
                                     break;
@@ -543,7 +543,7 @@ namespace TrainerEvaluate.Web
 
                                 sqllist.Add(string.Format(
                                 "insert into   Student (StudentId,StuName,Gender,IdentityNo,School,JobTitle,TelNo,Birthday,Nation,FirstRecord,FirstSchool," +
-                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description,ManageWork" +
+                                                       "LastRecord,LastSchool,PoliticsStatus,Rank,RankTime,Post,PostTime,Mobile,TeachNo,Description,ManageWork," +
                                                        "CreateTime,LastModifyTime,Status) values" +
                                                        "( '{0}','{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}'," +
                                                        "'{11}','{12}',{13},'{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}',GETDATE(),GETDATE(),1 )",

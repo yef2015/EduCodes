@@ -634,7 +634,7 @@ namespace TrainerEvaluate.Web
 
                 // 根据课程id，查找所属班级，最后确定课程所属年份
                 var classbll = new BLL.Class();
-                theYear.InnerText = classbll.GetClassInfoByClassId(classId) + "年中青年干部教育管理培训班课程评估表";
+                theYear.InnerText = classbll.GetClassInfoByClassId(classId) + "课程评估表";
 
                 //DataSet dsCourse = coursebll.GetCourseInfoByCourseId(courseId.ToString());
                 DataTable dtCourse = coursebll.GetCourseInfoByCourseIdAndClassId(courseId.ToString(), classId);
