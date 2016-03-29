@@ -74,7 +74,7 @@
         <div id="toolbar">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newUser()">新增</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">编辑</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+            <a id="btnDel"  href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">下载模板</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadTmpData()">批量导入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-redo" plain="true" onclick="exportData()">导出</a>
@@ -492,7 +492,15 @@
                 idno: $("#IdentityNo11").textbox('getText')
             });
         }
+         
 
+        $(function () {
+            if ('<%=IsDel%>' == "block") {
+                $("#btnDel").show();
+            } else {
+                $("#btnDel").hide();
+            }  
+        }); 
 
-    </script>
+   </script>
 </asp:Content>

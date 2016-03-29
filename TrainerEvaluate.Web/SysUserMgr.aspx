@@ -12,7 +12,7 @@
                 <input name="tName" class="easyui-textbox" id="tName" style="width: 165px;"/>
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">用户部门： </div>
+                <div align="center">性别： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
             <%--    <input name="tDept" class="easyui-textbox" id="tDept" style="width: 165px;"/>--%>
@@ -187,7 +187,7 @@
             $('#dg').datagrid('load', {
                 t: "g",
                 Name: $("#tName").textbox('getText'),
-                Dept: $("#tDept").textbox('getText')
+                Dept: $("#tGender").textbox('getText')
             });
         }
 

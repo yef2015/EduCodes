@@ -62,17 +62,17 @@
                 </tr>
             </thead>
         </table>
-        <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newClass()">新增</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editClass()">编辑</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="DeleteClass()">删除</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="setStu()">学员设置</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="uploadTmpStuData()">导入学员</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">项目负责人设置</a>
+        <div id="toolbar"> 
+            <a id="btnNew" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newClass()">新增</a>
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editClass()">编辑</a>
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="DeleteClass()">删除</a>
+            <a id="btnStu" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user" plain="true" onclick="setStu()">学员设置</a>
+            <a id="btnExstu" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="uploadTmpStuData()">导入学员</a>
+            <a id="btnCharge" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_business_boss" plain="true" onclick="setTeacher()">项目负责人设置</a>
+            <a id="btnExclass" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">批量导出班级信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourseNew()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="showCourseNew()">查看课程设置</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">批量导出班级信息</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a> 
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -266,12 +266,12 @@
             <form id="fmCourse" method="post">
                 <div class="fitem">
                     <label>选择课程:</label>
-                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'get',valueField:'ID',textField:'Name'">
+                    <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'post',valueField:'ID',textField:'Name'">
                     </select>
                 </div>
                 <div class="fitem">
                     <label>授课老师:</label>
-                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'get',valueField:'ID',textField:'Name'">
+                    <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'post',valueField:'ID',textField:'Name'">
                     </select>
                 </div>
                 <div class="fitem">
@@ -1073,6 +1073,30 @@
                 + "&area=" + $("#area").textbox('getText') + "&type=" + $('#type').combobox("getValue");
             window.location = url;
         }
+
+
+
+        $(function () {
+            if ('<%=IsDel%>' == "block") {
+                $("#btnNew").show();
+                $("#btnEdit").show();
+                $("#btnDel").show();
+                $("#btnStu").show();
+                $("#btnExstu").show();
+                $("#btnCharge").show();
+                $("#btnExclass").show();
+               } else { 
+                $("#btnNew").hide();
+                $("#btnEdit").hide();
+                $("#btnDel").hide();
+                $("#btnStu").hide();
+                $("#btnExstu").hide();
+                $("#btnCharge").hide();
+                $("#btnExclass").hide();
+               }
+           });
+
+
 
     </script>
 
