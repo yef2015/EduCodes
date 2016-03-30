@@ -83,6 +83,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newUser()">生成问卷</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">编辑调查时间</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">取消问卷</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="del()">删除问卷</a>
         </div>
     </div>
       
@@ -193,17 +194,65 @@
             var url = 'QuestionnaireHadlerNew.ashx' + '?t=c';
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $.messager.confirm('确认', '确定删除该问卷吗?', function (r) {
-                    if (r) {
-                        $.post(url, { id: row.ID }, function (result) {
-                            if (result == "" || result == null) {
-                                $('#dg').datagrid('reload'); // reload the user data
-                            } else {
-                                messageAlert('提示', result, 'warning');
-                            }
-                        });
-                    }
-                });
+                //$.messager.confirm('确认', '确定删除该问卷吗?', function (r) 
+                //{
+                //    if (r) {
+                //        $.post(url, { id: row.ID }, function (result) {
+                //            if (result == "" || result == null) {
+                //                $('#dg').datagrid('reload'); // reload the user data
+                //            } else {
+                //                messageAlert('提示', result, 'warning');
+                //            }
+                //        });
+                //    }
+                //});
+                if (row.QuestionInfoStatus != "已生成") {
+                    messageAlert('提示', "只有【已生成】的问卷允许取消！", 'warning');
+                    return;
+                }
+                if (confirm("确定取消该问卷吗?")) {
+                    $.post(url, { id: row.ID }, function (result) {
+                                    if (result == "" || result == null) {
+                                        $('#dg').datagrid('reload'); // reload the user data
+                                    } else {
+                                        messageAlert('提示', result, 'warning');
+                                    }
+                                });
+                }
+            } else {
+                messageAlert('提示', '请选择课程', 'warning');
+            }
+        }
+
+        function del() {
+            var url = 'QuestionnaireHadlerNew.ashx' + '?t=d';
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                if (row.QuestionInfoStatus != "已取消") {
+                    messageAlert('提示', "只有【已取消】的问卷允许删除！", 'warning');
+                    return;
+                }
+                //$.messager.confirm('确认', '确定删除该问卷吗?', function (r) {
+                //    if (r) {
+                //        $.post(url, { id: row.ID }, function (result) {
+                //            if (result == "" || result == null) {
+                //                $('#dg').datagrid('reload'); // reload the user data
+                //            } else {
+                //                messageAlert('提示', result, 'warning');
+                //            }
+                //        });
+                //    }
+                //});
+                if (confirm("确定删除该问卷吗?")) {
+                    $.post(url, { id: row.ID }, function (result) {
+                        if (result == "" || result == null) {
+                            $('#dg').datagrid('reload'); // reload the user data
+                        } else {
+                            messageAlert('提示', result, 'warning');
+                        }
+                    });
+                }
+
             } else {
                 messageAlert('提示', '请选择课程', 'warning');
             }

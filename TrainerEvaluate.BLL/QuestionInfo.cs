@@ -190,10 +190,11 @@ namespace TrainerEvaluate.BLL
                       "  b.TeacherName,b.ClassName,b.CoursName as CourseName,d.TeachPlace " +
                       " from CourseTeacher b " +
                       " left join QuestionInfo a on b.RId = a.ClassCourseID " +
-                      " inner join Course d on d.CourseId = b.CourseId ) AA ";
+                      " inner join Course d on d.CourseId = b.CourseId where (a.Status<>0 or a.Status is  null) ) AA ";
              
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(sql);
+            strSql.Append(sql); 
+
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -235,10 +236,13 @@ namespace TrainerEvaluate.BLL
             strSql.Append(" ISNULL(a.Status,1) Status  ");
             strSql.Append(" from CourseTeacher b ");
             strSql.Append(" left join QuestionInfo a on b.RId = a.ClassCourseID ");
-            strSql.Append(" inner join Course d on d.CourseId = b.CourseId )   T ");
+            strSql.Append(" inner join Course d on d.CourseId = b.CourseId  where (a.Status<>0 or a.Status is  null) )   T ");
+
+ 
+
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
-                strSql.Append(" WHERE " + strWhere);
+                strSql.Append(" where  " + strWhere);
             }
             strSql.Append(" ) TT");
 
@@ -353,7 +357,37 @@ namespace TrainerEvaluate.BLL
 
 
 
-       
+        /// <summary>
+        /// 删除问卷 Status=0
+        /// </summary>
+        /// <param name="classCourseId"></param>
+        /// <returns></returns>
+        public bool DelQue(string classCourseId)
+        {
+            try
+            {
+                var ls = new List<string>();
+                var sql = string.Format("  update QuestionInfo set Status=0 where ClassCourseID='{0}' ", classCourseId);
+                var sql1 =
+                    string.Format(
+                        "  delete from CourseStudents where CourseId=(select e.CourseID from ClassCourse e where e.ID='{0}' ) and StudentId in( select b.StudentId from ClassStudents b,ClassCourse c where b.ClassId=c.ClassId and c.ID='{0}') ",
+                        classCourseId);
+
+                ls.Add(sql);
+                ls.Add(sql1);
+                var re = DbHelperSQL.ExecuteSqlTran(ls);
+                return re > 0;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return false;
+            }
+        }
+
+
+
+
 
 
 

@@ -283,7 +283,8 @@ namespace TrainerEvaluate.BLL
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     var row = ds.Tables[0].Rows[0];
-                    classYear = row["YearLevel"].ToString() + row["Name"].ToString();
+                  //  classYear = row["YearLevel"].ToString() + row["Name"].ToString();
+                    classYear =  row["Name"].ToString();
                 }
                 return classYear;
             }

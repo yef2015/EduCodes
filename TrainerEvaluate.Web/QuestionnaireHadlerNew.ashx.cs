@@ -27,6 +27,9 @@ namespace TrainerEvaluate.Web
                     break; 
                 case "c":
                     CancelQue(context);
+                    break;       
+                case "d":
+                    DelQue(context);
                     break;    
                 case "q":
                    QueryData(context);
@@ -97,7 +100,8 @@ namespace TrainerEvaluate.Web
             var teacher = context.Request["Teacher"];
             var place = context.Request["Place"];
 
-            var strWhere = " 1=1 ";
+          var strWhere = " 1=1 ";
+     
             if (!string.IsNullOrEmpty(className))
             {
                 strWhere += string.Format(" and ClassName like '%" + className + "%' ");
@@ -192,6 +196,27 @@ namespace TrainerEvaluate.Web
             {
                 var qinfo = new BLL.QuestionInfo();
                 var result = qinfo.CancelQue(classCourseId);
+                if (!result)
+                {
+                    msg = "保存失败！";
+                }
+            }
+            else
+            {
+                msg = "参数错误！";
+            }
+            context.Response.Write(msg);
+        } 
+        
+        
+        private void DelQue(HttpContext context)
+        {
+            var classCourseId = context.Request["id"];
+            var msg = "";  
+            if (!string.IsNullOrEmpty(classCourseId))
+            {
+                var qinfo = new BLL.QuestionInfo();
+                var result = qinfo.DelQue(classCourseId);
                 if (!result)
                 {
                     msg = "保存失败！";

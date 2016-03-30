@@ -211,6 +211,7 @@ namespace TrainerEvaluate.Web
                             string check3 = string.Empty;
                             string check4 = string.Empty;
                             string suggest = string.Empty;
+                            string tranRequire = string.Empty;
 
                             foreach (DataRow dr in drFirst)
                             {
@@ -402,9 +403,14 @@ namespace TrainerEvaluate.Web
                                         check4 = string.Empty;
                                         break;
                                     case "AnswerText":
-                                        suggest = dtRQ.Rows[0][dr["ShowId"].ToString().Replace("txt", "")].ToString();
+                                        suggest = dtRQ.Rows[0]["Suggest"].ToString();
                                         strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='160' style=' vertical-align:top; padding-top:10px; padding-left:10px; padding-right:10px; line-height:28px;'>");
                                         strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>" + suggest);
+                                        strBuilder.Append("</td></tr>");
+
+                                       tranRequire = dtRQ.Rows[0]["TranRequire"].ToString();
+                                        strBuilder.Append("<tr><td colspan='4' bgcolor='#FFFFFF' class='gray10a' height='160' style=' vertical-align:top; padding-top:10px; padding-left:10px; padding-right:10px; line-height:28px;'>");
+                                        strBuilder.Append("<img src='images/bank.gif' width='25' height='10'>" + tranRequire);
                                         strBuilder.Append("</td></tr>");
                                         break;
                                     default:

@@ -518,6 +518,23 @@ namespace TrainerEvaluate.BLL
 
 
 
+	    /// <summary>
+	    ///  判断当前登录人是否是项目负责人
+	    /// </summary>
+	    /// <returns></returns>
+	    public bool GetCurrentUserIsCharge(Guid userid)
+	    {
+	        var sql =
+	            string.Format(
+	                " select count(*) from SysRoleUser a,  Roles b where a.RoleId=b.ID and a.UserId='{0}'  and b.Name='项目负责人'",
+	                userid);
+
+	        return DbHelperSQL.Exists(sql);
+	    }
+
+
+
+
 	    #endregion  ExtensionMethod
 	}
 }

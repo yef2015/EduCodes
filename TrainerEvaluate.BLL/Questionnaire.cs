@@ -791,7 +791,7 @@ namespace TrainerEvaluate.BLL
             {
                 if (!string.IsNullOrEmpty(courseId) && !string.IsNullOrEmpty(classid))
                 {
-                    var sql = string.Format(" select b.StuName,a.Suggest from Questionnaire a,Student b " +
+                    var sql = string.Format(" select b.StuName,a.Suggest,a.TranRequire from Questionnaire a,Student b " +
                                       " where a.StudentId = b.StudentId and a.Suggest<>''  " +
                                       " and a.CourseId = '{0}' and a.ClassId = '{1}' order by AppraiserTime desc "
                             , courseId, classid);

@@ -751,7 +751,7 @@ namespace TrainerEvaluate.BLL
 
             // 根据课程id，查找所属班级，最后确定课程所属年份
             var classbll = new BLL.Class();
-            string strTitleName = classbll.GetClassInfoByClassId(classid) + "年中青年干部教育管理培训班课程评估表";
+            string strTitleName = classbll.GetClassInfoByClassId(classid) + "中青年干部教育管理培训班课程评估表";
 
             for (int f = 0; f < 6; f++)
             {
@@ -1041,6 +1041,7 @@ namespace TrainerEvaluate.BLL
            cellstyleContent.WrapText = true;
            sheet2.SetColumnWidth(0, 13 * 256);
            sheet2.SetColumnWidth(1, 78 * 256);
+           sheet2.SetColumnWidth(2, 78 * 256);
 
            IRow title0 = sheet2.CreateRow(0);
            title0.Height = 600; 
@@ -1051,10 +1052,10 @@ namespace TrainerEvaluate.BLL
                cell.SetCellValue("学员建议");
                cell.CellStyle = cellstyleHead;
            }
-           SetCellRangeAddress(sheet2, 0, 0, 0, 1);
+           SetCellRangeAddress(sheet2, 0, 0, 0, 2);
 
 
-           var fieldsName = new List<string>() { "学员姓名", "建议" }; 
+           var fieldsName = new List<string>() { "学员姓名", "建议", "培训需求" }; 
            IRow title = sheet2.CreateRow(1);
            for (int f = 0; f < fieldsName.Count; f++)
            {
@@ -1255,7 +1256,7 @@ namespace TrainerEvaluate.BLL
                var couModelList = coubll.GetModelList(string.Format(strWhere, classid));
                var classbll = new BLL.Class();
                // 根据课程id，查找所属班级，最后确定课程所属年份               
-               string strTitleName = classbll.GetClassInfoByClassId(classid) + "年中青年干部教育管理培训班课程评估表";
+               string strTitleName = classbll.GetClassInfoByClassId(classid) + "中青年干部教育管理培训班课程评估表";
 
                foreach (Models.Course model in couModelList)
                {
@@ -1603,6 +1604,7 @@ namespace TrainerEvaluate.BLL
            cellstyleContent.WrapText = true;
            sheet2.SetColumnWidth(0, 13 * 256);
            sheet2.SetColumnWidth(1, 78 * 256);
+           sheet2.SetColumnWidth(2, 78 * 256);
 
            IRow title0 = sheet2.CreateRow(0);
            title0.Height = 600;
@@ -1613,10 +1615,10 @@ namespace TrainerEvaluate.BLL
                cell.SetCellValue("学员建议");
                cell.CellStyle = cellstyleHead;
            }
-           SetCellRangeAddress(sheet2, 0, 0, 0, 1);
+           SetCellRangeAddress(sheet2, 0, 0, 0, 2);
 
 
-           var fieldsName = new List<string>() { "学员姓名", "建议" };
+           var fieldsName = new List<string>() { "学员姓名", "建议","培训需求" };
            IRow title = sheet2.CreateRow(1);
            for (int f = 0; f < fieldsName.Count; f++)
            {
