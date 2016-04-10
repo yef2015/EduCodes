@@ -117,8 +117,22 @@ namespace TrainerEvaluate.Web
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
 
-            var num = classBll.GetRecordCount(" Status=1 and YearLevel = '" + classYear + "' ");
-            ds = classBll.GetListByPage(" Status=1  and YearLevel = '" + classYear + "' ", sort, startIndex, endIndex, order);
+
+
+            var strWhere = " Status=1 and YearLevel = '" + classYear + "' ";
+
+            //项目负责人只能看到自己的负责的项目
+            if (Profile.CurrentUser.UserRole == 3)
+            {
+                var role = new BLL.Roles();
+                var result = role.GetCurrentUserIsCharge(Profile.CurrentUser.UserId);
+                if (result)
+                {
+                    strWhere += string.Format(" and  Teacher like '%{0}%' ", Profile.CurrentUser.UserName);
+                }
+            }  
+            var num = classBll.GetRecordCount(strWhere);
+            ds = classBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);
 
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             return str;
@@ -167,6 +181,18 @@ namespace TrainerEvaluate.Web
 
             var startIndex = (page - 1) * rows + 1;
             var endIndex = startIndex + rows - 1;
+
+             
+            //项目负责人只能看到自己的负责的项目
+            if (Profile.CurrentUser.UserRole == 3)
+            {
+                var role = new BLL.Roles();
+                var result = role.GetCurrentUserIsCharge(Profile.CurrentUser.UserId);
+                if (result)
+                {
+                    strWhere += string.Format(" and  Teacher like '%{0}%' ", Profile.CurrentUser.UserName);
+                }
+            }  
 
             var num = classBll.GetRecordCount(strWhere);
             ds = classBll.GetListByPage(strWhere, sort, startIndex, endIndex, order);

@@ -540,6 +540,7 @@ namespace TrainerEvaluate.Web
             var shModel = shBll.GetModel(new Guid(id));
             shModel.LastModifyTime = DateTime.Now;
             var result = false;
+            var ismodityStu = false;
             var msg = "";
             try
             {
@@ -557,15 +558,28 @@ namespace TrainerEvaluate.Web
                     isFlag = shBll.ExistsBySchoolName(shModel.SchoolName);
                     if (isFlag)
                     {
-                        msg = "编辑学校已经存在，请核实。";
+                        msg = "学校名称重复，请核实。";
+                    }
+                    else  //学校名称改了，同时要修改学员对应的学校名称
+                    {
+                        ismodityStu = true;
                     }
                 }
+
                 if (!isFlag)
                 {
-                    result = shBll.Update(shModel);
+                    result = shBll.Update(shModel); 
                     if (!result)
                     {
                         msg = "保存失败！";
+                    }
+                    else
+                    {
+                        if (ismodityStu)
+                        {
+                            var stubll = new BLL.Student();
+                            stubll.UpdateStuSchoolName(beforeSchoolName, shModel.SchoolName);
+                        }
                     }
                 }
             }

@@ -83,7 +83,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newUser()">生成问卷</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">编辑调查时间</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">取消问卷</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="del()">删除问卷</a>
+            <a  id="btnDel"   href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="del()">删除问卷</a>
         </div>
     </div>
       
@@ -269,6 +269,15 @@
             }
         }
 
+
+
+        $(function () {
+            if ('<%=IsDel%>' == "block") {
+                        $("#btnDel").show();
+                    } else {
+                        $("#btnDel").hide();
+                    }
+                });
 
     </script>
 </asp:Content>

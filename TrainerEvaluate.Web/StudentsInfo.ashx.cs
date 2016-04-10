@@ -199,6 +199,7 @@ namespace TrainerEvaluate.Web
             var gender = string.IsNullOrEmpty(context.Request["gender"]) ? "" : context.Request["gender"].Trim();
             var idno = string.IsNullOrEmpty(context.Request["idno"]) ? "" : context.Request["idno"].Trim();
             var rank = string.IsNullOrEmpty(context.Request["rank"]) ? "" : context.Request["rank"].Trim();
+            var SchoolType = string.IsNullOrEmpty(context.Request["SchoolType"]) ? "" : context.Request["SchoolType"].Trim();
 
             /*
             var birthday = string.IsNullOrEmpty(context.Request["birthday"]) ? "" : context.Request["birthday"].Trim();
@@ -250,6 +251,10 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(rank))
             {
                 strWhere += string.Format(" and  Rank  like '%" + rank + "%' ");
+            }
+            if (!string.IsNullOrEmpty(SchoolType))
+            {
+                strWhere += string.Format(" and  SchoolTypeCode  ='" + SchoolType + "' ");
             }
 
             if (schoolname != "all")

@@ -57,8 +57,11 @@
                 </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                </td>
-            <td width="34%" bgcolor="FFFFFF" class="gray10a" height="25">
+                <div align="center">学校类型：</div>
+            </td>
+            <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                <select class="easyui-combobox" name="SchoolTypeName1" id="SchoolTypeName1" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=st',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                </select>
             </td>
         </tr>
         <tr>
@@ -197,45 +200,45 @@
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
                     <select class="easyui-combobox" name="PoliticsStaus" id="PoliticsStaus" style="width: 153px;"  data-options="url:'ComboboxGetData.ashx?t=p',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                    </select>
+                </td> 
+                <td  bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">手机号码： </div>
                 </td>
-                <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">现任级别： </div>
-                </td>
-                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
-                    <select class="easyui-combobox" name="Rank" id="Rank" style="width:165px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                   </select>
+                <td bgcolor="F0F9FF" height="25" class="gray10a">
+                    <input name="Mobile" id="Mobile" class="easyui-textbox" required="true" />
                 </td>
             </tr>
-            <tr>
+            <tr> 
                 <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center">现任职务： </div>
+                </td>
+                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a"> 
+                    <input name="Post" id="Post"   class="easyui-textbox"  required="true"/>
+                   <%-- <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;"  data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" required="true">
+                    </select>--%>
+                </td>
+                  <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">任现任时间：</div>
                 </td>
-                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
 
                     <input name="RankTime" id="RankTime" class="easyui-textbox" />
                 </td>
-                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">现任职务： </div>
-                </td>
-                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"> 
-                    <input name="Post" id="Post" style="width:75px;" class="easyui-textbox"  required="true"/>
-                    <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;"  data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" required="true">
-                    </select>
-                </td>
             </tr>
             <tr>
-                <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                   <%-- <div align="center">任职时间：</div>--%>
+             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">现任级别： </div>
                 </td>
-                <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <%--<input name="PostTime" id="PostTime" class="easyui-datebox" />--%>
+                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
+                    <select class="easyui-combobox" name="Rank" id="Rank" style="width:153px;"  data-options="url:'ComboboxGetData.ashx?t=rank',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                   </select>
                 </td>
-                <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">手机号码： </div>
+                <td   bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">任现级别时间：</div>
                 </td>
-                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <input name="Mobile" id="Mobile" class="easyui-textbox" required="true" />
-                </td>
+                <td   bgcolor="F0F9FF" height="25" class="gray10a">
+                    <input name="PostTime" id="PostTime" class="easyui-datebox"  required="true" />
+                </td> 
             </tr>
             <tr>
                 <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
@@ -329,12 +332,12 @@
                     <span id="aTelNo"></span>
                 </td>
             </tr>
-            <tr>
-                <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                   <%-- <div align="center">任职时间：</div>--%>
+            <tr> 
+                  <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">政治面貌：</div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                  <%--  <span id="aPostTime"></span>--%>
+                    <span id="aPoliticsStaus"></span>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">手机号码：</div>
@@ -382,30 +385,30 @@
                     <span id="aLastSchool"></span>
                 </td>
             </tr>
-            <tr>
-                <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                    <div align="center">政治面貌：</div>
-                </td>
-                <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <span id="aPoliticsStaus"></span>
-                </td>
-                <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+            <tr> 
+                <td bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">现任级别：</div>
                 </td>
-                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"><span id="aRank"></span></td>
+                <td bgcolor="F0F9FF" height="25" class="gray10a"><span id="aRank"></span></td>
+                <td bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">任现级别时间：</div>
+                </td>
+                <td bgcolor="F0F9FF" height="25" class="gray10a">
+                    <span id="aPostTime"></span>
+                </td>
             </tr>
             <tr>
-                <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                    <div align="center">任现任时间：</div>
-                </td>
-                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                    <span id="aRankTime"></span>
-                </td>
-                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                <td bgcolor="FFFFFF" class="gray10a" height="25">
                     <div align="center">现任职务： </div>
                 </td>
-                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                <td bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aPost"></span>
+                </td>
+                <td bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center">任现任时间：</div>
+                </td>
+                <td bgcolor="FFFFFF" height="25" class="gray10a">
+                    <span id="aRankTime"></span>
                 </td>
             </tr>
             <tr>
@@ -492,8 +495,8 @@
             $('#Rank').textbox("setText", "");
             $('#RankTime').textbox("setText", "");
             $('#Post').textbox("setText", "");
-            $('#PostOptName').combobox("setText", "");
-          //  $('#PostTime').textbox("setText", "");
+         //   $('#PostOptName').combobox("setText", "");
+          $('#PostTime').textbox("setText", "");
             $('#Mobile').textbox("setText", "");
             $('#Description').textbox("setText", "");
             $('#TeachNo').textbox("setText", "");
@@ -544,8 +547,8 @@
                 $('#Rank').textbox("setText", row.Rank);
                 $('#RankTime').textbox("setText", row.RankTime);
                 $('#Post').textbox("setText", row.Post);
-                $('#PostOptName').combobox("setValue", row.PostOptId);
-              //  $('#PostTime').textbox("setValue", row.PostTime);
+              //  $('#PostOptName').combobox("setValue", row.PostOptId);
+               $('#PostTime').textbox("setValue", row.PostTime);
                 $('#Mobile').textbox("setText", row.Mobile);
                 $('#Description').textbox("setText", row.Description);
                 $('#TeachNo').textbox("setText", row.TeachNo);
@@ -598,9 +601,9 @@
                         $('#aPost').text(row.Post);
                     }
                 }
-                //if (row.PostTime != null) {
-                //    $('#aPostTime').text(row.PostTime);
-                //}
+                if (row.PostTime != null) {
+                    $('#aPostTime').text(row.PostTime);
+                }
                 $('#aMobile').text(row.Mobile);
                 $('#aDescription').text(row.Description);
                 $('#aTeachNo').text(row.TeachNo);
@@ -637,12 +640,12 @@
                 Rank: $('#Rank').textbox("getText"),
                 RankTime: $('#RankTime').textbox("getText"),
                 Post: $('#Post').textbox("getText"),
-           //     PostTime: $('#PostTime').textbox("getText"),
+               PostTime: $('#PostTime').textbox("getText"),
                 Mobile: $('#Mobile').textbox("getText"),
                 Description: $('#Description').textbox("getText"),
                 TeachNo: $('#TeachNo').textbox("getText"),
-                PostOptName: $('#PostOptName ').combobox("getText"),
-                PostOptId: $('#PostOptName ').combobox("getValue"),
+             //   PostOptName: $('#PostOptName ').combobox("getText"),
+            //    PostOptId: $('#PostOptName ').combobox("getValue"),
                 SetPwd: IsSetPwd,
                 ManageWork: $('#ManageWork').textbox("getText")
             }; 
@@ -666,10 +669,14 @@
                 messageAlert('提示', "请填写现任职务", 'warning');
                 return;
             }
-            if (data.PostOptName == "") {
-                messageAlert('提示', "请填写选择现任职务", 'warning');
+            //if (data.PostOptName == "") {
+            //    messageAlert('提示', "请填写选择现任职务", 'warning');
+            //    return;
+            //} 
+            if (data.PostTime == "") {
+                messageAlert('提示', "请填写任现级别时间", 'warning');
                 return;
-            } 
+            }
             if (data.Mobile == "") {
                 messageAlert('提示', "请填写手机号码", 'warning');
                 return;
@@ -801,6 +808,7 @@
             $('#StuName11').textbox("setText", "");
             $('#Gender11').combobox("setValue", "");
             $('#Rank1').textbox("setText", "");
+            $('#SchoolTypeName1').combobox("setValue", "");
         }
 
 
@@ -813,7 +821,8 @@
                 telno: $("#TelNo11").textbox('getText'),
                 gender: $('#Gender11').combobox("getValue"),
                 idno: $("#IdentityNo11").textbox('getText'),
-                rank: $("#Rank1").textbox("getText")
+                rank: $("#Rank1").textbox("getText"),
+                SchoolType: $("#SchoolTypeName1").combobox("getValue")
             });
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -452,6 +453,22 @@ namespace TrainerEvaluate.BLL
 
             return DbHelperSQL.Query(strSql.ToString());
         }
+
+
+
+        public void UpdateStuSchoolName(string oldName,string NewName)
+        {
+            try
+            {
+                var sql = string.Format(" update Student set School='{0}'  where School='{1}' ", NewName, oldName);
+                DbHelperSQL.ExecuteSql(sql);
+            } 
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            } 
+        } 
+
 
         #endregion  ExtensionMethod
     }

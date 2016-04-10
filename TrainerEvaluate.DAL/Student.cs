@@ -462,6 +462,7 @@ namespace TrainerEvaluate.DAL
             strSql.Append("SELECT count(*) ");  
             strSql.Append(" from Student  a   inner join SysUser f on a.StudentId=f.UserId left join Dictionaries b   on  a.Gender=b.ID ");
             strSql.Append("  left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID ");
+            strSql.Append("  left join  School g on a.School=g.SchoolName ");
             strSql.Append(" where a.Status=1  ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
@@ -494,9 +495,10 @@ namespace TrainerEvaluate.DAL
 			{
                 strSql.Append("order by  StuName asc");
 			}
-            strSql.Append(" )AS Row, a.*, f.UserPassWord, b.Name as GenderName,c.Name as JobTitleName,d.Name as NationName, e.Name as PoliticsStatusName  ");
+            strSql.Append(" )AS Row, a.*,g.SchoolTypeCode, f.UserPassWord, b.Name as GenderName,c.Name as JobTitleName,d.Name as NationName, e.Name as PoliticsStatusName  ");
             strSql.Append(" from Student  a   inner join SysUser f on a.StudentId=f.UserId left join Dictionaries b   on  a.Gender=b.ID ");
             strSql.Append("  left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID ");
+            strSql.Append("  left join  School g on a.School=g.SchoolName ");
             strSql.Append(" where a.Status=1  ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{

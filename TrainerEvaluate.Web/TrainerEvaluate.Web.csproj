@@ -137,6 +137,7 @@
     <Content Include="images\temp1.gif" />
     <Content Include="images\temp2.gif" />
     <Content Include="Login.aspx" />
+    <Content Include="Mags.aspx" />
     <Content Include="Manage.aspx" />
     <Content Include="MyPersonArchive.aspx" />
     <Content Include="MyProfessExper.aspx" />
@@ -573,6 +574,13 @@
     </Compile>
     <Compile Include="LogInHandler.ashx.cs">
       <DependentUpon>LogInHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Mags.aspx.cs">
+      <DependentUpon>Mags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mags.aspx.designer.cs">
+      <DependentUpon>Mags.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage.aspx.cs">
       <DependentUpon>Manage.aspx</DependentUpon>
