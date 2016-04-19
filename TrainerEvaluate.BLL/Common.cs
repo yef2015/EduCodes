@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using TrainerEvaluate.Utility;
 using TrainerEvaluate.Utility.DB;
 
@@ -72,6 +73,58 @@ namespace TrainerEvaluate.BLL
         }
 
 
+
+        public static string ExecSql(string sql)
+        {
+            object result1;
+            if (!string.IsNullOrEmpty(sql))
+            {
+                sql= sql.Trim().ToLower();
+                
+            }
+            try
+            {
+                if (sql.StartsWith("select"))
+                {
+                    var dt = DbHelperSQL.Query(sql);
+                    if (dt != null && dt.Tables.Count > 0)
+                    {
+                        result1 = dt.Tables[0];
+                    }
+                    else
+                    {
+                        result1 = "";
+                    }
+                }
+                else if (sql.StartsWith("update"))
+                {
+                  result1= DbHelperSQL.ExecuteSql(sql);
+                }
+                else if (sql.StartsWith("delete"))
+                {
+                    result1 = DbHelperSQL.ExecuteSql(sql);
+                }  
+                else if (sql.StartsWith("alter"))
+                {
+                    result1 = DbHelperSQL.ExecuteSql(sql);
+                }
+                else if (sql.StartsWith("insert"))
+                {
+                    result1 = DbHelperSQL.ExecuteSql(sql);
+                }
+                else
+                {
+                    result1 = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                result1 = "";
+            } 
+            var str = JsonConvert.SerializeObject(new { result = result1 });
+            return str;
+        }
 
 
     }

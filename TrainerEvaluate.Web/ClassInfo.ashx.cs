@@ -385,10 +385,14 @@ namespace TrainerEvaluate.Web
             {
                 classModel.PointTypeName =  context.Request["PointTypeName"];
             }
-            //if (!string.IsNullOrEmpty(context.Request["Level"]))
-            //{
-            //    classModel.Level = Convert.ToInt32(context.Request["Level"]);
-            //}
+            if (!string.IsNullOrEmpty(context.Request["Level"]))
+            {
+                classModel.Level = Convert.ToInt32(context.Request["Level"]);
+            }
+            if (!string.IsNullOrEmpty(context.Request["LevelName"]))
+            {
+                classModel.LevelName = context.Request["LevelName"];
+            }
             if (!string.IsNullOrEmpty(context.Request["Type"]))
             {
                 classModel.Type = int.Parse(context.Request["Type"]);

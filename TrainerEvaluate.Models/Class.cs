@@ -17,6 +17,7 @@ namespace TrainerEvaluate.Models
 		private int _object;
 		private string _objectName;
         private string _typeName;
+        private string _levelName;
 		private string _description; 
 		private DateTime? _startDate;
 		private DateTime? _finishDate;
@@ -162,6 +163,11 @@ namespace TrainerEvaluate.Models
         {
             set { _level = value; }
             get { return _level; }
+        }
+        public string LevelName
+        {
+            set { _levelName = value; }
+            get { return _levelName; }
         }
 
         /// <summary>

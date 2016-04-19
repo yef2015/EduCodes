@@ -51,7 +51,7 @@
                 <tr>
                     <th field="ID" width="0" hidden="true">编号</th>
                     <th field="Name" width="100">班级名称</th>
-                    <th field="ObjectName" width="100" sortable="true">培训对象</th>
+                    <th field="levelname" width="100" sortable="true">培训类别</th>
                     <th field="Description" width="100" sortable="true">培训内容</th>
                     <th field="StartDate" width="100" sortable="true" formatter="formatterdate">开始日期</th>
                     <th field="FinishDate" width="100" sortable="true" formatter="formatterdate">结束日期</th>
@@ -85,8 +85,12 @@
                 </div>
                 <div class="fitem">
                     <label>培训对象:</label> 
-                    <select class="easyui-combobox" name="Object" id="Object" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=obj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
-                    </select> 
+                     <input name="ObjectName" id="ObjectName" class="easyui-textbox" style="width: 280px;" required="true">
+                </div>
+                  <div class="fitem">
+                    <label>培训类别:</label>
+                    <select class="easyui-combobox" name="Level" id="Level" style="width: 280px;"  required="true" data-options="url:'ComboboxGetData.ashx?t=obj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    </select>
                 </div>
                 <div class="fitem">
                     <label>培训内容:</label>
@@ -121,12 +125,7 @@
                     <label>培训形式:</label>
                     <select class="easyui-combobox" name="Area" id="Area" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
                     </select>
-                </div>
-               <%--  <div class="fitem">
-                    <label>培训级别:</label>  
-                <select class="easyui-combobox" name="Level" id="Level" style="width:280px;"  data-options="url:'ComboboxGetData.ashx?t=l',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
-                </select>
-                </div>--%>
+                </div> 
                 <div class="fitem">
                     <label>培训层次:</label>
                     <select class="easyui-combobox" name="Type" id="Type" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=pt',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
@@ -183,7 +182,7 @@
                         <input name="JijiaoCode11" id="JijiaoCode11" class="easyui-textbox" style="width: 165px;">
                     </td>
                 </tr>
-                <tr bgcolor="#FFFFFF">
+                <tr bgcolor="#FFFFFF"> 
                     <td colspan="4" class="gray10a" height="26" align="middle">
                         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryStudent()" style="width: 90px">查询</a>
                     </td>
@@ -208,6 +207,8 @@
             <input type="hidden" id="hUnStuIds" />
         </div>
         <div id="dlg-buttons1">
+             全选<input type="radio" name="IschkAll"  />        
+             清空<input type="radio" name="IschkAll"  /> 
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveChoseStu()" style="width: 90px">保存</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg1').dialog('close');$('#dg1').datagrid('load');" style="width: 90px">取消</a>
         </div>
@@ -269,6 +270,10 @@
                     <select class="easyui-combobox" name="CusCourse" id="CusCourse" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ccus',method:'post',valueField:'ID',textField:'Name'">
                     </select>
                 </div>
+                 <div class="fitem">
+                    <label>授课地点:</label>
+                    <input name="TeachPlace" id="TeachPlace" style="width:260px;"  class="easyui-textbox" />
+                </div>
                 <div class="fitem">
                     <label>授课老师:</label>
                     <select class="easyui-combobox" name="CusTeacher" id="CusTeacher" style="width: 260px;" data-options="url:'ComboxGetDropData.ashx?t=ctea',method:'post',valueField:'ID',textField:'Name'">
@@ -292,8 +297,7 @@
 
         <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
             closed="true" buttons="#dlg-buttons5">
-            <div class="ftitle">请选择要删除的课程</div>
-
+            <div class="ftitle">请选择要删除的课程</div> 
             <table id="dg5" class="easyui-datagrid"
                 data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
                 <thead>
@@ -301,7 +305,8 @@
                         <th data-options="field:'ck',checkbox:true"></th>
                         <th data-options="field:'RId'" hidden="true">RId</th>
                         <th width="35%" data-options="field:'CoursName'">课程名称</th>
-                        <th width="20%" data-options="field:'TeacherName'">教师姓名</th>
+                        <th width="15%" data-options="field:'TeacherName'">教师姓名</th>
+                        <th width="18%" data-options="field:'teacherplace'">授课地点</th>
                         <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
                         <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th>
                     </tr>
@@ -372,10 +377,7 @@
         <div id="dlg-buttons6">
             <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveClassAndStudent()" style="width: 120px">确认导入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg6').dialog('close'); " style="width: 120px">取消导入</a>
-        </div>
-
-
-
+        </div>  
     </div>
 
     <div id="dlgUpload" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
@@ -393,7 +395,7 @@
             $('#dlg').dialog('open').dialog('setTitle', '新增');
 
             $('#Name').textbox("setText", "");
-            $('#Object').textbox("setText", "");
+            $('#ObjectName').textbox("setText", "");
             $('#Description').textbox("setText", "");
             $('#StartDate').textbox("setText", "");
             $('#FinishDate').textbox("setText", "");
@@ -402,7 +404,7 @@
             $('#PointType').textbox("setText", "");
             $('#Teacher').textbox("setText", "");
             $('#Area').textbox("setText", "");
-            //$('#Level').textbox("setText", "");
+            $('#Level').combobox("setValue", "");
             $('#Type').textbox("setText", "");
             $('#Type').textbox("setText", "");
             $('#ReportMax').textbox("setText", "");
@@ -417,7 +419,7 @@
                 $('#dlg').dialog('open').dialog('setTitle', '编辑');
 
                 $('#Name').textbox("setText", row.Name);
-                $('#Object').combobox("setValue", row.Object);
+                $('#ObjectName').textbox("setText", row.ObjectName);
                 $('#Description').textbox("setText", row.Description);
                 $('#StartDate').datebox("setValue", row.StartDate);
                 $('#FinishDate').datebox("setValue", row.FinishDate);
@@ -426,7 +428,7 @@
                 $('#PointType').combobox("setValue", row.PointType);
                 $('#Teacher').textbox("setText", row.Teacher);
                 $('#Area').combobox("setValue", row.Area);
-                //$('#Level').combobox("setValue", row.Level);
+                $('#Level').combobox("setValue", row.Level);
                 $('#Type').combobox("setValue", row.Type);
                 $('#ReportMax').textbox("setText", row.ReportMax);
                 $('#CloseDate').datebox("setValue", row.CloseDate);
@@ -453,8 +455,8 @@
 
             var data = {
                 Name: $('#Name').textbox("getText"),
-                Object: $('#Object').combobox("getValue"),
-                ObjectName: $('#Object').combobox("getText"),
+                Object: 0,
+                ObjectName: $('#ObjectName').textbox("getText"),
                 Description: $('#Description').textbox("getText"),
                 StartDate: $('#StartDate').textbox("getText"),
                 FinishDate: $('#FinishDate').textbox("getText"),
@@ -463,7 +465,8 @@
                 PointType: $('#PointType').combobox("getValue"),
                 PointTypeName: $('#PointType').combobox("getText"),
                 Teacher: $('#Teacher').textbox("getText"),
-                //Level: $('#Level').combobox("getValue"),
+                Level: $('#Level').combobox("getValue"),
+                LevelName: $('#Level').combobox("getText"),
                 Type: $('#Type').combobox("getValue"),
                 TypeName: $('#Type').combobox("getText"),
                 Area: $('#Area').combobox("getValue"),
@@ -474,6 +477,14 @@
             };
             if (data.Name == "") {
                 alert("请填写班级名称！");
+                return;
+            }
+            if (data.ObjectName == "") {
+                alert("请填写培训对象！");
+                return;
+            }
+            if (data.Level == "") {
+                alert("请选择培训类别！");
                 return;
             }
             $.post(url, data, function (result) {
@@ -549,6 +560,7 @@
             $('#CusTeacher').textbox("setValue", "");
             $('#CusStartDate').textbox("setValue", "");
             $('#CusFinishDate').datebox("setValue", "");
+            $('#TeachPlace').textbox("setValue", "");
 
             var row = $('#dg').datagrid('getSelected');
             if (row) {
@@ -652,6 +664,7 @@
                 CoursName: $('#CusCourse').combobox("getText"),
                 TeacherId: $('#CusTeacher').combobox("getValue"),
                 TeacherName: $('#CusTeacher').combobox("getText"),
+                TeachPlace: $('#TeachPlace').textbox("getText"),
                 ClassId: $("#hClassid").val(),
                 ClassName: $("#hClassName").val(),
                 StartDate: $('#CusStartDate').textbox("getText"),

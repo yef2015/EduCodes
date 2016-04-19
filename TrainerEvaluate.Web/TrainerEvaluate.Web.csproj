@@ -443,6 +443,7 @@
     <Content Include="MyQuestionnaire.ashx" />
     <Content Include="ExportCharts.ashx" />
     <Content Include="ComboxGetDropData.ashx" />
+    <Content Include="Mags.ashx" />
     <None Include="Properties\PublishProfiles\pub.pubxml" />
     <Content Include="StudentsInfo.ashx" />
     <Content Include="TeacherInfo.ashx" />
@@ -574,6 +575,9 @@
     </Compile>
     <Compile Include="LogInHandler.ashx.cs">
       <DependentUpon>LogInHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Mags.ashx.cs">
+      <DependentUpon>Mags.ashx</DependentUpon>
     </Compile>
     <Compile Include="Mags.aspx.cs">
       <DependentUpon>Mags.aspx</DependentUpon>

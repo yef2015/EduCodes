@@ -5,10 +5,11 @@
      <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin: 20px;">
         <tr>
             <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">培训对象：</div>
+                <div align="center">培训类别：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="TrainName1" class="easyui-textbox" id="TrainName1">
+               <select class="easyui-combobox" name="Level" id="Level" style="width: 280px;"  required="true" data-options="url:'ComboboxGetData.ashx?t=obj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+               </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
             </td>
@@ -46,13 +47,13 @@
         var url = 'NetForStudentInfo.ashx';
 
         function clearCondition() {
-            $('#TrainName1').textbox('clear');
+            $('#Level').textbox('clear');
         }
 
         function query() {
             $('#dg').datagrid('load', {
                 t: "going",
-                name: $("#TrainName1").textbox('getText')
+                name: $("#Level").combobox('getValue')
             });
         }
 

@@ -11,35 +11,16 @@
                 <div align="center">课程名称：</div>
             </td>
             <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="corName" class="easyui-textbox" id="corName" style="width: 165px;"/>
+                <input name="corName" class="easyui-textbox" id="corName" style="width: 165px;" />
             </td>
             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">授课地点： </div>
+                <div align="center">课程类型： </div>
             </td>
             <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="TeachPlace11" class="easyui-textbox" id="TeachPlace11" style="width: 165px;"/>
+                <select class="easyui-combobox" name="cType" id="cType" style="width: 138px;" data-options="url:'ComboboxGetData.ashx?t=t',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                </select>
             </td>
-            <%--<td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
-                <div align="center">授课教师： </div>
-            </td>
-            <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
-                <input name="teacherName" class="easyui-textbox" id="teacherName">
-            </td>--%>
         </tr>
-        <%--<tr>
-            <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">授课地点：</div>
-            </td>
-            <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="TeachPlace11" class="easyui-textbox" id="TeachPlace11">
-            </td>
-            <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">授课时间： </div>
-            </td>
-            <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="TeachTime11" id="TeachTime11" class="easyui-datebox" />
-            </td>
-        </tr>--%>
         <tr bgcolor="#FFFFFF">
             <td colspan="4" class="gray10a" height="26" align="middle">
                 <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryUser()" style="width: 90px">查询</a>
@@ -54,13 +35,10 @@
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
-                    <th field="CourseId" width="0" hidden="true">编号</th>
-                    <th field="TeacherId" width="0" hidden="false">教师编号</th>
-                    <th field="CourseName" width="30%" sortable="true">课程名称</th>
-                    <th field="TeacherName" width="0" hidden="false">授课教师</th>
-                    <th field="TeachPlace" width="30%" sortable="true">授课地点</th>
-                    <th field="TeachTime" width="0" hidden="false">授课时间</th>
-                    <th field="Description" width="38%" sortable="true">描述</th>
+                    <th field="CourseId" width="0" hidden="true">编号</th> 
+                    <th field="CourseName" width="30%" sortable="true">课程名称</th> 
+                    <th field="TypeName" width="30%" sortable="true">课程类型</th> 
+                    <th field="Description" width="35%" sortable="true">描述</th>
                 </tr>
             </thead>
         </table>
@@ -88,10 +66,10 @@
                         name="CourseInfo" id="CourseInfo"
                         data-options="multiple:true,multiline:true,panelHeight:'auto',url:'TeacherInfo.ashx?t=c',method:'get',valueField:'TeacherId',textField:'TeacherName'" />
                 </div>--%>
-                <div class="fitem">
+             <%--   <div class="fitem">
                     <label>授课地点:</label>
                     <input name="TeachPlace" id="TeachPlace" style="width:280px;"  class="easyui-textbox" />
-                </div>
+                </div>--%>
 <%--                <div class="fitem">
                     <label>授课时间:</label>
                     <input name="TeachTime" id="TeachTime" style="width:280px;"  class="easyui-datebox" />
@@ -149,7 +127,7 @@
         function clearCondition() {
             $('#corName').textbox('clear');
             //$('#teacherName').textbox('clear');
-            $('#TeachPlace11').textbox('clear');;
+            $('#cType').combobox('clear');
             //$('#TeachTime11').textbox("setText", "");
         }
 
@@ -158,12 +136,12 @@
             $('#dg').datagrid('load', {
                 t: "q",
                 name: $("#corName").textbox('getText'),
-                //teaName: $("#teacherName").textbox('getText'),
-                teaplace: $("#TeachPlace11").textbox('getText')
+                cType: $("#cType").combobox('getValue'),
+                //   teaplace: $("#TeachPlace11").textbox('getText')
+                teaplace: "",
                 //teaTime: $("#TeachTime11").textbox('getText')
             });
         }
-
 
 
         function exportData() {
@@ -305,7 +283,8 @@
                 CourseName: $('#CourseName').textbox("getText"),
                 TeacherName:"", //$('#CourseInfo').combobox("getText"),
                 TeacherId:"", //escape($('#CourseInfo').combobox("getValues")),
-                TeachPlace: $('#TeachPlace').textbox("getText"),
+               // TeachPlace: $('#TeachPlace').textbox("getText"),
+                TeachPlace: "",
                 TeachTime:"2016-01-10", //$('#TeachTime').textbox("getText"),
                 Type: $('#Type').combobox("getValue"),
                 TypeName: $('#Type').combobox("getText"),

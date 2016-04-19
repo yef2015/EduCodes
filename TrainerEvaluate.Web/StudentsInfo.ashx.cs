@@ -128,7 +128,8 @@ namespace TrainerEvaluate.Web
             var endIndex = startIndex + rows - 1;
 
          //   var num = stuBll.GetRecordCount(" Status=1 ");
-            var num = stuBll.GetRecordCount("  ");  // 加入密码后导致问题，已经在后台增加了status=1的判断
+        //    var num = stuBll.GetRecordCount("  ");  // 加入密码后导致问题，已经在后台增加了status=1的判断
+            var num = stuBll.GetClassStuCount(coId);  
             var ds = stuBll.GetClassStuListByPage(coId, "ck", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);

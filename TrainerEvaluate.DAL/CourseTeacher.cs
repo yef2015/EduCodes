@@ -40,9 +40,9 @@ namespace TrainerEvaluate.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into CourseTeacher(");
-            strSql.Append("RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime)");
+            strSql.Append("RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime,teacherplace)");
             strSql.Append(" values (");
-            strSql.Append("@RId,@CourseId,@CoursName,@TeacherId,@TeacherName,@ClassId,@ClassName,@StartDate,@FinishDate,@CreateTime)");
+            strSql.Append("@RId,@CourseId,@CoursName,@TeacherId,@TeacherName,@ClassId,@ClassName,@StartDate,@FinishDate,@CreateTime,@teacherplace)");
             SqlParameter[] parameters = {
 					new SqlParameter("@RId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CourseId", SqlDbType.UniqueIdentifier,16),
@@ -53,7 +53,9 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@ClassName", SqlDbType.NVarChar,200),
 					new SqlParameter("@StartDate", SqlDbType.DateTime),
 					new SqlParameter("@FinishDate", SqlDbType.DateTime),
-					new SqlParameter("@CreateTime", SqlDbType.DateTime)};
+					new SqlParameter("@CreateTime", SqlDbType.DateTime),
+					new SqlParameter("@teacherplace", SqlDbType.NVarChar),
+                                        };
             parameters[0].Value = Guid.NewGuid();
             parameters[1].Value = model.CourseId;
             parameters[2].Value = model.CoursName;
@@ -64,6 +66,7 @@ namespace TrainerEvaluate.DAL
             parameters[7].Value = model.StartDate;
             parameters[8].Value = model.FinishDate;
             parameters[9].Value = model.CreateTime;
+            parameters[10].Value = model.teacherplace;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -148,7 +151,7 @@ namespace TrainerEvaluate.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime from CourseTeacher ");
+            strSql.Append("select  top 1 RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime,teacherplace from CourseTeacher ");
             strSql.Append(" where RId=@RId ");
             SqlParameter[] parameters = {
 					new SqlParameter("@RId", SqlDbType.UniqueIdentifier,16)			};
@@ -194,6 +197,10 @@ namespace TrainerEvaluate.DAL
                 {
                     model.TeacherName = row["TeacherName"].ToString();
                 }
+                if (row["teacherplace"] != null)
+                {
+                    model.teacherplace = row["teacherplace"].ToString();
+                }
                 if (row["ClassId"] != null)
                 {
                     model.ClassId = row["ClassId"].ToString();
@@ -224,7 +231,7 @@ namespace TrainerEvaluate.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime ");
+            strSql.Append("select RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime,teacherplace ");
             strSql.Append(" FROM CourseTeacher ");
             if (strWhere.Trim() != "")
             {
@@ -244,7 +251,7 @@ namespace TrainerEvaluate.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime ");
+            strSql.Append(" RId,CourseId,CoursName,TeacherId,TeacherName,ClassId,ClassName,StartDate,FinishDate,CreateTime,teacherplace ");
             strSql.Append(" FROM CourseTeacher ");
             if (strWhere.Trim() != "")
             {

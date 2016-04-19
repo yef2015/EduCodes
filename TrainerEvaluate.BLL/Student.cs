@@ -269,8 +269,8 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
 
-            strSql.Append(" select StuName,b.Name as GenderName,IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo,  Description,ManageWork    ");
-            strSql.Append(" from Student a left join Dictionaries b  on  a.Gender=b.ID left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID  ");
+            strSql.Append(" select StuName,b.Name as GenderName,a.IdentityNo,School,c.Name as JobTitleName,TelNo, Birthday, d.Name as NationName, FirstRecord, FirstSchool, LastRecord,LastSchool,e.Name as PoliticsStatusName, Rank, RankTime, Post+'  '+PostOptName, PostTime, Mobile, TeachNo,  Description,ManageWork    ");
+            strSql.Append(" from Student a inner join SysUser f1 on a.StudentId=f1.UserId  left join Dictionaries b  on  a.Gender=b.ID left join Dictionaries c on  a.JobTitle=c.ID  left join Dictionaries d on a.Nation=d.ID  left join Dictionaries e on  a.PoliticsStatus=e.ID  ");
             strSql.Append(" left join ClassStudents f on a.StudentId = f.StudentId  ");
             strSql.Append(" where a.Status=1 and f.ClassId = '"+classId+"'  ");
             strSql.Append(" order by a.StuName asc, a.CreateTime desc ");
@@ -294,12 +294,31 @@ namespace TrainerEvaluate.BLL
             }
             strSql.Append(")AS Row, T.*  from   ");
             strSql.Append(" ( select a.*,case ISNULL(b.RId,'00000000-0000-0000-0000-000000000000')  when '00000000-0000-0000-0000-000000000000' then  0  else 1 end ck ");
-            strSql.Append(string.Format("  from Student a left join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  )  ", classId));
+            strSql.Append(string.Format("  from Student a  inner join SysUser f on a.StudentId=f.UserId  left join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  )  ", classId));
             strSql.Append("  T ");
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
             return DbHelperSQL.Query(strSql.ToString());
         }
+
+
+        public int GetClassStuCount(string classId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(string.Format(" SELECT count(*) FROM Student a   inner join SysUser f on a.StudentId=f.UserId   left join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  ", classId));
+
+           var obj= DbHelperSQL.GetSingle(strSql.ToString());
+
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
 
         public DataSet GetClassStuListByPageCondition(string classId,string strWhere, string orderby, int startIndex, int endIndex)
         {

@@ -473,11 +473,11 @@ namespace TrainerEvaluate.BLL
                 string strWhere = string.Empty;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    strWhere += " and ObjectName like '%" + name + "%'";
+                    strWhere += " and levelname like '%" + name + "%'";
                 }
 
-                var sql = string.Format("select distinct(ObjectName) as train from Class "
-                        + " where Status = 1 and IsReport = 1 {0} ", strWhere);
+                var sql = string.Format("select distinct(levelname) as train from Class "
+                        + " where Status = 1 and IsReport = 1  and levelname is not null   {0} ", strWhere);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
@@ -503,11 +503,11 @@ namespace TrainerEvaluate.BLL
             string strWhere = string.Empty;
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere += " and ObjectName like '%" + name + "%'";
+                strWhere += " and levelname like '%" + name + "%'";
             }
 
-            var sql = string.Format("select COUNT(1) from( select distinct(ObjectName) as train from Class "
-                    + " where  Status = 1 and  IsReport = 1  {0} ) A ", strWhere,userId);
+            var sql = string.Format("select COUNT(1) from( select distinct(levelname) as train from Class "
+                    + " where  Status = 1 and  IsReport = 1 and levelname is not null   {0} ) A ", strWhere, userId);
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)
@@ -527,7 +527,7 @@ namespace TrainerEvaluate.BLL
                 string strWhere = string.Empty;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    strWhere += " and ObjectName like '%" + name + "%'";
+                    strWhere += " and levelname like '%" + name + "%'";
                 }
 
                 var sql = string.Format("select * from Class "
@@ -557,7 +557,7 @@ namespace TrainerEvaluate.BLL
             string strWhere = string.Empty;
             if (!string.IsNullOrEmpty(name))
             {
-                strWhere += " and Object like '%" + name + "%'";
+                strWhere += " and levelname like '%" + name + "%'";
             }
 
             var sql = string.Format("select count(1) from Class "

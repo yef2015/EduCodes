@@ -395,6 +395,7 @@ namespace TrainerEvaluate.Web
             courModel.ClassName = context.Request["ClassName"];
             courModel.TeacherId = context.Request["TeacherId"];
             courModel.TeacherName = context.Request["TeacherName"];
+            courModel.teacherplace = context.Request["TeachPlace"];
 
             if (!string.IsNullOrEmpty(context.Request["StartDate"]))
             {
@@ -409,7 +410,7 @@ namespace TrainerEvaluate.Web
         private void Query(HttpContext context)
         {
             var corName = context.Request["name"].Trim();
-            var teaplace = context.Request["teaplace"].Trim();
+            var cType = context.Request["cType"].Trim();
 
             var ds = new DataSet();
             var courBll = new BLL.Course();
@@ -418,10 +419,10 @@ namespace TrainerEvaluate.Web
             {
                 strWhere += string.Format(" and CourseName like '%" + corName + "%' ");
             }
-            
-            if (!string.IsNullOrEmpty(teaplace))
+
+            if (!string.IsNullOrEmpty(cType))
             {
-                strWhere += string.Format(" and  TeachPlace  like '%" + teaplace + "%' ");
+                strWhere += string.Format(" and  Type  =" + cType + "");
             }   
 
             var page = Convert.ToInt32(context.Request["page"]);

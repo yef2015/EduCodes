@@ -16,6 +16,7 @@ namespace TrainerEvaluate.Models
         private string _coursname;
         private string _teacherid;
         private string _teachername;
+        private string _teacherplace;
         private string _classid;
         private string _classname;
         private DateTime? _startdate;
@@ -58,6 +59,12 @@ namespace TrainerEvaluate.Models
         /// 
         /// </summary>
         public string TeacherName
+        {
+            set { _teachername = value; }
+            get { return _teachername; }
+        }
+
+        public string teacherplace
         {
             set { _teachername = value; }
             get { return _teachername; }

@@ -203,7 +203,7 @@ namespace TrainerEvaluate.BLL
             try
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.Append(" select a.CourseName,b.TeacherName,a.TeachPlace, ");
+                strSql.Append(" select a.CourseName,b.TeacherName,b.teacherplace, ");
                 strSql.Append(" CONVERT(varchar(100), b.StartDate, 111) as StartDate, ");
                 strSql.Append(" CONVERT(varchar(100), b.FinishDate, 111) as FinishDate, ");
                 strSql.Append(" a.TypeName+'  '+a.TypeSmallName as TypeInfo ,a.Description ");
@@ -311,7 +311,7 @@ namespace TrainerEvaluate.BLL
         public DataSet GetCourseInfoByCourseId(string courseId)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select a.CourseName,a.TeachPlace,b.TeacherName,b.StartDate,b.FinishDate  ");
+            strSql.Append(" select a.CourseName,b.teacherplace,b.TeacherName,b.StartDate,b.FinishDate  ");
             strSql.Append(" from Course a,CourseTeacher b ");
             strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '"+courseId+"' ");
             return DbHelperSQL.Query(strSql.ToString());
@@ -329,7 +329,7 @@ namespace TrainerEvaluate.BLL
              try
              {
                  StringBuilder strSql = new StringBuilder();
-                 strSql.Append(" select a.CourseName,a.TeachPlace,b.TeacherName,b.StartDate,b.FinishDate  ");
+                 strSql.Append(" select a.CourseName,b.teacherplace,b.TeacherName,b.StartDate,b.FinishDate  ");
                  strSql.Append(" from Course a,CourseTeacher b ");
                  strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '" + courseId + "' ");
                  strSql.Append(" and b.ClassId = '" + classId + "' ");
@@ -353,7 +353,7 @@ namespace TrainerEvaluate.BLL
             try
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.Append(" select a.CourseId, a.CourseName,a.TeachPlace,b.ClassId,b.TeacherId,b.TeacherName,b.StartDate,b.FinishDate  ");
+                strSql.Append(" select a.CourseId, a.CourseName,b.teacherplace,b.ClassId,b.TeacherId,b.TeacherName,b.StartDate,b.FinishDate  ");
                 strSql.Append(" from Course a,CourseTeacher b ");
                 strSql.Append(" where a.Status=1 and a.CourseId=b.CourseId and a.CourseId = '" + corId + "' ");
                 strSql.Append(" and b.ClassId in (select ClassId from ClassStudents where StudentId = '" + stuId + "') ");
