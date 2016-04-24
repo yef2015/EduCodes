@@ -255,6 +255,21 @@
                 </td>
             </tr>
             <tr>
+             <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                    <div align="center">学员类型： </div>
+                </td>
+                <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">  
+                    <select class="easyui-combobox" name="StuType" id="StuType" style="width:153px;"  data-options="url:'ComboboxGetData.ashx?t=stutype',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'" > 
+                   </select>
+                </td>
+                <td   bgcolor="F0F9FF" class="gray10a" height="25">
+                    
+                </td>
+                <td   bgcolor="F0F9FF" height="25" class="gray10a">
+                     
+                </td> 
+            </tr>
+            <tr>
                 <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">主管工作：</div>
                 </td>
@@ -501,6 +516,7 @@
             $('#Description').textbox("setText", "");
             $('#TeachNo').textbox("setText", "");
             $('#ManageWork').textbox("setText", "");
+            $('#StuType').combobox("setValue", "");
 
             url = 'StudentsInfo.ashx' + '?t=n';
         }
@@ -553,7 +569,7 @@
                 $('#Description').textbox("setText", row.Description);
                 $('#TeachNo').textbox("setText", row.TeachNo);
                 $('#ManageWork').textbox("setText", row.ManageWork);
-
+                $('#StuType').combobox("setValue", row.stutype);
                 url = 'StudentsInfo.ashx' + '?t=e&id=' + row.StudentId;
             } else {
                 // messageAlert('提示', '请选择要编辑的行!', 'warning');  
@@ -647,7 +663,9 @@
              //   PostOptName: $('#PostOptName ').combobox("getText"),
             //    PostOptId: $('#PostOptName ').combobox("getValue"),
                 SetPwd: IsSetPwd,
-                ManageWork: $('#ManageWork').textbox("getText")
+                ManageWork: $('#ManageWork').textbox("getText"),
+                StuType: $('#StuType').combobox("getValue"),
+                StuTypeName: $('#StuType').combobox("getText")
             }; 
             if (data.StuName == "") {
                 messageAlert('提示', "请填写姓名", 'warning');

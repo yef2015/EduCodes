@@ -15,7 +15,9 @@ namespace TrainerEvaluate.Models
 		private string _identityno;
 		private string _stuname;
 		private int? _gender;
+        private int? _stuType; 
 		private string _school;
+        private string _stuTypeName;
 		private int? _title;
 		private string _telno;
 		private DateTime _createtime;
@@ -72,6 +74,26 @@ namespace TrainerEvaluate.Models
 			set{ _gender=value;}
 			get{return _gender;}
 		}
+
+
+
+        /// <summary>
+        /// 学员信息增加类型，区别学员是否退休、返聘、调岗
+        /// </summary>
+        public int? StuType
+        {
+            set { _stuType = value; }
+            get { return _stuType; }
+        }
+
+
+        public string StuTypeName
+        {
+            set { _stuTypeName = value; }
+            get { return _stuTypeName; }
+        }
+
+
 		/// <summary>
 		/// 所在学校
 		/// </summary>

@@ -121,9 +121,9 @@
                 <div align="center">现任职务： </div>
             </td>
             <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <input name="Post" id="Post" style="width: 75px;" class="easyui-textbox"  required="true" />
-                <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;" data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'"  required="true">
-                </select>
+                <input name="Post" id="Post"   class="easyui-textbox"  required="true" />
+               <%-- <select class="easyui-combobox" name="PostOptName" id="PostOptName" style="width: 75px;" data-options="url:'ComboboxGetData.ashx?t=ptn',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'"  required="true">
+                </select>--%>
             </td>
         </tr>
         <tr>
@@ -216,7 +216,7 @@
                          $('#ManageWork').textbox("setText", item.ManageWork);
                          //    $('#RankTime').datebox("setValue", item.RankTime);
                          $('#Post').textbox("setText", item.Post);
-                         $('#PostOptName').combobox("setValue", item.PostOptId);
+                       //  $('#PostOptName').combobox("setValue", item.PostOptId);
                          $('#PostTime').textbox("setValue", item.PostTime);
                          $('#Mobile').textbox("setText", item.Mobile);
                          $('#Description').textbox("setText", item.Description);
@@ -253,8 +253,8 @@
                  Mobile: $('#Mobile').textbox("getText"),
                  Description: $('#Description').textbox("getText"),
                  TeachNo: $('#TeachNo').textbox("getText"),
-                 PostOptName: $('#PostOptName').combobox("getText"),
-                 PostOptId: $('#PostOptName').combobox("getValue"),
+                // PostOptName: $('#PostOptName').combobox("getText"),
+                // PostOptId: $('#PostOptName').combobox("getValue"),
                  UserPassWord: $('#UserPassWord ').textbox("getText"),
              };
              if (data.StuName == "") {
@@ -277,10 +277,10 @@
                  messageAlert('提示', "请填写现任职务", 'warning');
                  return;
              }
-             if (data.PostOptName == "") {
-                 messageAlert('提示', "请填写选择现任职务", 'warning');
-                 return;
-             }
+             //if (data.PostOptName == "") {
+             //    messageAlert('提示', "请填写选择现任职务", 'warning');
+             //    return;
+             //}
              if (data.Mobile == "") {
                  messageAlert('提示', "请填写手机号码", 'warning');
                  return;

@@ -21,11 +21,13 @@
         </tr>
         <tr>
             <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
-                <div align="center">培训范围：</div>
+                <div align="center">培训类别：</div>
             </td>
             <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
-                <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
-                </select>
+              <%--  <select class="easyui-combobox" name="tArea" id="tArea" style="width: 165px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                </select>--%>
+                  <select class="easyui-combobox" name="tLevel" id="tLevel" style="width: 165px;"    data-options="url:'ComboboxGetData.ashx?t=obj',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                  </select>
             </td>
             <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
                 <div align="center">培训层次： </div>
@@ -73,6 +75,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="setCourseNew()">课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="showCourseNew()">查看课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="disInfo()">查看班级信息</a> 
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -123,7 +126,7 @@
                 </div>
                 <div class="fitem">
                     <label>培训形式:</label>
-                    <select class="easyui-combobox" name="Area" id="Area" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto'">
+                    <select class="easyui-combobox" name="Area" id="Area" style="width: 280px;" data-options="url:'ComboboxGetData.ashx?t=a',method:'get',valueField:'ID',textField:'Name',panelHeight:'auto',multiple:true">
                     </select>
                 </div> 
                 <div class="fitem">
@@ -380,6 +383,136 @@
         </div>  
     </div>
 
+
+
+    <div id="dlg7" class="easyui-dialog" style="width: 650px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
+        closed="true" buttons="#dlg-buttons7">
+        <div class="ftitle">详细信息</div>
+        <form id="fm7" method="post">
+            <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">班级名称：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aName"></span>
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">培训对象： </div>
+                    </td>
+                    <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aObjectName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">培训类别：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aLevel"></span>
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25"></td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a"></td>
+                </tr>
+                <tr>
+                    <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">培训内容： </div>
+                    </td>
+                    <td colspan="3" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aDescription"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">开始日期：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aStartDate"></span>
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">结束日期： </div>
+                    </td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aFinishDate"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">学员人数：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aStudents"></span>
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">学时： </div>
+                    </td>
+                    <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aPoint"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">学时类型：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aPointType"></span>
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">项目负责人： </div>
+                    </td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aTeacher"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">培训形式：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aArea"></span>
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">培训层次： </div>
+                    </td>
+                    <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aType"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">是否报名班级：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aIsReport"></span>
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">报名上限人数： </div>
+                    </td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <span id="aReportMax"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
+                        <div align="center">报名截止日期：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
+                        <span id="aCloseDate"></span>
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25"></td>
+                    <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="dlg-buttons7">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg7').dialog('close')" style="width: 90px">关闭</a>
+    </div>
+
+
+
+
     <div id="dlgUpload" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
         <div class="ftitle">上传excel数据文件</div>
         <input type="file" id="upData" name="upData" />
@@ -427,7 +560,7 @@
                 $('#Point').textbox("setText", row.Point);
                 $('#PointType').combobox("setValue", row.PointType);
                 $('#Teacher').textbox("setText", row.Teacher);
-                $('#Area').combobox("setValue", row.Area);
+                $('#Area').combobox("setText", row.AreaName);
                 $('#Level').combobox("setValue", row.Level);
                 $('#Type').combobox("setValue", row.Type);
                 $('#ReportMax').textbox("setText", row.ReportMax);
@@ -524,7 +657,7 @@
 
         function downloadTmp() {
             var url = "ClassInfo.ashx?t=ex" + "&name=" + encodeURIComponent($("#name").textbox('getText')) + "&description=" + encodeURIComponent($("#description").textbox('getText'))
-                + "&area=" + $("#tArea").combobox('getValue') + "&type=" + $("#tType").combobox('getValue');
+                + "&level=" + $("#tLevel").combobox('getValue') + "&type=" + $("#tType").combobox('getValue');
             window.location = url;
         }
 
@@ -1067,7 +1200,7 @@
         function clearCondition() {
             $('#name').textbox('clear');
             $('#description').textbox('clear');
-            $('#tArea').textbox('clear');;
+            $('#tLevel').textbox('clear');;
             $('#tType').textbox('clear');
         }
 
@@ -1076,7 +1209,7 @@
                 t: "q",
                 Name: $("#name").textbox('getText'),
                 Description: $("#description").textbox('getText'),
-                Area: $("#tArea").combobox('getValue'),
+                Level: $("#tLevel").combobox('getValue'),
                 Type: $("#tType").textbox('getValue')
             });
         }
@@ -1110,6 +1243,34 @@
            });
 
 
+        function disInfo() {  
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlg7').dialog('open').dialog('setTitle', '班级信息'); 
+                $('#aName').text(row.Name);
+                $('#aObjectName').text(row.ObjectName);
+                $('#aDescription').text(row.Description);
+                $('#aStartDate').text(StringToDate(row.StartDate));
+                $('#aFinishDate').text(StringToDate(row.FinishDate));
+                $('#aStudents').text(  row.Students);
+                $('#aPoint').text( row.Point);
+                $('#aPointType').text( row.PointType);
+                $('#aTeacher').text( row.Teacher);
+                $('#aArea').text( row.AreaName);
+                $('#aLevel').text(  row.Level);
+                $('#aType').text( row.Type);
+                $('#aReportMax').text( row.ReportMax);
+                $('#aCloseDate').text(row.CloseDate);  
+                if (row.IsReport == 1) {
+                    $('#aIsReport').text("是");
+                }
+                else {
+                    $('#aIsReport').text("否");
+                }  
+            } else {
+                messageAlert('提示', '请选择要查看的行!', 'warning');
+            }
+        }
 
     </script>
 

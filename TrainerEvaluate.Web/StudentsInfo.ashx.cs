@@ -40,6 +40,9 @@ namespace TrainerEvaluate.Web
                     break;
                 case "cs":
                     GetClassStu(context);
+                    break;   
+                case "cs1":  //学员查看
+                    GetClassStuforStu(context);
                     break;
                 case "csq":
                     GetClassStuByConditon(context);
@@ -131,6 +134,30 @@ namespace TrainerEvaluate.Web
         //    var num = stuBll.GetRecordCount("  ");  // 加入密码后导致问题，已经在后台增加了status=1的判断
             var num = stuBll.GetClassStuCount(coId);  
             var ds = stuBll.GetClassStuListByPage(coId, "ck", startIndex, endIndex);
+            var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
+            context.Response.Write(str);
+        }
+
+
+
+        //学员查看班级信息
+        private void GetClassStuforStu(HttpContext context)
+        {
+            var page = Convert.ToInt32(context.Request["page"]);
+            var rows = Convert.ToInt32(context.Request["rows"]);
+            var coId = context.Request["coId"]; //班级id
+            //var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "StuName" : context.Request["sort"];
+            //var order = string.IsNullOrEmpty(context.Request["order"]) ? "asc" : context.Request["order"];
+
+            var stuBll = new BLL.Student();
+
+            var startIndex = (page - 1) * rows + 1;
+            var endIndex = startIndex + rows - 1;
+
+         //   var num = stuBll.GetRecordCount(" Status=1 ");
+        //    var num = stuBll.GetRecordCount("  ");  // 加入密码后导致问题，已经在后台增加了status=1的判断
+            var num = stuBll.GetClassStuCountForStu(coId);
+            var ds = stuBll.GetClassStuListByPageForStu(coId, "", startIndex, endIndex);
             var str = JsonConvert.SerializeObject(new { total = num, rows = ds.Tables[0] });
             context.Response.Write(str);
         }
@@ -579,6 +606,14 @@ namespace TrainerEvaluate.Web
             if (!string.IsNullOrEmpty(context.Request["PostOptId"]))
             {
                 stuModel.PostOptId = context.Request["PostOptId"];
+            }
+            if (!string.IsNullOrEmpty(context.Request["StuType"]))
+            {
+                stuModel.StuType = Convert.ToInt32(context.Request["StuType"]);
+            }
+            if (!string.IsNullOrEmpty(context.Request["StuTypeName"]))
+            {
+                stuModel.StuTypeName = context.Request["StuTypeName"];
             }
         }
 

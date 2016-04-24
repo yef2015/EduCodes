@@ -95,7 +95,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadTmp()">下载模板</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadTmpData()">批量导入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-redo" plain="true" onclick="exportData()">导出</a>
-            <%-- <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="ArchInfo()">学校档案</a>--%>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="ArchInfo()">查看学校信息</a>
         </div>
     </div>
 
@@ -171,7 +171,7 @@
 
     <div id="dlg1" class="easyui-dialog" style="width: 700px; height: 450px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons1">
-        <div class="ftitle" style="text-align: center">学校档案信息</div>
+        <div class="ftitle" style="text-align: center">学校信息</div>
         <form id="fm1" method="post">
             <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1">
                 <tr>
@@ -342,7 +342,7 @@
         function ArchInfo() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $('#dlg1').dialog('open').dialog('setTitle', '学校档案');
+                $('#dlg1').dialog('open').dialog('setTitle', '学校信息');
                 $('#aSchoolName').text(row.SchoolName);
                 $('#aSchDisName').text(row.SchDisName);
                 $('#aRunNatureName').text(row.RunNatureName);
@@ -355,6 +355,8 @@
                 $('#aLegalName').text(row.LegalName);
                 $('#aLinkTel').text(row.LinkTel);
                 $('#aDescription').text(row.Description);
+                $('#aAddressInfo').text(row.AddressInfo);
+                $('#aPostCode').text(row.PostCode);
             } else {
                 messageAlert('提示', '请选择要查看的行!', 'warning');
             }

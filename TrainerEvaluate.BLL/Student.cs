@@ -299,6 +299,30 @@ namespace TrainerEvaluate.BLL
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
             return DbHelperSQL.Query(strSql.ToString());
+        } 
+        
+
+
+        public DataSet GetClassStuListByPageForStu(string classId, string orderby, int startIndex, int endIndex)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append("order by T." + orderby + " desc, " + "T.StuName  asc ");
+            }
+            else
+            {
+                strSql.Append("order by T.StuName asc");
+            }
+            strSql.Append(")AS Row, T.*  from   ");
+            strSql.Append(" ( select a.*,c.Name as GenderName ");
+            strSql.Append(string.Format("  from Student a left join   Dictionaries c  on  a.Gender=c.ID inner join SysUser f on a.StudentId=f.UserId  inner join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  )  ", classId));
+            strSql.Append("  T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            return DbHelperSQL.Query(strSql.ToString());
         }
 
 
@@ -306,6 +330,23 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(string.Format(" SELECT count(*) FROM Student a   inner join SysUser f on a.StudentId=f.UserId   left join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  ", classId));
+
+           var obj= DbHelperSQL.GetSingle(strSql.ToString());
+
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+        public int GetClassStuCountForStu(string classId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(string.Format(" SELECT count(*) FROM Student a   inner join SysUser f on a.StudentId=f.UserId   inner join  ClassStudents b on a.StudentId=b.StudentId and b.ClassId={0}  where  a.Status=1  ", classId));
 
            var obj= DbHelperSQL.GetSingle(strSql.ToString());
 

@@ -160,4 +160,6 @@
     background: url('icons/user_group.png') no-repeat center center;
 }.icon-book_open_mark {
     background: url('icons/book_open_mark.png') no-repeat center center;
+}.icon-application {
+    background: url('icons/application.png') no-repeat center center;
 }

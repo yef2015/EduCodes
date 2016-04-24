@@ -55,6 +55,7 @@
             if (window.parent != null && window.parent.frames.length>0) {
               window.parent.location.reload();
             }
+            alert("请使用IE浏览器登录！");
         }); 
     </script> 
 

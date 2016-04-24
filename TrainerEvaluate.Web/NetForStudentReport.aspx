@@ -41,6 +41,8 @@
                     <th field="FinishDate" width="10%" sortable="true" formatter="formatterdate">结束日期</th>
                     <th field="Point" width="10%" sortable="true">学时</th>
                     <th field="ReportMax" width="10%" sortable="true">班级上限人数</th>
+                    <th field="HasReportNum" width="10%" sortable="true">已报名人数</th>
+                    <th field="LeftNum" width="10%" sortable="true">剩余报名名额</th>
                     <th field="CloseDate" width="12%" sortable="true" formatter="formatterdate">报名截止日期</th>
                 </tr>
             </thead>

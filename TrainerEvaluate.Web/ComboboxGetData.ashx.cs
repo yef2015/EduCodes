@@ -70,7 +70,10 @@ namespace TrainerEvaluate.Web
                 case "rank":
                     dataType = "现任级别";
                     break;
-                default:
+                case "stutype":
+                    dataType = "学员类型";
+                    break;
+                default: 
                     break; 
             }
            var dt=   BLL.Common.GetDataSourceFromSysCode(dataType);

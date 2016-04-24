@@ -530,7 +530,7 @@ namespace TrainerEvaluate.BLL
                     strWhere += " and levelname like '%" + name + "%'";
                 }
 
-                var sql = string.Format("select * from Class "
+                var sql = string.Format("select *,(ReportMax-HasReportNum) LeftNum from Class "
                         + " where Status = 1 and IsReport = 1 and  ID not in ( select ClassId  from ClassStudents where   StudentId='{1}')  and   (ReportMax-HasReportNum)>0 and CloseDate > GETDATE() {0} ", strWhere, userId);
 
                 StringBuilder strSql = new StringBuilder();

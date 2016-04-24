@@ -142,7 +142,7 @@ namespace TrainerEvaluate.Web
         {
             var name = context.Request["Name"];
             var description = context.Request["Description"];
-            var area = context.Request["Area"];
+            var level = context.Request["Level"];
             var type = context.Request["Type"];
             var classYear = System.DateTime.Now.Year.ToString();
             if (context.Session["ClassYear"] != null)
@@ -164,9 +164,9 @@ namespace TrainerEvaluate.Web
             {
                 strWhere += string.Format(" and  Description  like '%" + description.Trim() + "%' ");
             }
-            if (!string.IsNullOrEmpty(area))
+            if (!string.IsNullOrEmpty(level))
             {
-                strWhere += string.Format(" and  Area =" + area.Trim() + " ");
+                strWhere += string.Format(" and  Level =" + level.Trim() + " ");
             }
             if (!string.IsNullOrEmpty(type))
             {
@@ -241,7 +241,7 @@ namespace TrainerEvaluate.Web
         {
             var name = context.Request["Name"].Trim();
             var description = context.Request["Description"].Trim();
-            var area = context.Request["Area"].Trim();
+            var level = context.Request["Level"].Trim();
             var type = context.Request["Type"].Trim();
 
             var classYear = System.DateTime.Now.Year.ToString();
@@ -265,9 +265,9 @@ namespace TrainerEvaluate.Web
             {
                 strWhere += string.Format(" and  a.Description  like '%" + description + "%' ");
             }
-            if (!string.IsNullOrEmpty(area))
+            if (!string.IsNullOrEmpty(level))
             {
-                strWhere += string.Format(" and  a.Area =" + area + " ");
+                strWhere += string.Format(" and  a.Level =" + level + " ");
             }
             if (!string.IsNullOrEmpty(type))
             {
