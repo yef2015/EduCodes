@@ -287,7 +287,7 @@ namespace TrainerEvaluate.DAL
 				}
 				if(row["Object"]!=null)
 				{
-                    model.Object = Convert.ToInt32(row["Object"].ToString());
+                    model.Object =string.IsNullOrEmpty(row["Object"].ToString())?0: Convert.ToInt32(row["Object"].ToString());
 				}
                 if (row["ObjectName"] != null)
                 {

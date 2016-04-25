@@ -1260,7 +1260,7 @@
                 $('#aLevel').text(  row.Level);
                 $('#aType').text( row.Type);
                 $('#aReportMax').text( row.ReportMax);
-                $('#aCloseDate').text(row.CloseDate);  
+                $('#aCloseDate').text(StringToDate(row.CloseDate));  
                 if (row.IsReport == 1) {
                     $('#aIsReport').text("是");
                 }
