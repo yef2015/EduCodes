@@ -31,7 +31,8 @@
     <div style="margin: 10px; width: 99%">
         <table id="dg" title="我已参加" class="easyui-datagrid" style="width: 99%"
             url="NetForStudentInfo.ashx?t=qjoin&studentId=<%= UserId %>" toolbar="#toolbar"
-            pagination="true">
+            pagination="true"  pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
                     <th field="ID" width="0" hidden="true">编号</th>
@@ -279,11 +280,11 @@
                 $('#aFinishDate').text(StringToDate(row.FinishDate));
                 $('#aStudents').text(row.Students);
                 $('#aPoint').text(row.Point);
-                $('#aPointType').text(row.PointType);
+                $('#aPointType').text(row.PointTypeName);
                 $('#aTeacher').text(row.Teacher);
                 $('#aArea').text(row.AreaName);
                 $('#aLevel').text(row.levelname);
-                $('#aType').text(row.Type);
+                $('#aType').text(row.TypeName);
                 $('#aReportMax').text(row.ReportMax);
                 $('#aCloseDate').text(StringToDate(row.CloseDate));
                 if (row.IsReport == 1) {

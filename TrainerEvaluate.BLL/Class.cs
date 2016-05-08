@@ -161,7 +161,7 @@ namespace TrainerEvaluate.BLL
 	    public DataSet GetDataForExport(string strWhere)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select a.Name,Object, Description, convert(varchar, a.StartDate, 102) as StartDate, convert(varchar, a.FinishDate, 102) as FinishDate, Students, Point, b.Name as PointTypeName, Teacher, c.Name as  AreaName,d.Name as   LevelName,  e.Name as TypeName ");
+            strSql.Append("select a.Name,ObjectName,Description, convert(varchar, a.StartDate, 102) as StartDate, convert(varchar, a.FinishDate, 102) as FinishDate, Students, Point, b.Name as PointTypeName, Teacher, c.Name as  AreaName,d.Name as   LevelName,  e.Name as TypeName ");
             strSql.Append(" FROM Class a left join Dictionaries b on a.PointType=b.ID left join Dictionaries c on a.Area=c.ID  left join Dictionaries d on a.Level=d.ID  left join Dictionaries e on a.Type=e.ID ");
             if (strWhere.Trim() != "")
             {
@@ -422,7 +422,7 @@ namespace TrainerEvaluate.BLL
         public DataSet GetExportByClassId(string classId)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select a.Name as ClassName,a.Object,a.Description,a.StartDate,a.FinishDate,a.Students, ");
+            strSql.Append(" select a.Name as ClassName,a.Object,a.ObjectName, a.Description,a.StartDate,a.FinishDate,a.Students, ");
             strSql.Append(" a.Point,b.Name as PointTypeName,c.Name as TypeName,d.Name as AreaName from Class a  ");
             strSql.Append(" left join Dictionaries b on a.PointType = b.ID and a.ID = '" + classId + "' ");
             strSql.Append(" left join Dictionaries c on a.Type = c.ID and a.ID = '" + classId + "' ");

@@ -145,8 +145,8 @@
 
 
         function exportData() {
-            var url = "Course.ashx?t=ex" + "&name=" + encodeURIComponent($("#corName").textbox('getText')) + "&teaName=" 
-                + "&teaTime=&teaplace=" + $("#TeachPlace11").textbox('getText');
+            var url = "Course.ashx?t=ex" + "&name=" + encodeURIComponent($("#corName").textbox('getText')) + "&cType="+
+            $("#cType").combobox('getValue');
             window.location = url;
         }
 

@@ -468,9 +468,9 @@ namespace TrainerEvaluate.Web
         private DataSet QueryDataResultForExp(HttpContext context)
         {
             var corName = context.Request["name"].Trim();
-            var teaName = context.Request["teaName"].Trim();
-            var teaplace = context.Request["teaplace"].Trim();
-            var teaTime = context.Request["teaTime"].Trim();
+           // var teaName = context.Request["teaName"].Trim();
+          //  var teaplace = context.Request["teaplace"].Trim();
+            var cType = context.Request["cType"].Trim();
             var ds = new DataSet();
             var courBll = new BLL.Course();
             var strWhere = "";
@@ -478,39 +478,50 @@ namespace TrainerEvaluate.Web
             {
                 strWhere = string.Format(" CourseName like '%" + corName + "%' ");
             }
-            if (!string.IsNullOrEmpty(teaName))
+            if (!string.IsNullOrEmpty(cType))
             {
                 if (!string.IsNullOrEmpty(strWhere))
                 {
-                    strWhere += string.Format(" and  TeacherName  like '%" + teaName + "%' ");
+                    strWhere += string.Format(" and  Type  =" + cType + "");
                 }
                 else
                 {
-                    strWhere = string.Format(" TeacherName like '%" + teaName + "%' ");
+                    strWhere = string.Format("  Type  =" + cType + "");
                 }
             }
-            if (!string.IsNullOrEmpty(teaplace))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachPlace  like '%" + teaplace + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachPlace like '%" + teaplace + "%' ");
-                }
-            }
-            if (!string.IsNullOrEmpty(teaTime))
-            {
-                if (!string.IsNullOrEmpty(strWhere))
-                {
-                    strWhere += string.Format(" and  TeachTime  like '%" + teaTime + "%' ");
-                }
-                else
-                {
-                    strWhere = string.Format(" TeachTime like '%" + teaTime + "%' ");
-                }
-            }
+            //if (!string.IsNullOrEmpty(teaName))
+            //{
+            //    if (!string.IsNullOrEmpty(strWhere))
+            //    {
+            //        strWhere += string.Format(" and  TeacherName  like '%" + teaName + "%' ");
+            //    }
+            //    else
+            //    {
+            //        strWhere = string.Format(" TeacherName like '%" + teaName + "%' ");
+            //    }
+            //}
+            //if (!string.IsNullOrEmpty(teaplace))
+            //{
+            //    if (!string.IsNullOrEmpty(strWhere))
+            //    {
+            //        strWhere += string.Format(" and  TeachPlace  like '%" + teaplace + "%' ");
+            //    }
+            //    else
+            //    {
+            //        strWhere = string.Format(" TeachPlace like '%" + teaplace + "%' ");
+            //    }
+            //}
+            //if (!string.IsNullOrEmpty(teaTime))
+            //{
+            //    if (!string.IsNullOrEmpty(strWhere))
+            //    {
+            //        strWhere += string.Format(" and  TeachTime  like '%" + teaTime + "%' ");
+            //    }
+            //    else
+            //    {
+            //        strWhere = string.Format(" TeachTime like '%" + teaTime + "%' ");
+            //    }
+            //}
             if (!string.IsNullOrEmpty(strWhere))
             {
                 strWhere += string.Format(" and  Status = 1 ");

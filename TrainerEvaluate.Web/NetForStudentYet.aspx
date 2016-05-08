@@ -303,11 +303,11 @@
                 $('#aFinishDate').text(StringToDate(row.FinishDate));
                 $('#aStudents').text(row.Students);
                 $('#aPoint').text(row.Point);
-                $('#aPointType').text(row.PointType);
+                $('#aPointType').text(row.PointTypeName);
                 $('#aTeacher').text(row.Teacher);
                 $('#aArea').text(row.AreaName);
                 $('#aLevel').text(row.levelname);
-                $('#aType').text(row.Type);
+                $('#aType').text(row.TypeName);
                 $('#aReportMax').text(row.ReportMax);
                 $('#aCloseDate').text(StringToDate(row.CloseDate));
                 if (row.IsReport == 1) {

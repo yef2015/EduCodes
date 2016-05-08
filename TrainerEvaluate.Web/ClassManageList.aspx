@@ -1283,14 +1283,14 @@
                 $('#aDescription').text(row.Description);
                 $('#aStartDate').text(StringToDate(row.StartDate));
                 $('#aFinishDate').text(StringToDate(row.FinishDate));
-                $('#aStudents').text(  row.Students);
-                $('#aPoint').text( row.Point);
-                $('#aPointType').text( row.PointType);
-                $('#aTeacher').text( row.Teacher);
-                $('#aArea').text( row.AreaName);
-                $('#aLevel').text(  row.Level);
-                $('#aType').text( row.Type);
-                $('#aReportMax').text( row.ReportMax);
+                $('#aStudents').text(row.Students);
+                $('#aPoint').text(row.Point);
+                $('#aPointType').text(row.PointTypeName);
+                $('#aTeacher').text(row.Teacher);
+                $('#aArea').text(row.AreaName);
+                $('#aLevel').text(row.levelname);
+                $('#aType').text(row.TypeName);
+                $('#aReportMax').text(row.ReportMax);
                 $('#aCloseDate').text(StringToDate(row.CloseDate));  
                 if (row.IsReport == 1) {
                     $('#aIsReport').text("是");

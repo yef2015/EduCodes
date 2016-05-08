@@ -1746,7 +1746,7 @@ namespace TrainerEvaluate.BLL
                if (ds != null && ds.Tables[0].Rows.Count > 0)
                {
                    DataRow dr = ds.Tables[0].Rows[0];
-                   Object = dr["Object"].ToString();
+                   Object = dr["ObjectName"].ToString();
                    if (!string.IsNullOrEmpty(dr["StartDate"].ToString()))
                    {
                        StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("yyyy-MM-dd");
