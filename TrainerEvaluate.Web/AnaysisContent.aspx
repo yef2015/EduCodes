@@ -110,13 +110,13 @@
                     <div align="center">课程名称： </div>
                 </td>
                 <td width="35%" bgcolor="F0F9FF" height="25" class="gray10a">
-                    <div runat="server" id="courseName">XXX课程培训</div>
+                    <div runat="server" id="courseName"></div>
                 </td>
                 <td width="15%" bgcolor="F0F9FF" class="gray10a" height="25">
                     <div align="center">培训地点： </div>
                 </td>
                 <td width="34%" bgcolor="F0F9FF" height="25" class="gray10a" colspan="3">
-                    <div runat="server" id="coursePlace">教育党校</div>
+                    <div runat="server" id="coursePlace"></div>
                 </td>
             </tr>
             <tr bgcolor="#FFFFFF">
@@ -124,13 +124,13 @@
                     <div align="center">培训讲师： </div>
                 </td>
                 <td width="35%" class="gray10a" height="26">
-                    <div runat="server" id="teacherName">张一山</div>
+                    <div runat="server" id="teacherName"></div>
                 </td>
                 <td width="15%" class="gray10a" height="26">
                     <div align="center">培训时间： </div>
                 </td>
                 <td width="34%" class="gray10a" height="26"  colspan="3">
-                    <div runat="server" id="trainTime">2014-9-20</div>
+                    <div runat="server" id="trainTime"></div>
                 </td>
             </tr>
             <tr>

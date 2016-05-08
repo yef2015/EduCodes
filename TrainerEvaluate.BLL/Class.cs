@@ -477,7 +477,7 @@ namespace TrainerEvaluate.BLL
                 }
 
                 var sql = string.Format("select distinct(levelname) as train from Class "
-                        + " where Status = 1 and IsReport = 1  and levelname is not null   {0} ", strWhere);
+                        + " where Status = 1 and IsReport = 1 and CloseDate>GETDATE() and levelname is not null   {0} ", strWhere);
 
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM ( ");
@@ -507,7 +507,7 @@ namespace TrainerEvaluate.BLL
             }
 
             var sql = string.Format("select COUNT(1) from( select distinct(levelname) as train from Class "
-                    + " where  Status = 1 and  IsReport = 1 and levelname is not null   {0} ) A ", strWhere, userId);
+                    + " where  Status = 1 and  IsReport = 1 and CloseDate>GETDATE() and levelname is not null   {0} ) A ", strWhere, userId);
 
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj == null)
@@ -612,6 +612,28 @@ namespace TrainerEvaluate.BLL
 	        }
 	    }
 
+
+        /// <summary>
+        /// 提取班级课件
+        /// </summary>
+        /// <param name="classid"></param>
+        /// <returns></returns>
+        public DataSet GetClasspptByClassId(string classid)
+        {
+            try
+            {
+                var sql = string.Format(" select * from ClassAttach where IsValid=1 and ClassId= {0} ", classid);
+
+                DataSet ds = DbHelperSQL.Query(sql);
+
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                return new DataSet();
+            }
+        }
 
 	    #endregion  ExtensionMethod
 	}

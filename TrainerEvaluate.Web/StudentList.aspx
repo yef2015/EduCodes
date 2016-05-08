@@ -679,6 +679,10 @@
                 messageAlert('提示', "请填写身份证号", 'warning');
                 return;
             }
+            if (!checkIdNo(data.IdentityNo)) {
+                messageAlert('提示', "身份证号错误 " + idnomsg, 'warning');
+                return;
+            }
             if (data.School == "") {
                 messageAlert('提示', "请选择所在学校", 'warning');
                 return;
@@ -697,6 +701,10 @@
             }
             if (data.Mobile == "") {
                 messageAlert('提示', "请填写手机号码", 'warning');
+                return;
+            } 
+            if (checkCellPhone(data.Mobile)) {
+                messageAlert('提示', "手机号码错误", 'warning');
                 return;
             }
             if (data.TeachNo == "") {

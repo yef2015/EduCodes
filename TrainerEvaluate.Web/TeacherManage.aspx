@@ -350,6 +350,10 @@
                 messageAlert('提示', "请填写身份证号", 'warning');
                 return;
             }
+            if (!checkIdNo(data.IdentityNo)) {
+                messageAlert('提示', "身份证号错误 " + idnomsg, 'warning');
+                return;
+            }
             $.post(url, data, function (result) {
                 if (result == "") {
                     $('#dlg').dialog('close');

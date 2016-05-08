@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin: 20px;">
+    <table width="98%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin: 20px;">
         <tr>
             <td width="16%" bgcolor="F0F9FF" class="gray10a" height="25">
                 <div align="center">班级名称：</div>
@@ -28,9 +28,9 @@
         </tr>
     </table>
 
-    <div style="margin: 10px; width: 99%">  
+    <div style="margin: 10px; width: 99%">
         <table id="dg" title="我已参加" class="easyui-datagrid" style="width: 99%"
-            url="NetForStudentInfo.ashx?t=qjoin&studentId=<%= UserId %>"   toolbar="#toolbar" 
+            url="NetForStudentInfo.ashx?t=qjoin&studentId=<%= UserId %>" toolbar="#toolbar"
             pagination="true">
             <thead>
                 <tr>
@@ -39,18 +39,19 @@
                     <th field="Description" width="30%" sortable="true">培训内容</th>
                     <th field="StartDate" width="15%" sortable="true" formatter="formatterdate">开始日期</th>
                     <th field="FinishDate" width="15%" sortable="true" formatter="formatterdate">结束日期</th>
-                    <th field="Point" width="10%" sortable="true">学时</th> 
+                    <th field="Point" width="10%" sortable="true">学时</th>
                 </tr>
             </thead>
         </table>
-         <div id="toolbar">
+        <div id="toolbar">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-application" plain="true" onclick="classInfo()">班级信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="courseInfo()">课程信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="stuInfo()">学员信息</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="downloadppts()">课件下载</a>
         </div>
     </div>
 
-     <div id="dlg7" class="easyui-dialog" style="width: 650px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
+    <div id="dlg7" class="easyui-dialog" style="width: 650px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
         closed="true" buttons="#dlg-buttons7">
         <div class="ftitle">详细信息</div>
         <form id="fm7" method="post">
@@ -174,55 +175,73 @@
     <div id="dlg-buttons7">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg7').dialog('close')" style="width: 90px">关闭</a>
     </div>
-     <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
-            closed="true" buttons="#dlg-buttons5"> 
-            <table id="dg5" class="easyui-datagrid"
-                data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
-                <thead>
-                    <tr>
-                       <%-- <th data-options="field:'ck',checkbox:true"></th>--%>
-                        <th data-options="field:'RId'" hidden="true">RId</th>
-                        <th width="35%" data-options="field:'CoursName'">课程名称</th>
-                        <th width="15%" data-options="field:'TeacherName'">教师姓名</th>
-                        <th width="18%" data-options="field:'teacherplace'">授课地点</th>
-                        <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
-                        <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th> 
-                    </tr>
-                </thead>
-            </table>
-            <input type="hidden" id="hcctIsAll" />
-            <input type="hidden" id="hcctIds" />
-            <input type="hidden" id="hUncctIds" />
+    <div id="dlg5" class="easyui-dialog" style="width: 750px; height: 480px; padding: 10px 20px" data-options="modal:true,top:10"
+        closed="true" buttons="#dlg-buttons5">
+        <table id="dg5" class="easyui-datagrid"
+            data-options="rownumbers:true,singleSelect:false,url:'Course.ashx?t=dcct',method:'post',checkOnSelect:true, pagination:true">
+            <thead>
+                <tr>
+                    <%-- <th data-options="field:'ck',checkbox:true"></th>--%>
+                    <th data-options="field:'RId'" hidden="true">RId</th>
+                    <th width="35%" data-options="field:'CoursName'">课程名称</th>
+                    <th width="15%" data-options="field:'TeacherName'">教师姓名</th>
+                    <th width="18%" data-options="field:'teacherplace'">授课地点</th>
+                    <th field="StartDate" width="18%" sortable="true" formatter="formatterdatemore">开始时间</th>
+                    <th field="FinishDate" width="18%" sortable="true" formatter="formatterdatemore">结束时间</th>
+                </tr>
+            </thead>
+        </table>
+        <input type="hidden" id="hcctIsAll" />
+        <input type="hidden" id="hcctIds" />
+        <input type="hidden" id="hUncctIds" />
+    </div>
+    <div id="dlg-buttons5">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg5').dialog('close');" style="width: 90px">关闭</a>
+    </div>
+
+    <div id="dlg1" class="easyui-dialog" style="width: 630px; height: 500px; padding: 10px 20px" data-options="modal:true,top:10"
+        closed="true" buttons="#dlg-buttons1">
+        <table id="dg1" class="easyui-datagrid"
+            data-options="rownumbers:true,singleSelect:false,url:'StudentsInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
+            <thead>
+                <tr>
+                    <%--      <th data-options="field:'ck',checkbox:true"></th>--%>
+                    <th data-options="field:'StudentId'" hidden="true">StudentId</th>
+                    <th data-options="field:'StuName'" width="18%">姓名</th>
+                    <th data-options="field:'GenderName'" width="24%">性别</th>
+                    <th data-options="field:'School'" width="35%">所在学校</th>
+                    <th data-options="field:'Post'" width="16%">职务</th>
+                </tr>
+            </thead>
+        </table>
+        <input type="hidden" id="hClassid" />
+        <input type="hidden" id="hIsAllStu" />
+        <input type="hidden" id="hStuIds" />
+        <input type="hidden" id="hUnStuIds" />
+    </div>
+    <div id="dlg-buttons1">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg1').dialog('close');$('#dg1').datagrid('load');" style="width: 90px">关闭</a>
+    </div>
+
+    <div id="dlgUploadppt" class="easyui-dialog" style="width: 600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <table id="dgppts" title="课件列表" class="easyui-datagrid" style="width: 100%"
+            url="ClassInfo.ashx?t=ppt"
+            toolbar="#toolbarppts" pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
+            <thead>
+                <tr>
+                    <th field="Id" width="0" hidden="true">编号</th>
+                    <th field="Name" width="60%">课件名称</th>
+                    <th field="CreateTime" width="25%" sortable="true" formatter="formatterdate">上传时间</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbarppts"> 
+            <a id="btndownppt" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadppt()">下载</a>
+            <a id="btndownppts" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadpptall()">全部下载</a>
         </div>
-        <div id="dlg-buttons5"> 
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg5').dialog('close');" style="width: 90px">关闭</a>
-        </div>
-    
-     <div id="dlg1" class="easyui-dialog" style="width: 630px; height: 500px; padding: 10px 20px" data-options="modal:true,top:10"
-            closed="true" buttons="#dlg-buttons1"> 
-            <table id="dg1" class="easyui-datagrid"
-                data-options="rownumbers:true,singleSelect:false,url:'StudentsInfo.ashx',method:'post',checkOnSelect:true, pagination:true">
-                <thead>
-                    <tr>
-                  <%--      <th data-options="field:'ck',checkbox:true"></th>--%>
-                        <th data-options="field:'StudentId'" hidden="true">StudentId</th>
-                        <th data-options="field:'StuName'" width="18%">姓名</th> 
-                        <th data-options="field:'GenderName'" width="24%">性别</th>
-                        <th data-options="field:'School'" width="35%">所在学校</th>
-                        <th data-options="field:'Post'" width="16%">职务</th>
-                    </tr>
-                </thead>
-            </table>
-            <input type="hidden" id="hClassid" />
-            <input type="hidden" id="hIsAllStu" />
-            <input type="hidden" id="hStuIds" />
-            <input type="hidden" id="hUnStuIds" />
-        </div>
-        <div id="dlg-buttons1">  
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg1').dialog('close');$('#dg1').datagrid('load');" style="width: 90px">关闭</a>
-        </div>
-    
-    
+    </div>
+
 
     <script type="text/javascript">
 
@@ -263,7 +282,7 @@
                 $('#aPointType').text(row.PointType);
                 $('#aTeacher').text(row.Teacher);
                 $('#aArea').text(row.AreaName);
-                $('#aLevel').text(row.Level);
+                $('#aLevel').text(row.levelname);
                 $('#aType').text(row.Type);
                 $('#aReportMax').text(row.ReportMax);
                 $('#aCloseDate').text(StringToDate(row.CloseDate));
@@ -279,7 +298,7 @@
         }
 
 
-        function courseInfo() { 
+        function courseInfo() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $('#dlg5').dialog('open').dialog('setTitle', '查看课程设置');
@@ -290,15 +309,52 @@
             }
         }
 
-        function stuInfo() { 
+        function stuInfo() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $('#dlg1').dialog('open').dialog('setTitle', '学员信息'); 
+                $('#dlg1').dialog('open').dialog('setTitle', '学员信息');
 
                 $("#hClassid").val(row.ID);
                 $('#dg1').datagrid('reload', { t: 'cs1', coId: $("#hClassid").val() });
             } else {
                 messageAlert('提示', '请选择要设置的行!', 'warning');
+            }
+        }
+
+        var cid;
+        function downloadppts() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlgUploadppt').dialog({
+                    title: row.Name + '-- 课件信息',
+                    closed: false,
+                    cache: false,
+                    modal: true
+                });
+                cid = row.ID;
+                $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
+                $('#dlgUploadppt').dialog('open');
+            } else {
+                messageAlert('提示', '请选择课件所属班级!', 'warning');
+            }
+
+        }
+
+        function downloadppt() {
+            var row = $('#dgppts').datagrid('getSelected');
+            if (row) {
+                var url = "ClassInfo.ashx?t=downppt" + "&id=" + row.Id;
+                window.location = url;
+            } else {
+                messageAlert('提示', '请选择要下载的课件!', 'warning');
+            }
+        }
+
+        function downloadpptall() {
+            var rows = $('#dgppts').datagrid('getRows');
+            if (rows != null && rows.length > 0) {
+                var url = "ClassInfo.ashx?t=downpptall" + "&cid=" + cid;
+                window.location = url;
             }
         }
     </script>

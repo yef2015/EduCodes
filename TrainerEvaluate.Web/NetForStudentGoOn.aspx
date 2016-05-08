@@ -53,7 +53,7 @@
         function query() {
             $('#dg').datagrid('load', {
                 t: "going",
-                name: $("#Level").combobox('getValue')
+                name: $("#Level").combobox('getText')
             });
         }
 

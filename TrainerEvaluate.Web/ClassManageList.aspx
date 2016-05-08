@@ -76,6 +76,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="showCourseNew()">查看课程设置</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="disInfo()">查看班级信息</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadDatappt()">课件信息</a> 
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -520,6 +521,35 @@
     </div>
     <input type="hidden" id="setClassIdForStu" />
     <input type="hidden" id="setClassNameStu" />
+
+
+    <div id="dlgUploadppt" class="easyui-dialog" style="width:600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <table id="dgppts" title="已上传课件列表" class="easyui-datagrid" style="width: 100%"
+            url="ClassInfo.ashx?t=ppt"
+            toolbar="#toolbarppts" pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
+            <thead>
+                <tr>
+                    <th field="Id" width="0" hidden="true">编号</th>
+                    <th field="Name" width="60%">课件名称</th> 
+                    <th field="CreateTime" width="25%" sortable="true" formatter="formatterdate">上传时间</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbarppts">
+            <a id="btnNewppt" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newppt()">新增</a>
+            <a id="btnDelppt" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Deleteppt()">删除</a>
+            <a id="btndownppt" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadppt()">下载</a>
+            <a id="btndownppts" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadpptall()">全部下载</a>
+        </div>
+    </div>
+
+    <div id="dlgUploadpptfile" class="easyui-dialog" style="width: 400px; height:200px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <div class="ftitle">上传课件</div>
+        <input type="file" id="upDatappt" name="upDatappt" />
+        <div id="fileQueueppt"></div>
+    </div>
+
 
     <script type="text/javascript">
 
@@ -1117,6 +1147,7 @@
                 'queueID': 'fileQueue',
                 'fileTypeExts': '*.xls;*.xlsx',
                 'fileTypeDesc': 'xls Files (.xls)',
+                'buttonText': '请选择要上传的文件',
                 'onSelect': function (e) {
                     if (e.type != '.xlsx' && e.type != '.xls') {
                         alert("请上传excel文件!");
@@ -1271,6 +1302,142 @@
                 messageAlert('提示', '请选择要查看的行!', 'warning');
             }
         }
+
+
+        var cid;
+        function uploadDatappt() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {  
+                $('#dlgUploadppt').dialog({
+                    title: row.Name+ '-- 课件信息', 
+                    closed: false,
+                    cache: false,
+                    modal: true
+                });
+                cid = row.ID;
+                SetUploadPPtData(row.ID);
+                $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
+                $('#dlgUploadppt').dialog('open');
+            } else {
+                messageAlert('提示', '请选择课件所属班级!', 'warning');
+            }
+        }
+
+
+        function newppt() {
+            $('#dlgUploadpptfile').dialog({
+                title: '上传课件',
+                height: '300px',
+                closed: false,
+                cache: false,
+                modal: true
+            });
+            $('#dlgUploadpptfile').dialog('open'); 
+        }
+
+
+        function Deleteppt() {
+            var row = $('#dgppts').datagrid('getSelected');
+            var url = "ClassInfo.ashx?t=delppts";
+            if (row) {
+                if (confirm("确定删除此课件？")) {
+                    $.post(url, { id: row.Id }, function (result) {
+                        if (result == "" || result == null) {
+                            $('#dgppts').datagrid('reload');    // reload the user data
+                        } else {
+                            //$.messager.show({    // show error message
+                            //    title: 'Error',
+                            //    msg: result
+                            //});
+                            alert(result);
+                        }
+                    });
+                }
+            } else {
+                messageAlert('提示', '请选择要删除的课件!', 'warning');
+            }
+        }
+
+
+        function downloadppt() {
+            var row = $('#dgppts').datagrid('getSelected');
+            if (row) {
+                var url = "ClassInfo.ashx?t=downppt" + "&id=" +row.Id;
+                window.location = url;
+            } else {
+                messageAlert('提示', '请选择要下载的课件!', 'warning');
+            }
+        }
+
+        function downloadpptall() { 
+           var rows= $('#dgppts').datagrid('getRows');
+           if (rows != null && rows.length>0) {
+                var url = "ClassInfo.ashx?t=downpptall" + "&cid=" + cid;
+                window.location = url;
+            } 
+        }
+
+
+
+
+
+        function SetUploadPPtData(classId) {
+            $('#upDatappt').uploadify({
+                'swf': 'Scripts/uploadify.swf',
+                'uploader': 'ClassInfo.ashx?t=upppts&c=' + classId,
+                'cancelImg': 'Scripts/cancel.png',
+                'removeCompleted': true,
+                'hideButton': false,
+                'auto': true,
+                'buttonText': '请选择要上传的文件',
+                'queueID': 'fileQueue',
+                //'fileTypeExts': '*.xls;*.xlsx',
+                //'fileTypeDesc': 'xls Files (.xls)',
+                'onSelect': function (e) {
+                    //if (e.type != '.xlsx' && e.type != '.xls') {
+                    //    alert("请上传excel文件!");
+                    //}
+                },
+                'onUploadStart': function (file) {
+                    //$('#upDatappt').uploadify('upload', '*');
+                    $("#upDatappt").uploadify("settings", 'formData', {
+                        cid: classId
+                    }); //动态传参数
+                },
+                'onUploadSuccess': function (file, data, response) {
+                    if (data != "" && data != "1") {
+                        //var result = data.split('|');
+                        //if (result.length > 0) {
+                        //    if (result[0] == "studentexport") {
+                        //        $('#aCurPerson').text(result[1]);
+                        //        $('#aExportCount').text(result[2]);
+                        //        $('#aRepeatCount').text(result[3]);
+                        //        $('#aNotExistCount').text(result[4]);
+                        //        $('#aNULLidentityNo').text(result[5] + '  ( 注：身份证号为空的学员，不允许入库 ) ');
+                        //        $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
+                        //    }
+                        //    else {
+                        //        ifConfirmCover(result[1]);
+                        //    }
+                        //} else {
+                        //    alert(data);
+                        //}
+                    }
+                },
+                'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                    $('#permissions_hint').show();
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful > 0) {
+                        $('#dlgUploadppt').dialog('close');
+                        $('#dlgUploadpptfile').dialog('close');
+                        $('#dg').datagrid('reload');
+                      //  $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
+                    }
+                }
+            });
+        }
+
 
     </script>
 

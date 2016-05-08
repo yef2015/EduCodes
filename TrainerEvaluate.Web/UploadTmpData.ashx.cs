@@ -89,6 +89,9 @@ namespace TrainerEvaluate.Web
                     break;
                 case "stet":
                     filename = Guid.NewGuid() + "stet.xls";
+                    break;    
+                case "ppts": //上传课件信息
+                    filename = Guid.NewGuid() + "stet.xls";
                     break;
                 default:
                     break;
@@ -134,7 +137,7 @@ namespace TrainerEvaluate.Web
                     {
                         var classId = context.Request["d"];
                         result = ClassStudentImport(dt, out msg, filename,classId);
-                    }
+                    }  
                     File.Delete(basePath + filename);
 
                     if (result)
@@ -1387,9 +1390,7 @@ namespace TrainerEvaluate.Web
 
         #endregion
 
-
-
-
+         
 
         private string GetPwd(string idNo)
         {

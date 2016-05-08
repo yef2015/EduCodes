@@ -641,8 +641,8 @@ namespace TrainerEvaluate.Web
                 if (dtCourse.Rows.Count> 0)
                 {
                     DataRow dro = dtCourse.Rows[0];
-                    courseName.InnerText = dro["CourseName"].ToString(); 
-                    coursePlace.InnerText = dro["TeachPlace"].ToString(); 
+                    courseName.InnerText = dro["CourseName"].ToString();
+                    coursePlace.InnerText = dro["teacherplace"].ToString(); 
                     teacherName.InnerText = dro["TeacherName"].ToString();
                     trainTime.InnerText = "从" + Convert.ToDateTime(dro["StartDate"]).ToString("yyyy-MM-dd") + "到" +
                         Convert.ToDateTime(dro["FinishDate"]).ToString("yyyy-MM-dd");
@@ -684,8 +684,15 @@ namespace TrainerEvaluate.Web
                     totalPeople.InnerText = statifyPercent[6].ToString()+" 人";
                     totalDone.InnerText = statifyPercent[7].ToString() + " 人";
 
-                    evProgress.InnerText = string.Format("{0:N2}%", ((statifyPercent[7] / statifyPercent[6]) * 100)); 
 
+                    if (statifyPercent[6] > 0)
+                    {
+                        evProgress.InnerText = string.Format("{0:N2}%", ((statifyPercent[7] / statifyPercent[6]) * 100)); 
+                    }
+                    else
+                    {
+                        evProgress.InnerText = "0%";
+                    } 
                 }
 
 
