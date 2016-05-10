@@ -33,7 +33,7 @@
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
-                    <th field="train" width="20%" sortable="true">培训对象</th>
+                    <th field="train" width="20%" sortable="true">培训类别</th>
                 </tr>
             </thead>
         </table>

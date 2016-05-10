@@ -41,7 +41,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="msysmgr" name="sysmgr" style="height: 1200px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;">
+    <div id="msysmgr" name="sysmgr" style="height: 1200px; font-size: 14px; margin-left: 5px;width:263px;padding-top:5px;overflow:auto">
         <ul id="tt" class="easyui-tree"  style="height: 650px;width:260px;" data-options="
 				url: 'StudentsInfo.ashx?t=stree',
 				method: 'post', 

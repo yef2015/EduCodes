@@ -188,7 +188,7 @@ namespace TrainerEvaluate.Web
                     strBuilder.Append(" <td width='15%' bgcolor='F9ECD9' class='gray10a' height='25'> ");
                     strBuilder.Append(" <div align='center'>授课地点： </div></td> ");
                     strBuilder.Append(" <td width='34%' bgcolor='F9ECD9' height='25' class='gray10a'> ");
-                    strBuilder.Append(" <span id='ipPlace'>" + dtTT.Rows[0]["TeachPlace"].ToString() + "</span></td></tr> ");
+                    strBuilder.Append(" <span id='ipPlace'>" + dtTT.Rows[0]["teacherplace"].ToString() + "</span></td></tr> ");
                     strBuilder.Append(" <tr><td width='16%' colspan='4' bgcolor='#FFFFFF' class='gray10a' height='25'>&nbsp; </td> ");
                     strBuilder.Append(" </tr></table> ");
                 }
