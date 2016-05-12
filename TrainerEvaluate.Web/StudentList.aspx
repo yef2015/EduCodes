@@ -452,6 +452,19 @@
                 </td>
                 <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
                     <span id="aManageWork"></span>
+                </td>  
+              <tr>
+                <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    <div align="center">学员类型：</div>
+                </td>
+                <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                    <span id="aStuType"></span>
+                </td>
+                <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                    
+                </td>
+                <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                    
                 </td>
             </tr>
         </table>
@@ -625,6 +638,7 @@
                 $('#aTeachNo').text(row.TeachNo);
                 $('#aSchool').text(row.School);
                 $('#aManageWork').text(row.ManageWork);
+                $('#aStuType').text(row.stutypeName);
                 
                 $('#dg-train').datagrid('reload', { t: 'stcl', studentId: row.StudentId });
             } else {
