@@ -77,6 +77,10 @@ namespace TrainerEvaluate.Web
                 case "downpptall":
                     DownloadPPTsAll(context); 
                     break;
+                case "upworks":  //上传作业
+                    var upworks = Uploadhomeworks(context);
+                    context.Response.Write(upworks);
+                    break;  
                 default:
                     var str = GetData(context);
                     context.Response.Write(str);
@@ -755,6 +759,64 @@ namespace TrainerEvaluate.Web
         }
 
 
+
+
+
+
+        /// <summary>
+        /// 上传作业
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private string Uploadhomeworks(HttpContext context)
+        {
+            var str = string.Empty;
+            try
+            {
+                var basePath = HttpContext.Current.Server.MapPath("Uploadppts/");
+                if (context.Request.Files["Filedata"] != null)
+                {
+                    var classAttach = new Models.ClassAttach();
+                    classAttach.Id = Guid.NewGuid();
+
+                    HttpPostedFile myFile = context.Request.Files["Filedata"];
+                    int nFileLen = myFile.ContentLength;
+                    var filename = classAttach.Id + "." + myFile.FileName;
+                    byte[] myData = new byte[nFileLen];
+                    myFile.InputStream.Read(myData, 0, nFileLen);
+                    System.IO.FileStream newFile = new System.IO.FileStream(basePath + filename,
+                        System.IO.FileMode.Create);
+                    newFile.Write(myData, 0, myData.Length);
+                    newFile.Close();
+
+
+                    //var stuTaskBll = new BLL.StuTask();
+                    //classAttach.FileType = myFile.ContentType;
+                    //classAttach.Name = myFile.FileName;
+                    //classAttach.Url = "Uploadppts/" + filename;
+                    //classAttach.IsValid = true;
+                    //classAttach.ClassId = context.Request["cid"] != null ? Convert.ToInt32(context.Request["cid"]) : 0;
+                    //classAttach.CreateId = Profile.CurrentUser.UserId;
+                    //classAttach.CreateUserName = Profile.CurrentUser.UserName;
+                    //classAttach.CreateTime = DateTime.Now;
+                    //if (context.Request["Remark"] != null)
+                    //{
+                    //    classAttach.Remark = context.Request["Remark"];
+                    //}
+                    //classAttachBll.Add(classAttach);
+                }
+                else
+                {
+                    str = "请选择上传文件！";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+                str = "处理异常：" + ex.Message;
+            }
+            return str;
+        }
 
     }
 }

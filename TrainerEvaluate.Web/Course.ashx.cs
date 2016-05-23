@@ -450,7 +450,7 @@ namespace TrainerEvaluate.Web
             var fieldsNames = new List<string>();
             fieldsNames.Add("课程名称");
             //fieldsNames.Add("授课教师");
-            fieldsNames.Add("授课地点");
+          //  fieldsNames.Add("授课地点");
             //fieldsNames.Add("授课时间");
             fieldsNames.Add("课程类型");
             fieldsNames.Add("描述");

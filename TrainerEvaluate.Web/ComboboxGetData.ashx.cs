@@ -47,7 +47,7 @@ namespace TrainerEvaluate.Web
                     dataType = "学时类型";
                     break;   
                 case "a":
-                    dataType = "培训范围";
+                    dataType = "培训形式";
                     break;    
                 case "l":
                     dataType = "培训级别";
@@ -65,7 +65,7 @@ namespace TrainerEvaluate.Web
                     dataType = "学员职务";
                     break; 
                 case "obj":
-                    dataType = "培训对象";
+                    dataType = "培训类别";
                     break;   
                 case "rank":
                     dataType = "现任级别";

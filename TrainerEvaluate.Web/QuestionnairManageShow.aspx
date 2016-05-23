@@ -170,23 +170,39 @@
 
 
         function saveQueInfo() {
-            $.messager.confirm('确认', '确定生成问卷吗?', function (r) {
-                if (r) {
-                    $.post(url, {
-                        id: quid,
-                        StartTime: $("#StartTime").datebox('getValue'),
-                        EndTime: $("#EndTime").datebox('getValue'),
-                        Name: $("#Parameter").textbox('getText')
-                    }, function (result) {
-                        if (result == "" || result == null) {
-                            $('#dlg').dialog('close');
-                            $('#dg').datagrid('reload'); // reload the user data
-                        } else {
-                            messageAlert('提示', result, 'warning');
-                        }
-                    });
-                }
-            });
+            //$.messager.confirm('确认', '确定生成问卷吗?', function (r) {
+            //    if (r) {
+            //        $.post(url, {
+            //            id: quid,
+            //            StartTime: $("#StartTime").datebox('getValue'),
+            //            EndTime: $("#EndTime").datebox('getValue'),
+            //            Name: $("#Parameter").textbox('getText')
+            //        }, function (result) {
+            //            if (result == "" || result == null) {
+            //                $('#dlg').dialog('close');
+            //                $('#dg').datagrid('reload'); // reload the user data
+            //            } else {
+            //                messageAlert('提示', result, 'warning');
+            //            }
+            //        });
+            //    }
+            //});
+
+            if (confirm("确定生成问卷吗?")) {
+                $.post(url, {
+                    id: quid,
+                    StartTime: $("#StartTime").datebox('getValue'),
+                    EndTime: $("#EndTime").datebox('getValue'),
+                    Name: $("#Parameter").textbox('getText')
+                }, function (result) {
+                    if (result == "" || result == null) {
+                        $('#dlg').dialog('close');
+                        $('#dg').datagrid('reload'); // reload the user data
+                    } else {
+                        messageAlert('提示', result, 'warning');
+                    }
+                });
+            }  
         }
 
 

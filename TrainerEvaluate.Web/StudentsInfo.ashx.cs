@@ -185,7 +185,7 @@ namespace TrainerEvaluate.Web
             }
             if (!string.IsNullOrEmpty(card))
             {
-                strWhere += string.Format(" and  IdentityNo  like '%" + card + "%' ");
+                strWhere += string.Format(" and  a.IdentityNo  like '%" + card + "%' ");
             }
             if (!string.IsNullOrEmpty(code))
             {
@@ -409,6 +409,7 @@ namespace TrainerEvaluate.Web
             fieldsNames.Add("继教号");
             fieldsNames.Add("主管工作");
             fieldsNames.Add("描述");
+            fieldsNames.Add("学员类型");
 
             var ds = QueryDataResultForExp(context);
             var filename = DateTime.Now.ToString("yyyy-MM-dd") + "-学员信息.xls";

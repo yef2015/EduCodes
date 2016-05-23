@@ -66,8 +66,8 @@ namespace TrainerEvaluate.Models
 
         public string teacherplace
         {
-            set { _teachername = value; }
-            get { return _teachername; }
+            set { _teacherplace = value; }
+            get { return _teacherplace; }
         }
         /// <summary>
         /// 

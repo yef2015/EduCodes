@@ -49,6 +49,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="courseInfo()">课程信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="stuInfo()">学员信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="downloadppts()">课件下载</a>
+          <%--  <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadhomework()">上传作业</a>--%>
         </div>
     </div>
 
@@ -244,6 +245,33 @@
     </div>
 
 
+
+    <div id="dlgUploadhomework" class="easyui-dialog" style="width: 600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <table id="dghomeworks" title="已上传作业列表" class="easyui-datagrid" style="width: 100%"
+            url="ClassInfo.ashx?t=ppt"
+            toolbar="#toolbarhomeworks" pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
+            <thead>
+                <tr>
+                    <th field="Id" width="0" hidden="true">编号</th>
+                    <th field="Name" width="60%">作业名称</th>
+                    <th field="CreateTime" width="25%" sortable="true" formatter="formatterdate">上传时间</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbarhomeworks">
+            <a id="btnNewhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newhomeworks()">新增</a>
+          <%--  <a id="btnDelhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Deletehomeworks()">删除</a>--%>
+            <a id="btndownhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworks()">下载</a>
+            <a id="btndownallhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworksall()">全部下载</a>
+        </div>
+    </div>
+    <div id="dlgUploadhomeworks" class="easyui-dialog" style="width: 400px; height: 200px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <div class="ftitle">上传作业</div>
+        <input type="file" id="upDatahomeworks" name="upDatahomeworks" />
+        <div id="fileQueuehomeworks"></div>
+    </div>
+
     <script type="text/javascript">
 
         var url = 'NetForStudentInfo.ashx';
@@ -358,5 +386,86 @@
                 window.location = url;
             }
         }
+
+        function uploadhomework() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlgUploadhomework').dialog({
+                    title: row.Name + '-- 作业信息',
+                    closed: false,
+                    cache: false,
+                    modal: true
+                });
+                cid = row.ID;
+                SetUploadhomeworkData(row.ID);
+                $('#dghomeworks').datagrid('reload', { t: 'ppt', cId: row.ID });
+                $('#dlgUploadhomework').dialog('open');
+            } else {
+                messageAlert('提示', '请选择具体班级!', 'warning');
+            }
+        }
+
+
+         
+
+        function SetUploadhomeworkData(classId) {
+            $('#upDatappt').uploadify({
+                'swf': 'Scripts/uploadify.swf',
+                'uploader': 'ClassInfo.ashx?t=upworks',
+                'cancelImg': 'Scripts/cancel.png',
+                'removeCompleted': true,
+                'hideButton': false,
+                'auto': true,
+                'buttonText': '请选择要上传的文件',
+                'queueID': 'fileQueue',
+                //'fileTypeExts': '*.xls;*.xlsx',
+                //'fileTypeDesc': 'xls Files (.xls)',
+                'onSelect': function (e) {
+                    //if (e.type != '.xlsx' && e.type != '.xls') {
+                    //    alert("请上传excel文件!");
+                    //}
+                },
+                'onUploadStart': function (file) {
+                    //$('#upDatappt').uploadify('upload', '*');
+                    $("#upDatahomeworks").uploadify("settings", 'formData', {
+                        cid: classId,
+                        studentId: "<%= UserId %>",
+                    }); //动态传参数
+                },
+                'onUploadSuccess': function (file, data, response) {
+                    if (data != "" && data != "1") {
+                        //var result = data.split('|');
+                        //if (result.length > 0) {
+                        //    if (result[0] == "studentexport") {
+                        //        $('#aCurPerson').text(result[1]);
+                        //        $('#aExportCount').text(result[2]);
+                        //        $('#aRepeatCount').text(result[3]);
+                        //        $('#aNotExistCount').text(result[4]);
+                        //        $('#aNULLidentityNo').text(result[5] + '  ( 注：身份证号为空的学员，不允许入库 ) ');
+                        //        $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
+                        //    }
+                        //    else {
+                        //        ifConfirmCover(result[1]);
+                        //    }
+                        //} else {
+                        //    alert(data);
+                        //}
+                    }
+                },
+                'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                    $('#permissions_hint').show();
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful > 0) {
+                        $('#dlgUploadppt').dialog('close');
+                        $('#dlgUploadpptfile').dialog('close');
+                        $('#dg').datagrid('reload');
+                        //  $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
+                    }
+                }
+            });
+        }
+
+        
     </script>
 </asp:Content>

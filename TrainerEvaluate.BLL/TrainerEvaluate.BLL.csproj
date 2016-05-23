@@ -71,7 +71,9 @@
     <Compile Include="Roles.cs" />
     <Compile Include="SPSchool.cs" />
     <Compile Include="SPSchoolDistrict.cs" />
+    <Compile Include="StuAttBaseInfo.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="StuTask.cs" />
     <Compile Include="SysParameters.cs" />
     <Compile Include="SysUser.cs" />
     <Compile Include="Teacher.cs" />

@@ -188,7 +188,8 @@ namespace TrainerEvaluate.BLL
         {
             StringBuilder strSql = new StringBuilder();
             //strSql.Append(" select CourseName,TeacherName,TeachPlace,TeachTime,TypeName+'  '+TypeSmallName ,Description ");
-            strSql.Append(" select CourseName,TeachPlace,TypeName+'  '+TypeSmallName ,Description ");
+          //  strSql.Append(" select CourseName,TeachPlace,TypeName+'  '+TypeSmallName ,Description ");
+            strSql.Append(" select CourseName,TypeName+'  '+TypeSmallName ,Description ");
             strSql.Append(" FROM Course ");
             if (strWhere.Trim() != "")
             {
