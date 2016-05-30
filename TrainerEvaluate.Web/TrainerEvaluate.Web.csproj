@@ -875,6 +875,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Homework\" />
     <Folder Include="Uploadppts\" />
   </ItemGroup>
   <PropertyGroup>

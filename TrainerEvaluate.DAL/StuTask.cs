@@ -41,9 +41,9 @@ namespace TrainerEvaluate.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into StuTask(");
-            strSql.Append("Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId)");
+            strSql.Append("Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId,FileType)");
             strSql.Append(" values (");
-            strSql.Append("@Id,@StudentId,@ClassId,@CourseId,@CreateTime,@TaskUrl,@Remark,@Score,@TeacherId,@TeacherName,@ScoreTime,@TaskName,@IsValid,@LastModifyTime,@LastModifyId)");
+            strSql.Append("@Id,@StudentId,@ClassId,@CourseId,@CreateTime,@TaskUrl,@Remark,@Score,@TeacherId,@TeacherName,@ScoreTime,@TaskName,@IsValid,@LastModifyTime,@LastModifyId,@FileType)");
             SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16),
@@ -59,22 +59,25 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@TaskName", SqlDbType.NVarChar,500),
 					new SqlParameter("@IsValid", SqlDbType.Bit,1),
 					new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
-					new SqlParameter("@LastModifyId", SqlDbType.UniqueIdentifier,16)};
-            parameters[0].Value = Guid.NewGuid();
-            parameters[1].Value = Guid.NewGuid();
+					new SqlParameter("@LastModifyId", SqlDbType.UniqueIdentifier,16),
+					new SqlParameter("@FileType", SqlDbType.NVarChar,100),
+                                        };
+            parameters[0].Value = model.Id;
+            parameters[1].Value = model.StudentId;
             parameters[2].Value = model.ClassId;
-            parameters[3].Value = Guid.NewGuid();
+            parameters[3].Value = model.CourseId;
             parameters[4].Value = model.CreateTime;
             parameters[5].Value = model.TaskUrl;
             parameters[6].Value = model.Remark;
             parameters[7].Value = model.Score;
-            parameters[8].Value = Guid.NewGuid();
+            parameters[8].Value = model.TeacherId;
             parameters[9].Value = model.TeacherName;
             parameters[10].Value = model.ScoreTime;
             parameters[11].Value = model.TaskName;
             parameters[12].Value = model.IsValid;
             parameters[13].Value = model.LastModifyTime;
-            parameters[14].Value = Guid.NewGuid();
+            parameters[14].Value =model.LastModifyId;
+            parameters[15].Value = model.FileType;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -106,7 +109,8 @@ namespace TrainerEvaluate.DAL
             strSql.Append("TaskName=@TaskName,");
             strSql.Append("IsValid=@IsValid,");
             strSql.Append("LastModifyTime=@LastModifyTime,");
-            strSql.Append("LastModifyId=@LastModifyId");
+            strSql.Append("LastModifyId=@LastModifyId, ");
+            strSql.Append("FileType=@FileType ");
             strSql.Append(" where Id=@Id ");
             SqlParameter[] parameters = {
 					new SqlParameter("@StudentId", SqlDbType.UniqueIdentifier,16),
@@ -123,7 +127,9 @@ namespace TrainerEvaluate.DAL
 					new SqlParameter("@IsValid", SqlDbType.Bit,1),
 					new SqlParameter("@LastModifyTime", SqlDbType.DateTime),
 					new SqlParameter("@LastModifyId", SqlDbType.UniqueIdentifier,16),
-					new SqlParameter("@Id", SqlDbType.UniqueIdentifier,16)};
+					new SqlParameter("@Id", SqlDbType.UniqueIdentifier,16),
+                    new SqlParameter("@FileType", SqlDbType.NVarChar,100),
+                                        };
             parameters[0].Value = model.StudentId;
             parameters[1].Value = model.ClassId;
             parameters[2].Value = model.CourseId;
@@ -139,6 +145,7 @@ namespace TrainerEvaluate.DAL
             parameters[12].Value = model.LastModifyTime;
             parameters[13].Value = model.LastModifyId;
             parameters[14].Value = model.Id;
+            parameters[15].Value = model.FileType;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -201,7 +208,7 @@ namespace TrainerEvaluate.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId from StuTask ");
+            strSql.Append("select  top 1 Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId,FileType from StuTask ");
             strSql.Append(" where Id=@Id ");
             SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.UniqueIdentifier,16)			};
@@ -294,6 +301,9 @@ namespace TrainerEvaluate.DAL
                 if (row["LastModifyId"] != null && row["LastModifyId"].ToString() != "")
                 {
                     model.LastModifyId = new Guid(row["LastModifyId"].ToString());
+                } if (row["FileType"] != null && row["FileType"].ToString() != "")
+                {
+                    model.FileType = row["FileType"].ToString();
                 }
             }
             return model;
@@ -305,7 +315,7 @@ namespace TrainerEvaluate.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId ");
+            strSql.Append("select Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId,FileType ");
             strSql.Append(" FROM StuTask ");
             if (strWhere.Trim() != "")
             {
@@ -325,7 +335,7 @@ namespace TrainerEvaluate.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId ");
+            strSql.Append(" Id,StudentId,ClassId,CourseId,CreateTime,TaskUrl,Remark,Score,TeacherId,TeacherName,ScoreTime,TaskName,IsValid,LastModifyTime,LastModifyId,FileType ");
             strSql.Append(" FROM StuTask ");
             if (strWhere.Trim() != "")
             {

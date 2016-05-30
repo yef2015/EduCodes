@@ -82,7 +82,7 @@ namespace TrainerEvaluate.Web
                 if (dt.Rows.Count > 0)
                 {
                     ipCourseName.InnerText = dt.Rows[0]["CourseName"].ToString();
-                    ipPlace.InnerText = dt.Rows[0]["TeachPlace"].ToString();
+                    ipPlace.InnerText = dt.Rows[0]["teacherplace"].ToString();
                     ipTeacher.InnerText = dt.Rows[0]["TeacherName"].ToString();
                     ipTime.InnerText = Convert.ToDateTime(dt.Rows[0]["StartDate"].ToString()).ToString("yyyy-MM-dd")+"到"+
                                        Convert.ToDateTime(dt.Rows[0]["FinishDate"].ToString()).ToString("yyyy-MM-dd"); 

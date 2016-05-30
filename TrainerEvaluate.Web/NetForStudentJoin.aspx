@@ -49,7 +49,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="courseInfo()">课程信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="stuInfo()">学员信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-book_open_mark" plain="true" onclick="downloadppts()">课件下载</a>
-          <%--  <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadhomework()">上传作业</a>--%>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadhomework()">上传作业</a>
         </div>
     </div>
 
@@ -248,13 +248,13 @@
 
     <div id="dlgUploadhomework" class="easyui-dialog" style="width: 600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
         <table id="dghomeworks" title="已上传作业列表" class="easyui-datagrid" style="width: 100%"
-            url="ClassInfo.ashx?t=ppt"
+            url="ClassInfo.ashx?t=getupworks"
             toolbar="#toolbarhomeworks" pagination="true"
             rownumbers="true" fitcolumns="true" singleselect="true">
             <thead>
                 <tr>
                     <th field="Id" width="0" hidden="true">编号</th>
-                    <th field="Name" width="60%">作业名称</th>
+                    <th field="TaskName" width="60%">作业名称</th>
                     <th field="CreateTime" width="25%" sortable="true" formatter="formatterdate">上传时间</th>
                 </tr>
             </thead>
@@ -266,7 +266,7 @@
             <a id="btndownallhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworksall()">全部下载</a>
         </div>
     </div>
-    <div id="dlgUploadhomeworks" class="easyui-dialog" style="width: 400px; height: 200px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+    <div id="dlgUphomeworks" class="easyui-dialog" style="width: 400px; height: 200px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
         <div class="ftitle">上传作业</div>
         <input type="file" id="upDatahomeworks" name="upDatahomeworks" />
         <div id="fileQueuehomeworks"></div>
@@ -398,18 +398,27 @@
                 });
                 cid = row.ID;
                 SetUploadhomeworkData(row.ID);
-                $('#dghomeworks').datagrid('reload', { t: 'ppt', cId: row.ID });
+                $('#dghomeworks').datagrid('reload', { t: 'getupworks', cId: row.ID, uid: "<%= UserId %>" });
                 $('#dlgUploadhomework').dialog('open');
             } else {
                 messageAlert('提示', '请选择具体班级!', 'warning');
             }
         }
 
-
+        function newhomeworks() {
+            $('#dlgUphomeworks').dialog({
+                title: '上传作业',
+                height: '300px',
+                closed: false,
+                cache: false,
+                modal: true
+            });
+            $('#dlgUphomeworks').dialog('open');
+        }
          
 
         function SetUploadhomeworkData(classId) {
-            $('#upDatappt').uploadify({
+            $('#upDatahomeworks').uploadify({
                 'swf': 'Scripts/uploadify.swf',
                 'uploader': 'ClassInfo.ashx?t=upworks',
                 'cancelImg': 'Scripts/cancel.png',
@@ -457,15 +466,32 @@
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful > 0) {
-                        $('#dlgUploadppt').dialog('close');
-                        $('#dlgUploadpptfile').dialog('close');
-                        $('#dg').datagrid('reload');
+                        $('#dlgUphomeworks').dialog('close'); 
+                        $('#dghomeworks').datagrid('reload', { t: 'getupworks', cId: classId, uid: "<%= UserId %>" });
                         //  $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
                     }
                 }
             });
         }
 
-        
+        //下载作业
+        function downloadhomeworks() {
+            var row = $('#dghomeworks').datagrid('getSelected');
+            if (row) {
+                var url = "ClassInfo.ashx?t=downtask" + "&id=" + row.Id;
+                window.location = url;
+            } else {
+                messageAlert('提示', '请选择要下载的作业!', 'warning');
+            }
+        }
+
+        //下载全部作业
+        function downloadhomeworksall() {
+            var rows = $('#dghomeworks').datagrid('getRows');
+            if (rows != null && rows.length > 0) {
+                var url = "ClassInfo.ashx?t=downhwall" + "&cid=" + cid + "&stu=<%= UserId %> ";
+                window.location = url;
+            }
+        }
     </script>
 </asp:Content>

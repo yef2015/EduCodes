@@ -77,6 +77,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadDetailTmp()">导出班级详细信息</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="disInfo()">查看班级信息</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadDatappt()">课件信息</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="homeworkinfo()">学员作业</a> 
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -543,13 +544,35 @@
             <a id="btndownppts" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadpptall()">全部下载</a>
         </div>
     </div>
-
+  
     <div id="dlgUploadpptfile" class="easyui-dialog" style="width: 400px; height:200px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
         <div class="ftitle">上传课件</div>
         <input type="file" id="upDatappt" name="upDatappt" />
         <div id="fileQueueppt"></div>
     </div>
-
+    
+    
+    
+    <div id="dlghomework" class="easyui-dialog" style="width:600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <table id="dghomework" title="作业信息列表" class="easyui-datagrid" style="width: 100%"
+            url="ClassInfo.ashx?t=getallhomework"
+            toolbar="#toolbarhomework" pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
+            <thead>
+                <tr>
+                    <th field="Id" width="0" hidden="true">编号</th>
+                    <th field="TaskName" width="40%">作业名称</th>
+                    <th field="StuName" width="20%">学员姓名</th>
+                    <th field="School" width="20%">所在学校</th>
+                    <th field="CreateTime" width="15%" sortable="true" formatter="formatterdate">上传时间</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbarhomework"> 
+            <a id="btndownhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworks()">下载</a>
+            <a id="btndownallhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworksall()">全部下载</a>
+        </div>
+    </div>
 
     <script type="text/javascript">
 
@@ -1439,6 +1462,43 @@
         }
 
 
+        function homeworkinfo() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlghomework').dialog({
+                    title: row.Name + '-- 作业信息',
+                    closed: false,
+                    cache: false,
+                    modal: true
+                });
+                cid = row.ID; 
+                $('#dghomework').datagrid('reload', { t: 'getallhomework', cId: row.ID });
+                $('#dlghomework').dialog('open');
+            } else {
+                messageAlert('提示', '请选择班级!', 'warning');
+            }
+        }
+
+
+        //下载作业
+        function downloadhomeworks() {
+            var row = $('#dghomework').datagrid('getSelected');
+            if (row) {
+                var url = "ClassInfo.ashx?t=downtask" + "&id=" + row.Id;
+                window.location = url;
+            } else {
+                messageAlert('提示', '请选择要下载的作业!', 'warning');
+            }
+        }
+
+        //下载全部作业
+        function downloadhomeworksall() {
+            var rows = $('#dghomework').datagrid('getRows');
+            if (rows != null && rows.length > 0) {
+                var url = "ClassInfo.ashx?t=downhwall" + "&cid=" + cid;
+                window.location = url;
+            }
+        }
     </script>
 
 </asp:Content>

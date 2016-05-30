@@ -20,6 +20,7 @@ namespace TrainerEvaluate.Models
         private Guid _courseid;
         private DateTime? _createtime;
         private string _taskurl;
+        private string _fileType;
         private string _remark;
         private string _score;
         private Guid _teacherid;
@@ -76,6 +77,12 @@ namespace TrainerEvaluate.Models
         {
             set { _taskurl = value; }
             get { return _taskurl; }
+        }
+
+        public string FileType
+        {
+            set { _fileType = value; }
+            get { return _fileType; }
         }
         /// <summary>
         /// 备注

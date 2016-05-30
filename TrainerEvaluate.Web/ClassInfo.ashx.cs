@@ -63,6 +63,14 @@ namespace TrainerEvaluate.Web
                     var ppts= GetClasspptByClassId(context);
                     context.Response.Write(ppts);
                     break;
+                case "getupworks":
+                    var getupworks = Getupworks(context);
+                    context.Response.Write(getupworks);
+                    break;
+                case "getallhomework":  //取所有作业
+                    var gethomeworks = GethomeworksbyClass(context);
+                    context.Response.Write(gethomeworks);
+                    break;
                 case "upppts":
                     var upppts = UploadPPTsByClassId(context);
                     context.Response.Write(upppts);
@@ -72,10 +80,16 @@ namespace TrainerEvaluate.Web
                     context.Response.Write(delppts);
                     break;
                 case "downppt":
-                    DownloadPPTs(context); 
+                    DownloadPPTs(context);
+                    break;
+                case "downtask":
+                    DownloadHomeworks(context); 
                     break;
                 case "downpptall":
                     DownloadPPTsAll(context); 
+                    break;
+                case "downhwall":
+                    DownloadHomeworksAll(context); 
                     break;
                 case "upworks":  //上传作业
                     var upworks = Uploadhomeworks(context);
@@ -588,6 +602,66 @@ namespace TrainerEvaluate.Web
             return str;
         }
 
+        //提取当前学生的作业列表
+        private string Getupworks(HttpContext context)
+        {
+            var str = string.Empty;
+
+            var ds = new DataSet();
+            var stuTaskBll = new BLL.StuTask();
+            var classId = context.Request["cId"];
+            var uid = context.Request["uid"];
+            
+            if (!string.IsNullOrEmpty(classId))
+            { 
+                var page = Convert.ToInt32(context.Request["page"]);
+                var rows = Convert.ToInt32(context.Request["rows"]);
+
+                //var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "Name" : context.Request["sort"];
+                //var order = string.IsNullOrEmpty(context.Request["order"]) ? "desc" : context.Request["order"];
+
+                var startIndex = (page - 1)*rows + 1;
+                var endIndex = startIndex + rows - 1;
+
+                ds = stuTaskBll.GetListByPage(" IsValid=1 and  ClassId=" + classId + " and StudentId= '" + uid+"'", "", startIndex, endIndex);
+                var num = stuTaskBll.GetRecordCount(" IsValid=1 and  ClassId= " + classId + " and StudentId= '" + uid + "'"); 
+                str = JsonConvert.SerializeObject(new {total = num, rows = ds.Tables[0]});
+            }
+
+            return str;
+        }
+
+
+
+        //取班级学员的作业列表
+        private string GethomeworksbyClass(HttpContext context)
+        {
+            var str = string.Empty;
+
+            var ds = new DataSet();
+            var stuTaskBll = new BLL.StuTask();
+            var classId = context.Request["cId"];
+           // var uid = context.Request["uid"];
+            
+            if (!string.IsNullOrEmpty(classId))
+            { 
+                var page = Convert.ToInt32(context.Request["page"]);
+                var rows = Convert.ToInt32(context.Request["rows"]);
+
+                //var sort = string.IsNullOrEmpty(context.Request["sort"]) ? "Name" : context.Request["sort"];
+                //var order = string.IsNullOrEmpty(context.Request["order"]) ? "desc" : context.Request["order"];
+
+                var startIndex = (page - 1)*rows + 1;
+                var endIndex = startIndex + rows - 1;
+
+                ds = stuTaskBll.GetListofClassByPage(" IsValid=1 and  ClassId=" + classId , "", startIndex, endIndex);
+                var num = stuTaskBll.GetRecordCountofClass(" IsValid=1 and  ClassId= " + classId); 
+                str = JsonConvert.SerializeObject(new {total = num, rows = ds.Tables[0]});
+            }
+
+            return str;
+        }
+
 
 
 
@@ -773,15 +847,15 @@ namespace TrainerEvaluate.Web
             var str = string.Empty;
             try
             {
-                var basePath = HttpContext.Current.Server.MapPath("Uploadppts/");
+                var basePath = HttpContext.Current.Server.MapPath("Homework/");
                 if (context.Request.Files["Filedata"] != null)
                 {
-                    var classAttach = new Models.ClassAttach();
-                    classAttach.Id = Guid.NewGuid();
+                    var stuTask = new  Models.StuTask();
+                    stuTask.Id = Guid.NewGuid();
 
                     HttpPostedFile myFile = context.Request.Files["Filedata"];
                     int nFileLen = myFile.ContentLength;
-                    var filename = classAttach.Id + "." + myFile.FileName;
+                    var filename = stuTask.Id + "." + myFile.FileName;
                     byte[] myData = new byte[nFileLen];
                     myFile.InputStream.Read(myData, 0, nFileLen);
                     System.IO.FileStream newFile = new System.IO.FileStream(basePath + filename,
@@ -789,21 +863,21 @@ namespace TrainerEvaluate.Web
                     newFile.Write(myData, 0, myData.Length);
                     newFile.Close();
 
+                    var stuTaskBll =new  BLL.StuTask();
 
-                    //var stuTaskBll = new BLL.StuTask();
-                    //classAttach.FileType = myFile.ContentType;
-                    //classAttach.Name = myFile.FileName;
-                    //classAttach.Url = "Uploadppts/" + filename;
-                    //classAttach.IsValid = true;
-                    //classAttach.ClassId = context.Request["cid"] != null ? Convert.ToInt32(context.Request["cid"]) : 0;
-                    //classAttach.CreateId = Profile.CurrentUser.UserId;
-                    //classAttach.CreateUserName = Profile.CurrentUser.UserName;
-                    //classAttach.CreateTime = DateTime.Now;
-                    //if (context.Request["Remark"] != null)
-                    //{
-                    //    classAttach.Remark = context.Request["Remark"];
-                    //}
-                    //classAttachBll.Add(classAttach);
+                    stuTask.FileType = myFile.ContentType;
+                    stuTask.TaskName = myFile.FileName;
+                    stuTask.TaskUrl = "Homework/" + filename;
+                    stuTask.IsValid = true;
+                    stuTask.ClassId = context.Request["cid"] != null ? Convert.ToInt32(context.Request["cid"]) : 0; 
+                    stuTask.CreateTime = DateTime.Now;
+                    stuTask.StudentId = Profile.CurrentUser.UserId;
+                    if (context.Request["Remark"] != null)
+                    {
+                        stuTask.Remark = context.Request["Remark"];
+                    }
+
+                    stuTaskBll.Add(stuTask);
                 }
                 else
                 {
@@ -817,6 +891,104 @@ namespace TrainerEvaluate.Web
             }
             return str;
         }
+
+
+
+        /// <summary>
+        /// 下载作业
+        /// </summary>
+        /// <param name="context"></param>
+        private void DownloadHomeworks(HttpContext context)
+        {
+            var id = context.Request["id"];
+            try
+            {
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var stu = new BLL.StuTask();
+                    var homework = stu.GetModel(new Guid(id));
+
+                    var filename = homework.TaskName;
+                    var filetype = homework.FileType;
+                    var url = homework.TaskUrl;
+
+                    var basePath = HttpContext.Current.Server.MapPath("~");
+                    context.Response.ContentType = filetype;
+                    context.Response.AddHeader("Content-Disposition",
+                        string.Format("attachment;filename={0}",
+                            System.Web.HttpUtility.UrlEncode(filename, System.Text.Encoding.UTF8)));
+                    context.Response.Clear();
+
+                    context.Response.WriteFile(basePath + "/" + url);
+                    context.Response.Flush();
+                    context.Response.End();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+        }
+
+
+
+        //下载作业
+        private void DownloadHomeworksAll(HttpContext context)
+        {
+            var id = context.Request["cid"];
+            var stu = context.Request["stu"];
+            try
+            {
+                var basePath = HttpContext.Current.Server.MapPath("~");
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var ca = new BLL.StuTask();
+                    var ppts = new List<Models.StuTask>();
+                    if (!string.IsNullOrEmpty(stu))
+                    {
+                          ppts = ca.GetModelList(string.Format("  ClassId='{0}' and IsValid=1  and StudentId='{1}' ", id, stu));
+                    }
+                    else
+                    {
+                          ppts = ca.GetModelList(string.Format("  ClassId='{0}' and IsValid=1  ", id));
+                    }
+                  
+
+                    var cla = new BLL.Class();
+                    var cl = cla.GetModel(Convert.ToInt32(id));
+
+                    string err = string.Empty;
+                    List<string[]> files = new List<string[]>();
+
+                    foreach (var file in ppts)
+                    {
+                        files.Add(new[] { basePath + "/" + file.TaskUrl, file.TaskName });
+                    }
+
+                    string zipPath = basePath + "/" + cl.Name + ".zip";
+                    ZipHelper.ZipFile(files, zipPath, out err);
+
+
+                    context.Response.ContentType = "application/x-zip-compressed";
+                    context.Response.AddHeader("Content-Disposition",
+                        string.Format("attachment;filename={0}",
+                            System.Web.HttpUtility.UrlEncode(cl.Name + ".zip", System.Text.Encoding.UTF8)));
+                    context.Response.Clear();
+
+                    context.Response.WriteFile(zipPath);
+                    context.Response.Flush();
+                    context.Response.End();
+                    File.Delete(zipPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLogofExceptioin(ex);
+            }
+        }
+
+
 
     }
 }

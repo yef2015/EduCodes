@@ -138,7 +138,7 @@
             name="CourseInfo" id="CourseInfo" style="height: 20px;"
             data-options="
                     url:'MyQuestionnaire.ashx?uid='+document.getElementById('<%=hUid.ClientID  %>').value,
-                    method:'get',
+                    method:'post',
                     valueField:'CourseId',
                     textField:'CourseName' 
             " />
