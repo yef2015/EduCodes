@@ -78,6 +78,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="disInfo()">查看班级信息</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadDatappt()">课件信息</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="homeworkinfo()">学员作业</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-user_group" plain="true" onclick="stuAttInfo ()">学员考勤信息</a> 
         </div>
 
         <div id="dlg" class="easyui-dialog" style="width: 550px; height: 510px; padding: 10px 20px" data-options="modal:true,top:10"
@@ -572,6 +573,71 @@
             <a id="btndownhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworks()">下载</a>
             <a id="btndownallhomeworks" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadhomeworksall()">全部下载</a>
         </div>
+    </div>
+     
+    <div id="dlgstuAttInfo" class="easyui-dialog" style="width:600px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" bgcolor="C4D4E1" style="margin-bottom:10px;">
+                <tr>
+                    <td width="16%" bgcolor="F0F9FF" class="auto-style1">
+                        <div align="center">学校名称：</div>
+                    </td>
+                    <td width="35%" bgcolor="F0F9FF" class="auto-style1">
+                        <input name="SchoolNameAtt" id="SchoolNameAtt" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                    <td width="15%" bgcolor="F0F9FF" class="auto-style1">
+                        <div align="center">姓名： </div>
+                    </td>
+                    <td width="34%" bgcolor="F0F9FF" class="auto-style1">
+                        <input name="StudentNameAtt" id="StudentNameAtt" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="16%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">证件号：</div>
+                    </td>
+                    <td width="35%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <input name="CardCodeAtt" id="CardCodeAtt" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                    <td width="15%" bgcolor="FFFFFF" class="gray10a" height="25">
+                        <div align="center">继教号： </div>
+                    </td>
+                    <td width="34%" bgcolor="FFFFFF" height="25" class="gray10a">
+                        <input name="JijiaoCodeAtt" id="JijiaoCodeAtt" class="easyui-textbox" style="width: 165px;">
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF"> 
+                    <td colspan="4" class="gray10a" height="26" align="middle">
+                        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="queryStudent()" style="width: 90px">查询</a>
+                    </td>
+                </tr>
+            </table>  
+         <table id="dgstuAttInfo" title="学员考勤信息列表" class="easyui-datagrid" style="width: 100%"
+            url=""
+            toolbar="#toolbarstuAttInfo" pagination="true"
+            rownumbers="true" fitcolumns="true" singleselect="true">
+            <thead>
+                <tr>
+                    <th field="Id" width="0" hidden="true">ID</th>
+                    <th field="AttDate" width="20%" >日期</th>
+                    <th field="StuName" width="30%">学员姓名</th> 
+                    <th field="School" width="20%">所在学校</th>
+                    <th field="School" width="20%">出勤状态</th> 
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbarstuAttInfo">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-upload" plain="true" onclick="uploadAttbaseInfo()">导入出勤信息</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="downloadAttInfo()">导出考勤结果</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-download" plain="true" onclick="creatstuAttInfo()">生成学员数据文件</a>
+        </div>
+    </div>
+    
+    
+    
+     <div id="dlgUploadAttInfo" class="easyui-dialog" style="width: 400px; height: 400px; padding: 10px 20px" closed="true" data-options="modal:true,top:10">
+        <div class="ftitle">上传考勤记录数据文件</div>
+        <input type="file" id="upAttData" name="upAttData" />
+        <div id="fileQueueAtt"></div>
     </div>
 
     <script type="text/javascript">
@@ -1356,9 +1422,9 @@
                 modal: true
             });
             $('#dlgUploadpptfile').dialog('open'); 
-        }
+        } 
 
-
+       
         function Deleteppt() {
             var row = $('#dgppts').datagrid('getSelected');
             var url = "ClassInfo.ashx?t=delppts";
@@ -1401,9 +1467,7 @@
         }
 
 
-
-
-
+         
         function SetUploadPPtData(classId) {
             $('#upDatappt').uploadify({
                 'swf': 'Scripts/uploadify.swf',
@@ -1477,7 +1541,7 @@
             } else {
                 messageAlert('提示', '请选择班级!', 'warning');
             }
-        }
+        }  
 
 
         //下载作业
@@ -1499,6 +1563,111 @@
                 window.location = url;
             }
         }
+
+
+  
+        //考勤
+        function stuAttInfo() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $('#dlgstuAttInfo').dialog({
+                    title: row.Name + '-- 学员考勤信息',
+                    closed: false,
+                    cache: false,
+                    modal: true
+                });
+                cid = row.ID;
+                SetUploadStuAttData(cid);
+                $('#dgstuAttInfo').datagrid('reload', { t: 'getallhomework', cId: row.ID });
+                $('#dlgstuAttInfo').dialog('open');
+            } else {
+                messageAlert('提示', '请选择班级!', 'warning');
+            }
+        }
+
+
+        //上传考勤信息
+        function uploadAttbaseInfo() {
+            $('#dlgUploadAttInfo').dialog({
+                title: '上传考勤记录文件',
+                height: '300px',
+                closed: false,
+                cache: false,
+                modal: true
+            });
+            $('#dlgUploadAttInfo').dialog('open');
+        } 
+        
+
+
+        function SetUploadStuAttData(classId) {
+            $('#upAttData').uploadify({
+                'swf': 'Scripts/uploadify.swf',
+                'uploader': 'StuAttInfo.ashx?t=u&cid=' + classId,
+                'cancelImg': 'Scripts/cancel.png',
+                'removeCompleted': true,
+                'hideButton': false,
+                'auto': true,
+                'buttonText': '请选择要上传的文件',
+                'queueID': 'fileQueue',
+                'fileTypeExts': '*.dat;',
+                'fileTypeDesc': 'dat Files (.dat)',
+                'onSelect': function (e) {
+                    //if (e.type != '.xlsx' && e.type != '.xls') {
+                    //    alert("请上传excel文件!");
+                    //}
+                },
+                'onUploadStart': function (file) {
+                    //$('#upDatappt').uploadify('upload', '*');
+                    $("#upAttData").uploadify("settings", 'formData', {
+                        cid: classId
+                    }); //动态传参数
+                },
+                'onUploadSuccess': function (file, data, response) {
+                    if (data != "" && data != "1") {
+                        //var result = data.split('|');
+                        //if (result.length > 0) {
+                        //    if (result[0] == "studentexport") {
+                        //        $('#aCurPerson').text(result[1]);
+                        //        $('#aExportCount').text(result[2]);
+                        //        $('#aRepeatCount').text(result[3]);
+                        //        $('#aNotExistCount').text(result[4]);
+                        //        $('#aNULLidentityNo').text(result[5] + '  ( 注：身份证号为空的学员，不允许入库 ) ');
+                        //        $('#dlg6').dialog('open').dialog('setTitle', '导入学员');
+                        //    }
+                        //    else {
+                        //        ifConfirmCover(result[1]);
+                        //    }
+                        //} else {
+                        //    alert(data);
+                        //}
+                    }
+                },
+                'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                    $('#permissions_hint').show();
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful > 0) { 
+                        $('#dlgUploadAttInfo').dialog('close');
+                        $('#dgstuAttInfo').datagrid('reload');
+                        //  $('#dgppts').datagrid('reload', { t: 'ppt', cId: row.ID });
+                    }
+                }
+            });
+        }
+
+        //下载考勤结果
+        function downloadAttInfo() {
+
+        }
+
+
+        //生成学员信息dat文件，用于考勤机
+        function creatstuAttInfo() {
+
+
+        }
+
     </script>
 
 </asp:Content>
